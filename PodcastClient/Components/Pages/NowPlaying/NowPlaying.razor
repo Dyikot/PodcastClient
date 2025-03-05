@@ -1,0 +1,61 @@
+﻿@page "/now-playing"
+@rendermode InteractiveServer
+@inject IStringLocalizer<Resources.Resource> Localizer
+@inject IPodcastService PodcastService
+@inject IDateFormatter DateFormatter
+@inject IMediaService MediaService
+
+<PageTitle>@Title</PageTitle>
+
+<main>
+	@if(Episode == null)
+	{
+		<h2 id="no-playing">@Localizer["NoPlayingPodcast"]</h2>
+	}
+	else
+	{
+		<div id="about">
+			<img src="@Episode.IconUri" />
+			<div id="about-content">
+				<h5>@Episode.Name</h5>
+				<span>@Episode.Channel?.Name</span>
+				<div>
+					<div id="about-content-date">
+						<img src="NowPlaying/Calendar.png" />
+						<span>@DateFormatter.ToFormattedString(Episode.ReleaseDate, Localizer)</span>
+					</div>
+					<span>•</span>
+					<div id="about-content-duration">
+						<img src="NowPlaying/Time.svg" />
+						<span>@Episode.Duration.ToString("hh':'mm")</span>
+					</div>
+				</div>
+				<a href="@Episode.Link" target="_blank">@Localizer["Source"]</a>
+			</div>
+		</div>
+		<div id="description">@Episode.Description</div>
+		switch (Episode.Type)
+		{
+			case Models.ContentType.Audio:
+				<AudioPlayer Source="@Episode.ContentUri"
+							 Duration="@Episode.Duration"
+							 @bind-CurrentTime="Episode.Played"
+							 @bind-Volume="MediaService.AudioVolume"
+							 @bind-PlaySpeed="MediaService.AudioPlaySpeed"
+							 OnPlay="@OnPlay"
+							 OnPlayed="@OnPlayed" />
+				break;
+			case Models.ContentType.Video:
+				<div id="video-player-layout">
+					<VideoPlayer Source="@Episode.ContentUri"
+								 Duration="@Episode.Duration"
+								 @bind-CurrentTime="Episode.Played"
+								 @bind-Volume="MediaService.VideoVolume"
+								 @bind-PlaySpeed="MediaService.VideoPlaySpeed"
+								 OnPlay="@OnPlay"
+								 OnPlayed="@OnPlayed" />
+				</div>
+				break;
+		}
+	}
+</main>

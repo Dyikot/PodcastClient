@@ -1,0 +1,10 @@
+﻿@inject NavigationManager Navigation
+@inject IStringLocalizer<Resources.Resource> Localizer
+
+<main>
+	<span class="title">@Localizer["Language"]</span>
+	<select @bind="Culture">
+		<option value="en-US">English</option>
+		<option value="ru-RU">Русский</option>
+	</select>
+</main>

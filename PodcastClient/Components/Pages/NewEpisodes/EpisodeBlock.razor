@@ -1,0 +1,14 @@
+﻿@inject IStringLocalizer<Resources.Resource> Localizer
+@inject IDateFormatter DateFormatter
+@inject NavigationManager Navigator
+@inject IPodcastService PodcastService
+
+<main class="item" @onclick="OnEpisodeCLick">
+	<img src="@Episode.IconUri" alt="Could not find episode icon!" />
+	<div id="info">
+		<span id="title">@Episode.Name</span>
+		<span id="podcast-title">@Episode.Channel?.Name</span>
+		<span id="duration">@Duration</span>
+		<span id="release-date">@DateFormatter.ToFormattedString(Episode.ReleaseDate, Localizer)</span>
+	</div>
+</main>

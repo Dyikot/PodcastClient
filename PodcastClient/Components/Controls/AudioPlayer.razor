@@ -1,0 +1,55 @@
+﻿@inject IStringLocalizer<Resources.Resource> Localizer
+@inject IJSRuntime JS
+
+<main class="panel">
+	<audio id="audio-player"
+		   src="@Source" 
+		   @onloadedmetadata="OnMetadataLoaded"
+		   @onended="OnEnded"
+		   @onplay="OnPlay"
+		   @ontimeupdate="OnTimeUpdate" />
+	<div id="controls"  class="@(_canPlay ? "clickable" : "unclickable")">
+		<button class="button panel-item-transparent"
+				style="background-image: url('Controls/AudioPlayer/Rewind.png')"
+				@onclick="OnRewindButtonClick" />
+		<button id="play-button"
+				class="button panel-item-transparent"
+				style="background-image: url('@(_isPlaying ? PauseIconUri : PlayIconUri)')"
+				@ref="_playButton"
+				@onclick="OnPlayButtonClick" />
+		<button id="forward-button"
+				class="button panel-item-transparent"
+				style="background-image: url('Controls/AudioPlayer/Forward.png')"
+				@onclick="OnForwardButtonClick" />
+		<div id="duration">
+			<span id="duration-played">@CurrentTime.ToString(TimeFormat)</span>
+			<span>/</span>
+			<span id="duration-total">@Duration.ToString(TimeFormat)</span>
+		</div>
+		<input id="duration-slider"
+			   type="range"
+			   style="background-size: @(DurationPersentage)% 100%;"
+			   max="@Duration.TotalSeconds"
+			   value="@CurrentTime.TotalSeconds"
+			   @oninput="OnCurrentTimeSliderChanged" />
+		<button id="volume-button"
+				class="button panel-item-transparent"
+				style="background-image: url('@(Volume > 0 ? VolumeIconUri : NoVolumeIconUri)')"
+				@onclick="OnVolumeButtonClick" />
+		<input id="volume-slider"
+			   type="range"
+			   style="background-size: @(VolumePersentage)% 100%;"
+			   max="1"
+			   min="0"
+			   step="0.025"
+			   value="@Volume"
+			   @oninput="OnVolumeSliderChange" />
+		<DropdownList TValue="double"
+					  Value="PlaySpeed"
+					  ItemClick="OnSpeedOptionSelect"
+					  ValueContentDictionary="SpeedContentDictionary"
+					  ButtonClass="button speed-button item"
+					  PanelClass="speed-panel"
+					  ItemClass="item item-focusable speed-button-text" />
+	</div>
+</main>

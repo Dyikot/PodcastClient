@@ -1,0 +1,54 @@
+﻿main {
+    box-sizing: content-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    height: 64px;
+    border-radius: 10px;
+    font-size: clamp(0.8rem, 1vw, 1rem);
+}
+
+    main:hover {
+        cursor: pointer;
+    }
+
+#info {
+    padding: 0 10px;
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+img {
+    width: 64px;
+    border-radius: 10px;
+}
+
+#title {
+    flex: 6 6 40%;
+}
+
+#podcast-title {
+    flex: 3 3 20%;
+}
+
+#duration {
+    flex-basis: 5%;
+    text-align: center;
+}
+
+#release-date {
+    flex-basis: 15%;
+    text-align: right;
+}
+
+#title, #podcast-title{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

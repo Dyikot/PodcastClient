@@ -1,0 +1,58 @@
+#page {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Segoe UI';
+    min-height: 100vh;    
+}
+
+#sidebar {
+    position: sticky;
+    height: 10vh;
+    bottom: 0px;
+    order: 1;
+    z-index: 1;
+}
+
+main {
+    flex-grow: 1;
+}
+
+main ::deep h1{
+    margin-bottom: 30px;
+}
+
+@media (min-width: 641px) {
+    #page {
+        flex-direction: row;
+    }
+
+    #sidebar {
+        top: 0px;
+        order: 0;
+        width: 250px;
+        min-width: 250px;
+        height: 100vh;
+    }
+}
+
+::deep button {
+    border: none;
+    padding: 4px 10px;
+    color: inherit;
+}
+
+::deep select {
+    border: none;
+}
+
+::deep select:focus {
+    outline: none;
+}
+
+.theme-light #sidebar {
+    background-color: var(--light-sidebar);
+}
+
+.theme-dark #sidebar {
+    background-color: var(--dark-sidebar);
+}

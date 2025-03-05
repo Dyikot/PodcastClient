@@ -1,0 +1,13 @@
+﻿@inject IStringLocalizer<Resources.Resource> Localizer
+@inject ThemeService ThemeService
+@inject NavigationManager Navigator
+
+<main>
+	<span class="title">@Localizer["Theme"]</span>
+	<select @bind="ThemeService.Active"
+			@bind:event="oninput"
+			@bind:after="() => Navigator.Refresh()">
+		<option value="@Theme.Light">@Localizer["LightTheme"]</option>
+		<option value="@Theme.Dark">@Localizer["DarkTheme"]</option>
+	</select>
+</main>

@@ -1,0 +1,16 @@
+main {
+    display:flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 10px;
+}
+
+    main > ::deep main {
+        width: 200px;
+        display: inline-flex;
+        justify-content: space-between;
+    }
+
+    main ::deep select {
+        width: 100px;    
+    }

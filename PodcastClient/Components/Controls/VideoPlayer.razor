@@ -1,0 +1,61 @@
+﻿@inject IJSRuntime JS
+
+<figure id="video-player">
+	<video src="@Source"
+		   tabindex="0"
+		   @ref="_videoPlayer"
+		   @onloadedmetadata="OnMetadataLoaded"
+		   @onended="OnEnded"
+		   @onplay="OnPlay"
+		   @ontimeupdate="OnTimeUpdate"
+		   @onclick="OnPlayButtonClick"
+		   @onkeydown="OnKeyDown"
+		   @ondblclick="OnFullscreenButtonClick" />
+	<div id="controls">
+		<input id="duration-slider"
+			   type="range"
+			   style="background-size: @(DurationPersentage)% 100%;"
+			   max="@Duration.TotalSeconds"
+			   value="@CurrentTime.TotalSeconds"
+			   @oninput="OnCurrentTimeSliderChanged" />
+		<div id="controls-buttons">
+			<button class="button"
+					style="background-image: url(Controls/VideoPlayer/Rewind.png)"
+				    @onclick="OnRewindButtonClick" />
+			<button id="play-button"
+					class="button"
+					style="background-image: url(@(_isPlaying ? PauseIconUri : PlayIconUri))"
+				    @onclick="OnPlayButtonClick" />
+			<button class="button"
+					style="background-image: url(Controls/VideoPlayer/Forward.png)"
+				    @onclick="OnForwardButtonClick" />
+			<div id="duration">
+				<span id="duration-played">@CurrentTime.ToString(TimeFormat)</span>
+				<span>/</span>
+				<span id="duration-total">@Duration.ToString(TimeFormat)</span>
+			</div>		
+			<button id="volume-button"
+					class="button"
+					style="background-image: url(@(Volume > 0 ? VolumeIconUri : NoVolumeIconUri))"
+					@onclick="OnVolumeButtonClick" />
+			<input id="volume-slider"
+					type="range"
+					style="background-size: @(VolumePersentage)% 100%;"
+					max="1"
+					min="0"
+					step="0.025"
+					value="@Volume"
+					@oninput="OnVolumeSliderChange" />
+			<DropdownList TValue="double"
+						  Value="PlaySpeed"
+						  ItemClick="OnSpeedOptionSelect"
+						  ValueContentDictionary="SpeedContentDictionary"
+						  ButtonClass="button speed-button"
+						  PanelClass="speed-panel"
+						  ItemClass="item item-focusable speed-button-text" />
+			<button id="button-fullscreen"
+					class="button"
+					@onclick="OnFullscreenButtonClick" />
+		</div>
+	</div>
+</figure>

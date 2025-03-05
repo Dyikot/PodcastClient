@@ -1,0 +1,25 @@
+﻿@inject IPodcastService PodcastService
+@inject ThemeService ThemeService
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="/" />
+    <link rel="stylesheet" href="bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="app.css?version=1.0" />
+    <link rel="stylesheet" href="PodcastClient.styles.css" />
+    <link rel="icon" type="image/png" href="Rss.svg" />
+    <HeadOutlet />
+</head>
+
+<body class="@ThemeService.CssClass">
+    <Routes />
+    <script src="_framework/blazor.web.js"></script>
+    <script src="Components/Controls/AudioPlayer.razor.js"></script>
+    <script src="Components/Controls/VideoPlayer.razor.js"></script>
+</body>
+
+</html>

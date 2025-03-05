@@ -1,0 +1,46 @@
+﻿@page "/"
+@rendermode InteractiveServer
+@inject IStringLocalizer<Resources.Resource> Localizer
+@inject IPodcastService PodcastService
+@inject IHttpClientFactory HttpClientFactory
+@inject NavigationManager Navigator
+
+<PageTitle>@Localizer["MyPodcasts"]</PageTitle>
+
+<main>
+	<h1>@Localizer["MyPodcasts"]</h1>
+	<div id="addpodcast">
+		<button id="addpodcast-button" class="item" @onclick="OnSubscribeClick">
+			<img src="MyPodcasts/Add.png" />
+			<span>@Localizer["Subscribe"]</span>
+		</button>
+		@if (_isSubscribePanelVisible)
+		{
+			<div id="addpodcast-panel"
+				 class="panel"
+				 tabindex="0"
+				 @onmouseenter="OnSubscribePanelMouseEnter"
+				 @onmouseleave="OnSubscribePanelMouseLeave"
+				 @onfocusout="OnSubscribePanelFocusOut">
+				<span tabindex="0">@($"{Localizer["RssFeed"]}:")</span>
+				<InputText @ref="_rssInputFeed"
+						   @bind-Value="RssFeed"						  
+						   placeholder="https://rss-feed.com"
+						   class="panel-panel panel-input"/>
+				<button id="addpodcast-panel-button"
+						class="panel-item"
+						@onclick="OnSubmitButtonClick">
+					@Localizer["Submit"]
+				</button>
+			</div>
+		}
+	</div>
+	<div class="podcasts-library">
+		@foreach (var podcast in Podcasts)
+		{
+			<PodcastBlock Podcast="podcast" Click="OnChannelClick" />
+		}
+	</div>
+</main>
+
+

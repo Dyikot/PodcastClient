@@ -1,0 +1,11 @@
+﻿@page "/settings"
+@rendermode InteractiveServer
+@inject IStringLocalizer<Resources.Resource> Localizer
+
+<PageTitle>@Localizer["Settings"]</PageTitle>
+
+<main>
+	<h1>@Localizer["Settings"]</h1>
+	<LocaleSelector />
+	<ThemeSelector />
+</main>

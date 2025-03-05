@@ -1,0 +1,71 @@
+﻿main {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+}
+
+#no-playing {
+    margin: 10px;
+    align-self: flex-start;
+}
+
+#about {
+    display: flex;
+    gap: 20px;
+    padding: 25px 0px;
+    width: 75%;
+}
+
+    #about > img {
+        width: 150px;
+        height: 150px;
+        border-radius: 10px;
+    }
+
+#about-content {
+    display: flex;
+    flex-direction: column;
+}
+
+    #about-content > div:first-of-type {
+        display: inline-flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+
+#about-content-date, #about-content-duration {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+}
+
+:is(#about-content-date, #about-content-duration) > img {
+    width: 16px;
+    height: 16px;
+}
+
+#description {
+    width: 75%;
+    text-align: justify;
+    order: 2;
+}
+
+#video-player-layout {
+    display: flex;
+    width: 75%;
+    order: 1;
+    margin-bottom: 50px;
+}
+
+    #video-player-layout ::deep #video-player {
+        width: clamp(300px, 50vw, 800px);
+    }
+
+::deep .speed-button-text {
+    text-align: left;
+}

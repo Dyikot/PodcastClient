@@ -1,0 +1,11 @@
+﻿<main class="item" @onclick="OnClick">
+	<div id="content">
+		@if (Podcast.NewEpisodes.Count > 0)
+		{
+			<span id="new-episodes">@NewEpisodesNumber</span>
+		}
+		<img id="icon" src="@Podcast.IconUrl" @onclick="OnClick" alt="Error! Could not find image at this path." />
+		<h5 id="title">@Podcast.Name</h5>
+		<span id="owner" class="text-grey">@Podcast.Author</span>
+	</div>
+</main>

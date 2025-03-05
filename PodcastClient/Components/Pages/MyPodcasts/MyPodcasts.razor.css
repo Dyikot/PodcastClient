@@ -1,0 +1,51 @@
+﻿main {
+    margin: 10px;
+}
+
+#addpodcast {
+    height: 45px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+    #addpodcast :is(#addpodcast-button, #addpodcast-panel, #addpodcast-panel-button) {
+        border-radius: 5px;
+    }
+
+#addpodcast-panel {
+    align-self: stretch;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+}
+
+    #addpodcast-panel ::deep input {
+        border: none;
+    }
+
+    #addpodcast-panel > ::deep *{
+        outline: none;
+    }
+
+#addpodcast-button {
+    display: inline-flex;
+    gap: 5px;
+}
+
+    #addpodcast-button > img {
+        height: 24px;
+        width: 24px;
+    }
+
+.podcasts-library {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    justify-items: stretch;
+    margin: 20px 0;
+    gap: 20px;
+}

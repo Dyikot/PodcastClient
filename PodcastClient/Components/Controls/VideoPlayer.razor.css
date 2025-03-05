@@ -1,0 +1,134 @@
+﻿#video-player {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+    #video-player:hover #controls {
+        opacity: 1;
+    }
+
+video:focus {
+    outline: none;
+}
+
+#controls {
+    opacity: 0;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    height: 50px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 80%);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-around;
+}
+
+#duration-slider {
+    width: 100%;
+}
+
+#duration-slider::-webkit-slider-thumb {
+    opacity: 0;
+}
+
+    #duration-slider:hover::-webkit-slider-thumb {
+        opacity: 1;
+    }
+
+input[type="range"] {
+    -webkit-appearance: none;
+    height: 5px;
+    border-radius: 10px;
+    background-image: linear-gradient(var(--player-track-color), var(--player-track-color));
+    background-size: 0% 100%;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+    input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        background-color: var(--player-track-color);
+        height: 15px;
+        width: 15px;
+        border-radius: 50%;
+    }
+
+#controls-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+    margin: 0 1.5%;
+}
+
+::deep .button {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-size: 80%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: transparent;
+}
+
+    ::deep .button:hover {
+        background-color: var(--dark-panel-hover);
+    }
+
+#play-button {
+    background-size: 90%;
+}
+
+#volume-button {
+    margin-left: auto;
+    background-size: 70%;
+}
+
+#duration {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 160px;
+    color: var(--dark-text);
+}
+
+::deep .speed-button {
+    background-image: url('../../Controls/VideoPlayer/PlaybackSpeed.png');
+}
+
+::deep .speed-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    height: 150px;
+    width: 75px;
+    position: absolute;
+    right: 15px;
+    bottom: 70px;
+    border: none;
+}
+
+    ::deep .speed-panel > button:last-child {
+        border-end-start-radius: 10px;
+        border-end-end-radius: 10px;
+    }
+
+    ::deep .speed-panel > button:first-child {
+        border-start-start-radius: 10px;
+        border-start-end-radius: 10px;
+    }
+
+#button-fullscreen {
+    background-image: url('../../Controls/VideoPlayer/Expand.png');
+    background-size: 60%;
+}
+
+#video-player:fullscreen #button-fullscreen {
+    background-image: url('../../Controls/VideoPlayer/Shrink.png');
+}

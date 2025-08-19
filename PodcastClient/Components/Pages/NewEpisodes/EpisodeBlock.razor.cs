@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components;
 using PodcastClient.Models;
 
 namespace PodcastClient.Components.Pages.NewEpisodes
@@ -13,7 +13,7 @@ namespace PodcastClient.Components.Pages.NewEpisodes
 
         private void OnEpisodeCLick()
         {
-            PodcastService.Playing = Episode;
+            PodcastCollection.Current = Episode;
             Navigator.NavigateTo("/now-playing");
         }
     }

@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using PodcastClient.Models;
 
@@ -6,7 +6,7 @@ namespace PodcastClient.Components.Pages.MyPodcasts
 {
     public partial class MyPodcasts
     {
-        public List<Podcast> Podcasts { get; set; }
+		public IList<Podcast> Podcasts { get; set; } = [];
 		public string RssFeed { get; set; } = string.Empty;
         private bool _isSubscribePanelVisible = false;
 		private bool _isMouseOverSubscribePanel = false;
@@ -16,19 +16,19 @@ namespace PodcastClient.Components.Pages.MyPodcasts
 		protected override void OnInitialized()
         {
 			base.OnInitialized();
-			Podcasts = PodcastService.Podcasts;
+			Podcasts = PodcastCollection;
 
-			//if (Podcasts.Count == 0)
-			//{
-			//	var httpClient = HttpClientFactory.CreateClient();
-			//	var rss = httpClient.GetStringAsync("https://feeds.simplecast.com/h18ZIZD_").Result;
-			//	var podcast = Podcast.TryParse(rss);
-			//	Podcasts.Add(podcast);
+			if (Podcasts.Count == 0)
+			{
+				var httpClient = HttpClientFactory.CreateClient();
+				var rss = httpClient.GetStringAsync("https://feeds.simplecast.com/h18ZIZD_").Result;
+				var podcast = Podcast.TryParse(rss);
+				Podcasts.Add(podcast!);
 
-			//	rss = httpClient.GetStringAsync("https://feeds.twit.tv/twit_video_hd.xml").Result;
-			//	podcast = Podcast.TryParse(rss);
-			//	Podcasts.Add(podcast);
-			//}
+				rss = httpClient.GetStringAsync("https://feeds.twit.tv/twit_video_hd.xml").Result;
+				podcast = Podcast.TryParse(rss);
+				Podcasts.Add(podcast!);
+			}
 		}
 
 
@@ -58,9 +58,9 @@ namespace PodcastClient.Components.Pages.MyPodcasts
 		private void OnSubscribePanelMouseEnter() => _isMouseOverSubscribePanel = true;
 		private void OnSubscribePanelMouseLeave() => _isMouseOverSubscribePanel = false;
 
-		private void OnChannelClick(Podcast channel)
+		private void OnPodcastClick(Podcast podcast)
         {
-            Navigator.NavigateTo($"/channel?id={channel.Id}");
+            Navigator.NavigateTo($"/my_podcasts/{podcast.Name}");
         }
 
 		private async Task OnSubmitButtonClick()
@@ -81,7 +81,7 @@ namespace PodcastClient.Components.Pages.MyPodcasts
 				}
 				catch (Exception ex)
 				{
-					
+					Logger.LogError(ex.Message);
 				}
 
 				RssFeed = string.Empty;

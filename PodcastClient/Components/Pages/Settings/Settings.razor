@@ -1,11 +1,37 @@
-﻿@page "/settings"
+@page "/settings"
 @rendermode InteractiveServer
 @inject IStringLocalizer<Resources.Resource> Localizer
+@inject NavigationManager Navigator
+@inject ThemeService ThemeService
 
 <PageTitle>@Localizer["Settings"]</PageTitle>
 
-<main>
-	<h1>@Localizer["Settings"]</h1>
-	<LocaleSelector />
-	<ThemeSelector />
-</main>
+<style>
+	.option {
+		width: 220px;
+	}
+
+	.option-title {
+		width: 100px;
+	}
+</style>
+
+<div class="d-flex flex-column gap-3 m-3">
+	<div class="d-flex option">
+		<div class="option-title">@Localizer["Language"]</div>
+		<select class="rounded p-1 flex-grow-1" @bind="Culture">
+			<option value="en-US">English</option>
+			<option value="ru-RU">Русский</option>
+		</select>
+	</div>
+	<div class="d-flex option">
+		<div class="option-title">@Localizer["Theme"]</div>
+		<select class="rounded p-1 flex-grow-1"
+				@bind="ThemeService.Active"
+				@bind:event="oninput"
+				@bind:after="() => Navigator.Refresh()">
+			<option value="@Theme.Light">@Localizer["LightTheme"]</option>
+			<option value="@Theme.Dark">@Localizer["DarkTheme"]</option>
+		</select>
+	</div>
+</div>

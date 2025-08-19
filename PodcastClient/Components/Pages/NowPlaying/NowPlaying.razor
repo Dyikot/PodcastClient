@@ -1,9 +1,8 @@
-﻿@page "/now-playing"
+@page "/now-playing"
 @rendermode InteractiveServer
 @inject IStringLocalizer<Resources.Resource> Localizer
-@inject IPodcastService PodcastService
-@inject IDateFormatter DateFormatter
-@inject IMediaService MediaService
+@inject PodcastCollection PodcastCollection
+@inject MediaService MediaService
 
 <PageTitle>@Title</PageTitle>
 
@@ -18,11 +17,11 @@
 			<img src="@Episode.IconUri" />
 			<div id="about-content">
 				<h5>@Episode.Name</h5>
-				<span>@Episode.Channel?.Name</span>
+				<span>@Episode.Podcast?.Name</span>
 				<div>
 					<div id="about-content-date">
 						<img src="NowPlaying/Calendar.png" />
-						<span>@DateFormatter.ToFormattedString(Episode.ReleaseDate, Localizer)</span>
+						<span>@Episode.ReleaseDate.ToLocalizedString(Localizer)</span>
 					</div>
 					<span>•</span>
 					<div id="about-content-duration">
@@ -36,7 +35,7 @@
 		<div id="description">@Episode.Description</div>
 		switch (Episode.Type)
 		{
-			case Models.ContentType.Audio:
+			case Models.EpisodeType.Audio:
 				<AudioPlayer Source="@Episode.ContentUri"
 							 Duration="@Episode.Duration"
 							 @bind-CurrentTime="Episode.Played"
@@ -45,7 +44,7 @@
 							 OnPlay="@OnPlay"
 							 OnPlayed="@OnPlayed" />
 				break;
-			case Models.ContentType.Video:
+			case Models.EpisodeType.Video:
 				<div id="video-player-layout">
 					<VideoPlayer Source="@Episode.ContentUri"
 								 Duration="@Episode.Duration"

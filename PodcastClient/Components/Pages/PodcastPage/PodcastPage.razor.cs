@@ -1,7 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
+using Microsoft.AspNetCore.Components;
 using PodcastClient.Models;
-using System.Globalization;
 
 namespace PodcastClient.Components.Pages.PodcastPage
 {
@@ -12,9 +10,9 @@ namespace PodcastClient.Components.Pages.PodcastPage
 
     public partial class PodcastPage
     {
-		[SupplyParameterFromQuery(Name ="id")]
-        public Guid PodcastId { get; set; } 
-        public Podcast? Podcast { get; set; }
+		[Parameter]
+		public string Name { get; set; } = "";
+		public Podcast? Podcast { get; set; }
         private SortOrder SortOrder { get; set; } = SortOrder.Latest;
         private bool IsInProgressButtonActive { get; set; } = false;
         private bool IsFinishedButtonActive { get; set; } = false;
@@ -26,18 +24,18 @@ namespace PodcastClient.Components.Pages.PodcastPage
             {
                 if (IsFinishedButtonActive)
                 {
-                    return Podcast!.PlayedEpisodes;
+                    return Podcast!.Episodes.Where(ep => ep.Status == EpisodeStatus.Played).ToList();
                 }
 
                 if (IsNotStartedButtonActive)
                 {
-                    return Podcast!.UnplayedEpisodes;
+                    return Podcast!.Episodes.Where(ep => ep.Status == EpisodeStatus.Unplayed).ToList();
                 }
 
                 if (IsInProgressButtonActive)
                 {
-                    return Podcast!.InProgressEpisodes;
-                }
+					return Podcast!.Episodes.Where(ep => ep.Status == EpisodeStatus.InProgress).ToList();
+				}
 
                 return Podcast!.Episodes;
             }
@@ -45,11 +43,11 @@ namespace PodcastClient.Components.Pages.PodcastPage
 
         protected override void OnInitialized()
         {
-            Podcast = PodcastService.GetChannelById(PodcastId);
+            Podcast = PodcastCollection.First(podcast => podcast.Name == Name);
             base.OnInitialized();
         }
 
-        private void MarkAllItemsAs(PlayStatus progressStatus)
+        private void MarkAllItemsAs(EpisodeStatus progressStatus)
         {
             foreach (var episode in Podcast!.Episodes)
             {
@@ -57,8 +55,8 @@ namespace PodcastClient.Components.Pages.PodcastPage
             }
         }
 
-        private void OnMarkAllItemsButtonClick() => MarkAllItemsAs(PlayStatus.Played);
-        private void OnUnmarkAllItemsButtonClick() => MarkAllItemsAs(PlayStatus.Unplayed);
+        private void OnMarkAllItemsButtonClick() => MarkAllItemsAs(EpisodeStatus.Played);
+        private void OnUnmarkAllItemsButtonClick() => MarkAllItemsAs(EpisodeStatus.Unplayed);
 
         private void OnInProgressButtonClick()
         {
@@ -80,13 +78,13 @@ namespace PodcastClient.Components.Pages.PodcastPage
 
         private void OnUnsubscribeButtonClick()
         {
-            if(PodcastService.Playing != null &&
-			   Podcast!.Episodes.Contains(PodcastService.Playing))
+            if(PodcastCollection.Current != null && 
+			   Podcast!.Episodes.Contains(PodcastCollection.Current))
             {
-                PodcastService.Playing = null; 
+                PodcastCollection.Current = null; 
             }
 
-            PodcastService.Podcasts.Remove(Podcast);
+            PodcastCollection.Remove(Podcast!);
 			Navigator.NavigateTo("/");
 		}
     }

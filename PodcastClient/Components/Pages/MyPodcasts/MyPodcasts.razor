@@ -1,14 +1,14 @@
-﻿@page "/"
+@page "/"
 @rendermode InteractiveServer
 @inject IStringLocalizer<Resources.Resource> Localizer
-@inject IPodcastService PodcastService
+@inject PodcastCollection PodcastCollection
 @inject IHttpClientFactory HttpClientFactory
 @inject NavigationManager Navigator
+@inject ILogger<MyPodcasts> Logger
 
 <PageTitle>@Localizer["MyPodcasts"]</PageTitle>
 
-<main>
-	<h1>@Localizer["MyPodcasts"]</h1>
+<div class="m-3">
 	<div id="addpodcast">
 		<button id="addpodcast-button" class="item" @onclick="OnSubscribeClick">
 			<img src="MyPodcasts/Add.png" />
@@ -38,9 +38,9 @@
 	<div class="podcasts-library">
 		@foreach (var podcast in Podcasts)
 		{
-			<PodcastBlock Podcast="podcast" Click="OnChannelClick" />
+			<PodcastView Podcast="podcast" Click="OnPodcastClick" />
 		}
 	</div>
-</main>
+</div>
 
 

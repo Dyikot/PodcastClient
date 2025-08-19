@@ -1,4 +1,5 @@
 using PodcastClient.Components;
+using PodcastClient.Models;
 using PodcastClient.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,9 +8,8 @@ builder.Services.AddHttpClient();
 builder.Services.AddLocalization();
 builder.Services.AddControllers();
 builder.Services.AddSingleton<ThemeService>();
-builder.Services.AddSingleton<IPodcastService, PodcastService>();
-builder.Services.AddSingleton<IMediaService, MediaService>();
-builder.Services.AddTransient<IDateFormatter, DateFormatter>();
+builder.Services.AddSingleton<PodcastCollection>();
+builder.Services.AddSingleton<MediaService>();
 
 var app = builder.Build();
 app.UseHttpsRedirection();

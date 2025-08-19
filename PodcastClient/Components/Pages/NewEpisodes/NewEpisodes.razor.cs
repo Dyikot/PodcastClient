@@ -1,4 +1,4 @@
-﻿using PodcastClient.Models;
+using PodcastClient.Models;
 
 namespace PodcastClient.Components.Pages.NewEpisodes
 {
@@ -8,8 +8,8 @@ namespace PodcastClient.Components.Pages.NewEpisodes
 
         protected override void OnInitialized()
         {
-            Episodes = PodcastService.Podcasts
-                .SelectMany(podcast => podcast.NewEpisodes)
+            Episodes = PodcastCollection
+                .SelectMany(podcast => podcast.Episodes.Where(ep => ep.Status != EpisodeStatus.Played))
                 .OrderByDescending(episode => episode.ReleaseDate)
                 .ToList();
 

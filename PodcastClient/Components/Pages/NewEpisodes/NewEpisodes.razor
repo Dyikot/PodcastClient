@@ -1,12 +1,11 @@
-﻿@page "/new-episodes"
+@page "/new-episodes"
 @rendermode InteractiveServer
 @inject IStringLocalizer<Resources.Resource> Localizer
-@inject IPodcastService PodcastService
+@inject PodcastCollection PodcastCollection
 
 <PageTitle>@Localizer["NewEpisodes"]</PageTitle>
 
 <main>
-	<h1>@Localizer["NewEpisodes"]</h1>
 	<div id="new-episodes-list">
 		@foreach(var episode in Episodes)
 		{

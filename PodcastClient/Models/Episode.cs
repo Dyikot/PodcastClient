@@ -1,18 +1,18 @@
-﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components;
 
 namespace PodcastClient.Models
 {
-	public enum PlayStatus
+	public enum EpisodeStatus
 	{
 		Unplayed, InProgress, Played
 	}
 
-	public enum ContentType
+	public enum EpisodeType
 	{
 		Audio, Video
 	}
 
-	public class Episode
+	public partial class Episode
 	{
 		private Uri? _iconUri;
 
@@ -23,11 +23,12 @@ namespace PodcastClient.Models
 		public required Uri Link { get; set; }
 		public required TimeSpan Duration { get; set; }
 		public required Uri ContentUri { get; set; }
+
 		public int Number { get; set; }
-		public Podcast? Channel { get; set; }
+		public Podcast? Podcast { get; set; }
 		public TimeSpan Played { get; set; }
-		public Uri? IconUri { get => _iconUri ?? Channel?.IconUrl; set => _iconUri = value; }
-		public PlayStatus Status { get; set; } = PlayStatus.Unplayed;
-		public ContentType Type { get; set; } = ContentType.Audio;
+		public Uri? IconUri { get => _iconUri ?? Podcast?.IconUrl; set => _iconUri = value; }
+		public EpisodeStatus Status { get; set; } = EpisodeStatus.Unplayed;
+		public EpisodeType Type { get; set; } = EpisodeType.Audio;
 	}
 }

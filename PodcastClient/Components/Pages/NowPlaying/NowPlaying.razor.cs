@@ -1,4 +1,4 @@
-﻿using PodcastClient.Models;
+using PodcastClient.Models;
 
 namespace PodcastClient.Components.Pages.NowPlaying
 {
@@ -9,15 +9,15 @@ namespace PodcastClient.Components.Pages.NowPlaying
 
         protected override void OnParametersSet()
         {
-            Episode = PodcastService.Playing;
+            Episode = PodcastCollection.Current;
             base.OnParametersSet();
         }
 
         private void OnPlay()
         {
-            if(Episode != null && Episode.Status != PlayStatus.Played)
+            if(Episode != null && Episode.Status != EpisodeStatus.Played)
             {
-                Episode.Status = PlayStatus.InProgress;
+                Episode.Status = EpisodeStatus.InProgress;
             }
         }
 
@@ -25,7 +25,7 @@ namespace PodcastClient.Components.Pages.NowPlaying
 		{
 			if (Episode != null)
 			{
-				Episode.Status = PlayStatus.Played;
+				Episode.Status = EpisodeStatus.Played;
 			}
 		}
 	}

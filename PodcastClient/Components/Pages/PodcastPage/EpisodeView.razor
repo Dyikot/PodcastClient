@@ -1,12 +1,11 @@
-﻿@inject IStringLocalizer<Resources.Resource> Localizer
-@inject IDateFormatter DateFormatter
+@inject IStringLocalizer<Resources.Resource> Localizer
 @inject NavigationManager Navigator
-@inject IPodcastService PodcastService
+@inject PodcastCollection PodcastCollection
 
 <main class="item">
 	<div id="about" @onclick="OnClick">
 		<div id="about-header">
-			<span>@DateFormatter.ToFormattedString(Episode.ReleaseDate, Localizer)</span>
+			<span>@Episode.ReleaseDate.ToLocalizedString(Localizer)</span>
 			<span>•</span>
 			<span>@($"{Localizer["Episode"]}: {Episode.Number}")</span>
 		</div>
@@ -18,7 +17,7 @@
 	<div id="sidepanel">
 		@switch(Episode.Status)
 		{
-			case Models.PlayStatus.Played:
+			case Models.EpisodeStatus.Played:
 				<img @onclick="OnFinishedMarkClick" src="PodcastPage/Uncheck.svg" />
 				break;
 			default:

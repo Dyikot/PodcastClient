@@ -1,6 +1,6 @@
-﻿@page "/channel"
+@page "/my_podcasts/{name}"
 @rendermode InteractiveServer
-@inject IPodcastService PodcastService
+@inject PodcastCollection PodcastCollection
 @inject NavigationManager Navigator
 @inject IStringLocalizer<Resources.Resource> Localizer
 
@@ -83,14 +83,14 @@
 				{
 					@foreach (var episode in Episodes)
 					{
-						<EpisodeBlock Episode="episode" />
-					}					
+						<EpisodeView Episode="episode" />
+					}				
 				}
 				else
 				{
 					@for (int i = Episodes.Count - 1; i >= 0; i--)
 					{
-						<EpisodeBlock Episode="Episodes[i]" />
+						<EpisodeView Episode="Episodes[i]" />
 					}
 				}
 			</div>

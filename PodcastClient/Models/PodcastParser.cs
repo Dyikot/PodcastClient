@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components;
 using System.Globalization;
 using System.Xml.Linq;
 
@@ -6,7 +6,12 @@ namespace PodcastClient.Models
 {
     public partial class Podcast
     {
-        public static Podcast? TryParse(string rss)
+        private static readonly string[] _formats = [
+            "ddd, dd MMM yyyy HH:mm:ss 'PDT'",
+            "ddd, dd MMM yyyy HH:mm:ss PDT"
+        ];
+
+		public static Podcast? TryParse(string rss)
         {
             if (rss == string.Empty)
             {
@@ -131,24 +136,15 @@ namespace PodcastClient.Models
 
         private static DateTime ParseReleaseDate(string releaseDate)
         {
-            if (DateTime.TryParse(releaseDate, out DateTime date))
+			if (DateTime.TryParse(releaseDate, out DateTime date))
             {
                 return date.ToLocalTime();
             }
-
-            var split = releaseDate.Split(' ');
-
-            if (TimeZoneInfo.TryFindSystemTimeZoneById(split.Last(), out var timeZone))
+            else if(DateTime.TryParseExact(releaseDate, _formats, 
+                                           CultureInfo.InvariantCulture,
+				                           DateTimeStyles.None, out date))
             {
-                if (DateTime.TryParseExact(
-                    string.Concat(split[..^1]),
-                    "ddd, dd MMM yyyy HH:mm:ss".AsSpan(),
-                    new CultureInfo("en-US"),
-                    DateTimeStyles.AllowWhiteSpaces,
-                    out date))
-                {
-                    return TimeZoneInfo.ConvertTimeToUtc(date, timeZone).ToLocalTime();
-                }
+                return date.ToLocalTime();
             }
 
 			throw new NotSupportedException("Enable to parse date!");

@@ -43,7 +43,7 @@ namespace PodcastClient.Components.Pages.PodcastPage
 
         protected override void OnInitialized()
         {
-            Podcast = PodcastCollection.First(podcast => podcast.Name == Name);
+            Podcast = PodcastCollection.First(podcast => podcast.Title == Name);
             base.OnInitialized();
         }
 

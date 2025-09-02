@@ -1,213 +1,47 @@
 :root {
-    /* hover +- 7 */
-    /* active +- 10 */
-    /*  Light theme */
-    --light-text: black;
-    --light-text-grey: #797979;
-    --light-page: #e9e9e9;
-    --light-panel: #d9d9d9;
-    --light-panel-hover: #d2d2d2;
-    --light-panel-active: #c9c9c9;
-    --light-panel-item: #c9c9c9;
-    --light-panel-item-hover: #c2c2c2;
-    --light-panel-item-active: #b9b9b9;
-    --light-sidebar: #d3d3d3;
-    --light-sidebar-item: #c3c3c3;
-    /*  Dark theme  */
-    --dark-text: #e6e6e6;
-    --dark-text-grey: #a5a4a4;
-    --dark-page: #262626;
-    --dark-panel: #363636;
-    --dark-panel-hover: #3d3d3d;
-    --dark-panel-active: #464646;
-    --dark-panel-item: #464646;
-    --dark-panel-item-hover: #4d4d4d;
-    --dark-panel-item-active: #565656;
-    --dark-sidebar: #161616;
-    --dark-sidebar-item: #262626;
-    /* Others */
-    --player-track-color: #f59630; /*#3b7de5*/
+    --player-track-color: #f59630;
 }
 
-/*  Dark theme  */
-
-.theme-dark {
-    color: var(--dark-text);
-    background-color: var(--dark-page);
+:root[data-theme="light"] {
+    --fg-main: black;
+    --fg-secondary: #797979;
+    --bg-0: #e3e3e3;
+    --bg-1: #d4d4d4;
+    --bg-2: #c5c5c5;
+    --bg-3: #b6b6b6;
+    --bg-4: #a7a7a7;
+    --nav-menu: #c5c5c5;
+    --nav-menu-currentItem: #b6b6b6;
 }
 
-    .theme-dark .text-grey {
-        color: var(--dark-text-grey);
-    }
-
-    .theme-dark .item {
-        background-color: var(--dark-panel);
-    }
-
-        .theme-dark .item:hover {
-            background-color: var(--dark-panel-hover);
-        }
-
-        .theme-dark .item:active {
-            background-color: var(--dark-panel-active);
-        }
-
-    .theme-dark .item-active {
-        background-color: var(--dark-panel-active);
-    }
-
-    .theme-dark .item-focusable:focus {
-        background-color: var(--dark-panel-item-active);
-    }
-
-    .theme-dark .item-transparent:hover {
-        background-color: var(--dark-panel-hover);
-    }
-
-    .theme-dark .input::placeholder {
-        color: var(--dark-text-grey);
-    }
-
-    .theme-dark .panel {
-        background-color: var(--dark-panel);
-    }
-
-    .theme-dark .panel-panel {
-        background-color: var(--dark-panel-item);
-    }
-
-    .theme-dark .panel-item {
-        background-color: var(--dark-panel-item);
-    }
-
-        .theme-dark .panel-item:hover {
-            background-color: var(--dark-panel-item-hover);
-        }
-
-        .theme-dark .panel-item:active {
-            background-color: var(--dark-panel-item-active);
-        }
-
-        .theme-dark .panel-item-transparent:hover {
-            background-color: var(--dark-panel-item-hover);
-        }
-
-    .theme-dark .panel-item-active {
-        background-color: var(--dark-panel-item-active);
-    }
-
-    .theme-dark .panel-input {
-        color: var(--dark-text);
-    }
-
-        .theme-dark .panel-input::placeholder {
-            color: var(--dark-text-grey);
-        }
-
-    .theme-dark select {
-        background-color: var(--dark-panel);
-        color: var(--dark-text);
-    }
-
-        .theme-dark select option {
-            background-color: var(--dark-panel);
-            color: var(--dark-text);
-        }
-
-    .theme-dark :where(.navigation-link.active, .navigation-link:hover) {
-        background-color: var(--dark-sidebar-item);
-    }
-
-/*  Light theme */
-
-.theme-light {
-    color: var(--light-text);
-    background-color: var(--light-page);
+:root[data-theme="dark"] {
+    --fg-main: #e6e6e6;
+    --fg-secondary: #a5a4a4;
+    --bg-0: #2e2e2e;
+    --bg-1: #3d3d3d;
+    --bg-2: #4c4c4c;
+    --bg-3: #5b5b5b;
+    --bg-4: #6a6a6a;
+    --nav-menu: #151515;
+    --nav-menu-currentItem: #252525;
 }
 
-    .theme-light .text-grey {
-        color: var(--light-text-grey);
-    }
+.fg-main { color : var(--fg-main); }
+.fg-secondary { color : var(--fg-secondary); }
 
-    .theme-light .item {
-        background-color: var(--light-panel);
-    }
+.bg-0 { background-color: var(--bg-0); }
+.bg-1 { background-color: var(--bg-1); }
+.bg-2 { background-color: var(--bg-2); }
 
-        .theme-light .item:hover {
-            background-color: var(--light-panel-hover);
-        }
+.bg-0.hoverable:hover { background-color: var(--bg-1); }
+.bg-1.hoverable:hover { background-color: var(--bg-2); }
+.bg-2.hoverable:hover { background-color: var(--bg-3); }
 
-        .theme-light .item:active {
-            background-color: var(--light-panel-active);
-        }
+.bg-0.canBeActive:active { background-color: var(--bg-2); }
+.bg-1.canBeActive:active { background-color: var(--bg-3); }
+.bg-2.canBeActive:active { background-color: var(--bg-4); }
 
-        .theme-light .panel-item-transparent:hover {
-            background-color: var(--light-panel-hover);
-        }
-
-    .theme-light .item-active {
-        background-color: var(--light-panel-active);
-    }
-
-    .theme-light .item-focusable:focus {
-        background-color: var(--light-panel-item-active);
-    }
-
-    .theme-light .input::placeholder {
-        color: var(--light-text-grey);
-    }
-
-    .theme-light .panel {
-        background-color: var(--light-panel);
-    }
-
-    .theme-light .panel-panel {
-        background-color: var(--light-panel-item);
-    }
-
-    .theme-light .panel-item {
-        background-color: var(--light-panel-item);
-    }
-
-        .theme-light .panel-item:hover {
-            background-color: var(--light-panel-item-hover);
-        }
-
-        .theme-light .panel-item:active {
-            background-color: var(--light-panel-item-active);
-        }
-
-        .theme-light .panel-item-transparent:hover {
-            background-color: var(--light-panel-item-hover);
-        }
-
-    .theme-light .panel-item-active {
-        background-color: var(--light-panel-item-active);
-    }
-
-    .theme-light .panel-input {
-        color: var(--light-text);
-    }
-
-    .theme-light .panel-input::placeholder {
-        color: var(--light-text-grey);
-    }
-
-    .theme-light select {
-        background-color: var(--light-panel);
-        color: var(--light-text);
-    }
-
-        .theme-light select option {
-            background-color: var(--light-panel-hover);
-            color: var(--light-text);
-        }
-
-    .theme-light :where(.navigation-link.active, .navigation-link:hover) {
-        background-color: var(--light-sidebar-item);
-    }
-
-/* Events */
+input::placeholder { color: var(--fg-secondary); }
 
 .unclickable {
     pointer-events: none;

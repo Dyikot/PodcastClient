@@ -74,8 +74,7 @@ namespace PodcastClient.Models
 
 			return new Episode()
 			{
-				Id = Guid.TryParse(id, out Guid guid) ? guid : Guid.NewGuid(),
-				Name = title,
+				Title = title,
 				Description = new MarkupString(description),
 				ReleaseDate = ParseDate(releaseDate),
 				Duration = ParseDuration(duration),
@@ -115,8 +114,8 @@ namespace PodcastClient.Models
 			}
 
 			if (DateTime.TryParseExact(releaseDate, _formats,
-									  CultureInfo.InvariantCulture,
-									  DateTimeStyles.None, out date))
+									   CultureInfo.InvariantCulture,
+									   DateTimeStyles.None, out date))
 			{
 				return date.ToLocalTime();
 			}

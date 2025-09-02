@@ -1,4 +1,4 @@
-namespace PodcastClient.Services
+namespace PodcastClient.Models
 {
 	public class MediaService
 	{

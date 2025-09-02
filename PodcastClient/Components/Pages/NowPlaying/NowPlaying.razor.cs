@@ -5,7 +5,7 @@ namespace PodcastClient.Components.Pages.NowPlaying
     public partial class NowPlaying
     {
         public Episode? Episode { get; set; }
-        public string Title => Episode?.Name ?? Localizer["NoPlayingPodcast"];
+        public string Title => Episode?.Title ?? Localizer["NoPlayingPodcast"];
 
         protected override void OnParametersSet()
         {

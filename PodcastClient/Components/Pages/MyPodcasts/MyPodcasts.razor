@@ -8,16 +8,17 @@
 
 <PageTitle>@Localizer["MyPodcasts"]</PageTitle>
 
-<div class="m-3">
-	<div id="addpodcast">
-		<button id="addpodcast-button" class="item" @onclick="OnSubscribeClick">
-			<img src="MyPodcasts/Add.png" />
+<div class="m-3 d-flex flex-column gap-2">
+	<div class="d-flex align-items-center gap-2" style="height: 50px;">
+		<button class="bg-1 hoverable canBeActive gap-1 d-inline-flex rounded-2"
+				@onclick="OnSubscribeClick">
+			<img src="MyPodcasts/Add.png" width="24" height="24" />
 			<span>@Localizer["Subscribe"]</span>
 		</button>
 		@if (_isSubscribePanelVisible)
 		{
-			<div id="addpodcast-panel"
-				 class="panel"
+			<div class="bg-1 d-flex justify-content-around align-items-center gap-2 p-2 rounded-2"
+				 
 				 tabindex="0"
 				 @onmouseenter="OnSubscribePanelMouseEnter"
 				 @onmouseleave="OnSubscribePanelMouseLeave"
@@ -26,16 +27,16 @@
 				<InputText @ref="_rssInputFeed"
 						   @bind-Value="RssFeed"						  
 						   placeholder="https://rss-feed.com"
-						   class="panel-panel panel-input"/>
-				<button id="addpodcast-panel-button"
-						class="panel-item"
+						   class="bg-0 border border-0"
+						   style="outline: none;"/>
+				<button class="bg-2 hoverable canBeActive rounded-2"
 						@onclick="OnSubmitButtonClick">
 					@Localizer["Submit"]
 				</button>
 			</div>
 		}
 	</div>
-	<div class="podcasts-library">
+	<div class="d-flex flex-wrap justify-content-start my-2 gap-2">
 		@foreach (var podcast in Podcasts)
 		{
 			<PodcastView Podcast="podcast" Click="OnPodcastClick" />

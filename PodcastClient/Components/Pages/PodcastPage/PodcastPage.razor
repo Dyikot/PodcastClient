@@ -4,7 +4,7 @@
 @inject NavigationManager Navigator
 @inject IStringLocalizer<Resources.Resource> Localizer
 
-<PageTitle>@(Podcast?.Name ?? Localizer["Error"])</PageTitle>
+<PageTitle>@(Podcast?.Title ?? Localizer["Error"])</PageTitle>
 
 <main>
 	@if(Podcast == null)
@@ -28,7 +28,7 @@
 			<div id="about">
 				<img src="@Podcast.IconUrl" alt="Could not find the image" />
 				<div id="about-content">
-					<h4 id="about-content-name">@Podcast.Name</h4>
+					<h4 id="about-content-name">@Podcast.Title</h4>
 					<div id="about-content-owner">
 						<span>@Podcast.Author</span>
 						<span>•</span>

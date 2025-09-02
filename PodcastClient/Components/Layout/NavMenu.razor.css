@@ -23,6 +23,10 @@ span {
     text-decoration: none;
 }
 
+::deep .navigation-link { background-color: var(--nav-menu); }
+::deep .navigation-link:hover, 
+::deep .navigation-link.active { background-color: var(--nav-menu-currentItem); }
+
 @media (min-width: 641px) {
     #navigation-menu {
         height: 100%;

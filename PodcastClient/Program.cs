@@ -1,6 +1,5 @@
 using PodcastClient.Components;
 using PodcastClient.Models;
-using PodcastClient.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents().AddInteractiveServerComponents();

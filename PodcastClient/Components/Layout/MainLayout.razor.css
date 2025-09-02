@@ -6,6 +6,7 @@
 }
 
 #sidebar {
+    background-color: var(--nav-menu);
     position: sticky;
     height: 10vh;
     bottom: 0px;
@@ -13,11 +14,11 @@
     z-index: 1;
 }
 
-main {
+#body { 
     flex-grow: 1;
 }
 
-main ::deep h1{
+#body ::deep h1{
     margin-bottom: 30px;
 }
 
@@ -41,18 +42,5 @@ main ::deep h1{
     color: inherit;
 }
 
-::deep select {
-    border: none;
-}
-
-::deep select:focus {
-    outline: none;
-}
-
-.theme-light #sidebar {
-    background-color: var(--light-sidebar);
-}
-
-.theme-dark #sidebar {
-    background-color: var(--dark-sidebar);
-}
+::deep select { border: none; }
+::deep select:focus { outline: none; }

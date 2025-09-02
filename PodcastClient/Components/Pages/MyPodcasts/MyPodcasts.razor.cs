@@ -60,7 +60,7 @@ namespace PodcastClient.Components.Pages.MyPodcasts
 
 		private void OnPodcastClick(Podcast podcast)
         {
-            Navigator.NavigateTo($"/my_podcasts/{podcast.Name}");
+            Navigator.NavigateTo($"/my_podcasts/{podcast.Title}");
         }
 
 		private async Task OnSubmitButtonClick()

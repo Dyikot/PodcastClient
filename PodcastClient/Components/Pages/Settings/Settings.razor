@@ -30,8 +30,8 @@
 				@bind="ThemeService.Active"
 				@bind:event="oninput"
 				@bind:after="() => Navigator.Refresh()">
-			<option value="@Theme.Light">@Localizer["LightTheme"]</option>
-			<option value="@Theme.Dark">@Localizer["DarkTheme"]</option>
+			<option value="@ThemeService.Light">@Localizer["LightTheme"]</option>
+			<option value="@ThemeService.Dark">@Localizer["DarkTheme"]</option>
 		</select>
 	</div>
 </div>

@@ -1,15 +1,12 @@
 @page "/new-episodes"
 @rendermode InteractiveServer
-@inject IStringLocalizer<Resources.Resource> Localizer
 @inject PodcastCollection PodcastCollection
 
-<PageTitle>@Localizer["NewEpisodes"]</PageTitle>
+<PageTitle>@Resource.NewEpisodes</PageTitle>
 
-<main>
-	<div id="new-episodes-list">
-		@foreach(var episode in Episodes)
-		{
-			<EpisodeBlock Episode="episode" />
-		}
-	</div>
-</main>
+<div class="my-3 mx-4 d-flex flex-column align-items-stretch gap-3">
+	@foreach (var episode in Episodes)
+	{
+		<EpisodeView Episode="episode" />
+	}
+</div>

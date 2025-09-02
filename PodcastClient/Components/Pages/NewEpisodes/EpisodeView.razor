@@ -1,0 +1,21 @@
+@inject IStringLocalizer<Resource> Localizer
+@inject NavigationManager Navigator
+@inject PodcastCollection PodcastCollection
+
+<button class="bg-1 hoverable canBeActive d-flex align-items-center rounded-3 gap-3" 
+		style="height: 85px"
+		@onclick="OnEpisodeCLick">
+	<!--Icon-->
+	<img src="@Episode.IconUri" class="rounded-2" width="64" height="64" />
+	<!--Titles-->
+	<div class="d-flex flex-column align-items-start gap-2"
+		 style="max-width: 65%;">
+		<div class="fs-5 text-truncate mw-100">@Episode.Title</div>
+		<div class="fw-bold">@Episode.Podcast?.Title</div>
+	</div>
+	<!--Duration and date-->
+	<div class="d-flex flex-column gap-2 align-items-end flex-grow-1">
+		<span>@Episode.Duration.ToString("hh':'mm':'ss")</span>
+		<span class="text-end">@Episode.ReleaseDate.ToLocalizedString(Localizer)</span>
+	</div>
+</button>

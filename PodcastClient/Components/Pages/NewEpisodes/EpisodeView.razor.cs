@@ -3,15 +3,12 @@ using PodcastClient.Models;
 
 namespace PodcastClient.Components.Pages.NewEpisodes
 {
-    public partial class EpisodeBlock
+    public partial class EpisodeView
     {
         [Parameter, EditorRequired]
         public Episode Episode { get; set; }
-        public string Duration => Episode is Episode episode
-                                  ? episode.Duration.ToString("hh':'mm")
-                                  : string.Empty;
 
-        private void OnEpisodeCLick()
+		private void OnEpisodeCLick()
         {
             PodcastCollection.Current = Episode;
             Navigator.NavigateTo("/now-playing");

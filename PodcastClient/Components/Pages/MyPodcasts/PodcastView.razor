@@ -8,42 +8,30 @@
 		text-overflow: ellipsis;
 		margin: 0px;
 	}
-
-	#author {
-		overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-	}
-
-	#new-episodes {
-		position: absolute;
-		background-color: orange;
-		border-radius: 50px;
-		width: 24px;
-		height: 24px;
-		bottom: 200px;
-		left: 115px;
-		color: black;
-		cursor: default;
-		text-align: center;
-		font-size: 0.95rem;
-	}
 </style>
 
-<button class="bg-1 hoverable canBeActive d-flex justify-content-center align-items-center"
+<button class="bg-1 hoverable canBeActive d-flex justify-content-center align-items-center rounded-2"
 		style="width: 200px; height: 240px;"
 		@onclick="OnClick">
-	<div class="position-relative d-flex flex-column"
+	<div class="position-relative d-flex flex-column text-start"
 		 style="width: 130px; height: 90%;">
+		<!--New articles view-->
 		@if (NewEpisodes.Count > 0)
 		{
-			<span id="new-episodes">@int.Min(NewEpisodes.Count, 99)</span>
+			<div id="new-episodes"
+				 class="position-absolute top-0 start-100 translate-middle 
+						text-center rounded-circle"
+				  style="width: 24px; height: 24px; background-color: orange">
+				@int.Min(NewEpisodes.Count, 99)
+			</div>
 		}
+		<!--Icon-->
 		<img src="@Podcast.IconUrl" 
 			 class="rounded-2 mb-1"
 			 style="height: 130px"
 			 @onclick="OnClick" />
+		<!--Title and author-->
 		<h5 id="title">@Podcast.Title</h5>
-		<span id="author" class="text-grey">@Podcast.Author</span>
+		<div class="text-grey text-truncate mw-100">@Podcast.Author</div>
 	</div>
 </button>

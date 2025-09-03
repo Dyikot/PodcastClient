@@ -8,8 +8,19 @@ namespace PodcastClient.Components.Pages.PodcastPage
         [Parameter, EditorRequired]
         public Episode Episode { get; set; }
 
-		private void OnNotStartedMarkClick() => Episode.Status = EpisodeStatus.Played;
-        private void OnFinishedMarkClick() => Episode.Status = EpisodeStatus.Unplayed;
+        public bool HasPlayed
+        {
+            get => Episode.Status == EpisodeStatus.Played;
+            set
+            {
+                var status = value ? EpisodeStatus.Played : EpisodeStatus.Unplayed;
+
+                if(status != Episode.Status)
+                {
+                    Episode.Status = status;
+                }
+            }
+        }
 
         private void OnClick()
         {

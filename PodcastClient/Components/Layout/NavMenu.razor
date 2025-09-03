@@ -1,24 +1,22 @@
-@inject IStringLocalizer<Resources.Resource> Localizer
-
 <nav id="navigation-menu">
     <NavLink class="navigation-link" href="" Match="NavLinkMatch.All">
-        <img src="Navigation/Library.png" />
-        <span>@Localizer["MyPodcasts"]</span>
+        <img src="Navigation/Podcasts.svg" />
+        <span>@Resource.MyPodcasts</span>
     </NavLink>
     <NavLink class="navigation-link" href="new-episodes">
-        <img src="Navigation/Record.png" />
-        <span>@Localizer["NewEpisodes"]</span>
+        <img src="Navigation/Library.svg" />
+        <span>@Resource.NewEpisodes</span>
     </NavLink>
     <NavLink class="navigation-link" href="explore">
-        <img src="Navigation/Explore.png" />
-        <span>@Localizer["Explore"]</span>
+        <img src="Navigation/Explore.svg" />
+        <span>@Resource.Explore</span>
     </NavLink>
     <NavLink class="navigation-link" href="now-playing">
-        <img src="Navigation/NowPlaying.png" />
-        <span>@Localizer["NowPlaying"]</span>
+        <img src="Navigation/Equalizer.svg" />
+        <span>@Resource.NowPlaying</span>
     </NavLink>
     <NavLink class="navigation-link" href="settings">
-        <img src="Navigation/Settings.png" />
-        <span>@Localizer["Settings"]</span>
+        <img src="Navigation/Settings.svg" />
+        <span>@Resource.Settings</span>
     </NavLink>
 </nav>

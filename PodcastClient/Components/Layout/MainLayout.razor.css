@@ -18,10 +18,6 @@
     flex-grow: 1;
 }
 
-#body ::deep h1{
-    margin-bottom: 30px;
-}
-
 @media (min-width: 641px) {
     #page {
         flex-direction: row;
@@ -35,12 +31,3 @@
         height: 100vh;
     }
 }
-
-::deep button {
-    border: none;
-    padding: 4px 10px;
-    color: inherit;
-}
-
-::deep select { border: none; }
-::deep select:focus { outline: none; }

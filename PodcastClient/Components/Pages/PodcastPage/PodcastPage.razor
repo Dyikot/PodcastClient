@@ -36,7 +36,7 @@
 					</div>
 					<div class="h-100 overflowOn5">@Podcast.Description</div>
 					<div class="d-flex align-items-end gap-2">
-						<button class="bg-2 hoverable canBeActive rounded-2" 
+						<button class="btn bg-2 hoverable canBeActive rounded-2" 
 								@onclick="OnUnsubscribeButtonClick">
 							@Resource.Unsubscribe
 						</button>
@@ -48,31 +48,31 @@
 		<div class="d-flex flex-column gap-4 w-75 m-auto">
 			<!--Sort and filter buttons-->
 			<div class="d-inline-flex gap-2">
-				<select class="bg-1 p-1 rounded-2" @bind="SortOrder">
+				<select class="fg-main bg-1 p-1 rounded-2" @bind="SortOrder">
 					<option value="@SortOrder.Latest">@Resource.Latest</option>
 					<option value="@SortOrder.Oldest">@Resource.Oldest</option>
 				</select>
-				<SwitchButton Class="bg-1 hoverable canBeActive rounded-2"
-							  ActiveClass="bg-2 hoverable canBeActive rounded-2"
-							  IsActive="@IsInProgressButtonActive"
+				<ToggleButton Class="btn bg-1 hoverable canBeActive rounded-2"
+							  CheckedClass="btn bg-2 hoverable canBeActive rounded-2"
+							  IsChecked="@IsInProgressButtonActive"
 							  OnClick="OnInProgressButtonClick">
 					<ContentTemplate>@Resource.InProgress</ContentTemplate>
-					<ActiveContentTemplate>@Resource.InProgress</ActiveContentTemplate>
-				</SwitchButton>
-				<SwitchButton Class="bg-1 hoverable canBeActive rounded-2"
-							  ActiveClass="bg-2 hoverable canBeActive rounded-2"
-							  IsActive="@HasPlayedButtonActive"
+					<CheckedContentTemplate>@Resource.InProgress</CheckedContentTemplate>
+				</ToggleButton>
+				<ToggleButton Class="btn bg-1 hoverable canBeActive rounded-2"
+							  CheckedClass="btn bg-2 hoverable canBeActive rounded-2"
+							  IsChecked="@HasPlayedButtonActive"
 							  OnClick="OnPlayedButtonClick">
 					<ContentTemplate>@Resource.Played</ContentTemplate>
-					<ActiveContentTemplate>@Resource.Played</ActiveContentTemplate>
-				</SwitchButton>
-				<SwitchButton Class="bg-1 hoverable canBeActive rounded-2"
-							  ActiveClass="bg-2 hoverable canBeActive rounded-2"
-							  IsActive="@HasUnplayedButtonActive"
+					<CheckedContentTemplate>@Resource.Played</CheckedContentTemplate>
+				</ToggleButton>
+				<ToggleButton Class="btn bg-1 hoverable canBeActive rounded-2"
+							  CheckedClass="btn bg-2 hoverable canBeActive rounded-2"
+							  IsChecked="@HasUnplayedButtonActive"
 							  OnClick="OnUnplayedButtonClick">
 					<ContentTemplate>@Resource.Unplayed</ContentTemplate>
-					<ActiveContentTemplate>@Resource.Unplayed</ActiveContentTemplate>
-				</SwitchButton>
+					<CheckedContentTemplate>@Resource.Unplayed</CheckedContentTemplate>
+				</ToggleButton>
 			</div>
 			<!--Podcasts-->
 			<div class="d-flex flex-column gap-3 mb-3">

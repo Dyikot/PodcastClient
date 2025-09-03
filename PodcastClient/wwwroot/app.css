@@ -41,7 +41,18 @@
 .bg-1.canBeActive:active { background-color: var(--bg-3); }
 .bg-2.canBeActive:active { background-color: var(--bg-4); }
 
-input::placeholder { color: var(--fg-secondary); }
+.btn {
+    color: inherit;
+}
+
+.btn:hover {
+    color: inherit;
+}
+
+.btn:focus {    
+    box-shadow: none;
+    outline: 0;
+}
 
 .overflowOn5 {
 	display: -webkit-box;
@@ -66,4 +77,17 @@ input::placeholder { color: var(--fg-secondary); }
 
 .clickable {
     pointer-events: auto;
+}
+
+input::placeholder { color: var(--fg-secondary); }
+
+select {
+    border: none; 
+    outline: none;
+}
+select:focus { outline: none; }
+
+button {
+    border: none;
+    color: inherit;
 }

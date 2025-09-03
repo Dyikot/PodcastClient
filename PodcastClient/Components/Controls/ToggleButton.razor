@@ -1,0 +1,10 @@
+<button @onclick="@OnButtonClick" class="@(IsChecked ? CheckedClass : Class)">
+	@if(IsChecked)
+	{
+		@CheckedContentTemplate
+	}
+	else
+	{
+		@ContentTemplate
+	}
+</button>

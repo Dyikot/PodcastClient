@@ -2,45 +2,43 @@ using Microsoft.AspNetCore.Components;
 
 namespace PodcastClient.Components.Controls
 {
-    public partial class SwitchButton
+    public partial class ToggleButton
     {
-        private bool _isActive = false;
+        private bool _isChecked = false;
 
         [Parameter]
         public string Class { get; set; }
 		[Parameter]
-		public string ActiveClass { get; set; }
+		public string CheckedClass { get; set; }
 		[Parameter, EditorRequired]
         public RenderFragment ContentTemplate { get; set; }
         [Parameter ,EditorRequired]
-        public RenderFragment ActiveContentTemplate { get; set; }
+        public RenderFragment CheckedContentTemplate { get; set; }
         [Parameter]
         public EventCallback OnClick { get; set; }
 		[Parameter]
 		public EventCallback<bool> OnStateChanged { get; set; }
 		[Parameter]
-        public bool IsActive
+        public bool IsChecked
         {
-            get => _isActive;
+            get => _isChecked;
             set
             {
-                if (_isActive == value)
+                if (_isChecked != value)
                 {
-                    return;
-                }
+                    if(OnStateChanged.HasDelegate)
+                    {
+                        OnStateChanged.InvokeAsync(value);
+                    }
 
-                if(OnStateChanged.HasDelegate)
-                {
-                    OnStateChanged.InvokeAsync(value);
+                    _isChecked = value;                    
                 }
-
-                _isActive = value;
             }
         }
 
         private void OnButtonClick()
         {
-            IsActive = !IsActive;
+            IsChecked = !IsChecked;
 
             if (OnClick.HasDelegate)
             {

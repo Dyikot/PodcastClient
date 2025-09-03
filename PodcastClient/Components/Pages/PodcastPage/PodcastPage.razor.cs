@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Components;
 using PodcastClient.Models;
+using System.Collections;
 
 namespace PodcastClient.Components.Pages.PodcastPage
 {
@@ -10,34 +11,26 @@ namespace PodcastClient.Components.Pages.PodcastPage
 
     public partial class PodcastPage
     {
+        private EpisodeStatus? _filterByStatus;
+
 		[Parameter]
 		public string Name { get; set; } = "";
 		public Podcast? Podcast { get; set; }
         private SortOrder SortOrder { get; set; } = SortOrder.Latest;
-        private bool IsInProgressButtonActive { get; set; } = false;
-        private bool IsFinishedButtonActive { get; set; } = false;
-        private bool IsNotStartedButtonActive { get; set; } = false;
+        public bool IsInProgressButtonActive => _filterByStatus == EpisodeStatus.InProgress;
+        public bool HasPlayedButtonActive => _filterByStatus == EpisodeStatus.Played;
+        public bool HasUnplayedButtonActive => _filterByStatus == EpisodeStatus.Unplayed;
 
-        private IList<Episode> Episodes
+        public IList<Episode> Episodes
         {
             get
             {
-                if (IsFinishedButtonActive)
+                if(_filterByStatus == null)
                 {
-                    return Podcast!.Episodes.Where(ep => ep.Status == EpisodeStatus.Played).ToList();
-                }
-
-                if (IsNotStartedButtonActive)
-                {
-                    return Podcast!.Episodes.Where(ep => ep.Status == EpisodeStatus.Unplayed).ToList();
-                }
-
-                if (IsInProgressButtonActive)
-                {
-					return Podcast!.Episodes.Where(ep => ep.Status == EpisodeStatus.InProgress).ToList();
+                    return Podcast!.Episodes;
 				}
 
-                return Podcast!.Episodes;
+				return Podcast!.Episodes.Where(ep => ep.Status == _filterByStatus).ToList();
             }
         }
 
@@ -60,21 +53,39 @@ namespace PodcastClient.Components.Pages.PodcastPage
 
         private void OnInProgressButtonClick()
         {
-            IsFinishedButtonActive = false;
-            IsNotStartedButtonActive = false;
+            if(_filterByStatus == EpisodeStatus.InProgress)
+            {
+                _filterByStatus = null;
+            }
+            else
+            {
+                _filterByStatus = EpisodeStatus.InProgress;
+            }
         }
 
-        private void OnFinishedButtonClick()
+        private void OnPlayedButtonClick()
         {
-            IsInProgressButtonActive = false;
-            IsNotStartedButtonActive = false;
-        }
+			if (_filterByStatus == EpisodeStatus.Played)
+			{
+				_filterByStatus = null;
+			}
+			else
+			{
+				_filterByStatus = EpisodeStatus.Played;
+			}
+		}
 
-        private void OnNotStartedButtonClick()
+        private void OnUnplayedButtonClick()
         {
-            IsInProgressButtonActive = false;
-            IsFinishedButtonActive = false;
-        }        
+			if (_filterByStatus == EpisodeStatus.Unplayed)
+			{
+				_filterByStatus = null;
+			}
+			else
+			{
+				_filterByStatus = EpisodeStatus.Unplayed;
+			}
+		}
 
         private void OnUnsubscribeButtonClick()
         {

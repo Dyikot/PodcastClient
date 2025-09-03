@@ -1,84 +1,81 @@
 @page "/my_podcasts/{name}"
-@rendermode InteractiveServer
 @inject PodcastCollection PodcastCollection
 @inject NavigationManager Navigator
-@inject IStringLocalizer<Resources.Resource> Localizer
 
-<PageTitle>@(Podcast?.Title ?? Localizer["Error"])</PageTitle>
+<PageTitle>@(Podcast?.Title ?? Resource.Error)</PageTitle>
 
-<main>
+<style>
+	.no-link-text a:link {
+		color: inherit;
+		text-decoration: none;
+		pointer-events: none;
+	}
+
+	.no-header-text :is(h1, h2, h3, h4, h5, h6) { font-size: 1rem; }
+</style>
+
+<div>
 	@if(Podcast == null)
 	{
-		<h1>@Localizer["PodcastNull"]</h1>
+		<h1>@Resource.PodcastNull</h1>
 	}
 	else
-	{
-		<style>
-			.about-body-description-text a:link {
-				color: inherit;
-				text-decoration: none;
-				pointer-events: none;
-			}
-
-			.about-body-description-text :is(h1, h2, h3, h4, h5, h6) {
-				font-size: 1rem;
-			}
-		</style>
-		<div id="about-layout" class="panel">
-			<div id="about">
-				<img src="@Podcast.IconUrl" alt="Could not find the image" />
-				<div id="about-content">
-					<h4 id="about-content-name">@Podcast.Title</h4>
-					<div id="about-content-owner">
+	{	
+		<div class="bg-1 d-flex justify-content-center align-items-center mb-3"
+			 style="height: 300px">
+			<!--Header-->
+			<div class="d-flex gap-3"
+				 style="width: 75%; height: 80%">
+				<img src="@Podcast.IconUrl" class="rounded-2" width="150" height="150"  />
+				<div class="h-100 d-flex flex-column align-items-stretch gap-1">
+					<h4 class="m-0">@Podcast.Title</h4>
+					<div class="d-flex gap-2">
 						<span>@Podcast.Author</span>
 						<span>•</span>
-						<span>@($"{Localizer["Episodes"]}: {Podcast.Episodes.Count}")</span>
+						<span>@($"{Resource.Episodes}: {Podcast.Episodes.Count}")</span>
 					</div>
-					<div id="about-content-description">@Podcast.Description</div>
-					<div id="about-content-buttons">
-						<button class="panel-item" @onclick="OnUnsubscribeButtonClick">
-							@Localizer["Unsubscribe"]
+					<div class="h-100 overflowOn5">@Podcast.Description</div>
+					<div class="d-flex align-items-end gap-2">
+						<button class="bg-2 hoverable canBeActive rounded-2" 
+								@onclick="OnUnsubscribeButtonClick">
+							@Resource.Unsubscribe
 						</button>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div id="episodes">
-			<div id="episodes-buttons">
-				<div>
-					<select @bind="SortOrder">
-						<option value="@SortOrder.Latest">@Localizer["Latest"]</option>
-						<option value="@SortOrder.Oldest">@Localizer["Oldest"]</option>
-					</select>
-					<SwitchButton NormalClass="item"
-								  ActiveClass="panel-item-active"
-								  @bind-IsActive="@IsInProgressButtonActive"
-								  OnActivated="OnInProgressButtonClick">
-						@Localizer["InProgress"]
-					</SwitchButton>
-					<SwitchButton NormalClass="item"
-								  ActiveClass="panel-item-active"
-								  @bind-IsActive="@IsFinishedButtonActive"
-								  OnActivated="OnFinishedButtonClick">
-						@Localizer["Played"]
-					</SwitchButton>
-					<SwitchButton NormalClass="item"
-								  ActiveClass="panel-item-active"
-								  @bind-IsActive="@IsNotStartedButtonActive"
-								  OnActivated="OnNotStartedButtonClick">
-						@Localizer["Unplayed"]
-					</SwitchButton>		
-				</div>
-				<div>
-					<button class="item" @onclick="OnMarkAllItemsButtonClick">
-						@Localizer["MarkPlayedAll"]
-					</button>
-					<button class="item" @onclick="OnUnmarkAllItemsButtonClick">
-						@Localizer["UnMarkPlayedAll"]
-					</button>
-				</div>
+		<!--Main-->
+		<div class="d-flex flex-column gap-4 w-75 m-auto">
+			<!--Sort and filter buttons-->
+			<div class="d-inline-flex gap-2">
+				<select class="bg-1 p-1 rounded-2" @bind="SortOrder">
+					<option value="@SortOrder.Latest">@Resource.Latest</option>
+					<option value="@SortOrder.Oldest">@Resource.Oldest</option>
+				</select>
+				<SwitchButton Class="bg-1 hoverable canBeActive rounded-2"
+							  ActiveClass="bg-2 hoverable canBeActive rounded-2"
+							  IsActive="@IsInProgressButtonActive"
+							  OnClick="OnInProgressButtonClick">
+					<ContentTemplate>@Resource.InProgress</ContentTemplate>
+					<ActiveContentTemplate>@Resource.InProgress</ActiveContentTemplate>
+				</SwitchButton>
+				<SwitchButton Class="bg-1 hoverable canBeActive rounded-2"
+							  ActiveClass="bg-2 hoverable canBeActive rounded-2"
+							  IsActive="@HasPlayedButtonActive"
+							  OnClick="OnPlayedButtonClick">
+					<ContentTemplate>@Resource.Played</ContentTemplate>
+					<ActiveContentTemplate>@Resource.Played</ActiveContentTemplate>
+				</SwitchButton>
+				<SwitchButton Class="bg-1 hoverable canBeActive rounded-2"
+							  ActiveClass="bg-2 hoverable canBeActive rounded-2"
+							  IsActive="@HasUnplayedButtonActive"
+							  OnClick="OnUnplayedButtonClick">
+					<ContentTemplate>@Resource.Unplayed</ContentTemplate>
+					<ActiveContentTemplate>@Resource.Unplayed</ActiveContentTemplate>
+				</SwitchButton>
 			</div>
-			<div id="episodes-list">
+			<!--Podcasts-->
+			<div class="d-flex flex-column gap-3 mb-3">
 				@if(SortOrder == SortOrder.Latest)
 				{
 					@foreach (var episode in Episodes)
@@ -96,4 +93,4 @@
 			</div>
 		</div>
 	}
-</main>
+</div>

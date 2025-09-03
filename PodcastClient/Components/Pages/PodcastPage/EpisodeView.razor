@@ -1,29 +1,38 @@
-@inject IStringLocalizer<Resources.Resource> Localizer
+@inject IStringLocalizer<Resource> Localizer
 @inject NavigationManager Navigator
 @inject PodcastCollection PodcastCollection
 
-<main class="item">
-	<div id="about" @onclick="OnClick">
-		<div id="about-header">
+<button class="bg-1 hoverable canBeActive rounded-3 d-flex p-3"
+		style="height: 140px">
+	<!--Main block-->
+	<div class="d-flex flex-column align-items-start gap-1"
+		 style="width: 85%"
+		 @onclick="OnClick">
+		<!--Date and episodes number-->
+		<div class="d-flex gap-1">
 			<span>@Episode.ReleaseDate.ToLocalizedString(Localizer)</span>
 			<span>•</span>
 			<span>@($"{Localizer["Episode"]}: {Episode.Number}")</span>
 		</div>
-		<div id="about-body">
-			<span id="about-body-name">@Episode.Title</span>
-			<span id="about-body-description">@Description</span>
+		<!--Title and description-->
+		<div class="fw-bold mw-100 m-0">@Episode.Title</div>
+		<div class="overflowOn2 text-start mw-100 no-link-text no-header-text">
+			@Episode.Description
 		</div>
 	</div>
-	<div id="sidepanel">
+	<!--Side block-->
+	<div class="flex-grow-1 ms-2 d-flex justify-content-around align-items-center">
 		@switch(Episode.Status)
 		{
 			case Models.EpisodeStatus.Played:
-				<img @onclick="OnFinishedMarkClick" src="PodcastPage/Uncheck.svg" />
+				<img @onclick="OnFinishedMarkClick" src="PodcastPage/Uncheck.svg" 
+					 width="32" height="32" />
 				break;
 			default:
-				<img @onclick="OnNotStartedMarkClick" src="PodcastPage/Check.svg" />
+				<img @onclick="OnNotStartedMarkClick" src="PodcastPage/Check.svg"
+					 width="32" height="32" />
 				break;
 		}
 		<span>@Episode.Duration.ToString("hh':'mm")</span>
 	</div>
-</main>
+</button>

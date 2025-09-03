@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
+using Microsoft.AspNetCore.Components;
 
 namespace PodcastClient.Components.Controls
 {
@@ -8,16 +7,18 @@ namespace PodcastClient.Components.Controls
         private bool _isActive = false;
 
         [Parameter]
-        public string ActiveClass { get; set; }
+        public string Class { get; set; }
+		[Parameter]
+		public string ActiveClass { get; set; }
+		[Parameter, EditorRequired]
+        public RenderFragment ContentTemplate { get; set; }
+        [Parameter ,EditorRequired]
+        public RenderFragment ActiveContentTemplate { get; set; }
         [Parameter]
-        public string NormalClass { get; set; }
-        [Parameter]
-        public RenderFragment? ChildContent { get; set; }
-        [Parameter]
-        public EventCallback OnActivated { get; set; }
-        [Parameter]
-        public EventCallback OnDeactivated { get; set; }
-        [Parameter]
+        public EventCallback OnClick { get; set; }
+		[Parameter]
+		public EventCallback<bool> OnStateChanged { get; set; }
+		[Parameter]
         public bool IsActive
         {
             get => _isActive;
@@ -28,28 +29,22 @@ namespace PodcastClient.Components.Controls
                     return;
                 }
 
-                if(IsActiveChanged.HasDelegate)
+                if(OnStateChanged.HasDelegate)
                 {
-                    IsActiveChanged.InvokeAsync(value);
+                    OnStateChanged.InvokeAsync(value);
                 }
 
                 _isActive = value;
             }
         }
-        [Parameter]
-        public EventCallback<bool> IsActiveChanged { get; set; }
 
         private void OnButtonClick()
         {
             IsActive = !IsActive;
 
-            if (IsActive && OnActivated.HasDelegate)
+            if (OnClick.HasDelegate)
             {
-                OnActivated.InvokeAsync();
-            }
-            else if(!IsActive && OnDeactivated.HasDelegate)
-            {
-                OnDeactivated.InvokeAsync();
+                OnClick.InvokeAsync();
             }
         }
     }

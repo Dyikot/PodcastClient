@@ -43,6 +43,22 @@
 
 input::placeholder { color: var(--fg-secondary); }
 
+.overflowOn5 {
+	display: -webkit-box;
+	-webkit-line-clamp: 5;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.overflowOn2 {
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
 .unclickable {
     pointer-events: none;
     filter: grayscale(1);

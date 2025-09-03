@@ -1,3 +1,10 @@
-﻿<button @onclick="@OnButtonClick" class="@(IsActive ? ActiveClass : NormalClass)">
-	@ChildContent
+<button @onclick="@OnButtonClick" class="@(IsActive ? ActiveClass : Class)">
+	@if(IsActive)
+	{
+		@ActiveContentTemplate
+	}
+	else
+	{
+		@ContentTemplate
+	}
 </button>

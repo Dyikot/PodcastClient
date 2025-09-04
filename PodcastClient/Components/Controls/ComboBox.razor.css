@@ -1,0 +1,35 @@
+button[data-IsSelected="True"] {
+    background-color: var(--bg-2);
+}
+
+[data-IsVisible="False"] {
+    display: none !important;
+}
+
+.defaultBorder {
+    border: 1px solid var(--bg-3);
+}
+
+.dropdown[data-DropDownPosition="Left"] {
+    top: 0;
+    right: 100%;
+    margin-right: 5px;
+}
+
+.dropdown[data-DropDownPosition="Top"] {
+    bottom: 100%;
+    left: 0;
+    margin-bottom: 5px;
+}
+
+.dropdown[data-DropDownPosition="Right"] {
+    top: 0;
+    left: 100%;
+    margin-left: 5px;
+}
+
+.dropdown[data-DropDownPosition="Bottom"] {
+    top: 100%;
+    left: 0;
+    margin-top: 5px;
+}

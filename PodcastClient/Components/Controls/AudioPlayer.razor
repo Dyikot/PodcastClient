@@ -1,55 +1,77 @@
-﻿@inject IStringLocalizer<Resources.Resource> Localizer
 @inject IJSRuntime JS
 
-<main class="panel">
+<div class="bg-1 d-flex justify-content-center align-items-stretch mt-auto bottom-0 position-sticky w-100 order-3"
+	 style="height: 80px; z-index: 1">
 	<audio id="audio-player"
 		   src="@Source" 
 		   @onloadedmetadata="OnMetadataLoaded"
 		   @onended="OnEnded"
 		   @onplay="OnPlay"
 		   @ontimeupdate="OnTimeUpdate" />
-	<div id="controls"  class="@(_canPlay ? "clickable" : "unclickable")">
-		<button class="button panel-item-transparent"
-				style="background-image: url('Controls/AudioPlayer/Rewind.png')"
-				@onclick="OnRewindButtonClick" />
-		<button id="play-button"
-				class="button panel-item-transparent"
-				style="background-image: url('@(_isPlaying ? PauseIconUri : PlayIconUri)')"
-				@ref="_playButton"
-				@onclick="OnPlayButtonClick" />
-		<button id="forward-button"
-				class="button panel-item-transparent"
-				style="background-image: url('Controls/AudioPlayer/Forward.png')"
-				@onclick="OnForwardButtonClick" />
-		<div id="duration">
+	<div class="w-100 px-3 d-flex align-items-center gap-1  @(_canPlay ? "clickable" : "unclickable")">
+		<button class="bg-1 hoverable canBeActive rounded-2"
+				@onclick="OnRewindButtonClick">
+			<img src="Controls/AudioPlayer/Rewind.png" width="24" height="24" />
+		</button>
+		<ToggleButton Class="bg-1 hoverable canBeActive rounded-2"
+					  CheckedClass="bg-1 hoverable canBeActive rounded-2"
+					  IsChecked="@IsPlaying" 
+					  OnClick="OnPlayButtonClick">
+			<ContentTemplate>
+				<img src="Controls/AudioPlayer/Play.png" width="48" height="48" />
+			</ContentTemplate>
+			<CheckedContentTemplate>
+				<img src="Controls/AudioPlayer/Pause.png" width="48" height="48" />
+			</CheckedContentTemplate>
+		</ToggleButton>
+		<button class="bg-1 hoverable canBeActive rounded-2"
+				@onclick="OnForwardButtonClick">
+			<img src="Controls/AudioPlayer/Forward.png" width="24" height="24" />
+		</button>
+		<div class="d-flex justify-content-center align-items-center gap-1"
+			 style="width: 160px">
 			<span id="duration-played">@CurrentTime.ToString(TimeFormat)</span>
 			<span>/</span>
 			<span id="duration-total">@Duration.ToString(TimeFormat)</span>
 		</div>
-		<input id="duration-slider"
+		<input class="flex-grow-1"
 			   type="range"
 			   style="background-size: @(DurationPersentage)% 100%;"
 			   max="@Duration.TotalSeconds"
 			   value="@CurrentTime.TotalSeconds"
 			   @oninput="OnCurrentTimeSliderChanged" />
-		<button id="volume-button"
-				class="button panel-item-transparent"
-				style="background-image: url('@(Volume > 0 ? VolumeIconUri : NoVolumeIconUri)')"
-				@onclick="OnVolumeButtonClick" />
-		<input id="volume-slider"
-			   type="range"
+		<ToggleButton Class="bg-1 hoverable canBeActive rounded-2"
+					  CheckedClass="bg-1 hoverable canBeActive rounded-2"
+					  IsChecked="@IsMute"
+					  OnClick="OnVolumeButtonClick">
+			<ContentTemplate>
+				<img src="Controls/AudioPlayer/Volume.png" width="24" height="24" />
+			</ContentTemplate>
+			<CheckedContentTemplate>
+				<img src="Controls/AudioPlayer/NoVolume.png" width="24" height="24" />
+			</CheckedContentTemplate>
+		</ToggleButton>
+		<input type="range"
 			   style="background-size: @(VolumePersentage)% 100%;"
 			   max="1"
 			   min="0"
 			   step="0.025"
 			   value="@Volume"
 			   @oninput="OnVolumeSliderChange" />
-		<DropdownList TValue="double"
-					  Value="PlaySpeed"
-					  ItemClick="OnSpeedOptionSelect"
-					  ValueContentDictionary="SpeedContentDictionary"
-					  ButtonClass="button speed-button item"
-					  PanelClass="speed-panel"
-					  ItemClass="item item-focusable speed-button-text" />
+		<ComboBox TItem="double"
+				  SelectedItem="PlaySpeed"
+				  Items="_playSpeedOptions"
+				  OnItemSelect="OnSpeedOptionSelect"
+				  DropDownPosition="DropDownPosition.Top"
+				  ButtonClass="bg-1 hoverable canBeActive rounded-2 p-2"
+				  ItemClass="bg-1 hoverable canBeActive p-2"
+				  Context="context">
+			<ButtonContentTemplate>
+				<img src="Controls/AudioPlayer/PlaybackSpeed.png" width="24" height="24" /> 
+			</ButtonContentTemplate>
+			<ItemTemplate>
+				<span>@GetSpeedOptionLabel(context)</span>
+			</ItemTemplate>
+		</ComboBox>
 	</div>
-</main>
+</div>

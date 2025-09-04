@@ -1,32 +1,21 @@
-﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
+using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
 namespace PodcastClient.Components.Controls
 {
     public partial class AudioPlayer
     {
-        public readonly Uri PlayIconUri = new Uri("Controls/AudioPlayer/Play.png", UriKind.Relative);
-        public readonly Uri PauseIconUri = new Uri("Controls/AudioPlayer/Pause.png", UriKind.Relative);
-        public readonly Uri VolumeIconUri = new Uri("Controls/AudioPlayer/Volume.png", UriKind.Relative);
-        public readonly Uri NoVolumeIconUri = new Uri("Controls/AudioPlayer/NoVolume.png", UriKind.Relative);
-        private ElementReference _playButton;
+        private readonly List<double> _playSpeedOptions = [0.5, 1.0, 1.25, 1.5, 2.0];
+
         private TimeSpan _currentTime;
         private double _beforeMuteVolume = 0;
         private double _volume;
         private double _playSpeed;
-        private bool _isMute = false;
-        private bool _isPlaying = false;
         private bool _canPlay = false;
         private bool _initialized = false;
-		private readonly Dictionary<double, string> SpeedContentDictionary = new()
-		{
-			{ 0.5, "0.5x" },
-			{ 1.0, "1x" },
-			{ 1.25, "1.25x"},
-			{ 1.5, "1.5x"},
-			{ 2.0, "2x" }
-		};
+
+        public bool IsPlaying { get; private set; } = false;
+        public bool IsMute { get; private set; } = false;
 
 		[Parameter]
         public Uri? Source { get; set; }
@@ -40,12 +29,15 @@ namespace PodcastClient.Components.Controls
             get => _currentTime;
             set
             {
-                if (CurrentTimeChanged.HasDelegate)
+                if(_currentTime != value)
                 {
-                    CurrentTimeChanged.InvokeAsync(value);
-                }
+                    if (CurrentTimeChanged.HasDelegate)
+                    {
+                        CurrentTimeChanged.InvokeAsync(value);
+                    }
 
-                _currentTime = value;
+                    _currentTime = value;
+                }
             }
         }
 
@@ -55,12 +47,15 @@ namespace PodcastClient.Components.Controls
             get => _volume;
             set
             {
-                if (VolumeChanged.HasDelegate)
+                if(_volume != value)
                 {
-                    VolumeChanged.InvokeAsync(value);
-                }
+                    if (VolumeChanged.HasDelegate)
+                    {
+                        VolumeChanged.InvokeAsync(value);
+                    }
 
-                _volume = value;
+                    _volume = value;
+                }
             }
         }
 
@@ -70,12 +65,15 @@ namespace PodcastClient.Components.Controls
             get => _playSpeed;
             set
             {
-                if (PlaySpeedChanged.HasDelegate)
+                if(_playSpeed != value)
                 {
-                    PlaySpeedChanged.InvokeAsync(value);
-                }
+                    if (PlaySpeedChanged.HasDelegate)
+                    {
+                        PlaySpeedChanged.InvokeAsync(value);
+                    }
 
-                _playSpeed = value;
+                    _playSpeed = value;
+                }
             }
         }
 
@@ -134,13 +132,13 @@ namespace PodcastClient.Components.Controls
 				await OnPlayed.InvokeAsync();
             }
             
-            _isPlaying = false;
+            IsPlaying = false;
 			await JS.InvokeVoidAsync("SetCurrentTime", TimeSpan.Zero.TotalSeconds);
 		}
 
 		private async Task OnPlayButtonClick()
 		{
-            if(_isPlaying)
+            if(IsPlaying)
             {
 				await JS.InvokeVoidAsync("Pause");
 			}
@@ -149,7 +147,7 @@ namespace PodcastClient.Components.Controls
 				await JS.InvokeVoidAsync("Play");
 			}
 			
-			_isPlaying = !_isPlaying;
+			IsPlaying = !IsPlaying;
 		}
 
         private async Task OnRewindButtonClick()
@@ -182,7 +180,7 @@ namespace PodcastClient.Components.Controls
 
         private async Task OnVolumeButtonClick()
         {
-            if (_isMute)
+            if (IsMute)
             {
                 Volume = _beforeMuteVolume;
 			}
@@ -192,19 +190,19 @@ namespace PodcastClient.Components.Controls
                  Volume = 0;
             }
 
-            _isMute = !_isMute;
+            IsMute = !IsMute;
 			await JS.InvokeVoidAsync("SetVolume", Volume);
 		}
 
         private async Task OnCurrentTimeSliderChanged(ChangeEventArgs e)
         {
-			CurrentTime = TimeSpan.FromSeconds(double.Parse(e.Value as string));
+			CurrentTime = TimeSpan.FromSeconds(double.Parse((string)e.Value!));
             await JS.InvokeVoidAsync("SetCurrentTime", CurrentTime.TotalSeconds);
 		}
             
         private async Task OnVolumeSliderChange(ChangeEventArgs e)
         {
-			Volume = double.Parse(e.Value as string);
+			Volume = double.Parse((string)e.Value!);
 			await JS.InvokeVoidAsync("SetVolume", Volume);
 		}
 
@@ -213,5 +211,18 @@ namespace PodcastClient.Components.Controls
             PlaySpeed = value;
 			await JS.InvokeVoidAsync("SetPlaySpeed", PlaySpeed);
 		}
+
+        private string GetSpeedOptionLabel(double value)
+        {
+            return value switch
+            {
+                0.5 => "0.5x",
+                1.0 => "1x",
+                1.25 => "1.25x",
+                1.5 => "1.5x",
+                2.0 => "2x",
+                _ => $"{value}x"
+            };
+        }
     }
 }

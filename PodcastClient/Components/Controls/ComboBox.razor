@@ -1,0 +1,24 @@
+@inject IJSRuntime JS
+@typeparam TItem
+
+<div class="position-relative" @onfocusout="OnLostFocus">
+	<button class="@ButtonClass" @onclick="OnButtonClick">
+		@ButtonContentTemplate
+	</button>
+	@if(IsDropDownOpen)
+	{
+		<div class="dropdown d-flex flex-column position-absolute @DropDownClass"
+			 data-DropDownPosition="@DropDownPosition"
+			 @onmouseenter="OnMouseEnter"
+			 @onmouseleave="OnMouseLeave">
+			@foreach (var itemPresenter in _itemPrenseters)
+			{
+				<button class="@ItemClass"
+						@onclick="itemPresenter.OnClick"
+						data-IsSelected="@itemPresenter.IsSelected.ToString()">
+					@ItemTemplate(itemPresenter.Item)
+				</button>
+			}
+		</div>
+	}
+</div>

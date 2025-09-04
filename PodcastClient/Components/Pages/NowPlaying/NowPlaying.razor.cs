@@ -5,12 +5,10 @@ namespace PodcastClient.Components.Pages.NowPlaying
     public partial class NowPlaying
     {
         public Episode? Episode { get; set; }
-        public string Title => Episode?.Title ?? Localizer["NoPlayingPodcast"];
 
         protected override void OnParametersSet()
         {
             Episode = PodcastCollection.Current;
-            base.OnParametersSet();
         }
 
         private void OnPlay()

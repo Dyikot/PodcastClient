@@ -15,3 +15,7 @@ input[type="range"] {
         width: 15px;
         border-radius: 50%;
     }
+
+::deep .playSpeed-dropDown {
+    width: auto !important;
+}

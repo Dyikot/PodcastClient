@@ -1,35 +1,35 @@
 @page "/settings"
 @inject NavigationManager Navigator
 @inject ThemeService ThemeService
+@inject IStringLocalizer<Resource> Localizer
 
 <PageTitle>@Resource.Settings</PageTitle>
 
-<style>
-	.settings-option {
-		width: 220px;
-	}
-
-	.settings-option-title {
-		width: 100px;
-	}
-</style>
-
 <div class="d-flex flex-column gap-3 m-3">
-	<div class="d-flex settings-option">
-		<div class="settings-option-title">@Resource.Language</div>
-		<select class="fg-main bg-1 rounded p-1 flex-grow-1" @bind="Culture">
-			<option value="en-US">English</option>
-			<option value="ru-RU">Русский</option>
-		</select>
+	<div class="d-flex">
+		<div class="settings-title">@Resource.Language</div>
+		<ComboBox TItem="CultureInfo"
+				  Items="LanguageOptions"
+				  @bind-SelectedItem="Culture"
+				  OnItemSelected="(culture) => Navigator.Refresh()"
+				  ButtonClass="settings-combobox"
+				  Context="context">
+			<ItemTemplate>
+				@GetLanguageValue(context)
+			</ItemTemplate>
+		</ComboBox>
 	</div>
-	<div class="d-flex settings-option">
-		<div class="settings-option-title">@Resource.Theme</div>
-		<select class="fg-main bg-1 rounded p-1 flex-grow-1"
-				@bind="ThemeService.Active"
-				@bind:event="oninput"
-				@bind:after="() => Navigator.Refresh()">
-			<option value="@ThemeService.Light">@Resource.LightTheme</option>
-			<option value="@ThemeService.Dark">@Resource.DarkTheme</option>
-		</select>
+	<div class="d-flex">
+		<div class="settings-title">@Resource.Theme</div>
+		<ComboBox TItem="string"
+				  Items="ThemeOptions"
+				  @bind-SelectedItem="ThemeService.Active"
+				  OnItemSelected="(culture) => Navigator.Refresh()"
+				  ButtonClass="settings-combobox"
+				  Context="context">
+			<ItemTemplate>
+				@Localizer[context]
+			</ItemTemplate>
+		</ComboBox>
 	</div>
 </div>

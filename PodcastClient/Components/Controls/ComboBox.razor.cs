@@ -23,13 +23,12 @@ namespace PodcastClient.Components.Controls
 		{
 			return builder =>
 			{
-				builder.OpenElement(0, "span");
-				builder.AddContent(1, item?.ToString());
-				builder.CloseElement();
+				builder.AddContent(0, item?.ToString());
 			};
-		};
+		};		
 
 		private List<ItemPresenter> _itemPrenseters = default!;
+		private TItem _selectedItem = default!;
 
 		public bool IsMouseOver { get; private set; } = false;
 		public bool IsDropDownOpen { get; private set; } = false;
@@ -37,13 +36,28 @@ namespace PodcastClient.Components.Controls
 		[Parameter]
 		public DropDownPosition DropDownPosition { get; set; } = DropDownPosition.Bottom;
 
-		[Parameter]
-		public TItem? SelectedItem { get; set; } 
+		[Parameter, EditorRequired]
+		public TItem SelectedItem
+		{
+			get => _selectedItem;
+			set
+			{
+				if(!EqualityComparer<TItem>.Default.Equals(_selectedItem, value))
+				{
+					if(SelectedItemChanged.HasDelegate)
+					{
+						SelectedItemChanged.InvokeAsync(value);
+					}
+
+					_selectedItem = value;
+				}
+			}
+		}
 		[Parameter, EditorRequired]
 		public IEnumerable<TItem> Items { get; set; }
 
 		[Parameter]
-		public RenderFragment? ButtonContentTemplate { get; set; }
+		public RenderFragment<TItem>? ButtonContentTemplate { get; set; }
 		[Parameter]
 		public RenderFragment<TItem> ItemTemplate { get; set; } = DefaultItemTemplate;
 
@@ -52,14 +66,30 @@ namespace PodcastClient.Components.Controls
 		[Parameter]
 		public string ItemClass { get; set; } = string.Empty;
 		[Parameter]
-		public string DropDownClass { get; set; } = "defaultBorder bg-1 rounded-2 py-1";
+		public string DropDownClass { get; set; } = string.Empty;
 
 		[Parameter]
-		public EventCallback<TItem> OnItemSelect { get; set; }
+		public EventCallback<TItem> OnItemSelected { get; set; }
+		[Parameter]
+		public EventCallback<TItem> SelectedItemChanged { get; set; }
+
+		private RenderFragment<TItem> DefaultButtonContentTemplate => item =>
+		{
+			return builder =>
+			{
+				builder.OpenElement(0, "div");
+				builder.AddAttribute(1, "class", "d-flex justify-content-between px-1");
+				builder.AddContent(2, ItemTemplate(item));
+				builder.OpenElement(3, "img");
+				builder.AddAttribute(4, "src", "Controls/ComboBox/ArrowDown.svg");
+				builder.CloseElement();
+				builder.CloseElement();
+			};
+		};
 
 		protected override void OnInitialized()
 		{
-			SelectedItem ??= Items.First();
+			ButtonContentTemplate ??= DefaultButtonContentTemplate;
 			_itemPrenseters = Items.Select(item => new ItemPresenter(item, this)).ToList();
 		}
 
@@ -72,9 +102,9 @@ namespace PodcastClient.Components.Controls
 			SelectedItem = item;
 			IsDropDownOpen = false;
 
-			if(OnItemSelect.HasDelegate)
+			if(OnItemSelected.HasDelegate)
 			{
-				await OnItemSelect.InvokeAsync(item);
+				await OnItemSelected.InvokeAsync(item);
 			}
 		}
 

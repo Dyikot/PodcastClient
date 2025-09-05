@@ -81,9 +81,9 @@ namespace PodcastClient.Resources {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string DarkTheme {
+        internal static string dark {
             get {
-                return ResourceManager.GetString("DarkTheme", resourceCulture);
+                return ResourceManager.GetString("dark", resourceCulture);
             }
         }
         
@@ -189,9 +189,9 @@ namespace PodcastClient.Resources {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string LightTheme {
+        internal static string light {
             get {
-                return ResourceManager.GetString("LightTheme", resourceCulture);
+                return ResourceManager.GetString("light", resourceCulture);
             }
         }
         

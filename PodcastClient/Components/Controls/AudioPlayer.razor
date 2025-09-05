@@ -8,7 +8,7 @@
 		   @onended="OnEnded"
 		   @onplay="OnPlay"
 		   @ontimeupdate="OnTimeUpdate" />
-	<div class="w-100 px-3 d-flex align-items-center gap-1  @(_canPlay ? "clickable" : "unclickable")">
+	<div class="w-100 px-4 d-flex align-items-center gap-1  @(_canPlay ? "clickable" : "unclickable")">
 		<button class="bg-1 hoverable canBeActive rounded-2"
 				@onclick="OnRewindButtonClick">
 			<img src="Controls/AudioPlayer/Rewind.png" width="24" height="24" />
@@ -39,7 +39,7 @@
 			   style="background-size: @(DurationPersentage)% 100%;"
 			   max="@Duration.TotalSeconds"
 			   value="@CurrentTime.TotalSeconds"
-			   @oninput="OnCurrentTimeSliderChanged" />
+			   @oninput="OnCurrentTimeSliderChanged" />		
 		<ToggleButton Class="bg-1 hoverable canBeActive rounded-2"
 					  CheckedClass="bg-1 hoverable canBeActive rounded-2"
 					  IsChecked="@IsMute"
@@ -61,16 +61,16 @@
 		<ComboBox TItem="double"
 				  SelectedItem="PlaySpeed"
 				  Items="_playSpeedOptions"
-				  OnItemSelect="OnSpeedOptionSelect"
+				  OnItemSelected="OnSpeedOptionSelect"
 				  DropDownPosition="DropDownPosition.Top"
-				  ButtonClass="bg-1 hoverable canBeActive rounded-2 p-2"
-				  ItemClass="bg-1 hoverable canBeActive p-2"
+				  ButtonClass="bg-1 hoverable canBeActive"
+				  DropDownClass="playSpeed-dropDown"
 				  Context="context">
 			<ButtonContentTemplate>
-				<img src="Controls/AudioPlayer/PlaybackSpeed.png" width="24" height="24" /> 
+				<img src="Controls/AudioPlayer/PlaybackSpeed.png" width="24" height="24" />
 			</ButtonContentTemplate>
 			<ItemTemplate>
-				<span>@GetSpeedOptionLabel(context)</span>
+				@GetSpeedOptionLabel(context)
 			</ItemTemplate>
 		</ComboBox>
 	</div>

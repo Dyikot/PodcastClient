@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Components;
+using PodcastClient.Components.Controls;
 using PodcastClient.Models;
-using System.Collections;
 
 namespace PodcastClient.Components.Pages.PodcastPage
 {
@@ -11,12 +11,14 @@ namespace PodcastClient.Components.Pages.PodcastPage
 
     public partial class PodcastPage
     {
+        public static readonly SortOrder[] SortOrderOptions = Enum.GetValues<SortOrder>();
+
         private EpisodeStatus? _filterByStatus;
 
 		[Parameter]
 		public string Name { get; set; } = "";
 		public Podcast? Podcast { get; set; }
-        private SortOrder SortOrder { get; set; } = SortOrder.Latest;
+        public SortOrder SortOrder { get; set; } = SortOrder.Latest;
         public bool IsInProgressButtonActive => _filterByStatus == EpisodeStatus.InProgress;
         public bool HasPlayedButtonActive => _filterByStatus == EpisodeStatus.Played;
         public bool HasUnplayedButtonActive => _filterByStatus == EpisodeStatus.Unplayed;

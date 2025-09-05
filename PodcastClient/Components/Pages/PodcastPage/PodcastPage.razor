@@ -1,6 +1,7 @@
 @page "/my_podcasts/{name}"
 @inject PodcastCollection PodcastCollection
 @inject NavigationManager Navigator
+@inject IStringLocalizer<Resource> Localizer
 
 <PageTitle>@(Podcast?.Title ?? Resource.Error)</PageTitle>
 
@@ -46,11 +47,16 @@
 		<!--Main-->
 		<div class="d-flex flex-column gap-4 w-75 m-auto">
 			<!--Sort and filter buttons-->
-			<div class="d-inline-flex gap-2">
-				<select class="fg-main bg-1 p-1 rounded-2" @bind="SortOrder">
-					<option value="@SortOrder.Latest">@Resource.Latest</option>
-					<option value="@SortOrder.Oldest">@Resource.Oldest</option>
-				</select>
+			<div class="d-flex gap-2">
+				<ComboBox TItem="Pages.PodcastPage.SortOrder"
+						  Items="SortOrderOptions"
+						  @bind-SelectedItem="SortOrder"
+						  ButtonClass="h-100"
+						  Context="context">
+					<ItemTemplate>
+						@Localizer[context.ToString()]
+					</ItemTemplate>
+				</ComboBox>
 				<ToggleButton Class="btn bg-1 hoverable canBeActive rounded-2"
 							  CheckedClass="btn bg-2 hoverable canBeActive rounded-2"
 							  IsChecked="@IsInProgressButtonActive"

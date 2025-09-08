@@ -26,23 +26,12 @@
 					  CheckedClass="bg-transparent p-0"
 					  IsChecked="@HasPlayed">
 			<ContentTemplate>
-				<img src="PodcastPage/Check.svg" width="40" height="40" />
+				<img src="PodcastPage/Mark.svg" width="32" />
 			</ContentTemplate>
 			<CheckedContentTemplate>
-				<img src="PodcastPage/CheckFill.svg" width="40" height="40" />
+				<img src="PodcastPage/MarkFill.svg" width="32" />
 			</CheckedContentTemplate>
 		</ToggleButton>
-		@* @switch(Episode.Status)
-		{
-			case Models.EpisodeStatus.Played:
-				<img @onclick="OnFinishedMarkClick" src="PodcastPage/CheckFill.svg" 
-					 width="40" height="40" />
-				break;
-			default:
-				<img @onclick="OnNotStartedMarkClick" src="PodcastPage/Check.svg"
-					 width="40" height="40" />
-				break;
-		} *@
 		<span>@Episode.Duration.ToString("hh':'mm':'ss")</span>
 	</div>
 </button>

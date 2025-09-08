@@ -5,39 +5,42 @@
 
 <PageTitle>@(Episode?.Title ?? Resource.NoPlayingPodcast)</PageTitle>
 
-<div class="h-100 d-flex flex-column align-items-center gap-2">
+<div class="h-100 d-flex flex-column align-items-center gap-3">
 	@if(Episode == null)
 	{
-		<h2 class="m-2 align-self-start">
-			@Resource.NoPlayingPodcast
-		</h2>
+		<h2 class="m-2 align-self-start">@Resource.NoPlayingPodcast</h2>
 	}
 	else
 	{
-		<div class="d-flex gap-3 mt-4 w-75">
+		<div class="d-flex gap-3 mt-4 mainLayout">
 			<img src="@Episode.IconUri" class="rounded-2" width="150" height="150" />
 			<div class="d-flex flex-column align-items-start gap-1">
 				<h5>@Episode.Title</h5>
 				<span>@Episode.Podcast!.Title</span>
-				<div class="d-flex align-items-stretch gap-2" style="height: 25px">
-					<div class="d-flex align-items-md-center gap-1">
-						<img src="NowPlaying/Calendar.svg" class="h-100" />
+				<div class="d-flex align-items-stretch gap-3">
+					<div class="d-flex align-items-md-center gap-2">
+						<img src="NowPlaying/Calendar.svg" 
+							 width="16"
+							 title="@Resource.ReleaseDate"/>
 						<span>@Episode.ReleaseDate.ToLocalizedString(Localizer)</span>
 					</div>
-					<div class="d-flex align-items-center gap-1">
-						<img src="NowPlaying/Time.svg" class="h-100" />
+					<div class="d-flex align-items-center gap-2">
+						<img src="NowPlaying/Clock.svg"
+							 width="16"
+							 title="@Resource.Duration"/>
 						<span>@Episode.Duration.ToString("hh':'mm':'ss")</span>
 					</div>
 				</div>
-				<a class="bg-0 hoverable canBeActive rounded-2 mt-auto p-1" 
-				   title="@Resource.Source"
+				<a class="bg-0 hoverable canBeActive rounded-2 mt-auto p-1 fg-main
+						  text-decoration-none d-flex align-items-center gap-1"
 				   href="@Episode.Link" 
 				   target="_blank">
 					<img src="NowPlaying/Link.svg" />
+					<span>@Resource.Source</span>
 				</a>
 			</div>
 		</div>
-		<div class="w-75 order-2">
+		<div class="mainLayout order-2">
 			@Episode.Description
 		</div>
 		switch (Episode.Type)
@@ -52,7 +55,7 @@
 							 OnPlayed="@OnPlayed" />
 				break;
 			case Models.EpisodeType.Video:
-				<div class="d-flex w-75 order-1 mb-4">
+				<div class="d-flex mainLayout order-1">
 					<VideoPlayer Source="@Episode.ContentUri"
 								 Duration="@Episode.Duration"
 								 @bind-CurrentTime="Episode.Played"

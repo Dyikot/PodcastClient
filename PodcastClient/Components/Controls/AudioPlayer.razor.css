@@ -1,21 +1,28 @@
-input[type="range"] {
-    -webkit-appearance: none;
-    height: 5px;
-    border-radius: 10px;
-    background-image: linear-gradient(var(--player-track-color), var(--player-track-color));
-    background-size: 0% 100%;
-    background-repeat: no-repeat;
-    cursor: pointer;
-}
-
-    input[type="range"]::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        background-color: var(--player-track-color);
-        height: 15px;
-        width: 15px;
-        border-radius: 50%;
-    }
-
 ::deep .playSpeed-dropDown {
     width: auto !important;
+}
+
+div[data-CanPlay="True"] {
+    pointer-events: auto; 
+}
+
+div[data-CanPlay="False"] {
+    pointer-events: none; 
+    filter: grayscale(1);
+}
+
+.playerLayout {
+    position: sticky;
+    width: 100%;
+    height: 70px;
+    bottom: 10vh;
+    margin-top: auto;
+    z-index: 1;
+    order: 3;
+}
+
+@media (min-width: 641px) {
+    .playerLayout {
+        bottom: 0;
+    }
 }

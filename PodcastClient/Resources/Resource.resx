@@ -135,6 +135,9 @@
   <data name="Descending" xml:space="preserve">
     <value />
   </data>
+  <data name="Duration" xml:space="preserve">
+    <value />
+  </data>
   <data name="Episode" xml:space="preserve">
     <value />
   </data>

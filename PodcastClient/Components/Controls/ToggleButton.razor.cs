@@ -7,9 +7,9 @@ namespace PodcastClient.Components.Controls
         private bool _isChecked = false;
 
         [Parameter]
-        public string Class { get; set; }
-		[Parameter]
-		public string CheckedClass { get; set; }
+        public string Class { get; set; } = string.Empty;
+        [Parameter]
+        public string CheckedClass { get; set; } = string.Empty;
 		[Parameter, EditorRequired]
         public RenderFragment ContentTemplate { get; set; }
         [Parameter ,EditorRequired]

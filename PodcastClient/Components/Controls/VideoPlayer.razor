@@ -1,9 +1,10 @@
-﻿@inject IJSRuntime JS
+@inject IJSRuntime JS
+@inherits PlayerBase
 
-<figure id="video-player">
+<figure id="video-player" 
+		class="d-flex flex-column align-items-stretch">
 	<video src="@Source"
 		   tabindex="0"
-		   @ref="_videoPlayer"
 		   @onloadedmetadata="OnMetadataLoaded"
 		   @onended="OnEnded"
 		   @onplay="OnPlay"
@@ -11,50 +12,85 @@
 		   @onclick="OnPlayButtonClick"
 		   @onkeydown="OnKeyDown"
 		   @ondblclick="OnFullscreenButtonClick" />
-	<div id="controls">
-		<input id="duration-slider"
+	<div id="controls"
+		 class="d-flex flex-column align-items-stretch justify-content-around">
+		<!--Duration slider-->
+		<input class="slider sliderThumb"
 			   type="range"
 			   style="background-size: @(DurationPersentage)% 100%;"
 			   max="@Duration.TotalSeconds"
 			   value="@CurrentTime.TotalSeconds"
 			   @oninput="OnCurrentTimeSliderChanged" />
-		<div id="controls-buttons">
-			<button class="button"
-					style="background-image: url(Controls/VideoPlayer/Rewind.png)"
-				    @onclick="OnRewindButtonClick" />
-			<button id="play-button"
-					class="button"
-					style="background-image: url(@(_isPlaying ? PauseIconUri : PlayIconUri))"
-				    @onclick="OnPlayButtonClick" />
-			<button class="button"
-					style="background-image: url(Controls/VideoPlayer/Forward.png)"
-				    @onclick="OnForwardButtonClick" />
-			<div id="duration">
-				<span id="duration-played">@CurrentTime.ToString(TimeFormat)</span>
+		<!--Buttons-->
+		<div id="controls-buttons" class="d-flex align-items-center gap-2 px-2">
+			<!--Rewind button-->
+			<button class="controlButton rounded-2"
+					@onclick="OnRewindButtonClick">
+				<img src="Controls/VideoPlayer/Replay.svg" />
+			</button>
+			<!--Play/Pause button-->
+			<ToggleButton Class="controlButton rounded-2"
+						  CheckedClass="controlButton rounded-2"
+						  IsChecked="IsPlaying"
+						  OnClick="OnPlayButtonClick">
+				<ContentTemplate>
+					<img src="Controls/VideoPlayer/Play.svg" width="32" />
+				</ContentTemplate>
+				<CheckedContentTemplate>
+					<img src="Controls/VideoPlayer/Pause.svg" width="32" />
+				</CheckedContentTemplate>
+			</ToggleButton>
+			<!--Forward button-->
+			<button class="controlButton rounded-2"
+				    @onclick="OnForwardButtonClick">
+				<img src="Controls/VideoPlayer/Forward.svg"  />
+			</button>
+			<!--Duration panel-->
+			<div class="d-flex justify-content-center align-items-center gap-1 text-white"
+				 style="width: 160px">
+				<span>@CurrentTime.ToString(TimeFormat)</span>
 				<span>/</span>
-				<span id="duration-total">@Duration.ToString(TimeFormat)</span>
-			</div>		
-			<button id="volume-button"
-					class="button"
-					style="background-image: url(@(Volume > 0 ? VolumeIconUri : NoVolumeIconUri))"
-					@onclick="OnVolumeButtonClick" />
-			<input id="volume-slider"
-					type="range"
-					style="background-size: @(VolumePersentage)% 100%;"
-					max="1"
-					min="0"
-					step="0.025"
-					value="@Volume"
-					@oninput="OnVolumeSliderChange" />
-			<DropdownList TValue="double"
-						  Value="PlaySpeed"
-						  ItemClick="OnSpeedOptionSelect"
-						  ValueContentDictionary="SpeedContentDictionary"
-						  ButtonClass="button speed-button"
-						  PanelClass="speed-panel"
-						  ItemClass="item item-focusable speed-button-text" />
-			<button id="button-fullscreen"
-					class="button"
+				<span>@Duration.ToString(TimeFormat)</span>
+			</div>
+			<!--Mute button-->
+			<ToggleButton Class="controlButton rounded-2 ms-auto"
+						  CheckedClass="controlButton rounded-2 ms-auto"
+						  IsChecked="IsMute"
+						  OnClick="OnMuteButtonClick">
+				<ContentTemplate>
+					<img src="Controls/VideoPlayer/VolumeOn.svg"  />
+				</ContentTemplate>
+				<CheckedContentTemplate>
+					<img src="Controls/VideoPlayer/VolumeOff.svg"  />
+				</CheckedContentTemplate>
+			</ToggleButton>
+			<!--Volume slider-->
+			<input class="slider rounded-2"
+				   type="range"
+				   style="background-size: @(VolumePersentage)% 100%"
+				   max="1"
+				   min="0"
+				   step="0.025"
+				   value="@Volume"
+				   @oninput="OnVolumeSliderChanged" />
+			<!--Speed selector-->
+			<ComboBox TItem="double"
+					  SelectedItem="PlaySpeed"
+					  OnItemSelected="OnSpeedOptionSelect"
+					  DropDownPosition="DropDownPosition.Top"
+					  ButtonClass="controlButton rounded-2"
+					  DropDownClass="speedDropDown mb-3"
+					  Items="PlaySpeedOptions"
+					  Context="context">
+				<ButtonContentTemplate>
+					<img src="Controls/VideoPlayer/PlaySpeed.svg" />
+				</ButtonContentTemplate>
+				<ItemTemplate>
+					@GetSpeedOptionLabel(context)
+				</ItemTemplate>
+			</ComboBox>
+			<!--Fullscreen button-->
+			<button class="controlButton rounded-2 fullscreenButton"
 					@onclick="OnFullscreenButtonClick" />
 		</div>
 	</div>

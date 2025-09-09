@@ -4,7 +4,7 @@ namespace PodcastClient.Components.Pages.NewEpisodes
 {
     public partial class NewEpisodes
     {
-        public IList<Episode> Episodes { get; set; } = [];
+        public List<Episode> Episodes { get; set; } = [];
 
         protected override void OnInitialized()
         {
@@ -12,8 +12,6 @@ namespace PodcastClient.Components.Pages.NewEpisodes
                 .SelectMany(podcast => podcast.Episodes.Where(ep => ep.Status != EpisodeStatus.Played))
                 .OrderByDescending(episode => episode.ReleaseDate)
                 .ToList();
-
-            base.OnInitialized();
         }
     }
 }

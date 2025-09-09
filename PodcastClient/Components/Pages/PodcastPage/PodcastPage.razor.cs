@@ -1,92 +1,81 @@
 using Microsoft.AspNetCore.Components;
-using PodcastClient.Components.Controls;
+using PodcastClient.Data;
 using PodcastClient.Models;
 
 namespace PodcastClient.Components.Pages.PodcastPage
 {
-    public enum SortOrder
-    {
-        Oldest, Latest
-    }
-
-    public partial class PodcastPage
+	public partial class PodcastPage
     {
         public static readonly SortOrder[] SortOrderOptions = Enum.GetValues<SortOrder>();
 
         private EpisodeStatus? _filterByStatus;
+        private SortOrder _sortOrder = SortOrder.Latest;
 
 		[Parameter]
 		public string Name { get; set; } = "";
 		public Podcast? Podcast { get; set; }
-        public SortOrder SortOrder { get; set; } = SortOrder.Latest;
+        public List<Episode> Episodes { get; set; } = [];
+
         public bool IsInProgressButtonActive => _filterByStatus == EpisodeStatus.InProgress;
         public bool HasPlayedButtonActive => _filterByStatus == EpisodeStatus.Played;
         public bool HasUnplayedButtonActive => _filterByStatus == EpisodeStatus.Unplayed;
 
-        public IList<Episode> Episodes
+        public SortOrder SortOrder
         {
-            get
+            get => _sortOrder;
+            set
             {
-                if(_filterByStatus == null)
+                if(_sortOrder != value)
                 {
-                    return Podcast!.Episodes;
-				}
-
-				return Podcast!.Episodes.Where(ep => ep.Status == _filterByStatus).ToList();
+                    _sortOrder = value;
+                    UpdateEpisodes(Podcast!.Episodes);
+                }
             }
         }
 
         protected override void OnInitialized()
         {
             Podcast = PodcastCollection.First(podcast => podcast.Title == Name);
-            base.OnInitialized();
+            
+            if(Podcast != null)
+            {
+                UpdateEpisodes(Podcast.Episodes);
+			}
         }
 
-        private void MarkAllItemsAs(EpisodeStatus progressStatus)
+        private void UpdateEpisodes(EpisodeCollection episodes)
         {
-            foreach (var episode in Podcast!.Episodes)
+            if(_filterByStatus != null)
             {
-                episode.Status = progressStatus;
-            }
-        }
-
-        private void OnMarkAllItemsButtonClick() => MarkAllItemsAs(EpisodeStatus.Played);
-        private void OnUnmarkAllItemsButtonClick() => MarkAllItemsAs(EpisodeStatus.Unplayed);
-
-        private void OnInProgressButtonClick()
-        {
-            if(_filterByStatus == EpisodeStatus.InProgress)
-            {
-                _filterByStatus = null;
+			    Episodes = episodes
+					    .Where(ep => ep.Status == _filterByStatus)
+					    .Order(new EpisodeSortOrder(SortOrder))
+					    .ToList();
             }
             else
             {
-                _filterByStatus = EpisodeStatus.InProgress;
-            }
-        }
-
-        private void OnPlayedButtonClick()
-        {
-			if (_filterByStatus == EpisodeStatus.Played)
-			{
-				_filterByStatus = null;
-			}
-			else
-			{
-				_filterByStatus = EpisodeStatus.Played;
+				Episodes = episodes
+						.Order(new EpisodeSortOrder(SortOrder))
+						.ToList();
 			}
 		}
 
-        private void OnUnplayedButtonClick()
+		private void OnInProgressButtonClick() => OnFilterButtonClick(EpisodeStatus.InProgress);
+		private void OnPlayedButtonClick() => OnFilterButtonClick(EpisodeStatus.Played);
+		private void OnUnplayedButtonClick() => OnFilterButtonClick(EpisodeStatus.Unplayed);
+
+		private void OnFilterButtonClick(EpisodeStatus edisodeStatus)
         {
-			if (_filterByStatus == EpisodeStatus.Unplayed)
+			if (_filterByStatus == edisodeStatus)
 			{
 				_filterByStatus = null;
 			}
 			else
 			{
-				_filterByStatus = EpisodeStatus.Unplayed;
+				_filterByStatus = edisodeStatus;
 			}
+
+            UpdateEpisodes(Podcast!.Episodes);
 		}
 
         private void OnUnsubscribeButtonClick()

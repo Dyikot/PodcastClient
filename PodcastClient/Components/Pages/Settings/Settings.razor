@@ -1,6 +1,8 @@
 @page "/settings"
-@inject NavigationManager Navigator
 @inject ThemeService ThemeService
+@inject CultureService CultureService
+@inject LocalStorage LocalStorage
+@inject NavigationManager Navigator
 @inject IStringLocalizer<Resource> Localizer
 
 <PageTitle>@Resource.Settings</PageTitle>
@@ -10,12 +12,12 @@
 		<div class="settings-title">@Resource.Language</div>
 		<ComboBox TItem="CultureInfo"
 				  Items="LanguageOptions"
-				  @bind-SelectedItem="Culture"
-				  OnItemSelected="(culture) => Navigator.Refresh()"
+				  @bind-SelectedItem="CultureService.Culture"
+				  SelectionChanged="OnCultureChanged"
 				  ButtonClass="settings-combobox"
 				  Context="context">
 			<ItemTemplate>
-				@GetLanguageValue(context)
+				@GetLanguageLabel(context)
 			</ItemTemplate>
 		</ComboBox>
 	</div>
@@ -23,8 +25,8 @@
 		<div class="settings-title">@Resource.Theme</div>
 		<ComboBox TItem="string"
 				  Items="ThemeOptions"
-				  @bind-SelectedItem="ThemeService.Active"
-				  OnItemSelected="(culture) => Navigator.Refresh()"
+				  @bind-SelectedItem="ThemeService.Theme"
+				  SelectionChanged="OnThemeChanged"
 				  ButtonClass="settings-combobox"
 				  Context="context">
 			<ItemTemplate>

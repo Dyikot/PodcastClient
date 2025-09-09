@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Components;
+using PodcastClient.Data;
 
 namespace PodcastClient.Models
 {
@@ -34,5 +35,38 @@ namespace PodcastClient.Models
 	public enum EpisodeType
 	{
 		Audio, Video
+	}
+
+	public class EpisodeSortOrder : IComparer<Episode>
+	{
+		private readonly SortOrder _sortOrder;
+
+		public EpisodeSortOrder(SortOrder sortOrder)
+		{
+			_sortOrder = sortOrder;
+		}
+
+		public int Compare(Episode? x, Episode? y)
+		{
+			if(x == null || y == null)
+			{
+				return 0;
+			}			
+			else if(x == null)
+			{
+				return -1;
+			}
+			else if(y == null)
+			{
+				return 1;
+			}
+
+			return _sortOrder switch
+			{
+				SortOrder.Oldest => x.ReleaseDate.CompareTo(y.ReleaseDate),
+				SortOrder.Latest => y.ReleaseDate.CompareTo(x.ReleaseDate),
+				_ => throw new NotImplementedException()
+			};
+		}
 	}
 }

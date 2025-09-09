@@ -17,7 +17,7 @@ namespace PodcastClient.Components.Controls
         [Parameter]
         public EventCallback OnClick { get; set; }
 		[Parameter]
-		public EventCallback<bool> OnStateChanged { get; set; }
+		public EventCallback<bool> IsCheckedChanged { get; set; }
 		[Parameter]
         public bool IsChecked
         {
@@ -26,10 +26,10 @@ namespace PodcastClient.Components.Controls
             {
                 if (_isChecked != value)
                 {
-                    if(OnStateChanged.HasDelegate)
-                    {
-                        OnStateChanged.InvokeAsync(value);
-                    }
+					if (IsCheckedChanged.HasDelegate)
+					{
+						IsCheckedChanged.InvokeAsync(value);
+					}
 
                     _isChecked = value;                    
                 }

@@ -45,10 +45,10 @@
 			</div>
 		</div>
 		<!--Main-->
-		<div class="d-flex flex-column gap-4 w-75 m-auto">
+		<div class="d-flex flex-column gap-4 mainLayout m-auto">
 			<!--Sort and filter buttons-->
 			<div class="d-flex gap-2">
-				<ComboBox TItem="Pages.PodcastPage.SortOrder"
+				<ComboBox TItem="PodcastClient.Data.SortOrder"
 						  Items="SortOrderOptions"
 						  @bind-SelectedItem="SortOrder"
 						  ButtonClass="h-100"
@@ -59,21 +59,21 @@
 				</ComboBox>
 				<ToggleButton Class="btn bg-1 hoverable canBeActive rounded-2"
 							  CheckedClass="btn bg-2 hoverable canBeActive rounded-2"
-							  IsChecked="@IsInProgressButtonActive"
+							  IsChecked="IsInProgressButtonActive"
 							  OnClick="OnInProgressButtonClick">
 					<ContentTemplate>@Resource.InProgress</ContentTemplate>
 					<CheckedContentTemplate>@Resource.InProgress</CheckedContentTemplate>
 				</ToggleButton>
 				<ToggleButton Class="btn bg-1 hoverable canBeActive rounded-2"
 							  CheckedClass="btn bg-2 hoverable canBeActive rounded-2"
-							  IsChecked="@HasPlayedButtonActive"
+							  IsChecked="HasPlayedButtonActive"
 							  OnClick="OnPlayedButtonClick">
 					<ContentTemplate>@Resource.Played</ContentTemplate>
 					<CheckedContentTemplate>@Resource.Played</CheckedContentTemplate>
 				</ToggleButton>
 				<ToggleButton Class="btn bg-1 hoverable canBeActive rounded-2"
 							  CheckedClass="btn bg-2 hoverable canBeActive rounded-2"
-							  IsChecked="@HasUnplayedButtonActive"
+							  IsChecked="HasUnplayedButtonActive"
 							  OnClick="OnUnplayedButtonClick">
 					<ContentTemplate>@Resource.Unplayed</ContentTemplate>
 					<CheckedContentTemplate>@Resource.Unplayed</CheckedContentTemplate>
@@ -81,19 +81,9 @@
 			</div>
 			<!--Podcasts-->
 			<div class="d-flex flex-column gap-3 mb-3">
-				@if(SortOrder == SortOrder.Latest)
+				@foreach (var episode in Episodes)
 				{
-					@foreach (var episode in Episodes)
-					{
-						<EpisodeView Episode="episode" />
-					}				
-				}
-				else
-				{
-					@for (int i = Episodes.Count - 1; i >= 0; i--)
-					{
-						<EpisodeView Episode="Episodes[i]" />
-					}
+					<EpisodeView Episode="episode" />
 				}
 			</div>
 		</div>

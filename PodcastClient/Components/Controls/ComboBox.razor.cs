@@ -25,8 +25,9 @@ namespace PodcastClient.Components.Controls
 			{
 				builder.AddContent(0, item?.ToString());
 			};
-		};		
+		};
 
+		private readonly EqualityComparer<TItem> _comparer = EqualityComparer<TItem>.Default;
 		private List<ItemPresenter> _itemPrenseters = default!;
 		private TItem _selectedItem = default!;
 
@@ -42,14 +43,14 @@ namespace PodcastClient.Components.Controls
 			get => _selectedItem;
 			set
 			{
-				if(!EqualityComparer<TItem>.Default.Equals(_selectedItem, value))
+				if(!_comparer.Equals(_selectedItem, value))
 				{
+					_selectedItem = value;
+
 					if(SelectedItemChanged.HasDelegate)
 					{
 						SelectedItemChanged.InvokeAsync(value);
 					}
-
-					_selectedItem = value;
 				}
 			}
 		}
@@ -69,9 +70,11 @@ namespace PodcastClient.Components.Controls
 		public string DropDownClass { get; set; } = string.Empty;
 
 		[Parameter]
-		public EventCallback<TItem> OnItemSelected { get; set; }
-		[Parameter]
 		public EventCallback<TItem> SelectedItemChanged { get; set; }
+		[Parameter]
+		public EventCallback<TItem> SelectionChanged { get; set; }
+		[Parameter]
+		public EventCallback<TItem> OnItemClicked { get; set; }
 
 		private RenderFragment<TItem> DefaultButtonContentTemplate => item =>
 		{
@@ -99,12 +102,23 @@ namespace PodcastClient.Components.Controls
 
 		private async Task OnItemClick(TItem item)
 		{
-			SelectedItem = item;
 			IsDropDownOpen = false;
 
-			if(OnItemSelected.HasDelegate)
+			if(OnItemClicked.HasDelegate)
 			{
-				await OnItemSelected.InvokeAsync(item);
+				await OnItemClicked.InvokeAsync(item);
+			}
+
+			if (_comparer.Equals(SelectedItem, item))
+			{
+				return;
+			}
+
+			SelectedItem = item;
+
+			if(SelectionChanged.HasDelegate)
+			{
+				await SelectionChanged.InvokeAsync(item);
 			}
 		}
 

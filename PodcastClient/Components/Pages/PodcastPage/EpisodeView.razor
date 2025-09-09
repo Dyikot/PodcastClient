@@ -24,7 +24,7 @@
 	<div class="flex-grow-1 ms-2 d-flex justify-content-around align-items-center">
 		<ToggleButton Class="bg-transparent p-0"
 					  CheckedClass="bg-transparent p-0"
-					  IsChecked="@HasPlayed">
+					  @bind-IsChecked="@HasPlayed">
 			<ContentTemplate>
 				<img src="PodcastPage/Mark.svg" width="32" />
 			</ContentTemplate>

@@ -1,11 +1,14 @@
 using PodcastClient.Components;
 using PodcastClient.Models;
+using PodcastClient.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents().AddInteractiveServerComponents();
 builder.Services.AddHttpClient();
 builder.Services.AddLocalization();
 builder.Services.AddControllers();
+builder.Services.AddScoped<LocalStorage>();
+builder.Services.AddScoped<CultureService>();
 builder.Services.AddSingleton<ThemeService>();
 builder.Services.AddSingleton<PodcastCollection>();
 builder.Services.AddSingleton<MediaService>();

@@ -1,4 +1,5 @@
-using PodcastClient.Models;
+using PodcastClient.Extensions;
+using PodcastClient.Services;
 using System.Globalization;
 
 namespace PodcastClient.Components.Pages.Settings
@@ -17,27 +18,18 @@ namespace PodcastClient.Components.Pages.Settings
 			ThemeService.Dark
 		];
 
-		public CultureInfo Culture
+		private async Task OnThemeChanged(string theme)
 		{
-			get => CultureInfo.CurrentCulture;
-			set
-			{
-				if (CultureInfo.CurrentCulture != value)
-				{
-					var uri = new Uri(Navigator.Uri).GetComponents(UriComponents.PathAndQuery,
-																   UriFormat.Unescaped);
-					var cultureEscaped = Uri.EscapeDataString(value.Name);
-					var uriEscaped = Uri.EscapeDataString(uri);
-
-					Navigator.NavigateTo(
-						uri: $"Culture/Set?culture={cultureEscaped}&redirectUri={uriEscaped}",
-						forceLoad: true
-					);
-				}
-			}
+			await LocalStorage.SetTheme(theme);
+			Navigator.Refresh();
 		}
 
-		public string GetLanguageValue(CultureInfo option) => option.Name switch
+		private async Task OnCultureChanged(CultureInfo culture)
+		{
+			await LocalStorage.SetCulture(culture);
+		}
+
+		private string GetLanguageLabel(CultureInfo option) => option.Name switch
 		{
 			"ru-RU" => "Русский",
 			"en-US" => "English",

@@ -9,7 +9,7 @@ namespace PodcastClient.Components.Controls
 
 		protected override async Task InitializeControlAsync()
 		{
-			await JS.InvokeVoidAsync("InitializeVideo");
+			await JS.InvokeVoidAsync("InitializeVideo", _control);
 		}
 
 		protected override async Task<double> GetCurrentTimeAsync()

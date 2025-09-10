@@ -5,6 +5,7 @@
 		class="d-flex flex-column align-items-stretch">
 	<video src="@Source"
 		   tabindex="0"
+		   @ref="_control"
 		   @onloadedmetadata="OnMetadataLoaded"
 		   @onended="OnEnded"
 		   @onplay="OnPlay"
@@ -76,7 +77,7 @@
 			<!--Speed selector-->
 			<ComboBox TItem="double"
 					  SelectedItem="PlaySpeed"
-					  OnItemSelected="OnSpeedOptionSelect"
+					  SelectionChanged="OnSpeedOptionSelect"
 					  DropDownPosition="DropDownPosition.Top"
 					  ButtonClass="controlButton rounded-2"
 					  DropDownClass="speedDropDown mb-3"

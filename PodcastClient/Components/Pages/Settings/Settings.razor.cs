@@ -1,4 +1,4 @@
-using PodcastClient.Extensions;
+using PodcastClient.Data;
 using PodcastClient.Services;
 using System.Globalization;
 
@@ -20,13 +20,7 @@ namespace PodcastClient.Components.Pages.Settings
 
 		private async Task OnThemeChanged(string theme)
 		{
-			await LocalStorage.SetTheme(theme);
-			Navigator.Refresh();
-		}
-
-		private async Task OnCultureChanged(CultureInfo culture)
-		{
-			await LocalStorage.SetCulture(culture);
+			await LocalStorage.SetItem(LocalStorageKeys.Theme, theme);
 		}
 
 		private string GetLanguageLabel(CultureInfo option) => option.Name switch

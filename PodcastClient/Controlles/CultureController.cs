@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace PodcastClient.Controlles
@@ -13,7 +13,8 @@ namespace PodcastClient.Controlles
 			{
 				HttpContext.Response.Cookies.Append(
                     CookieRequestCultureProvider.DefaultCookieName,
-                    CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture))
+                    CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+					new CookieOptions { Expires = DateTime.Now.AddYears(1) }
                 );
 			}
 

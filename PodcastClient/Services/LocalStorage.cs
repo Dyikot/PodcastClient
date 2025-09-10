@@ -1,4 +1,5 @@
 using Microsoft.JSInterop;
+using System.Text.Json;
 
 namespace PodcastClient.Services
 {
@@ -16,9 +17,26 @@ namespace PodcastClient.Services
 			await _js.InvokeVoidAsync("localStorage.setItem", key, value);
 		}
 
+		public async ValueTask SetItem<T>(string key, T value)
+		{
+			await SetItem(key, JsonSerializer.Serialize(value));
+		}
+
 		public async ValueTask<string?> GetItem(string key)
 		{
 			return await _js.InvokeAsync<string>("localStorage.getItem", key);
+		}
+
+		public async ValueTask<T?> GetItem<T>(string key)
+		{
+			var item = await GetItem(key);
+
+			if(item == null)
+			{
+				return default;
+			}
+
+			return JsonSerializer.Deserialize<T>(item);
 		}
 
 		public async ValueTask RemoveItem(string key)

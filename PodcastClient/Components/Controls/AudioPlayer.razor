@@ -3,6 +3,7 @@
 
 <div class="playerLayout d-flex flex-column justify-content-center align-items-stretch">
 	<audio src="@Source" 
+		   @ref="_control"
 		   @onloadedmetadata="OnMetadataLoaded"
 		   @onended="OnEnded"
 		   @onplay="OnPlay"
@@ -22,9 +23,9 @@
 		</button>
 		<!--Play/Pause button-->
 		<ToggleButton Class="bg-1 hoverable canBeActive rounded-2"
-						CheckedClass="bg-1 hoverable canBeActive rounded-2"
-						IsChecked="IsPlaying"
-						OnClick="OnPlayButtonClick">
+					  CheckedClass="bg-1 hoverable canBeActive rounded-2"
+					  IsChecked="IsPlaying"
+					  OnClick="OnPlayButtonClick">
 			<ContentTemplate>
 				<img src="Controls/AudioPlayer/Play.svg" width="48" />
 			</ContentTemplate>
@@ -46,9 +47,9 @@
 		</div>
 		<!--Mute button-->
 		<ToggleButton Class="bg-1 hoverable canBeActive rounded-2 ms-auto"
-						CheckedClass="bg-1 hoverable canBeActive rounded-2 ms-auto"
-						IsChecked="IsMute"
-						OnClick="OnMuteButtonClick">
+					  CheckedClass="bg-1 hoverable canBeActive rounded-2 ms-auto"
+					  IsChecked="IsMute"
+					  OnClick="OnMuteButtonClick">
 			<ContentTemplate>
 				<img src="Controls/AudioPlayer/VolumeOn.svg"  />
 			</ContentTemplate>
@@ -67,13 +68,13 @@
 			   @oninput="OnVolumeSliderChanged" />
 		<!--Speed selector-->
 		<ComboBox TItem="double"
-					SelectedItem="PlaySpeed"
-					Items="PlaySpeedOptions"
-					OnItemSelected="OnSpeedOptionSelect"
-					DropDownPosition="DropDownPosition.Top"
-					ButtonClass="bg-1 hoverable canBeActive"
-					DropDownClass="playSpeed-dropDown"
-					Context="context">
+				  SelectedItem="PlaySpeed"
+				  Items="PlaySpeedOptions"
+				  SelectionChanged="OnSpeedOptionSelect"
+				  DropDownPosition="DropDownPosition.Top"
+				  ButtonClass="bg-1 hoverable canBeActive"
+				  DropDownClass="playSpeed-dropDown"
+				  Context="context">
 			<ButtonContentTemplate>
 				<img src="Controls/AudioPlayer/PlaySpeed.svg"  />
 			</ButtonContentTemplate>

@@ -1,7 +1,7 @@
-﻿let audio = null;
+let audio = null;
 
-window.InitializeAudio = () => {
-    audio = document.querySelector('audio');
+window.InitializeAudio = (control) => {
+    audio = control;
 };
 
 window.Play = () => {
@@ -22,8 +22,10 @@ window.SetCurrentTime = (value) => {
 
 window.SetVolume = (value) => {
     audio.volume = value;
+    localStorage.setItem("audio-volume", value);
 };
 
 window.SetPlaySpeed = (value) => {
     audio.playbackRate = value;
+    localStorage.setItem("audio-speed", value);
 };

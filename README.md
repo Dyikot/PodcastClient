@@ -21,6 +21,9 @@ Podcast Client is a web application for managing and consuming audio and video p
 ### Individual Podcast Page
 ![Podcast Page](Screenshots/PodcastPage.PNG)
 
+### New Episodes Page
+![New Episodes](Screenshots/NewEpisodes.PNG)
+
 ### Audio Player
 ![Now Playing - Audio](Screenshots/NowPlayingAudio.PNG)
 

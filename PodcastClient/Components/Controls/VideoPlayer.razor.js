@@ -1,8 +1,8 @@
-﻿let video = null;
+let video = null;
 let videoPlayer = null;
 
-window.InitializeVideo = () => {
-    video = document.querySelector('video');
+window.InitializeVideo = (control) => {
+    video = control;
     videoPlayer = document.getElementById("video-player");
 
     video.addEventListener('keydown', (e) => {
@@ -36,10 +36,12 @@ window.SetVideoCurrentTime = (value) => {
 
 window.SetVideoVolume = (value) => {
     video.volume = value;
+    localStorage.setItem("video-volume", value);
 };
 
 window.SetVideoPlaySpeed = (value) => {
     video.playbackRate = value;
+    localStorage.setItem("video-speed", value);
 };
 
 window.SwitchFullscreen = () => {

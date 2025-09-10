@@ -31,7 +31,6 @@ namespace PodcastClient.Components.Pages.MyPodcasts
 			}
 		}
 
-
 		protected override async Task OnAfterRenderAsync(bool firstRender)
 		{
 			if (_wasSubscribeButtonClicked)

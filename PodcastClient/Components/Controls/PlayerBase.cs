@@ -11,8 +11,8 @@ namespace PodcastClient.Components.Controls
 		protected double _beforeMuteVolume = 0;
 		protected double _volume;
 		protected double _playSpeed;
+		protected ElementReference _control;
 		private bool _hasMuteButtonPressed = false;
-		private bool _initialized = false;
 
 		[Parameter]
 		public Uri? Source { get; set; }
@@ -85,15 +85,6 @@ namespace PodcastClient.Components.Controls
 
 		public double VolumePersentage => Volume / 1 * 100;
 		public double DurationPersentage => CurrentTime / Duration * 100;
-
-		public override async Task SetParametersAsync(ParameterView parameters)
-		{
-			if (!_initialized)
-			{
-				_initialized = true;
-				await base.SetParametersAsync(parameters);
-			}
-		}
 
 		protected abstract Task InitializeControlAsync();
 		protected abstract Task<double> GetCurrentTimeAsync();
@@ -216,7 +207,7 @@ namespace PodcastClient.Components.Controls
 		protected async Task OnSpeedOptionSelect(double value)
 		{
 			PlaySpeed = value;
-			await SetVolumeAsync(PlaySpeed);
+			await SetPlaySpeedAsync(PlaySpeed);
 		}
 
 		protected string GetSpeedOptionLabel(double value)

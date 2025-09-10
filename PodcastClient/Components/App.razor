@@ -1,9 +1,5 @@
-@using PodcastClient.Services
-@inject PodcastCollection PodcastCollection
-@inject ThemeService ThemeService
-
 <!DOCTYPE html>
-<html lang="en" data-theme="@ThemeService.Theme">
+<html lang="en">
 
 <head>
     <meta charset="utf-8" />
@@ -13,6 +9,18 @@
     <link rel="stylesheet" href="app.css?version=1.0" />
     <link rel="stylesheet" href="PodcastClient.styles.css" />
     <link rel="icon" type="image/png" href="Rss.svg" />
+    <script>
+        window.SetTheme = (theme) => {
+            document.documentElement.setAttribute("data-theme", theme);
+        };
+
+        window.SetThemeFromLocalStorage = () => {
+            const theme = localStorage.getItem("theme") || "light";
+            SetTheme(theme);
+        };
+
+        SetThemeFromLocalStorage();
+    </script>  
     <HeadOutlet />
 </head>
 

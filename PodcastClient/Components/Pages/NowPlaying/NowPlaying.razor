@@ -51,7 +51,7 @@
 							 Duration="@Episode.Duration"
 							 @bind-CurrentTime="Episode.Played"
 							 @bind-Volume="MediaService.AudioVolume"
-							 @bind-PlaySpeed="MediaService.AudioPlaySpeed"
+							 @bind-PlaySpeed="MediaService.AudioSpeed"
 							 OnPlay="@OnPlay"
 							 OnPlayed="@OnPlayed" />
 				break;
@@ -61,7 +61,7 @@
 								 Duration="@Episode.Duration"
 								 @bind-CurrentTime="Episode.Played"
 								 @bind-Volume="MediaService.VideoVolume"
-								 @bind-PlaySpeed="MediaService.VideoPlaySpeed"
+								 @bind-PlaySpeed="MediaService.VideoSpeed"
 								 OnPlay="@OnPlay"
 								 OnPlayed="@OnPlayed" />
 				</div>

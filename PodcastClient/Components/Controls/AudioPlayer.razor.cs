@@ -6,7 +6,7 @@ namespace PodcastClient.Components.Controls
     {
 		protected override async Task InitializeControlAsync()
 		{
-			await JS.InvokeVoidAsync("InitializeAudio");
+			await JS.InvokeVoidAsync("InitializeAudio", _control);
 		}
 
 		protected override async Task<double> GetCurrentTimeAsync()
@@ -26,7 +26,7 @@ namespace PodcastClient.Components.Controls
 
 		protected override async Task SetPlaySpeedAsync(double value)
         {
-			await JS.InvokeVoidAsync("SetPlaySpeed", PlaySpeed);
+			await JS.InvokeVoidAsync("SetPlaySpeed", value);
 		}
 
 		protected override async Task PlayAsync()

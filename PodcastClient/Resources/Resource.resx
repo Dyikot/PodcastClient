@@ -141,6 +141,9 @@
   <data name="Episode" xml:space="preserve">
     <value />
   </data>
+  <data name="EpisodeNotFound" xml:space="preserve">
+    <value />
+  </data>
   <data name="Episodes" xml:space="preserve">
     <value />
   </data>
@@ -198,7 +201,7 @@
   <data name="Played" xml:space="preserve">
     <value />
   </data>
-  <data name="PodcastNull" xml:space="preserve">
+  <data name="PodcastNotFound" xml:space="preserve">
     <value />
   </data>
   <data name="ReleaseDate" xml:space="preserve">

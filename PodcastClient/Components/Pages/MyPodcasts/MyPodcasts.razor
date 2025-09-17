@@ -1,8 +1,9 @@
 @page "/"
-@inject PodcastCollection PodcastCollection
-@inject IHttpClientFactory HttpClientFactory
+@inject PodcastRssFetcher PodcastRssFetcher
+@inject UserContext UserContext
 @inject NavigationManager Navigator
 @inject ILogger<MyPodcasts> Logger
+@inject IDbContextFactory<ApplicationDbContext> DbContextFactory
 
 <PageTitle>@Resource.MyPodcasts</PageTitle>
 

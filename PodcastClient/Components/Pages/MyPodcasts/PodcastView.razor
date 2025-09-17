@@ -1,3 +1,6 @@
+@inject IDbContextFactory<ApplicationDbContext> DbContextFactory
+@inject UserContext UserContext
+
 <style>
 	#title {
 		flex-basis: 24%;
@@ -16,17 +19,17 @@
 	<div class="position-relative d-flex flex-column text-start"
 		 style="width: 130px; height: 90%;">
 		<!--New articles view-->
-		@if (NewEpisodes.Count > 0)
+		@if (NewEpisodes > 0)
 		{
 			<div id="new-episodes"
 				 class="position-absolute top-0 start-100 translate-middle text-black
 						text-center rounded-circle"
 				  style="width: 24px; height: 24px; background-color: orange">
-				@int.Min(NewEpisodes.Count, 99)
+				@int.Min(NewEpisodes, 99)
 			</div>
 		}
 		<!--Icon-->
-		<img src="@Podcast.IconUrl" 
+		<img src="@Podcast.IconSource" 
 			 class="rounded-2 mb-1"
 			 style="height: 130px"
 			 @onclick="OnClick" />

@@ -1,3 +1,6 @@
 PodcastClient/bin
 PodcastClient/obj
 .vs
+*.db
+*.db-shm
+*.db-wal

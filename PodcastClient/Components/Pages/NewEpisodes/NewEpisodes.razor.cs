@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using PodcastClient.Models;
 
 namespace PodcastClient.Components.Pages.NewEpisodes
@@ -6,12 +7,17 @@ namespace PodcastClient.Components.Pages.NewEpisodes
     {
         public List<Episode> Episodes { get; set; } = [];
 
-        protected override void OnInitialized()
+        protected override async Task OnInitializedAsync()
         {
-            Episodes = PodcastCollection
-                .SelectMany(podcast => podcast.Episodes.Where(ep => ep.Status != EpisodeStatus.Played))
-                .OrderByDescending(episode => episode.ReleaseDate)
-                .ToList();
+            using var context = DbContextFactory.CreateDbContext();
+			Episodes = await context.UserEpisodes
+                .AsNoTracking()
+                .Where(ep => ep.UserId == UserContext.UserId &&
+                             ep.Status != EpisodeStatus.Played)
+                .Include(ep => ep.Episode)
+                .Select(ep => ep.Episode)
+                .OrderByDescending(e => e.ReleaseDate)
+                .ToListAsync();
         }
     }
 }

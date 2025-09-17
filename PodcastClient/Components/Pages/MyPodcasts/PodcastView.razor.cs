@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Components;
+using Microsoft.EntityFrameworkCore;
 using PodcastClient.Models;
 
 namespace PodcastClient.Components.Pages.MyPodcasts
@@ -10,12 +11,17 @@ namespace PodcastClient.Components.Pages.MyPodcasts
         [Parameter]
         public EventCallback<Podcast> Click { get; set; }
 
-        public IList<Episode> NewEpisodes { get; private set; }
+        public int NewEpisodes { get; private set; }
 
-		protected override void OnInitialized()
+		protected override async Task OnInitializedAsync()
 		{
-            NewEpisodes = Podcast.Episodes.Where(ep => ep.Status != EpisodeStatus.Played).ToList();
-			base.OnInitialized();
+            using var context = DbContextFactory.CreateDbContext();
+
+			NewEpisodes = await context.UserEpisodes
+                    .AsNoTracking()
+					.Where(ep => ep.UserId == UserContext.UserId &&
+                                 ep.PodcastId == Podcast.Id)
+					.CountAsync(ep => ep.Status != EpisodeStatus.Played);
 		}
 
         private Task OnClick() => Click.InvokeAsync(Podcast);

@@ -8,14 +8,16 @@ internal class Program
 	{
 		var builder = WebApplication.CreateBuilder(args);
 		builder.Services.AddRazorComponents().AddInteractiveServerComponents();
+		builder.Services.AddDbContextFactory<ApplicationDbContext>();
 		builder.Services.AddHttpClient();
 		builder.Services.AddLocalization();
 		builder.Services.AddControllers();
+		builder.Services.AddScoped<UserContext>();
 		builder.Services.AddScoped<LocalStorage>();
 		builder.Services.AddScoped<CultureService>();
 		builder.Services.AddScoped<ThemeService>();
 		builder.Services.AddScoped<MediaService>();
-		builder.Services.AddSingleton<PodcastCollection>();
+		builder.Services.AddSingleton<PodcastRssFetcher>();
 
 		var app = builder.Build();
 		app.UseHttpsRedirection();
@@ -23,10 +25,10 @@ internal class Program
 		app.UseAntiforgery();
 		app.UseRequestLocalization(options =>
 		{
-			string[] cultures = ["en-US", "ru-RU"];
+			string[] cultures = ["ru-RU", "en-US"];
 			options.AddSupportedCultures(cultures)
 				   .AddSupportedUICultures(cultures)
-				   .SetDefaultCulture("ru-RU");
+				   .SetDefaultCulture(cultures[0]);
 		});
 		app.MapControllers();
 		app.MapRazorComponents<App>().AddInteractiveServerRenderMode();

@@ -1,23 +1,23 @@
-@page "/now-playing"
-@using PodcastClient.Services
-@inject IStringLocalizer<Resources.Resource> Localizer
-@inject PodcastCollection PodcastCollection
+@page "/podcast/{podcastId:int}/episode/{episodeNumber:int}"
+@inject UserContext UserContext
 @inject MediaService MediaService
+@inject IStringLocalizer<Resources.Resource> Localizer
+@inject IDbContextFactory<ApplicationDbContext> DbContextFactory
 
-<PageTitle>@(Episode?.Title ?? Resource.NoPlayingPodcast)</PageTitle>
+<PageTitle>@(Episode?.Title ?? Resource.EpisodeNotFound)</PageTitle>
 
 <div class="h-100 d-flex flex-column align-items-center gap-3">
 	@if(Episode == null)
 	{
-		<h2 class="m-2 align-self-start">@Resource.NoPlayingPodcast</h2>
+		<h2 class="m-2 align-self-start">@Resource.EpisodeNotFound</h2>
 	}
 	else
 	{
 		<div class="d-flex gap-3 mt-4 mainLayout">
-			<img src="@Episode.IconUri" class="rounded-2" width="150" height="150" />
+			<img src="@Episode!.IconSource" class="rounded-2" width="150" height="150" />
 			<div class="d-flex flex-column align-items-start gap-1">
 				<h5>@Episode.Title</h5>
-				<span>@Episode.Podcast!.Title</span>
+				<span>@PodcastTitle</span>
 				<div class="d-flex align-items-stretch gap-3">
 					<div class="d-flex align-items-md-center gap-2">
 						<img src="NowPlaying/Calendar.svg" 
@@ -34,7 +34,7 @@
 				</div>
 				<a class="bg-0 hoverable canBeActive rounded-2 mt-auto p-1 fg-main
 						  text-decoration-none d-flex align-items-center gap-1"
-				   href="@Episode.Link" 
+				   href="@Episode.Source" 
 				   target="_blank">
 					<img src="NowPlaying/Link.svg" />
 					<span>@Resource.Source</span>
@@ -42,28 +42,30 @@
 			</div>
 		</div>
 		<div class="mainLayout order-2">
-			@Episode.Description
+			@Description
 		</div>
 		switch (Episode.Type)
 		{
 			case Models.EpisodeType.Audio:
-				<AudioPlayer Source="@Episode.ContentUri"
+				<AudioPlayer Source="@Episode.ContentSource"
 							 Duration="@Episode.Duration"
-							 @bind-CurrentTime="Episode.Played"
+							 @bind-CurrentTime="EpisodePlayback!.Played"
 							 @bind-Volume="MediaService.AudioVolume"
 							 @bind-PlaySpeed="MediaService.AudioSpeed"
-							 OnPlay="@OnPlay"
-							 OnPlayed="@OnPlayed" />
+							 OnPlay="OnPlay"
+							 OnPause="OnPause"
+							 Ended="OnEnded" />
 				break;
 			case Models.EpisodeType.Video:
 				<div class="d-flex mainLayout order-1">
-					<VideoPlayer Source="@Episode.ContentUri"
+					<VideoPlayer Source="@Episode.ContentSource"
 								 Duration="@Episode.Duration"
-								 @bind-CurrentTime="Episode.Played"
+								 @bind-CurrentTime="EpisodePlayback!.Played"
 								 @bind-Volume="MediaService.VideoVolume"
 								 @bind-PlaySpeed="MediaService.VideoSpeed"
-								 OnPlay="@OnPlay"
-								 OnPlayed="@OnPlayed" />
+								 OnPlay="OnPlay"
+								 OnPause="OnPause"
+								 Ended="OnEnded" />
 				</div>
 				break;
 		}

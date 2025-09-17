@@ -8,10 +8,12 @@ namespace PodcastClient.Components.Pages.NewEpisodes
         [Parameter, EditorRequired]
         public Episode Episode { get; set; }
 
-		private void OnEpisodeCLick()
+		private void OnEpisodeClick()
         {
-            PodcastCollection.Current = Episode;
-            Navigator.NavigateTo("/now-playing");
+            var podcastId = Episode.PodcastId;
+            var episodeNumber = Episode.EpisodeNumber;
+
+            Navigator.NavigateTo($"/podcast/{podcastId}/episode/{episodeNumber}");
         }
     }
 }

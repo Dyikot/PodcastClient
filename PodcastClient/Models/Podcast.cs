@@ -1,20 +1,17 @@
-using Microsoft.AspNetCore.Components;
-
 namespace PodcastClient.Models
 {
-	public partial class Podcast
+	public class Podcast
 	{
-		private static Uri DefaultIconUri { get; } = new Uri("Rss.svg", UriKind.Relative);
+		public static Uri DefaultIconSource { get; } = new Uri("Rss.svg", UriKind.Relative);
 
-		public Podcast()
-		{
-			Episodes = new EpisodeCollection(this);
-		}
+		public int Id { get; set; }
 
-		public string Title { get; set; } = string.Empty;
-		public string Author { get; set; } = string.Empty;
-		public MarkupString Description { get; set; } = new();
-		public Uri IconUrl { get; set; } = DefaultIconUri;
-		public EpisodeCollection Episodes { get; init; }
+		public required string Title { get; set; }
+		public required string Author { get; set; }
+		public required string Description { get; set; }
+		public required Uri Rss { get; set; }
+		public Uri IconSource { get; set; } = DefaultIconSource;
+		public List<Episode> Episodes { get; set; } = [];
+		public List<User> Users { get; set; } = [];
 	}
 }

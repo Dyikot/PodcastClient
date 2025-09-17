@@ -3,29 +3,20 @@ using PodcastClient.Models;
 
 namespace PodcastClient.Components.Pages.PodcastPage
 {
-    public partial class EpisodeView
-    {
-        [Parameter, EditorRequired]
-        public Episode Episode { get; set; }
+	public partial class EpisodeView
+	{
+		[Parameter, EditorRequired]
+		public Episode Episode { get; set; }
+		public MarkupString Description { get; set; }
 
-        public bool HasPlayed
-        {
-            get => Episode.Status == EpisodeStatus.Played;
-            set
-            {
-                var status = value ? EpisodeStatus.Played : EpisodeStatus.Unplayed;
+		protected override void OnInitialized()
+		{
+			Description = new(Episode.Description);
+		}
 
-                if(status != Episode.Status)
-                {
-                    Episode.Status = status;
-                }
-            }
-        }
-
-        private void OnClick()
-        {
-            PodcastCollection.Current = Episode;
-            Navigator.NavigateTo("/now-playing");
-        }
+		private void OnClick()
+		{
+			Navigator.NavigateTo($"/podcast/{Episode.PodcastId}/episode/{Episode.EpisodeNumber}");
+		}
 	}
 }

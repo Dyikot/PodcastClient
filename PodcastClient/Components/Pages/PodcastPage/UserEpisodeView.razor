@@ -19,6 +19,17 @@
 			@Description
 		</div>
 	</div>
+	<!--Mark button-->
+	<ToggleButton Class="bg-transparent p-0"
+				  CheckedClass="bg-transparent p-0"
+				  @bind-IsChecked="@HasPlayed">
+		<ContentTemplate>
+			<img src="PodcastPage/Mark.svg" width="32" />
+		</ContentTemplate>
+		<CheckedContentTemplate>
+			<img src="PodcastPage/MarkFill.svg" width="32" />
+		</CheckedContentTemplate>
+	</ToggleButton>
 	<!--Durtion-->
 	<span>@Episode.Duration.ToString("hh':'mm':'ss")</span>
 </button>

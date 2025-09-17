@@ -71,7 +71,9 @@ namespace PodcastClient.Components.Controls
 		[Parameter]
 		public EventCallback OnPlay { get; set; }
 		[Parameter]
-		public EventCallback OnPlayed { get; set; }
+		public EventCallback OnPause { get; set; }
+		[Parameter]
+		public EventCallback Ended { get; set; }
 		[Parameter]
 		public EventCallback<TimeSpan> CurrentTimeChanged { get; set; }
 		[Parameter]
@@ -120,13 +122,13 @@ namespace PodcastClient.Components.Controls
 
 		protected async Task OnEnded()
 		{
-			if (OnPlayed.HasDelegate)
-			{
-				await OnPlayed.InvokeAsync();
-			}
-
 			IsPlaying = false;
 			await SetCurrentTimeAsync(TimeSpan.Zero);
+
+			if (Ended.HasDelegate)
+			{
+				await Ended.InvokeAsync();
+			}
 		}
 
 		protected async Task OnPlayButtonClick()

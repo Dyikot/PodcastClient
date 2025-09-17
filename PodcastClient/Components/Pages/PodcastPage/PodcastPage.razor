@@ -1,7 +1,8 @@
-@page "/my_podcasts/{name}"
-@inject PodcastCollection PodcastCollection
+@page "/podcast/{podcastId:int}"
 @inject NavigationManager Navigator
+@inject UserContext UserContext
 @inject IStringLocalizer<Resource> Localizer
+@inject IDbContextFactory<ApplicationDbContext> DbContextFactory
 
 <PageTitle>@(Podcast?.Title ?? Resource.Error)</PageTitle>
 
@@ -18,7 +19,7 @@
 <div>
 	@if(Podcast == null)
 	{
-		<h1>@Resource.PodcastNull</h1>
+		<h1>@Resource.PodcastNotFound</h1>
 	}
 	else
 	{	
@@ -26,7 +27,7 @@
 			 style="height: 300px">
 			<!--Header-->
 			<div class="d-flex gap-3" style="width: 75%; height: 80%">
-				<img src="@Podcast.IconUrl" class="rounded-2" width="150" height="150"  />
+				<img src="@Podcast.IconSource" class="rounded-2" width="150" height="150"  />
 				<div class="h-100 d-flex flex-column align-items-stretch gap-1">
 					<h4 class="m-0">@Podcast.Title</h4>
 					<div class="d-flex gap-2">
@@ -34,12 +35,15 @@
 						<span>•</span>
 						<span>@($"{Resource.Episodes}: {Podcast.Episodes.Count}")</span>
 					</div>
-					<div class="h-100 overflowOn5">@Podcast.Description</div>
+					<div class="h-100 overflowOn5">@Description</div>
 					<div class="d-flex align-items-end gap-2">
-						<button class="btn bg-2 hoverable canBeActive rounded-2" 
-								@onclick="OnUnsubscribeButtonClick">
-							@Resource.Unsubscribe
-						</button>
+						<ToggleButton Class="btn bg-2 hoverable canBeActive rounded-2"
+									  CheckedClass="btn bg-2 hoverable canBeActive rounded-2"
+									  IsChecked="UserHasSubscription"
+									  OnClick="OnSubscribeButtonClick">
+							<ContentTemplate>@Resource.Subscribe</ContentTemplate>
+							<CheckedContentTemplate>@Resource.Unsubscribe</CheckedContentTemplate>
+						</ToggleButton>
 					</div>
 				</div>
 			</div>
@@ -57,33 +61,47 @@
 						@Localizer[context.ToString()]
 					</ItemTemplate>
 				</ComboBox>
-				<ToggleButton Class="btn bg-1 hoverable canBeActive rounded-2"
-							  CheckedClass="btn bg-2 hoverable canBeActive rounded-2"
-							  IsChecked="IsInProgressButtonActive"
-							  OnClick="OnInProgressButtonClick">
-					<ContentTemplate>@Resource.InProgress</ContentTemplate>
-					<CheckedContentTemplate>@Resource.InProgress</CheckedContentTemplate>
-				</ToggleButton>
-				<ToggleButton Class="btn bg-1 hoverable canBeActive rounded-2"
-							  CheckedClass="btn bg-2 hoverable canBeActive rounded-2"
-							  IsChecked="HasPlayedButtonActive"
-							  OnClick="OnPlayedButtonClick">
-					<ContentTemplate>@Resource.Played</ContentTemplate>
-					<CheckedContentTemplate>@Resource.Played</CheckedContentTemplate>
-				</ToggleButton>
-				<ToggleButton Class="btn bg-1 hoverable canBeActive rounded-2"
-							  CheckedClass="btn bg-2 hoverable canBeActive rounded-2"
-							  IsChecked="HasUnplayedButtonActive"
-							  OnClick="OnUnplayedButtonClick">
-					<ContentTemplate>@Resource.Unplayed</ContentTemplate>
-					<CheckedContentTemplate>@Resource.Unplayed</CheckedContentTemplate>
-				</ToggleButton>
+				@if(UserHasSubscription)
+				{
+					<ToggleButton Class="btn bg-1 hoverable canBeActive rounded-2"
+								  CheckedClass="btn bg-2 hoverable canBeActive rounded-2"
+								  IsChecked="IsInProgressFilter"
+								  OnClick="OnInProgressButtonClick">
+						<ContentTemplate>@Resource.InProgress</ContentTemplate>
+						<CheckedContentTemplate>@Resource.InProgress</CheckedContentTemplate>
+					</ToggleButton>
+					<ToggleButton Class="btn bg-1 hoverable canBeActive rounded-2"
+								  CheckedClass="btn bg-2 hoverable canBeActive rounded-2"
+								  IsChecked="IsPlayedFilter"
+								  OnClick="OnPlayedButtonClick">
+						<ContentTemplate>@Resource.Played</ContentTemplate>
+						<CheckedContentTemplate>@Resource.Played</CheckedContentTemplate>
+					</ToggleButton>
+					<ToggleButton Class="btn bg-1 hoverable canBeActive rounded-2"
+								  CheckedClass="btn bg-2 hoverable canBeActive rounded-2"
+								  IsChecked="IsUnplayedFilter"
+								  OnClick="OnUnplayedButtonClick">
+						<ContentTemplate>@Resource.Unplayed</ContentTemplate>
+						<CheckedContentTemplate>@Resource.Unplayed</CheckedContentTemplate>
+					</ToggleButton>					
+				}
 			</div>
 			<!--Podcasts-->
 			<div class="d-flex flex-column gap-3 mb-3">
-				@foreach (var episode in Episodes)
+				@if (UserHasSubscription)
 				{
-					<EpisodeView Episode="episode" />
+					@foreach (var episode in UserEpisodes!)
+					{
+						<UserEpisodeView UserEpisode="episode" 
+										 StatusChanged="OnEpisodeStatusChanged" />
+					}
+				}
+				else
+				{
+					@foreach (var episode in Episodes!)
+					{
+						<EpisodeView Episode="episode" />
+					}
 				}
 			</div>
 		</div>

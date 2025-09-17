@@ -1,34 +1,29 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.EntityFrameworkCore;
 using PodcastClient.Models;
 
 namespace PodcastClient.Components.Pages.MyPodcasts
 {
     public partial class MyPodcasts
     {
-		public IList<Podcast> Podcasts { get; set; } = [];
+		public List<Podcast> Podcasts { get; set; } = [];
 		public string RssFeed { get; set; } = string.Empty;
         private bool _isSubscribePanelVisible = false;
 		private bool _isMouseOverSubscribePanel = false;
 		private bool _wasSubscribeButtonClicked = false;
 		private InputText? _rssInputFeed;
 
-		protected override void OnInitialized()
-        {
-			base.OnInitialized();
-			Podcasts = PodcastCollection;
+		protected override async Task OnInitializedAsync()
+		{
+			using var context = DbContextFactory.CreateDbContext();
 
-			if (Podcasts.Count == 0)
-			{
-				var httpClient = HttpClientFactory.CreateClient();
-				var rss = httpClient.GetStringAsync("https://feeds.simplecast.com/h18ZIZD_").Result;
-				var podcast = Podcast.TryParse(rss);
-				Podcasts.Add(podcast!);
+			var user = await context.Users
+				.AsNoTracking()
+				.Include(u => u.Podcasts)
+				.SingleAsync(u => u.Id == UserContext.UserId);
 
-				rss = httpClient.GetStringAsync("https://feeds.twit.tv/twit_video_hd.xml").Result;
-				podcast = Podcast.TryParse(rss);
-				Podcasts.Add(podcast!);
-			}
+			Podcasts = user.Podcasts;
 		}
 
 		protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -59,7 +54,7 @@ namespace PodcastClient.Components.Pages.MyPodcasts
 
 		private void OnPodcastClick(Podcast podcast)
         {
-            Navigator.NavigateTo($"/my_podcasts/{podcast.Title}");
+            Navigator.NavigateTo($"/podcast/{podcast.Id}");
         }
 
 		private async Task OnSubmitButtonClick()
@@ -70,11 +65,11 @@ namespace PodcastClient.Components.Pages.MyPodcasts
 			{
 				try
 				{
-					var rss = await HttpClientFactory.CreateClient().GetStringAsync(RssFeed);
-					var podcast = await Task.Run(() => Podcast.TryParse(rss));
+					var podcast = await PodcastRssFetcher.GetPodcastAsync(RssFeed);
 
 					if (podcast != null)
 					{
+						await UserContext.AddPodcastAsync(podcast);
 						Podcasts.Add(podcast);
 					}
 				}

@@ -1,12 +1,12 @@
 @inject IStringLocalizer<Resource> Localizer
 @inject NavigationManager Navigator
-@inject PodcastCollection PodcastCollection
+@inject UserContext UserContext
 
 <button class="bg-1 hoverable canBeActive d-flex align-items-center rounded-3 gap-3 px-3" 
 		style="height: 85px"
-		@onclick="OnEpisodeCLick">
+		@onclick="OnEpisodeClick">
 	<!--Icon-->
-	<img src="@Episode.IconUri" class="rounded-2" width="64" height="64" />
+	<img src="@Episode.IconSource" class="rounded-2" width="64" height="64" />
 	<!--Titles-->
 	<div class="d-flex flex-column align-items-start gap-2"
 		 style="max-width: 65%;">

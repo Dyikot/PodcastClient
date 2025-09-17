@@ -1,5 +1,6 @@
 @page "/new-episodes"
-@inject PodcastCollection PodcastCollection
+@inject IDbContextFactory<ApplicationDbContext> DbContextFactory
+@inject UserContext UserContext
 
 <PageTitle>@Resource.NewEpisodes</PageTitle>
 

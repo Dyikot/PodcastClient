@@ -141,6 +141,9 @@
   <data name="Episode" xml:space="preserve">
     <value>Эпизод</value>
   </data>
+  <data name="EpisodeNotFound" xml:space="preserve">
+    <value>Не удалось найти эпизод</value>
+  </data>
   <data name="Episodes" xml:space="preserve">
     <value>Число эпизодов</value>
   </data>
@@ -198,8 +201,8 @@
   <data name="Played" xml:space="preserve">
     <value>Сыграно</value>
   </data>
-  <data name="PodcastNull" xml:space="preserve">
-    <value>Не удалось найти подкаст!</value>
+  <data name="PodcastNotFound" xml:space="preserve">
+    <value>Не удалось найти подкаст</value>
   </data>
   <data name="ReleaseDate" xml:space="preserve">
     <value>Дата выхода</value>

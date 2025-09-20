@@ -35,24 +35,6 @@ namespace PodcastClient.Services
 			return ParsePodcast(rss, rssPage);
 		}
 
-		public async Task<Podcast?> GetPodcastAsync(string? rss)
-		{
-			if(string.IsNullOrEmpty(rss))
-			{
-				return null;
-			}
-
-			try
-			{
-				var rssUri = new Uri(rss);
-				return await GetPodcastAsync(rssUri);			
-			}
-			catch(Exception)
-			{
-				return null;
-			}
-		}
-
 		private static Podcast? ParsePodcast(Uri rss, string? rssPage)
 		{
 			if (string.IsNullOrEmpty(rssPage))
@@ -129,8 +111,7 @@ namespace PodcastClient.Services
 
 		private static Episode ParseEpisode(XElement item, Uri podcastIconSource)
 		{
-			string id = "",
-				   title = "",
+			string title = "",
 				   description = "",
 				   releaseDate = "",
 				   duration = "",
@@ -143,10 +124,6 @@ namespace PodcastClient.Services
 			{
 				switch (element.Name.LocalName)
 				{
-					case "guid":
-						id = element.Value;
-						break;
-
 					case "title":
 						title = element.Value;
 						break;

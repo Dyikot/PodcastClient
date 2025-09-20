@@ -1,6 +1,7 @@
 @page "/podcast/{podcastId:int}"
 @inject NavigationManager Navigator
 @inject UserContext UserContext
+@inject PodcastsService PodcastsService
 @inject IStringLocalizer<Resource> Localizer
 @inject IDbContextFactory<ApplicationDbContext> DbContextFactory
 
@@ -55,7 +56,7 @@
 				<ComboBox TItem="PodcastClient.Data.SortOrder"
 						  Items="SortOrderOptions"
 						  @bind-SelectedItem="SortOrder"
-						  ButtonClass="h-100"
+						  ButtonClass="p-2"
 						  Context="context">
 					<ItemTemplate>
 						@Localizer[context.ToString()]

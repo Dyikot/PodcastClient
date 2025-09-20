@@ -31,6 +31,8 @@ namespace PodcastClient.Services
 				.Include(u => u.Podcasts)
 				.FirstAsync(u => u.Id == UserId);
 
+			context.Podcasts.Attach(podcast);
+
 			var userEpisodes = podcast.Episodes
 				.Select(ep => new UserEpisode { User = user, Episode = ep })
 				.ToList();

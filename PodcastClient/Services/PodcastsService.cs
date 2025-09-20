@@ -1,0 +1,43 @@
+using Microsoft.EntityFrameworkCore;
+using PodcastClient.Models;
+using System.Linq.Expressions;
+
+namespace PodcastClient.Services
+{
+	public class PodcastsService
+	{
+		private readonly IDbContextFactory<ApplicationDbContext> _dbContextFactory;
+
+		public PodcastsService(IDbContextFactory<ApplicationDbContext> dbContextFactory)
+		{
+			_dbContextFactory = dbContextFactory;
+		}
+
+		public async Task<Podcast?> FindAsync(Expression<Func<Podcast, bool>> predicate)
+		{
+			using var context = _dbContextFactory.CreateDbContext();
+
+			return await context.Podcasts
+				.AsNoTracking()
+				.Include(p => p.Episodes)
+				.FirstOrDefaultAsync(predicate);
+		}
+
+		public async Task<Podcast?> FindAsync(int podcastId) => 
+			await FindAsync(p => p.Id == podcastId);
+
+		public async Task AddPodcastAsync(Podcast podcast)
+		{
+			using var context = _dbContextFactory.CreateDbContext();
+
+			await context.AddAsync(podcast);
+			await context.SaveChangesAsync();
+		}
+
+		public async Task RemovePodcastAsync(int podcastId)
+		{
+			using var context = _dbContextFactory.CreateDbContext();
+			await context.Podcasts.Where(p => p.Id == podcastId).ExecuteDeleteAsync();
+		}
+	}
+}

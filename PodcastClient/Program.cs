@@ -13,6 +13,7 @@ internal class Program
 		builder.Services.AddLocalization();
 		builder.Services.AddControllers();
 		builder.Services.AddScoped<UserContext>();
+		builder.Services.AddScoped<PodcastsService>();
 		builder.Services.AddScoped<LocalStorage>();
 		builder.Services.AddScoped<CultureService>();
 		builder.Services.AddScoped<ThemeService>();

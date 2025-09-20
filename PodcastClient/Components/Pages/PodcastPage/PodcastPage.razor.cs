@@ -51,15 +51,25 @@ namespace PodcastClient.Components.Pages.PodcastPage
                 .Include(p => p.Episodes)
                 .FirstOrDefaultAsync(p => p.Id == PodcastId);
 
-            Episodes = EpisodesSource = Podcast?.Episodes;
-			if (Podcast != null)
+            if(Podcast != null)
             {
-                Description = new(Podcast.Description);
-                UserEpisodes = UserEpisodesSource = await QueryUserEpisodesAsync(context);
-			}
-
-            SortItems();
+                await SetContent(Podcast, context);
+                SortItems();
+            }
         }
+
+        private async Task SetContent(Podcast podcast, ApplicationDbContext context)
+        {
+			Episodes = EpisodesSource = podcast.Episodes;
+			Description = new(podcast.Description);
+			UserEpisodes = UserEpisodesSource = await QueryUserEpisodesAsync(context);
+		}
+
+        private void ResetContent()
+        {
+			UserEpisodes = UserEpisodesSource = null;
+			_episodesFilter = null;
+		}
 
 		private void OnInProgressButtonClick() => OnFilterButtonClick(EpisodeStatus.InProgress);
 		private void OnPlayedButtonClick() => OnFilterButtonClick(EpisodeStatus.Played);
@@ -85,14 +95,17 @@ namespace PodcastClient.Components.Pages.PodcastPage
             if(UserHasSubscription)
             {
                 await UserContext.RemovePodcastAsync(PodcastId);
-
-                UserEpisodes = UserEpisodesSource = null;
-                _episodesFilter = null;
-                _sortOrder = SortOrder.Latest;
+                ResetContent();
+                SortItems();
             }
             else
             {
+                Podcast = await PodcastsService.FindAsync(PodcastId);
+                await UserContext.AddPodcastAsync(Podcast!);
 
+                using var context = DbContextFactory.CreateDbContext();
+                await SetContent(Podcast!, context);
+                SortItems();
             }
         }
 

@@ -61,11 +61,21 @@ namespace PodcastClient.Components.Pages.MyPodcasts
 		{
 			_isSubscribePanelVisible = false;
 
-			if (RssFeed != string.Empty)
+			if (!string.IsNullOrEmpty(RssFeed))
 			{
 				try
 				{
-					var podcast = await PodcastRssFetcher.GetPodcastAsync(RssFeed);
+					var rss = new Uri(RssFeed);
+					var podcast = await PodcastsService.FindAsync(p => p.Rss == rss);
+
+					if(podcast == null)
+					{
+						podcast = await PodcastRssFetcher.GetPodcastAsync(rss);
+						if(podcast != null)
+						{
+							await PodcastsService.AddPodcastAsync(podcast);
+						}
+					}
 
 					if (podcast != null)
 					{

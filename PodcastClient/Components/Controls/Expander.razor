@@ -1,0 +1,14 @@
+<div class="position-relative @Class" @onfocusout="OnLostFocus">
+	<button class="@HeaderClass" @onclick="OnButtonClick">
+		@HeaderTemplate
+	</button>
+	@if (IsDropDownOpen)
+	{
+		<div class="dropDownPanel @ContentClass"
+			 data-DropDownPosition="@DropDownPosition"
+			 @onmouseenter="OnMouseEnter"
+			 @onmouseleave="OnMouseLeave">
+			@ContentTemplate
+		</div>
+	}
+</div>

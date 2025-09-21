@@ -1,10 +1,13 @@
 using Microsoft.AspNetCore.Components;
+using PodcastClient.Components.Controls;
 using PodcastClient.Models;
 
 namespace PodcastClient.Components.Pages.PodcastPage
 {
     public partial class UserEpisodeView
     {
+        private Expander? _expander;
+
         [Parameter, EditorRequired]
         public UserEpisode UserEpisode { get; set; }
         public Episode Episode => UserEpisode.Episode;
@@ -13,28 +16,31 @@ namespace PodcastClient.Components.Pages.PodcastPage
 		[Parameter]
         public EventCallback<UserEpisode> StatusChanged { get; set; }
 
-        public bool HasPlayed
+        public bool HasPlayed => UserEpisode.Status == EpisodeStatus.Played;
+
+		public async Task SetEpisodeStatusAsync(EpisodeStatus status)
         {
-            get => UserEpisode.Status == EpisodeStatus.Played;
-            set
+            if(UserEpisode.Status != status)
             {
-                var status = value ? EpisodeStatus.Played : EpisodeStatus.Unplayed;
+                UserEpisode.Status = status;
 
-                if(status != UserEpisode.Status)
-                {
-					UserEpisode.Status = status;
-
-                    if(StatusChanged.HasDelegate)
-                    {
-                        StatusChanged.InvokeAsync(UserEpisode);
-                    }
-                }
-            }
+				if (StatusChanged.HasDelegate)
+				{
+					await StatusChanged.InvokeAsync(UserEpisode);
+				}
+			}
         }
 
 		protected override void OnInitialized()
 		{
 			Description = new(Episode.Description);
+		}
+
+        private async Task OnMoreClick()
+        {
+            _expander!.IsDropDownOpen = false;
+            var status = HasPlayed ? EpisodeStatus.Unplayed : EpisodeStatus.Played;
+            await SetEpisodeStatusAsync(status);
 		}
 
 		private void OnClick()

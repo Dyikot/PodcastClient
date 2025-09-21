@@ -168,6 +168,12 @@
   <data name="light" xml:space="preserve">
     <value />
   </data>
+  <data name="MarkAsPlayed" xml:space="preserve">
+    <value />
+  </data>
+  <data name="MarkAsUnplayed" xml:space="preserve">
+    <value />
+  </data>
   <data name="MarkPlayedAll" xml:space="preserve">
     <value />
   </data>

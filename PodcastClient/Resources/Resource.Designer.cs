@@ -216,6 +216,24 @@ namespace PodcastClient.Resources {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        internal static string MarkAsPlayed {
+            get {
+                return ResourceManager.GetString("MarkAsPlayed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MarkAsUnplayed {
+            get {
+                return ResourceManager.GetString("MarkAsUnplayed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         internal static string MarkPlayedAll {
             get {
                 return ResourceManager.GetString("MarkPlayedAll", resourceCulture);

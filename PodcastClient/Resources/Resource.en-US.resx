@@ -154,7 +154,7 @@
     <value>Explore</value>
   </data>
   <data name="HoursShort" xml:space="preserve">
-    <value>hr</value>
+    <value>h</value>
   </data>
   <data name="InProgress" xml:space="preserve">
     <value>In progress</value>
@@ -167,6 +167,12 @@
   </data>
   <data name="light" xml:space="preserve">
     <value>Light</value>
+  </data>
+  <data name="MarkAsPlayed" xml:space="preserve">
+    <value>Mark as played </value>
+  </data>
+  <data name="MarkAsUnplayed" xml:space="preserve">
+    <value>Mark as unplayed</value>
   </data>
   <data name="MarkPlayedAll" xml:space="preserve">
     <value>Mark All</value>

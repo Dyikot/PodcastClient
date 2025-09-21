@@ -5,8 +5,11 @@ namespace PodcastClient.Components.Pages.NewEpisodes
 {
     public partial class EpisodeView
     {
-        [Parameter, EditorRequired]
-        public Episode Episode { get; set; }
+		[Parameter, EditorRequired]
+		public EpisodeViewModel DataContext { get; set; }
+
+        public Episode Episode => DataContext.Episode;
+		public string PodcastTitle => DataContext.PodcastTitle;
 
 		private void OnEpisodeClick()
         {

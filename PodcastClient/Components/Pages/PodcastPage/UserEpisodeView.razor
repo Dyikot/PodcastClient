@@ -1,35 +1,47 @@
 @inject IStringLocalizer<Resource> Localizer
 @inject NavigationManager Navigator
 
-<button class="bg-1 hoverable canBeActive rounded-3 d-flex p-3 justify-content-between align-items-center"
-		style="height: 140px">
-	<!--Description-->
-	<div class="d-flex flex-column align-items-start gap-1"
-		 style="width: 80%"
-		 @onclick="OnClick">
-		<!--Date and episodes number-->
-		<div class="d-flex gap-1">
-			<span>@Episode.ReleaseDate.ToLocalizedString(Localizer)</span>
-			<span>•</span>
-			<span>@($"{Localizer["Episode"]}: {Episode.EpisodeNumber}")</span>
-		</div>
+<button class="bg-1 hoverable canBeActive rounded-3 p-3"
+		style="height: 160px">
+	<!--Date, mark and additional features-->
+	<div class="d-flex gap-2" style="height: 25px">
+		<span>@Episode.ReleaseDate.ToLocalizedString(Localizer)</span>
+		@if(HasPlayed)
+		{
+			<span class="text-success">@Resource.Played</span>
+		}
+		<Expander Class="ms-auto"
+				  HeaderClass="bg-transparent"
+				  ContentClass="dropDown-more py-2 bg-1 rounded-2 d-flex flex-column"
+				  DropDownPosition="DropDownPosition.Top"
+				  @ref="_expander">
+			<HeaderTemplate>
+				<img class="ms-auto" src="PodcastPage/MoreHorizontal.svg" width="24" />
+			</HeaderTemplate>
+			<ContentTemplate>
+				<div class="p-1 bg-1 hoverable canBeActive" @onclick="OnMoreClick">
+					@if(HasPlayed)
+					{
+						@Resource.MarkAsUnplayed
+					}
+					else
+					{
+						@Resource.MarkAsPlayed
+					}
+				</div>
+			</ContentTemplate>
+		</Expander>
+	</div>
+	<!--Desription-->
+	<div class="d-flex flex-column align-items-start gap-1" @onclick="OnClick">
 		<!--Title and description-->
-		<div class="fw-bold mw-100 m-0 text-start text-truncate">@Episode.Title</div>
-		<div class="overflowOn2 text-start mw-100 no-link-text no-header-text">
+		<div class="fw-bold fontSize-1 m-0 text-start text-truncate">
+			@Episode.Title
+		</div>
+		<div class="overflowOn2 text-start no-link-text no-header-text">
 			@Description
 		</div>
+		<!--Durtion-->
+		<span class="mt-2">@Episode.Duration.ToLocalizedString(Localizer)</span>
 	</div>
-	<!--Mark button-->
-	<ToggleButton Class="bg-transparent p-0"
-				  CheckedClass="bg-transparent p-0"
-				  @bind-IsChecked="@HasPlayed">
-		<ContentTemplate>
-			<img src="PodcastPage/Mark.svg" width="32" />
-		</ContentTemplate>
-		<CheckedContentTemplate>
-			<img src="PodcastPage/MarkFill.svg" width="32" />
-		</CheckedContentTemplate>
-	</ToggleButton>
-	<!--Durtion-->
-	<span>@Episode.Duration.ToString("hh':'mm':'ss")</span>
 </button>

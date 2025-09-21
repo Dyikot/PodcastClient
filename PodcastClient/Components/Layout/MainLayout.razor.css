@@ -1,7 +1,6 @@
 #page {
     display: flex;
-    flex-direction: column;
-    font-family: 'Segoe UI';
+    flex-direction: column;    
     min-height: 100vh;
 }
 
@@ -22,8 +21,8 @@
     #sidebar {
         top: 0px;
         order: 0;
-        width: 230px;
-        min-width: 230px;
+        width: 200px;
+        min-width: 200px;
         height: 100vh;
     }
 }

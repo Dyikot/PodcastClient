@@ -1,0 +1,30 @@
+/* DropDownPanel */
+
+.dropDownPanel {
+    position: absolute;
+    z-index: 10;
+}
+
+.dropDownPanel[data-DropDownPosition="Left"] {
+    top: 0;
+    right: 100%;
+    margin-right: 5px;
+}
+
+.dropDownPanel[data-DropDownPosition="Top"] {
+    bottom: 100%;
+    left: 0;
+    margin-bottom: 5px;
+}
+
+.dropDownPanel[data-DropDownPosition="Right"] {
+    top: 0;
+    left: 100%;
+    margin-left: 5px;
+}
+
+.dropDownPanel[data-DropDownPosition="Bottom"] {
+    top: 100%;
+    left: 0;
+    margin-top: 5px;
+}

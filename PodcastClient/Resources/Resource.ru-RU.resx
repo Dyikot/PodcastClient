@@ -168,6 +168,12 @@
   <data name="light" xml:space="preserve">
     <value>Светлая</value>
   </data>
+  <data name="MarkAsPlayed" xml:space="preserve">
+    <value>Отметить как проигранное</value>
+  </data>
+  <data name="MarkAsUnplayed" xml:space="preserve">
+    <value>Отметить как непроигранное</value>
+  </data>
   <data name="MarkPlayedAll" xml:space="preserve">
     <value>Отметить все</value>
   </data>
@@ -199,7 +205,7 @@
     <value>Играть</value>
   </data>
   <data name="Played" xml:space="preserve">
-    <value>Сыграно</value>
+    <value>Проиграно</value>
   </data>
   <data name="PodcastNotFound" xml:space="preserve">
     <value>Не удалось найти подкаст</value>
@@ -238,7 +244,7 @@
     <value>Снять отметку со всех</value>
   </data>
   <data name="Unplayed" xml:space="preserve">
-    <value>Не сыграно</value>
+    <value>Не проиграно</value>
   </data>
   <data name="Unsubscribe" xml:space="preserve">
     <value>Отписаться</value>

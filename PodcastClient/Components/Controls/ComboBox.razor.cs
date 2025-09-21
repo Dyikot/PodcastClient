@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Components;
+using PodcastClient.Data;
 
 namespace PodcastClient.Components.Controls
 {
@@ -19,23 +20,28 @@ namespace PodcastClient.Components.Controls
 			public async Task OnClick() => await _parent.OnItemClick(Item);
 		}
 
-		private static readonly RenderFragment<TItem> DefaultItemTemplate = item =>
-		{
-			return builder =>
-			{
-				builder.AddContent(0, item?.ToString());
-			};
-		};
-
 		private readonly EqualityComparer<TItem> _comparer = EqualityComparer<TItem>.Default;
 		private List<ItemPresenter> _itemPrenseters = default!;
 		private TItem _selectedItem = default!;
 
-		public bool IsMouseOver { get; private set; } = false;
-		public bool IsDropDownOpen { get; private set; } = false;
+		[Parameter]
+		public string ButtonClass { get; set; } = string.Empty;
+		[Parameter]
+		public string ItemClass { get; set; } = string.Empty;
+		[Parameter]
+		public string DropDownClass { get; set; } = string.Empty;
 
 		[Parameter]
-		public DropDownPosition DropDownPosition { get; set; } = DropDownPosition.Bottom;
+		public EventCallback<TItem> SelectedItemChanged { get; set; }
+		[Parameter]
+		public EventCallback<TItem> SelectionChanged { get; set; }
+		[Parameter]
+		public EventCallback<TItem> OnItemClicked { get; set; }
+
+		[Parameter]
+		public RenderFragment<TItem>? ButtonContentTemplate { get; set; }
+		[Parameter]
+		public RenderFragment<TItem> ItemTemplate { get; set; } = DataTemplates.StringTemplate;
 
 		[Parameter, EditorRequired]
 		public TItem SelectedItem
@@ -54,34 +60,22 @@ namespace PodcastClient.Components.Controls
 				}
 			}
 		}
+
 		[Parameter, EditorRequired]
 		public IEnumerable<TItem> Items { get; set; }
 
 		[Parameter]
-		public RenderFragment<TItem>? ButtonContentTemplate { get; set; }
-		[Parameter]
-		public RenderFragment<TItem> ItemTemplate { get; set; } = DefaultItemTemplate;
+		public DropDownPosition DropDownPosition { get; set; } = DropDownPosition.Bottom;
 
-		[Parameter]
-		public string ButtonClass { get; set; } = string.Empty;
-		[Parameter]
-		public string ItemClass { get; set; } = string.Empty;
-		[Parameter]
-		public string DropDownClass { get; set; } = string.Empty;
-
-		[Parameter]
-		public EventCallback<TItem> SelectedItemChanged { get; set; }
-		[Parameter]
-		public EventCallback<TItem> SelectionChanged { get; set; }
-		[Parameter]
-		public EventCallback<TItem> OnItemClicked { get; set; }
+		public bool IsMouseOver { get; private set; } = false;
+		public bool IsDropDownOpen { get; private set; } = false;
 
 		private RenderFragment<TItem> DefaultButtonContentTemplate => item =>
 		{
 			return builder =>
 			{
 				builder.OpenElement(0, "div");
-				builder.AddAttribute(1, "class", "d-flex justify-content-between px-1");
+				builder.AddAttribute(1, "class", "d-flex align-items-center justify-content-between px-1");
 				builder.AddContent(2, ItemTemplate(item));
 				builder.OpenElement(3, "img");
 				builder.AddAttribute(4, "src", "Controls/ComboBox/ArrowDown.svg");

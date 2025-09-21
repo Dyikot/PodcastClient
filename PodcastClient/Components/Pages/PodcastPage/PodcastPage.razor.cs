@@ -50,7 +50,7 @@ namespace PodcastClient.Components.Pages.PodcastPage
                 .AsNoTracking()
                 .Include(p => p.Episodes)
                 .FirstOrDefaultAsync(p => p.Id == PodcastId);
-
+            
             if(Podcast != null)
             {
                 await SetContent(Podcast, context);

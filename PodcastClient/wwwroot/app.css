@@ -43,6 +43,14 @@
 .bg-1.canBeActive:active { background-color: var(--bg-3); }
 .bg-2.canBeActive:active { background-color: var(--bg-4); }
 
+/* Font sizes */
+
+.fontSize-1 { font-size: 16px; }
+.fontSize-2 { font-size: 18px; }
+.fontSize-3 { font-size: 20px; }
+.fontSize-4 { font-size: 22px; }
+.fontSize-5 { font-size: 24px; }
+
 /* Layout */
 
 .mainLayout {

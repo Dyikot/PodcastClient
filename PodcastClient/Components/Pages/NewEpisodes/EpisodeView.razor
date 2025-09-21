@@ -3,19 +3,19 @@
 @inject UserContext UserContext
 
 <button class="bg-1 hoverable canBeActive d-flex align-items-center rounded-3 gap-3 px-3" 
-		style="height: 85px"
+		style="height: 90px"
 		@onclick="OnEpisodeClick">
 	<!--Icon-->
 	<img src="@Episode.IconSource" class="rounded-2" width="64" height="64" />
 	<!--Titles-->
 	<div class="d-flex flex-column align-items-start gap-2"
 		 style="max-width: 65%;">
-		<div class="fs-5 text-truncate mw-100 fw-bold">@Episode.Title</div>
-		<div class="">@Episode.Podcast?.Title</div>
+		<div class="fontSize-1 text-truncate mw-100 fw-bold">@Episode.Title</div>
+		<div class="">@PodcastTitle</div>
 	</div>
 	<!--Duration and date-->
 	<div class="d-flex flex-column gap-2 align-items-end flex-grow-1">
-		<span>@Episode.Duration.ToString("hh':'mm':'ss")</span>
+		<span>@Episode.Duration.ToLocalizedString(Localizer)</span>
 		<span class="text-end">@Episode.ReleaseDate.ToLocalizedString(Localizer)</span>
 	</div>
 </button>

@@ -1,4 +1,4 @@
-namespace PodcastClient.Models
+namespace PodcastClient.Data
 {
 	public class Podcast
 	{

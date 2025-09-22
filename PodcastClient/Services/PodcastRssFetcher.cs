@@ -1,4 +1,4 @@
-using PodcastClient.Models;
+using PodcastClient.Data;
 using System.Globalization;
 using System.Xml.Linq;
 

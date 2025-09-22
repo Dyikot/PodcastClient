@@ -1,4 +1,5 @@
 @page "/podcast/{podcastId:int}/episode/{episodeNumber:int}"
+@using PodcastClient.Data
 @inject UserContext UserContext
 @inject MediaService MediaService
 @inject IStringLocalizer<Resources.Resource> Localizer
@@ -46,7 +47,7 @@
 		</div>
 		switch (Episode.Type)
 		{
-			case Models.EpisodeType.Audio:
+			case EpisodeType.Audio:
 				<AudioPlayer Source="@Episode.ContentSource"
 							 Duration="@Episode.Duration"
 							 @bind-CurrentTime="EpisodePlayback!.Played"
@@ -56,7 +57,7 @@
 							 OnPause="OnPause"
 							 Ended="OnEnded" />
 				break;
-			case Models.EpisodeType.Video:
+			case EpisodeType.Video:
 				<div class="d-flex mainLayout order-1">
 					<VideoPlayer Source="@Episode.ContentSource"
 								 Duration="@Episode.Duration"

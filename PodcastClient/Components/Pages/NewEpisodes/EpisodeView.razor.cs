@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Components;
-using PodcastClient.Models;
+using PodcastClient.Data;
 
 namespace PodcastClient.Components.Pages.NewEpisodes
 {

@@ -1,4 +1,4 @@
-namespace PodcastClient.Data
+namespace PodcastClient.Base
 {
 	public enum SortOrder
 	{

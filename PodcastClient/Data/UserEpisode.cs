@@ -1,6 +1,6 @@
-using PodcastClient.Data;
+using PodcastClient.Base;
 
-namespace PodcastClient.Models
+namespace PodcastClient.Data
 {
 	public class UserEpisode
 	{
@@ -37,9 +37,7 @@ namespace PodcastClient.Models
 		public int Compare(UserEpisode? x, UserEpisode? y)
 		{
 			if (x == null || y == null)
-			{
 				return 0;
-			}
 			else if (x == null)
 			{
 				return -1;

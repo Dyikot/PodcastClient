@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Components;
 using PodcastClient.Components.Controls;
-using PodcastClient.Models;
+using PodcastClient.Data;
 
 namespace PodcastClient.Components.Pages.PodcastPage
 {

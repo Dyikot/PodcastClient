@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Components;
 
-namespace PodcastClient.Data
+namespace PodcastClient.Components.Templates
 {
 	public static class DataTemplates
 	{

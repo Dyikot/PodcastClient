@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Components;
-using PodcastClient.Data;
+using PodcastClient.Components.Templates;
 
 namespace PodcastClient.Components.Controls
 {
@@ -10,11 +10,17 @@ namespace PodcastClient.Components.Controls
 
 	public partial class ComboBox<TItem>
 	{
-		private class ItemPresenter(TItem item, ComboBox<TItem> parent)
+		private class ItemPresenter
 		{
-			private readonly ComboBox<TItem> _parent = parent;
+			private readonly ComboBox<TItem> _parent;
 
-			public TItem Item { get; init; } = item;
+			public ItemPresenter(TItem item, ComboBox<TItem> parent)
+			{
+				_parent = parent;
+				Item = item;
+			}
+
+			public TItem Item { get; init; } 
 			public bool IsSelected => EqualityComparer<TItem>.Default.Equals(Item, _parent.SelectedItem);
 
 			public async Task OnClick() => await _parent.OnItemClick(Item);

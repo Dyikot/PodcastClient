@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace PodcastClient.Models
+namespace PodcastClient.Data
 {
 	public class ApplicationDbContext : DbContext
 	{

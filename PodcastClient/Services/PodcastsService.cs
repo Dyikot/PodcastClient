@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using PodcastClient.Models;
+using PodcastClient.Data;
 using System.Linq.Expressions;
 
 namespace PodcastClient.Services

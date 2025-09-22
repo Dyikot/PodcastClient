@@ -1,5 +1,5 @@
 using PodcastClient.Components;
-using PodcastClient.Models;
+using PodcastClient.Data;
 using PodcastClient.Services;
 
 internal class Program
@@ -7,6 +7,7 @@ internal class Program
 	private static void Main(string[] args)
 	{
 		var builder = WebApplication.CreateBuilder(args);
+
 		builder.Services.AddRazorComponents().AddInteractiveServerComponents();
 		builder.Services.AddDbContextFactory<ApplicationDbContext>();
 		builder.Services.AddHttpClient();
@@ -21,6 +22,7 @@ internal class Program
 		builder.Services.AddSingleton<PodcastRssFetcher>();
 
 		var app = builder.Build();
+
 		app.UseHttpsRedirection();
 		app.UseStaticFiles();
 		app.UseAntiforgery();

@@ -33,9 +33,7 @@ namespace PodcastClient.Components.Pages.MyPodcasts
 					{
 						podcast = await PodcastRssFetcher.GetPodcastAsync(rss);
 						if(podcast != null)
-						{
 							await PodcastsService.AddPodcastAsync(podcast);
-						}
 					}
 
 					if (podcast != null)

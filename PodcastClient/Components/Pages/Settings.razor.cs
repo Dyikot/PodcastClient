@@ -2,7 +2,7 @@ using PodcastClient.Data;
 using PodcastClient.Services;
 using System.Globalization;
 
-namespace PodcastClient.Components.Pages.Settings
+namespace PodcastClient.Components.Pages
 {
     public partial class Settings
     {

@@ -1,5 +1,4 @@
 @page "/podcast/{podcastId:int}"
-@inject NavigationManager Navigator
 @inject UserContext UserContext
 @inject PodcastsService PodcastsService
 @inject IStringLocalizer<Resource> Localizer
@@ -91,10 +90,11 @@
 			<div class="d-flex flex-column gap-3 mb-3">
 				@if (UserHasSubscription)
 				{
-					@foreach (var episode in UserEpisodes!)
+					@foreach (var userEpisode in UserEpisodes!)
 					{
-						<UserEpisodeView UserEpisode="episode" 
-										 StatusChanged="OnEpisodeStatusChanged" />
+						<EpisodeView Episode="userEpisode.Episode"
+									 UserEpisode="userEpisode"
+									 OnStatusChanged="OnEpisodeStatusChanged" />
 					}
 				}
 				else

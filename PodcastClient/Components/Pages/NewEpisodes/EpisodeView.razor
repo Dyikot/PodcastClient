@@ -1,10 +1,9 @@
 @inject IStringLocalizer<Resource> Localizer
-@inject NavigationManager Navigator
 @inject UserContext UserContext
 
-<button class="bg-1 hoverable canBeActive d-flex align-items-center rounded-3 gap-3 px-3" 
-		style="height: 90px"
-		@onclick="OnEpisodeClick">
+<NavLink class="fg-main bg-1 hoverable canBeActive text-decoration-none d-flex align-items-center rounded-3 gap-3 px-3" 
+		 style="height: 90px"
+		 href="@Href" role="button">
 	<!--Icon-->
 	<img src="@Episode.IconSource" class="rounded-2" width="64" height="64" />
 	<!--Titles-->
@@ -18,4 +17,4 @@
 		<span>@Episode.Duration.ToLocalizedString(Localizer)</span>
 		<span class="text-end">@Episode.ReleaseDate.ToLocalizedString(Localizer)</span>
 	</div>
-</button>
+</NavLink>

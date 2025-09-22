@@ -8,10 +8,9 @@ namespace PodcastClient.Components.Pages.MyPodcasts
     {
         [Parameter, EditorRequired]
         public Podcast Podcast { get; set; }
-        [Parameter]
-        public EventCallback<Podcast> Click { get; set; }
 
         public int NewEpisodes { get; private set; }
+        public string Href => $"podcast/{Podcast.Id}";
 
 		protected override async Task OnInitializedAsync()
 		{
@@ -23,7 +22,5 @@ namespace PodcastClient.Components.Pages.MyPodcasts
                                  ep.PodcastId == Podcast.Id)
 					.CountAsync(ep => ep.Status != EpisodeStatus.Played);
 		}
-
-        private Task OnClick() => Click.InvokeAsync(Podcast);
     }
 }

@@ -1,14 +1,40 @@
 @inject IStringLocalizer<Resource> Localizer
-@inject NavigationManager Navigator
 
-<button class="bg-1 hoverable canBeActive rounded-3 p-3"
-		style="height: 160px">
-	<!--Date and mark-->
-	<div class="d-flex gap-1" style="height: 25px">
+<div class="bg-1 hoverable canBeActive rounded-3 p-3" role="button"
+	 style="height: 160px">
+	<!--Date, mark and additional features-->
+	<div class="d-flex gap-2" style="height: 25px">
 		<span>@Episode.ReleaseDate.ToLocalizedString(Localizer)</span>
+		@if(HasPlayed)
+		{
+			<span class="text-success">@Resource.Played</span>
+		}
+		<Expander Class="ms-auto"
+				  HeaderClass="bg-transparent"
+				  ContentClass="dropDown-more py-2 bg-1 rounded-2 d-flex flex-column"
+				  DropDownPosition="DropDownPosition.Top"
+				  @ref="_expander">
+			<HeaderTemplate>
+				<img class="ms-auto" src="PodcastPage/MoreHorizontal.svg" width="24" />
+			</HeaderTemplate>
+			<ContentTemplate>
+				<button class="btn border-0 p-1 bg-1 hoverable canBeActive @Disabled" 
+						@onclick="OnMarkPlayedClick">
+					@if(HasPlayed)
+					{
+						@Resource.MarkAsUnplayed
+					}
+					else
+					{
+						@Resource.MarkAsPlayed
+					}
+				</button>
+			</ContentTemplate>
+		</Expander>
 	</div>
 	<!--Desription-->
-	<div class="d-flex flex-column align-items-start gap-1" @onclick="OnClick">
+	<NavLink class="fg-main text-decoration-none d-flex flex-column align-items-start gap-1" 
+			 href="@Href" role="button">
 		<!--Title and description-->
 		<div class="fw-bold fontSize-1 m-0 text-start text-truncate">
 			@Episode.Title
@@ -18,5 +44,5 @@
 		</div>
 		<!--Durtion-->
 		<span class="mt-2">@Episode.Duration.ToLocalizedString(Localizer)</span>
-	</div>
-</button>
+	</NavLink>
+</div>

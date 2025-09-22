@@ -20,11 +20,6 @@ namespace PodcastClient.Components.Pages.MyPodcasts
 			Podcasts = user.Podcasts;
 		}
 
-		private void OnPodcastClick(Podcast podcast)
-        {
-            Navigator.NavigateTo($"/podcast/{podcast.Id}");
-        }
-
 		private async Task OnSubmitButtonClick()
 		{
 			if (!string.IsNullOrEmpty(RssFeed))

@@ -1,21 +1,9 @@
 @inject IDbContextFactory<ApplicationDbContext> DbContextFactory
 @inject UserContext UserContext
 
-<style>
-	#title {
-		flex-basis: 24%;
-		display: -webkit-box;
-		-webkit-line-clamp: 2;
-		-webkit-box-orient: vertical;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		margin: 0px;
-	}
-</style>
-
-<button class="bg-1 hoverable canBeActive d-flex justify-content-center align-items-center rounded-2"
-		style="width: 200px; height: 240px;"
-		@onclick="OnClick">
+<NavLink class="fg-main bg-1 hoverable canBeActive rounded-2 text-decoration-none d-flex justify-content-center align-items-center"
+		 style="width: 200px; height: 240px;" 
+		 href="@Href" role="button">
 	<div class="position-relative d-flex flex-column text-start"
 		 style="width: 130px; height: 90%;">
 		<!--New articles view-->
@@ -31,10 +19,9 @@
 		<!--Icon-->
 		<img src="@Podcast.IconSource" 
 			 class="rounded-2 mb-1"
-			 style="height: 130px"
-			 @onclick="OnClick" />
+			 style="height: 130px" />
 		<!--Title and author-->
 		<h5 id="title">@Podcast.Title</h5>
 		<div class="text-grey text-truncate mw-100">@Podcast.Author</div>
 	</div>
-</button>
+</NavLink>

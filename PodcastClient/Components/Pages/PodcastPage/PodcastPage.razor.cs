@@ -157,7 +157,9 @@ namespace PodcastClient.Components.Pages.PodcastPage
 		private async Task OnEpisodeStatusChanged(UserEpisode userEpisode)
 		{
             using var context = DbContextFactory.CreateDbContext();
-            context.UserEpisodes.Update(userEpisode);
+
+            context.UserEpisodes.Attach(userEpisode);
+            context.Entry(userEpisode).Property(ue => ue.Status).IsModified = true;
             await context.SaveChangesAsync();
 		}
     }

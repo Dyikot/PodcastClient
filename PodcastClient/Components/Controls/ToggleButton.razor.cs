@@ -10,14 +10,17 @@ namespace PodcastClient.Components.Controls
         public string Class { get; set; } = string.Empty;
         [Parameter]
         public string CheckedClass { get; set; } = string.Empty;
+
 		[Parameter, EditorRequired]
         public RenderFragment ContentTemplate { get; set; }
         [Parameter ,EditorRequired]
         public RenderFragment CheckedContentTemplate { get; set; }
+
         [Parameter]
         public EventCallback OnClick { get; set; }
 		[Parameter]
 		public EventCallback<bool> IsCheckedChanged { get; set; }
+
 		[Parameter]
         public bool IsChecked
         {
@@ -36,7 +39,15 @@ namespace PodcastClient.Components.Controls
             }
         }
 
-        private void OnButtonClick()
+        [Parameter]
+        public bool IsEnabled { get; set; } = true;
+
+        private string Classes => string.Join(" ",
+            IsChecked ? CheckedClass : Class,
+            IsEnabled ? "" : "disabled");
+
+
+		private void OnButtonClick()
         {
             IsChecked = !IsChecked;
 

@@ -81,6 +81,24 @@ namespace PodcastClient.Resources {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        internal static string ConfirmPassword {
+            get {
+                return ResourceManager.GetString("ConfirmPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string ConfirmPasswordValidation {
+            get {
+                return ResourceManager.GetString("ConfirmPasswordValidation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         internal static string dark {
             get {
                 return ResourceManager.GetString("dark", resourceCulture);
@@ -120,6 +138,15 @@ namespace PodcastClient.Resources {
         internal static string Duration {
             get {
                 return ResourceManager.GetString("Duration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string EmailValidation {
+            get {
+                return ResourceManager.GetString("EmailValidation", resourceCulture);
             }
         }
         
@@ -171,6 +198,24 @@ namespace PodcastClient.Resources {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        internal static string FieldRequiredValidation {
+            get {
+                return ResourceManager.GetString("FieldRequiredValidation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Home {
+            get {
+                return ResourceManager.GetString("Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         internal static string HoursShort {
             get {
                 return ResourceManager.GetString("HoursShort", resourceCulture);
@@ -189,6 +234,15 @@ namespace PodcastClient.Resources {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        internal static string InvalidUsernameOrPassword {
+            get {
+                return ResourceManager.GetString("InvalidUsernameOrPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         internal static string Language {
             get {
                 return ResourceManager.GetString("Language", resourceCulture);
@@ -201,6 +255,15 @@ namespace PodcastClient.Resources {
         internal static string Latest {
             get {
                 return ResourceManager.GetString("Latest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Library {
+            get {
+                return ResourceManager.GetString("Library", resourceCulture);
             }
         }
         
@@ -246,15 +309,6 @@ namespace PodcastClient.Resources {
         internal static string MinutesShort {
             get {
                 return ResourceManager.GetString("MinutesShort", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string MyPodcasts {
-            get {
-                return ResourceManager.GetString("MyPodcasts", resourceCulture);
             }
         }
         
@@ -309,6 +363,24 @@ namespace PodcastClient.Resources {
         internal static string OrderBy {
             get {
                 return ResourceManager.GetString("OrderBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Password {
+            get {
+                return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string PasswordValidation {
+            get {
+                return ResourceManager.GetString("PasswordValidation", resourceCulture);
             }
         }
         
@@ -372,6 +444,33 @@ namespace PodcastClient.Resources {
         internal static string Settings {
             get {
                 return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string SignIn {
+            get {
+                return ResourceManager.GetString("SignIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string SignOut {
+            get {
+                return ResourceManager.GetString("SignOut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string SignUp {
+            get {
+                return ResourceManager.GetString("SignUp", resourceCulture);
             }
         }
         
@@ -453,6 +552,33 @@ namespace PodcastClient.Resources {
         internal static string Unsubscribe {
             get {
                 return ResourceManager.GetString("Unsubscribe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string UserName {
+            get {
+                return ResourceManager.GetString("UserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string UserNameValidation {
+            get {
+                return ResourceManager.GetString("UserNameValidation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string UserValidationExist {
+            get {
+                return ResourceManager.GetString("UserValidationExist", resourceCulture);
             }
         }
     }

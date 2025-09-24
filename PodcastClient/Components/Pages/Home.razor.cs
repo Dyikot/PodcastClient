@@ -1,6 +1,7 @@
 namespace PodcastClient.Components.Pages
 {
-    public partial class Explore
+    public partial class Home
     {
+		
     }
 }

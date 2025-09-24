@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using PodcastClient.Data;
 
-namespace PodcastClient.Components.Pages.MyPodcasts
+namespace PodcastClient.Components.Pages.Library
 {
-    public partial class MyPodcasts
+    public partial class Library
     {
 		public List<Podcast> Podcasts { get; set; } = [];
 		public string RssFeed { get; set; } = string.Empty;

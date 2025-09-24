@@ -1,6 +1,4 @@
 @page "/podcast/{podcastId:int}"
-@using PodcastClient.Data
-@using PodcastClient.Utilities
 @inject UserContext UserContext
 @inject PodcastsService PodcastsService
 @inject IStringLocalizer<Resource> Localizer
@@ -39,9 +37,10 @@
 					</div>
 					<div class="h-100 overflowOn5">@Description</div>
 					<div class="d-flex align-items-end gap-2">
-						<ToggleButton Class="btn bg-2 hoverable canBeActive rounded-2"
-									  CheckedClass="btn bg-2 hoverable canBeActive rounded-2"
+						<ToggleButton Class="btn bg-2 hoverable rounded-2"
+									  CheckedClass="btn bg-2 hoverable  rounded-2"
 									  IsChecked="UserHasSubscription"
+									  IsEnabled="UserContext.IsAuthenticated"
 									  OnClick="OnSubscribeButtonClick">
 							<ContentTemplate>@Resource.Subscribe</ContentTemplate>
 							<CheckedContentTemplate>@Resource.Unsubscribe</CheckedContentTemplate>
@@ -54,7 +53,7 @@
 		<div class="d-flex flex-column gap-4 mainLayout m-auto">
 			<!--Sort and filter buttons-->
 			<div class="d-flex gap-2">
-				<ComboBox TItem="PodcastClient.Data.SortOrder"
+				<ComboBox TItem="PodcastClient.Base.SortOrder"
 						  Items="SortOrderOptions"
 						  @bind-SelectedItem="SortOrder"
 						  ButtonClass="p-2"
@@ -65,22 +64,22 @@
 				</ComboBox>
 				@if(UserHasSubscription)
 				{
-					<ToggleButton Class="btn bg-1 hoverable canBeActive rounded-2"
-								  CheckedClass="btn bg-2 hoverable canBeActive rounded-2"
+					<ToggleButton Class="btn bg-1 hoverable  rounded-2"
+								  CheckedClass="btn bg-2 hoverable  rounded-2"
 								  IsChecked="IsInProgressFilter"
 								  OnClick="OnInProgressButtonClick">
 						<ContentTemplate>@Resource.InProgress</ContentTemplate>
 						<CheckedContentTemplate>@Resource.InProgress</CheckedContentTemplate>
 					</ToggleButton>
-					<ToggleButton Class="btn bg-1 hoverable canBeActive rounded-2"
-								  CheckedClass="btn bg-2 hoverable canBeActive rounded-2"
+					<ToggleButton Class="btn bg-1 hoverable  rounded-2"
+								  CheckedClass="btn bg-2 hoverable  rounded-2"
 								  IsChecked="IsPlayedFilter"
 								  OnClick="OnPlayedButtonClick">
 						<ContentTemplate>@Resource.Played</ContentTemplate>
 						<CheckedContentTemplate>@Resource.Played</CheckedContentTemplate>
 					</ToggleButton>
-					<ToggleButton Class="btn bg-1 hoverable canBeActive rounded-2"
-								  CheckedClass="btn bg-2 hoverable canBeActive rounded-2"
+					<ToggleButton Class="btn bg-1 hoverable  rounded-2"
+								  CheckedClass="btn bg-2 hoverable  rounded-2"
 								  IsChecked="IsUnplayedFilter"
 								  OnClick="OnUnplayedButtonClick">
 						<ContentTemplate>@Resource.Unplayed</ContentTemplate>

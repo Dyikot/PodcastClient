@@ -168,6 +168,9 @@
   <data name="light" xml:space="preserve">
     <value>Light</value>
   </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
   <data name="MarkAsPlayed" xml:space="preserve">
     <value>Mark as played </value>
   </data>
@@ -180,8 +183,8 @@
   <data name="MinutesShort" xml:space="preserve">
     <value>m</value>
   </data>
-  <data name="MyPodcasts" xml:space="preserve">
-    <value>My Podcasts</value>
+  <data name="Library" xml:space="preserve">
+    <value>Library</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
@@ -248,5 +251,44 @@
   </data>
   <data name="Unsubscribe" xml:space="preserve">
     <value>Unsubscribe</value>
+  </data>
+  <data name="SignIn" xml:space="preserve">
+    <value>Sign In</value>
+  </data>
+  <data name="SignUp" xml:space="preserve">
+    <value>Sign Up</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="UserNameValidation" xml:space="preserve">
+    <value>Username cannot be less than 3 and more than 32 characters</value>
+  </data>
+  <data name="PasswordValidation" xml:space="preserve">
+    <value>The password must be at least 8 characters long</value>
+  </data>
+  <data name="FieldRequiredValidation" xml:space="preserve">
+    <value>The field is required</value>
+  </data>
+  <data name="EmailValidation" xml:space="preserve">
+    <value>Invalid email address</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirm password</value>
+  </data>
+  <data name="ConfirmPasswordValidation" xml:space="preserve">
+    <value>Password doesn't match</value>
+  </data>
+  <data name="UserValidationExist" xml:space="preserve">
+    <value>A user with that username already exists</value>
+  </data>
+  <data name="InvalidUsernameOrPassword" xml:space="preserve">
+    <value>Incorrect username or password</value>
+  </data>
+  <data name="SignOut" xml:space="preserve">
+    <value>Sign Out</value>
   </data>
 </root>

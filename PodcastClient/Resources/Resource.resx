@@ -168,6 +168,9 @@
   <data name="light" xml:space="preserve">
     <value />
   </data>
+  <data name="Home" xml:space="preserve">
+    <value />
+  </data>
   <data name="MarkAsPlayed" xml:space="preserve">
     <value />
   </data>
@@ -180,7 +183,7 @@
   <data name="MinutesShort" xml:space="preserve">
     <value />
   </data>
-  <data name="MyPodcasts" xml:space="preserve">
+  <data name="Library" xml:space="preserve">
     <value />
   </data>
   <data name="Name" xml:space="preserve">
@@ -247,6 +250,45 @@
     <value />
   </data>
   <data name="Unsubscribe" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SignIn" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SignUp" xml:space="preserve">
+    <value />
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value />
+  </data>
+  <data name="UserNameValidation" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PasswordValidation" xml:space="preserve">
+    <value />
+  </data>
+  <data name="FieldRequiredValidation" xml:space="preserve">
+    <value />
+  </data>
+  <data name="EmailValidation" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ConfirmPasswordValidation" xml:space="preserve">
+    <value />
+  </data>
+  <data name="UserValidationExist" xml:space="preserve">
+    <value />
+  </data>
+  <data name="InvalidUsernameOrPassword" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SignOut" xml:space="preserve">
     <value />
   </data>
 </root>

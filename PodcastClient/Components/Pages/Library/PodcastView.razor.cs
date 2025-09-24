@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
 using PodcastClient.Data;
 
-namespace PodcastClient.Components.Pages.MyPodcasts
+namespace PodcastClient.Components.Pages.Library
 {
     public partial class PodcastView
     {

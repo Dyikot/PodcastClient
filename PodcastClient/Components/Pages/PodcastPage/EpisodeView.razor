@@ -1,6 +1,6 @@
 @inject IStringLocalizer<Resource> Localizer
 
-<div class="bg-1 hoverable canBeActive rounded-3 p-3" role="button"
+<div class="bg-1 hoverable  rounded-3 p-3" role="button"
 	 style="height: 160px">
 	<!--Date, mark and additional features-->
 	<div class="d-flex gap-2" style="height: 25px">
@@ -15,10 +15,10 @@
 				  DropDownPosition="DropDownPosition.Top"
 				  @ref="_expander">
 			<HeaderTemplate>
-				<img class="ms-auto" src="PodcastPage/MoreHorizontal.svg" width="24" />
+				<img class="ms-auto" src="Podcast/MoreHorizontal.svg" width="24" />
 			</HeaderTemplate>
 			<ContentTemplate>
-				<button class="btn border-0 p-1 bg-1 hoverable canBeActive @Disabled" 
+				<button class="btn border-0 p-1 bg-1 hoverable  @Disabled" 
 						@onclick="OnMarkPlayedClick">
 					@if(HasPlayed)
 					{
@@ -33,7 +33,7 @@
 		</Expander>
 	</div>
 	<!--Desription-->
-	<NavLink class="fg-main text-decoration-none d-flex flex-column align-items-start gap-1" 
+	<NavLink class="fg-main text-decoration-none d-flex flex-column align-items-start gap-1"
 			 href="@Href" role="button">
 		<!--Title and description-->
 		<div class="fw-bold fontSize-1 m-0 text-start text-truncate">

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using PodcastClient.Components;
 using PodcastClient.Data;
 using PodcastClient.Services;
@@ -9,6 +10,14 @@ internal class Program
 		var builder = WebApplication.CreateBuilder(args);
 
 		builder.Services.AddRazorComponents().AddInteractiveServerComponents();
+		builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+			.AddCookie(options =>
+			{
+				options.LoginPath = "/signin";
+				options.LogoutPath = "/";
+			});
+		builder.Services.AddAuthorization();
+		builder.Services.AddCascadingAuthenticationState();
 		builder.Services.AddDbContextFactory<ApplicationDbContext>();
 		builder.Services.AddHttpClient();
 		builder.Services.AddLocalization();
@@ -26,6 +35,8 @@ internal class Program
 		app.UseHttpsRedirection();
 		app.UseStaticFiles();
 		app.UseAntiforgery();
+		app.UseAuthentication();
+		app.UseAuthorization();
 		app.UseRequestLocalization(options =>
 		{
 			string[] cultures = ["ru-RU", "en-US"];

@@ -1,0 +1,58 @@
+@page "/signup"
+@inject NavigationManager NavigationManager
+@inject IDbContextFactory<ApplicationDbContext> DbContextFactory
+
+<PageTitle>@Resource.SignUp</PageTitle>
+
+<style>
+	.validation-message {
+		color: red;
+		margin-top: .25rem;
+	}
+</style>
+
+<div class="h-100 p-2 d-flex align-items-center justify-content-center">
+	<EditForm class="signin-form bg-1 rounded-2 p-3 d-flex flex-column align-items-center justify-content-around"
+			  Model="User"
+			  OnValidSubmit="OnValidSubmit">
+		<DataAnnotationsValidator />
+		<h4>@Resource.SignUp</h4>
+		<div>
+			<label for="email" class="form-label fontSize-1">
+				Email
+			</label>
+			<InputText id="email" class="form-control" @bind-Value="User.Email" />
+			<ValidationMessage For="@(() => User.Email)" />
+		</div>
+		<div>
+			<label for="username" class="form-label fontSize-1">
+				@Resource.UserName
+			</label>
+			<InputText id="username" class="form-control" @bind-Value="User.UserName" />
+			<ValidationMessage For="@(() => User.UserName)" />
+		</div>
+		<div>
+			<label for="password" class="form-label fontSize-1">
+				@Resource.Password
+			</label>
+			<InputText type="password" id="password" class="form-control"
+					   @bind-Value="User.Password" />
+			<ValidationMessage For="@(() => User.Password)" />
+		</div>
+		<div>
+			<label for="confirm-password" class="form-label fontSize-1">
+				@Resource.ConfirmPassword
+			</label>
+			<InputText type="password" id="confirm-password" class="form-control"
+					   @bind-Value="User.ConfirmPassword" />
+			<ValidationMessage For="@(() => User.ConfirmPassword)" />
+		</div>
+		@if (_errorMessage != null)
+		{
+			<span class="validation-message">@_errorMessage</span>
+		}
+		<button class="w-100 btn btn-warning text-black" type="submit">
+			@Resource.Submit
+		</button>
+	</EditForm>
+</div>

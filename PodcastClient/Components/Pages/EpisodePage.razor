@@ -21,23 +21,23 @@
 				<span>@PodcastTitle</span>
 				<div class="d-flex align-items-stretch gap-3">
 					<div class="d-flex align-items-md-center gap-2">
-						<img src="NowPlaying/Calendar.svg" 
+						<img src="Episode/Calendar.svg" 
 							 width="16"
 							 title="@Resource.ReleaseDate"/>
 						<span>@Episode.ReleaseDate.ToLocalizedString(Localizer)</span>
 					</div>
 					<div class="d-flex align-items-center gap-2">
-						<img src="NowPlaying/Clock.svg"
+						<img src="Episode/Clock.svg"
 							 width="16"
 							 title="@Resource.Duration"/>
 						<span>@Episode.Duration.ToString("hh':'mm':'ss")</span>
 					</div>
 				</div>
-				<a class="bg-0 hoverable canBeActive rounded-2 mt-auto p-1 fg-main
+				<a class="bg-0 hoverable  rounded-2 mt-auto p-1 fg-main
 						  text-decoration-none d-flex align-items-center gap-1"
 				   href="@Episode.Source" 
 				   target="_blank">
-					<img src="NowPlaying/Link.svg" />
+					<img src="Episode/Link.svg" />
 					<span>@Resource.Source</span>
 				</a>
 			</div>

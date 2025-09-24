@@ -1,12 +1,12 @@
-#navigation-menu {
+.navMenu {
     display: flex;
 }
 
-span {
+.navText {
     display: none;
 }
 
-::deep a {
+::deep .navItem {
     flex: 1;
     display: flex;
     flex-direction: row;
@@ -15,22 +15,24 @@ span {
     height: 10vh;
     border-radius: 5px;
     font-size: 1.05rem;
-    color: inherit;
     text-decoration: none;
+    color: inherit;
 }
 
-::deep .navigation-link { background-color: var(--nav-menu); }
-::deep .navigation-link:hover, 
-::deep .navigation-link.active { background-color: var(--nav-menu-currentItem); }
+::deep .navItemBg { background-color: var(--navMenu); }
+::deep .navItemBg:hover, 
+::deep .navItemBg.active { background-color: var(--nav-menu-currentItem); }
+::deep .navItemBg:focus-visible { outline: 3px solid var(--bg-3); }
 
 @media (min-width: 641px) {
-    #navigation-menu {
+    .navMenu {
         flex-direction: column;
         gap: 10px;
+        padding: 1rem 0;
         height: 100%;
     }
 
-    ::deep a {
+    ::deep .navItem {
         flex: 0 0 50px;
         margin: 0 10px;
         padding: 0 10px;
@@ -38,16 +40,11 @@ span {
         justify-content: flex-start;
     }
 
-    ::deep a:first-child {
-        margin-top: 1.25rem;
-    }
-
-    ::deep a:last-child {
+    ::deep .account {
         margin-top: auto;
-        margin-bottom: 1.25rem;
     }
 
-    span {
+    .navText {
         display: inline;
     }
 }

@@ -25,7 +25,7 @@ namespace PodcastClient.Data
 
 		private void ConfigureUser(EntityTypeBuilder<User> builder)
 		{
-			
+			builder.HasIndex(u => u.UserName).IsUnique();
 		}
 
 		private void ConfigurePodcast(EntityTypeBuilder<Podcast> builder)

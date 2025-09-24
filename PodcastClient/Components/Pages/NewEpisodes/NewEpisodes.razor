@@ -1,5 +1,5 @@
 @page "/new-episodes"
-@using PodcastClient.Data
+@attribute [Authorize]
 @inject IDbContextFactory<ApplicationDbContext> DbContextFactory
 @inject UserContext UserContext
 

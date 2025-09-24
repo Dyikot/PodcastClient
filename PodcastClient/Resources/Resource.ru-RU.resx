@@ -168,6 +168,9 @@
   <data name="light" xml:space="preserve">
     <value>Светлая</value>
   </data>
+  <data name="Home" xml:space="preserve">
+    <value>Главная</value>
+  </data>
   <data name="MarkAsPlayed" xml:space="preserve">
     <value>Отметить как проигранное</value>
   </data>
@@ -180,8 +183,8 @@
   <data name="MinutesShort" xml:space="preserve">
     <value>м</value>
   </data>
-  <data name="MyPodcasts" xml:space="preserve">
-    <value>Мои Подкасты</value>
+  <data name="Library" xml:space="preserve">
+    <value>Библиотека</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Название</value>
@@ -248,5 +251,44 @@
   </data>
   <data name="Unsubscribe" xml:space="preserve">
     <value>Отписаться</value>
+  </data>
+  <data name="SignIn" xml:space="preserve">
+    <value>Вход</value>
+  </data>
+  <data name="SignUp" xml:space="preserve">
+    <value>Регистрация</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>Имя пользователя</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Пароль</value>
+  </data>
+  <data name="UserNameValidation" xml:space="preserve">
+    <value>Имя пользователя не может быть меньше 3 и больше 32 символов</value>
+  </data>
+  <data name="PasswordValidation" xml:space="preserve">
+    <value>Пароль должен быть не менее 8 символов</value>
+  </data>
+  <data name="FieldRequiredValidation" xml:space="preserve">
+    <value>Поле обязательное</value>
+  </data>
+  <data name="EmailValidation" xml:space="preserve">
+    <value>Недопустимый электронный адрес</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Потвердите пароль</value>
+  </data>
+  <data name="ConfirmPasswordValidation" xml:space="preserve">
+    <value>Пароль не совпадает</value>
+  </data>
+  <data name="UserValidationExist" xml:space="preserve">
+    <value>Пользователь с таким именем пользователя уже существует</value>
+  </data>
+  <data name="InvalidUsernameOrPassword" xml:space="preserve">
+    <value>Неверное имя пользователя или пароль</value>
+  </data>
+  <data name="SignOut" xml:space="preserve">
+    <value>Выйти</value>
   </data>
 </root>

@@ -1,2 +1,3 @@
 .settings-title { width: 100px; }
 ::deep .settings-combobox { width: 100px; }
+::deep .settings-combobox:focus-visible { outline: 3px solid var(--bg-3); }

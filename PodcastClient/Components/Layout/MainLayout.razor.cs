@@ -7,6 +7,11 @@ namespace PodcastClient.Components.Layout
 	{
 		private bool _initialized = false;
 
+		protected override async Task OnInitializedAsync()
+		{
+			await UserContext.InitializeAsync();			
+		}
+
 		protected override async Task OnAfterRenderAsync(bool firstRender)
 		{
 			if (firstRender && !_initialized)

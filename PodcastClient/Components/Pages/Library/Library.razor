@@ -1,30 +1,30 @@
-@page "/"
-@using PodcastClient.Data
+@page "/library"
+@attribute [Authorize]
 @inject PodcastRssFetcher PodcastRssFetcher
 @inject UserContext UserContext
 @inject PodcastsService PodcastsService
-@inject ILogger<MyPodcasts> Logger
+@inject ILogger<Library> Logger
 @inject IDbContextFactory<ApplicationDbContext> DbContextFactory
 
-<PageTitle>@Resource.MyPodcasts</PageTitle>
+<PageTitle>@Resource.Library</PageTitle>
 
 <div class="m-3 d-flex flex-column gap-2">
 	<div class="d-flex align-items-center gap-2" style="height: 50px;">
 	<!--Subscribe expander-->
-	<Expander HeaderClass="btn bg-1 hoverable canBeActive rounded-2 d-flex align-items-center gap-1"
+	<Expander HeaderClass="btn bg-1 hoverable  rounded-2 d-flex align-items-center gap-1"
 			  ContentClass="bg-1 rounded-2 p-2 top-50 translate-middle-y d-flex justify-content-around align-items-center gap-2"
 			  DropDownPosition="DropDownPosition.Right">
 		<HeaderTemplate>
-			<img src="MyPodcasts/Add.svg" width="24" height="24" />
+			<img src="Library/Add.svg" width="24" height="24" />
 			<span>@Resource.Subscribe</span>
 		</HeaderTemplate>
 		<ContentTemplate>
-			<img src="MyPodcasts/RssFeed.svg" />
+			<img src="Library/RssFeed.svg" />
 			<InputText @bind-Value="RssFeed"
 					   placeholder="https://rss-feed.com"
 					   class="fg-main bg-0 border border-0"
 					   style="outline: none" />
-			<button class="btn bg-2 hoverable canBeActive rounded-2"
+			<button class="btn bg-2 hoverable  rounded-2"
 					@onclick="OnSubmitButtonClick">
 				@Resource.Submit
 			</button>

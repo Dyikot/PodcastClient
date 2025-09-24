@@ -1,27 +1,24 @@
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.EntityFrameworkCore;
 using PodcastClient.Data;
+using System.Security.Claims;
 
 namespace PodcastClient.Services
 {
 	public class UserContext
 	{
-		private readonly IDbContextFactory<ApplicationDbContext> _dbContextFactory;		
+		private readonly IDbContextFactory<ApplicationDbContext> _dbContextFactory;
+		private readonly AuthenticationStateProvider _authenticationStateProvider;
 
-		public UserContext(IDbContextFactory<ApplicationDbContext> dbContextFactory)
+		public UserContext(IDbContextFactory<ApplicationDbContext> dbContextFactory,
+						   AuthenticationStateProvider authenticationStateProvider)
 		{
 			_dbContextFactory = dbContextFactory;
-			using var context = _dbContextFactory.CreateDbContext();
-
-			if (!context.Users.Any())
-			{
-				context.Users.Add(new User());
-				context.SaveChanges();
-			}
-
-			UserId = context.Users.First().Id;
+			_authenticationStateProvider = authenticationStateProvider;
 		}
 
-		public int UserId { get; init; }
+		public int UserId { get; private set; }
+		public bool IsAuthenticated => UserId > 0;
 
 		public async Task AddPodcastAsync(Podcast podcast)
 		{
@@ -53,6 +50,17 @@ namespace PodcastClient.Services
 			await context.UserEpisodes
 				.Where(ep => ep.UserId == UserId && ep.PodcastId == podcastId)
 				.ExecuteDeleteAsync();
+		}
+
+		public async Task InitializeAsync()
+		{
+			var state = await _authenticationStateProvider.GetAuthenticationStateAsync();
+			var claim = state.User.FindFirst(ClaimTypes.NameIdentifier);
+
+			if (claim != null)
+			{
+				UserId = int.Parse(claim.Value);
+			}
 		}
 	}
 }

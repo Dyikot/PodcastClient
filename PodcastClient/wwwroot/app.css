@@ -36,15 +36,46 @@
 .bg-2 { background-color: var(--bg-2); }
 .bg-3 { background-color: var(--bg-3); }
 
-.bg-0:focus { background-color: var(--bg-1); }
-.bg-1:focus { background-color: var(--bg-2); }
-.bg-2:focus { background-color: var(--bg-3); }
-.bg-3:focus { background-color: var(--bg-4); }
-
 .bg-0.hoverable:hover { background-color: var(--bg-1); }
 .bg-1.hoverable:hover { background-color: var(--bg-2); }
 .bg-2.hoverable:hover { background-color: var(--bg-3); }
 .bg-3.hoverable:hover { background-color: var(--bg-4); }
+
+.bg-0:focus-visible {
+    outline: none;
+    background-color: var(--bg-0);
+    box-shadow: 
+        0 2px 4px rgb(0 0 0 / 0.12),
+        0 0 2px rgb(0 0 0 / 0.15), 
+        0 0 0 4px rgb(from var(--bg-1) r g b / 0.5);
+}
+
+.bg-1:focus-visible {
+    outline: none;
+    background-color: var(--bg-1);
+    box-shadow: 
+        0 2px 4px rgb(0 0 0 / 0.12),
+        0 0 2px rgb(0 0 0 / 0.15), 
+        0 0 0 4px rgb(from var(--bg-1) r g b / 0.75);
+}
+
+.bg-2:focus-visible {
+    outline: none;
+    background-color: var(--bg-2);
+    box-shadow: 
+        0 2px 4px rgb(0 0 0 / 0.12),
+        0 0 2px rgb(0 0 0 / 0.15), 
+        0 0 0 4px rgb(from var(--bg-2) r g b / 0.75);
+}
+
+.bg-3:focus-visible {
+    outline: none;
+    background-color: var(--bg-3);
+    box-shadow: 
+        0 2px 4px rgb(0 0 0 / 0.12),
+        0 0 2px rgb(0 0 0 / 0.15), 
+        0 0 0 4px rgb(from var(--bg-3) r g b / 0.75);
+}
 
 /* Font sizes */
 
@@ -76,16 +107,7 @@ button {
 
 .btn {
     --bs-btn-active-border-color: transparent;
-    color: inherit;
-}
-
-.btn:hover {
-    color: inherit;
-}
-
-.btn:focus {   
-    box-shadow: none;
-    outline: 0;
+    --bs-btn-color: --var(--fg-main);
 }
 
 /* Text classes */

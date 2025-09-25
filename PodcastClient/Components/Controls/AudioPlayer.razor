@@ -18,24 +18,24 @@
 		   @oninput="OnCurrentTimeSliderChanged" />
 	<div class="bg-1 flex-grow-1 px-4 d-flex align-items-center gap-1" data-CanPlay="@CanPlay.ToString()">
 		<!--Rewind button-->
-		<button class="bg-1 hoverable  rounded-2"
+		<button class="btn bg-1 hoverable"
 				@onclick="OnRewindButtonClick">
 			<img src="Controls/AudioPlayer/Replay.svg" />
 		</button>
 		<!--Play/Pause button-->
-		<ToggleButton Class="bg-1 hoverable  rounded-2"
-					  CheckedClass="bg-1 hoverable  rounded-2"
+		<ToggleButton Class="btn bg-1 hoverable px-2"
+					  CheckedClass="btn bg-1 hoverable px-2"
 					  IsChecked="IsPlaying"
 					  OnClick="OnPlayButtonClick">
 			<ContentTemplate>
-				<img src="Controls/AudioPlayer/Play.svg" width="48" />
+				<img src="Controls/AudioPlayer/Play.svg" width="36" />
 			</ContentTemplate>
 			<CheckedContentTemplate>
-				<img src="Controls/AudioPlayer/Pause.svg" width="48" />
+				<img src="Controls/AudioPlayer/Pause.svg" width="36" />
 			</CheckedContentTemplate>
 		</ToggleButton>
 		<!--Forward button-->
-		<button class="bg-1 hoverable  rounded-2"
+		<button class="btn bg-1 hoverable"
 				@onclick="OnForwardButtonClick">
 			<img src="Controls/AudioPlayer/Forward.svg"  />
 		</button>
@@ -47,8 +47,8 @@
 			<span id="duration-total">@Duration.ToString(TimeFormat)</span>
 		</div>
 		<!--Mute button-->
-		<ToggleButton Class="bg-1 hoverable  rounded-2 ms-auto"
-					  CheckedClass="bg-1 hoverable  rounded-2 ms-auto"
+		<ToggleButton Class="btn bg-1 hoverable ms-auto"
+					  CheckedClass="btn bg-1 hoverable  ms-auto"
 					  IsChecked="IsMute"
 					  OnClick="OnMuteButtonClick">
 			<ContentTemplate>
@@ -73,7 +73,7 @@
 				  Items="PlaySpeedOptions"
 				  SelectionChanged="OnSpeedOptionSelect"
 				  DropDownPosition="DropDownPosition.Top"
-				  ButtonClass="bg-1 hoverable "
+				  ButtonClass="btn bg-1 hoverable"
 				  DropDownClass="playSpeed-dropDown"
 				  Context="context">
 			<ButtonContentTemplate>

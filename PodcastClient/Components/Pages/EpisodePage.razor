@@ -15,7 +15,7 @@
 	else
 	{
 		<div class="d-flex gap-3 mt-4 mainLayout">
-			<img src="@Episode!.IconSource" class="rounded-2" width="150" height="150" />
+			<img src="@Episode!.IconSource" class="rounded-2" width="175" height="175" />
 			<div class="d-flex flex-column align-items-start gap-1">
 				<h5 class="m-0">@Episode.Title</h5>
 				<span>@PodcastTitle</span>
@@ -33,13 +33,16 @@
 						<span>@Episode.Duration.ToString("hh':'mm':'ss")</span>
 					</div>
 				</div>
-				<a class="bg-0 hoverable  rounded-2 mt-auto p-1 fg-main
-						  text-decoration-none d-flex align-items-center gap-1"
-				   href="@Episode.Source" 
-				   target="_blank">
-					<img src="Episode/Link.svg" />
-					<span>@Resource.Source</span>
-				</a>
+				<div class="mt-auto d-flex gap-1 flex-wrap">
+					<a class="btn bg-0 hoverable" href="@PodcastHref">
+						<img src="Episode/Podcast.svg" />
+						<span>@Resource.PodcastPage</span>
+					</a>
+					<a class="btn bg-0 hoverable" href="@Episode.Source" target="_blank">
+						<img src="Episode/Link.svg" />
+						<span>@Resource.Source</span>
+					</a>
+				</div>
 			</div>
 		</div>
 		<div class="mainLayout order-2">

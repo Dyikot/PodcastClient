@@ -11,7 +11,7 @@
 <div class="m-3 d-flex flex-column gap-2">
 	<div class="d-flex align-items-center gap-2" style="height: 50px;">
 	<!--Subscribe expander-->
-	<Expander HeaderClass="btn bg-1 hoverable  rounded-2 d-flex align-items-center gap-1"
+	<Expander HeaderClass="btn bg-1 hoverable d-flex align-items-center gap-1"
 			  ContentClass="bg-1 rounded-2 p-2 top-50 translate-middle-y d-flex justify-content-around align-items-center gap-2"
 			  DropDownPosition="DropDownPosition.Right">
 		<HeaderTemplate>
@@ -24,7 +24,7 @@
 					   placeholder="https://rss-feed.com"
 					   class="fg-main bg-0 border border-0"
 					   style="outline: none" />
-			<button class="btn bg-2 hoverable  rounded-2"
+			<button class="btn bg-2 hoverable"
 					@onclick="OnSubmitButtonClick">
 				@Resource.Submit
 			</button>
@@ -36,6 +36,10 @@
 		@foreach (var podcast in Podcasts)
 		{
 			<PodcastView Podcast="podcast" />
+		}
+		@if(IsAddingPodcast)
+		{
+			<LoadingPodcastView />
 		}
 	</div>
 </div>

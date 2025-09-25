@@ -30,6 +30,10 @@ video:focus {
 
 ::deep .controlButton { background-color: transparent; }
 ::deep .controlButton:hover { background-color: var(--sliderColor); }
+::deep .controlButton:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px var(--sliderColor);
+}
 
 ::deep .speedDropDown {
     width: auto !important;

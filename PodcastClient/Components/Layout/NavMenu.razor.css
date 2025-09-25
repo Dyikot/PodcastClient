@@ -22,7 +22,13 @@
 ::deep .navItemBg { background-color: var(--navMenu); }
 ::deep .navItemBg:hover, 
 ::deep .navItemBg.active { background-color: var(--nav-menu-currentItem); }
-::deep .navItemBg:focus-visible { outline: 3px solid var(--bg-3); }
+::deep .navItemBg:focus-visible {
+    outline: none;
+    box-shadow: 
+        0 2px 4px rgb(0 0 0 / 0.12),
+        0 0 2px rgb(0 0 0 / 0.15), 
+        0 0 0 4px var(--nav-menu-currentItem);
+}
 
 @media (min-width: 641px) {
     .navMenu {

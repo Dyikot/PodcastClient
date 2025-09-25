@@ -144,6 +144,15 @@ namespace PodcastClient.Resources {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        internal static string EmailExist {
+            get {
+                return ResourceManager.GetString("EmailExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         internal static string EmailValidation {
             get {
                 return ResourceManager.GetString("EmailValidation", resourceCulture);
@@ -414,6 +423,15 @@ namespace PodcastClient.Resources {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        internal static string PodcastPage {
+            get {
+                return ResourceManager.GetString("PodcastPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         internal static string ReleaseDate {
             get {
                 return ResourceManager.GetString("ReleaseDate", resourceCulture);
@@ -567,18 +585,18 @@ namespace PodcastClient.Resources {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string UserNameValidation {
+        internal static string UserNameExist {
             get {
-                return ResourceManager.GetString("UserNameValidation", resourceCulture);
+                return ResourceManager.GetString("UserNameExist", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string UserValidationExist {
+        internal static string UserNameValidation {
             get {
-                return ResourceManager.GetString("UserValidationExist", resourceCulture);
+                return ResourceManager.GetString("UserNameValidation", resourceCulture);
             }
         }
     }

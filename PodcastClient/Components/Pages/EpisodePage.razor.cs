@@ -18,6 +18,7 @@ namespace PodcastClient.Components.Pages
 		public Episode? Episode { get; private set; }
 		public MarkupString Description { get; private set; }
 		public string? PodcastTitle { get; private set; }
+		public string PodcastHref => $"podcast/{PodcastId}";
 
 		protected override async Task OnInitializedAsync()
 		{

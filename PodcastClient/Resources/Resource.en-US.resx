@@ -282,13 +282,19 @@
   <data name="ConfirmPasswordValidation" xml:space="preserve">
     <value>Password doesn't match</value>
   </data>
-  <data name="UserValidationExist" xml:space="preserve">
-    <value>A user with that username already exists</value>
+  <data name="UserNameExist" xml:space="preserve">
+    <value>This username is already taken</value>
   </data>
   <data name="InvalidUsernameOrPassword" xml:space="preserve">
     <value>Incorrect username or password</value>
   </data>
   <data name="SignOut" xml:space="preserve">
     <value>Sign Out</value>
+  </data>
+  <data name="EmailExist" xml:space="preserve">
+    <value>This email is already registered</value>
+  </data>
+  <data name="PodcastPage" xml:space="preserve">
+    <value>Podcast page</value>
   </data>
 </root>

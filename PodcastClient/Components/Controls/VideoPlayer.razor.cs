@@ -55,6 +55,14 @@ namespace PodcastClient.Components.Controls
 					await OnPlayButtonClick();
 					break;
 
+				case "ArrowLeft":
+					await OnRewindButtonClick();
+					break;
+
+				case "ArrowRight":
+					await OnForwardButtonClick();
+					break;
+
 				default:
 					break;
 			}

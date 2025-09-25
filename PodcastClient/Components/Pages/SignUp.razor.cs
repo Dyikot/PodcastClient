@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using PodcastClient.Data;
 using PodcastClient.Resources;
 using System.ComponentModel.DataAnnotations;
-using System.Security.Claims;
 
 namespace PodcastClient.Components.Pages
 {
@@ -37,17 +36,24 @@ namespace PodcastClient.Components.Pages
 		{
 			using var context = DbContextFactory.CreateDbContext();
 
-			var exist = await context.Users.AnyAsync(u => u.UserName == User.UserName);
+			var user = await context.Users.FirstOrDefaultAsync(u => u.UserName == User.UserName);
 
-			if (exist)
+			if (user != null)
 			{
-				_errorMessage = Resource.UserValidationExist;
+				if(user.Email == User.Email)
+				{
+					_errorMessage = Resource.EmailExist;
+					return;
+				}
+
+				_errorMessage = Resource.UserNameExist;
 				return;
 			}
 
+
 			var passwordHasher = new PasswordHasher<IdentityUser>();
 
-			var user = new User
+			user = new User
 			{
 				Email = User.Email,
 				UserName = User.UserName,
@@ -57,7 +63,7 @@ namespace PodcastClient.Components.Pages
 			context.Users.Add(user);
 			await context.SaveChangesAsync();
 
-			NavigationManager.NavigateTo("/signin");
+			NavigationManager.NavigateTo($"/Auth/SignIn?userId={user.Id}");
 		}
 	}
 }

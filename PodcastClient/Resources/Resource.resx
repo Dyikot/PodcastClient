@@ -297,4 +297,10 @@
   <data name="PodcastPage" xml:space="preserve">
     <value />
   </data>
+  <data name="ToBeginning" xml:space="preserve">
+    <value />
+  </data>
+  <data name="NextPage" xml:space="preserve">
+    <value />
+  </data>
 </root>

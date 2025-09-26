@@ -5,10 +5,15 @@
 
 <PageTitle>@Resource.NewEpisodes</PageTitle>
 
-<div class="my-3 mx-4 d-flex flex-column align-items-stretch" 
-	 style="gap: 0.75rem">
-	@foreach (var episodeViewModel in Episodes)
-	{
-		<EpisodeView DataContext="episodeViewModel" />
-	}
+<div class="my-4 mx-4">
+	<div class="d-flex flex-column align-items-stretch" style="gap: 0.75rem">
+		@foreach (var episodeViewModel in Episodes.Skip((Page - 1) * ItemsPerPage).Take(ItemsPerPage))
+		{
+			<EpisodeView DataContext="episodeViewModel" />
+		}
+	</div>
+	<PageNavigationControl Class="mt-4" 
+						   Page="@Page" 
+						   PageAmount="@PageAmount" 
+						   ButtonsAmount="5" />
 </div>

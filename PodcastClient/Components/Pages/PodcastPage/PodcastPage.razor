@@ -93,7 +93,7 @@
 			<div class="d-flex flex-column gap-3 mb-3">
 				@if (UserHasSubscription)
 				{
-					@foreach (var userEpisode in UserEpisodes!)
+					@foreach (var userEpisode in UserEpisodes!.Skip((Page - 1) * ItemsPerPage).Take(ItemsPerPage))
 					{
 						<EpisodeView Episode="userEpisode.Episode"
 									 UserEpisode="userEpisode"
@@ -102,12 +102,13 @@
 				}
 				else
 				{
-					@foreach (var episode in Episodes!)
+					@foreach (var episode in Episodes!.Skip((Page - 1) * ItemsPerPage).Take(ItemsPerPage))
 					{
 						<EpisodeView Episode="episode" />
 					}
 				}
 			</div>
+			<PageNavigationControl Page="@Page" PageAmount="@PageAmount" ButtonsAmount="5" />
 		</div>
 	}
 </div>

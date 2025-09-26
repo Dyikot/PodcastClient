@@ -1,0 +1,28 @@
+@inject NavigationManager NavigationManager
+
+@if(PageAmount > 1)
+{    
+    <ul class="pagination @Class">
+        @if(Page > 1)
+        {
+            <li class="page-item">
+                <a class="page-link" href="@FirstPageUri">
+                    @Resource.ToBeginning
+                </a>
+            </li>
+        }
+        @foreach(var page in Enumerable.Range(Start, Count))
+        {
+            @PageNumberView(page)
+        }
+        @if(Page < PageAmount)
+        {
+            <li class="page-item">
+                <a class="page-link" href="@NextPageUri">
+                    @Resource.NextPage
+                </a>
+            </li>
+        }
+    </ul>
+}
+

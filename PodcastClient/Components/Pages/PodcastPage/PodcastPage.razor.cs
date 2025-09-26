@@ -2,14 +2,19 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
 using PodcastClient.Base;
 using PodcastClient.Data;
+using System.Collections;
 
 namespace PodcastClient.Components.Pages.PodcastPage
 {
 	public partial class PodcastPage
     {
+		private const int ItemsPerPage = 25;
 		public static readonly SortOrder[] SortOrderOptions = Enum.GetValues<SortOrder>();
 
-        private EpisodeStatus? _episodesFilter;
+		[SupplyParameterFromQuery]
+		public int Page { get; set; }
+
+		private EpisodeStatus? _episodesFilter;
         private SortOrder _sortOrder = SortOrder.Latest;
 
 		[Parameter]
@@ -22,7 +27,16 @@ namespace PodcastClient.Components.Pages.PodcastPage
         public List<UserEpisode>? UserEpisodes { get; private set; }
 		public List<UserEpisode>? UserEpisodesSource { get; private set; }
 
-        public bool UserHasSubscription => UserEpisodes != null;
+		public int PageAmount
+        {
+            get
+            {
+                IList? episodes = UserHasSubscription ? UserEpisodes : Episodes;
+				return (episodes!.Count + ItemsPerPage - 1) / ItemsPerPage;
+			}
+        }
+
+		public bool UserHasSubscription => UserEpisodes != null;
         public bool IsInProgressFilter => _episodesFilter == EpisodeStatus.InProgress;
         public bool IsPlayedFilter => _episodesFilter == EpisodeStatus.Played;
         public bool IsUnplayedFilter => _episodesFilter == EpisodeStatus.Unplayed;
@@ -56,7 +70,16 @@ namespace PodcastClient.Components.Pages.PodcastPage
                 await SetContent(Podcast, context);
                 SortItems();
             }
-        }
+
+			if (Page < 0 || Page > PageAmount)
+			{
+				throw new NotSupportedException();
+			}
+			else if (Page == 0)
+			{
+				Page = 1;
+			}
+		}
 
         private async Task SetContent(Podcast podcast, ApplicationDbContext context)
         {

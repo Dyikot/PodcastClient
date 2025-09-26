@@ -26,7 +26,7 @@
     --nav-menu-currentItem: #252525;
 }
 
-/* Theme classes */
+
 
 .fg-main { color : var(--fg-main); }
 .fg-secondary { color : var(--fg-secondary); }
@@ -77,15 +77,13 @@
         0 0 0 4px rgb(from var(--bg-3) r g b / 0.75);
 }
 
-/* Font sizes */
-
 .fontSize-1 { font-size: 16px; }
 .fontSize-2 { font-size: 18px; }
 .fontSize-3 { font-size: 20px; }
 .fontSize-4 { font-size: 22px; }
 .fontSize-5 { font-size: 24px; }
 
-/* Layout */
+
 
 .mainLayout {
     width: 100%;
@@ -98,7 +96,7 @@
     }
 }
 
-/* Button classes */
+
 
 button {
     border: none;
@@ -110,7 +108,20 @@ button {
     --bs-btn-color: --var(--fg-main);
 }
 
-/* Text classes */
+
+.pagination {
+    --bs-pagination-bg: var(--bg-1);
+    --bs-pagination-color: var(--fg-main);
+    --bs-pagination-border-color: var(--bg-0);
+
+    --bs-pagination-hover-bg: var(--bg-2);
+    --bs-pagination-hover-color: var(--fg-main);
+    --bs-pagination-hover-border-color: var(--bg-1);
+
+    --bs-pagination-focus-bg: var(--bg-2);
+    --bs-pagination-focus-color: var(--fg-main);
+}
+
 
 .overflowOn5 {
 	display: -webkit-box;
@@ -128,11 +139,11 @@ button {
 	text-overflow: ellipsis;
 }
 
+
+
 input::placeholder {
     color: var(--fg-secondary);
 }
-
-/* Player slider classes */
 
 input[type="range"].slider {
     -webkit-appearance: none;

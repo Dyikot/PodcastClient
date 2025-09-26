@@ -342,6 +342,15 @@ namespace PodcastClient.Resources {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        internal static string NextPage {
+            get {
+                return ResourceManager.GetString("NextPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         internal static string NoPlayingPodcast {
             get {
                 return ResourceManager.GetString("NoPlayingPodcast", resourceCulture);
@@ -543,6 +552,15 @@ namespace PodcastClient.Resources {
         internal static string Theme {
             get {
                 return ResourceManager.GetString("Theme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string ToBeginning {
+            get {
+                return ResourceManager.GetString("ToBeginning", resourceCulture);
             }
         }
         

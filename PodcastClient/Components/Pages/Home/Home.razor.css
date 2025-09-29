@@ -1,0 +1,18 @@
+.seacrhBar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: .5rem 1rem;
+    text-decoration: none;
+    border: 2px solid var(--bg-4);
+}
+
+.seacrhBar:hover {
+    border-color: darkorange;
+}
+
+@media (min-width: 641px) {
+    .card {
+        width: 500px;
+    }
+}

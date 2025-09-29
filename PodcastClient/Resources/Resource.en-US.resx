@@ -303,4 +303,13 @@
   <data name="NextPage" xml:space="preserve">
     <value>Next</value>
   </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="NoNewEpisodes" xml:space="preserve">
+    <value>No new episodes</value>
+  </data>
+  <data name="MoreEpisodes" xml:space="preserve">
+    <value>More episodes</value>
+  </data>
 </root>

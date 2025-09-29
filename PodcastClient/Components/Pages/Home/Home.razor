@@ -1,0 +1,46 @@
+@page "/"
+@inject UserContext UserContext
+@inject IDbContextFactory<ApplicationDbContext> DbContextFactory
+
+<PageTitle>@Resource.Home</PageTitle>
+
+<div class="p-3 d-flex flex-column gap-5">
+	<!--Search-->
+	<a href="/search" class="bg-0 seacrhBar rounded-5 fg-secondary fontSize-3">
+		<img src="Home/Search.svg" />
+		<span>@Resource.Search</span>
+	</a>
+	<!--New episodes-->
+	<AuthorizeView>
+		<div class="card">
+			<div class="card-header fontSize-2">
+				@Resource.NewEpisodes
+			</div>
+			<div class="card-body">
+				@if(NewEpisodes?.Count > 0)
+				{
+					<div class="d-flex flex-column gap-2">
+						@foreach(var episode in NewEpisodes.Take(3))
+						{
+							<EpisodeView DataContext="episode" />
+						}
+						@if(NewEpisodes.Count > 3)
+						{
+							<NavLink href="new-episodes" class="btn bg-1 hoverable">
+								@Resource.MoreEpisodes
+							</NavLink>							
+						}
+					</div>
+				}
+				else
+				{
+					<div class="card-text fg-secondary text-center">
+						@Resource.NoNewEpisodes
+					</div>
+				}
+			</div>
+		</div>
+	</AuthorizeView>
+	<!--Popular-->
+	<!--New-->
+</div>

@@ -19,6 +19,12 @@ namespace PodcastClient.Data
 		public EpisodeType Type { get; set; } = EpisodeType.Audio;
 	}
 
+	public readonly struct EpisodeViewModel
+	{
+		public Episode Episode { get; init; }
+		public string PodcastTitle { get; init; }
+	}
+
 	public class EpisodeSortOrder : IComparer<Episode>
 	{
 		private readonly SortOrder _sortOrder;

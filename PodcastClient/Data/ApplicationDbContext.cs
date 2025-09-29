@@ -31,6 +31,7 @@ namespace PodcastClient.Data
 		private void ConfigurePodcast(EntityTypeBuilder<Podcast> builder)
 		{
 			builder.HasIndex(p => p.Rss).IsUnique();
+			builder.HasIndex(p => p.Title);
 		}
 
 		private void ConfigureEpisode(EntityTypeBuilder<Episode> builder)

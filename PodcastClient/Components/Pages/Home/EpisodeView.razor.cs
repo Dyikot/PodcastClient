@@ -1,0 +1,15 @@
+using Microsoft.AspNetCore.Components;
+using PodcastClient.Data;
+
+namespace PodcastClient.Components.Pages.Home
+{
+	public partial class EpisodeView
+	{
+		[Parameter, EditorRequired]
+		public EpisodeViewModel DataContext { get; set; }
+		public Episode Episode => DataContext.Episode;
+		public string PodcastTitle => DataContext.PodcastTitle;
+
+		public string Href => $"podcast/{Episode.PodcastId}/episode/{Episode.EpisodeNumber}";
+	}
+}

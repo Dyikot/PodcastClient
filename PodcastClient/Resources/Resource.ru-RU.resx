@@ -303,4 +303,13 @@
   <data name="NextPage" xml:space="preserve">
     <value>Следующая</value>
   </data>
+  <data name="Search" xml:space="preserve">
+    <value>Поиск</value>
+  </data>
+  <data name="NoNewEpisodes" xml:space="preserve">
+    <value>Нет новых эпизодов</value>
+  </data>
+  <data name="MoreEpisodes" xml:space="preserve">
+    <value>Больше эпизодов</value>
+  </data>
 </root>

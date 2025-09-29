@@ -1,20 +1,16 @@
 @inject IStringLocalizer<Resource> Localizer
-@inject UserContext UserContext
 
-<NavLink class="btn bg-1 hoverable d-flex align-items-center gap-3 px-3" 
-		 style="height: 90px"
-		 href="@Href" role="button">
+<NavLink class="btn bg-1 hoverable d-flex align-items-center gap-3 ps-0" 
+		 style="height: 80px"
+		 href="@Href" target="_blank" role="button">
 	<!--Icon-->
-	<img src="@Episode.IconSource" class="rounded-2" width="64" height="64" />
-	<!--Titles-->
-	<div class="d-flex flex-column align-items-start gap-2"
-		 style="max-width: 65%;">
-		<div class="fontSize-1 text-truncate mw-100 fw-bold">@Episode.Title</div>
-		<div class="">@PodcastTitle</div>
+	<img src="@Episode.IconSource" class="rounded-start-2" width="80" height="80" />
+	<!--Description-->
+	<div class="d-flex flex-column align-items-start" style="width: 70%">
+		<span class="fontSize-r-1">@Episode.ReleaseDate.ToLocalizedString(Localizer)</span>
+		<span class="fontSize-1 mw-100 text-truncate fw-bold">@Episode.Title</span>
+		<span>@PodcastTitle</span>
 	</div>
-	<!--Duration and date-->
-	<div class="d-flex flex-column gap-2 align-items-end flex-grow-1">
-		<span>@Episode.Duration.ToLocalizedString(Localizer)</span>
-		<span class="text-end">@Episode.ReleaseDate.ToLocalizedString(Localizer)</span>
-	</div>
+	<!--Duration-->
+	<div class="flex-grow-1">@Episode.Duration.ToLocalizedString(Localizer)</div>
 </NavLink>

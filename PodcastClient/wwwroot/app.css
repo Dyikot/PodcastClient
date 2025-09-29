@@ -26,8 +26,6 @@
     --nav-menu-currentItem: #252525;
 }
 
-
-
 .fg-main { color : var(--fg-main); }
 .fg-secondary { color : var(--fg-secondary); }
 
@@ -83,7 +81,9 @@
 .fontSize-4 { font-size: 22px; }
 .fontSize-5 { font-size: 24px; }
 
-
+.fontSize-r-1 { font-size: 12px; }
+.fontSize-r-2 { font-size: 10px; }
+.fontSize-r-3 { font-size: 8px; }
 
 .mainLayout {
     width: 100%;
@@ -96,7 +96,14 @@
     }
 }
 
-
+.card {
+    --bs-card-bg: var(--bg-0);
+    --bs-card-color: var(--fg-main);
+    --bs-card-cap-bg: var(--bg-1);
+    --bs-card-cap-color: var(--fg-main);
+    --bs-card-title-color: var(--fg-main);
+    --bs-card-border-color: var(--bg-4);
+}
 
 button {
     border: none;
@@ -107,7 +114,6 @@ button {
     --bs-btn-active-border-color: transparent;
     --bs-btn-color: --var(--fg-main);
 }
-
 
 .pagination {
     --bs-pagination-bg: var(--bg-1);
@@ -121,7 +127,6 @@ button {
     --bs-pagination-focus-bg: var(--bg-2);
     --bs-pagination-focus-color: var(--fg-main);
 }
-
 
 .overflowOn5 {
 	display: -webkit-box;
@@ -138,8 +143,6 @@ button {
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
-
-
 
 input::placeholder {
     color: var(--fg-secondary);

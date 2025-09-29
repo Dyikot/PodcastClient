@@ -4,12 +4,6 @@ using PodcastClient.Data;
 
 namespace PodcastClient.Components.Pages.NewEpisodes
 {
-    public readonly struct EpisodeViewModel
-    {
-        public Episode Episode { get; init; }
-        public string PodcastTitle { get; init; }
-    }
-
     public partial class NewEpisodes
     {
         private const int ItemsPerPage = 25;
@@ -28,13 +22,12 @@ namespace PodcastClient.Components.Pages.NewEpisodes
                 .AsNoTracking()
                 .Where(ep => ep.UserId == UserContext.UserId &&
                              ep.Status != EpisodeStatus.Played)
-                .Include(ep => ep.Episode)
+                .OrderByDescending(ep => ep.Episode.ReleaseDate)
                 .Select(ep => new EpisodeViewModel 
                     {
                         Episode = ep.Episode,
                         PodcastTitle = ep.Episode.Podcast.Title 
                     })
-                .OrderByDescending(vm => vm.Episode.ReleaseDate)
                 .ToListAsync();
 
             if(Page < 0 || Page > PageAmount)

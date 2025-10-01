@@ -28,8 +28,6 @@ namespace PodcastClient.Components.Layout
 				_initialized = true;
 				StateHasChanged();
 			}
-
-			await base.OnAfterRenderAsync(firstRender);
 		}
 	}
 }

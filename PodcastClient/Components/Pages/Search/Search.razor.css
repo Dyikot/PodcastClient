@@ -1,0 +1,5 @@
+.seacrhBar {
+    background: url("Home/Search.svg") 1rem no-repeat;
+    padding: .5rem calc(2rem + 24px);
+    border: 2px solid var(--bg-4);
+}

@@ -37,7 +37,7 @@ namespace PodcastClient.Services
 				.ToListAsync();
 		}
 
-		public async Task AddPodcastAsync(Podcast podcast)
+		public async Task AddAsync(Podcast podcast)
 		{
 			using var context = _dbContextFactory.CreateDbContext();
 
@@ -45,7 +45,7 @@ namespace PodcastClient.Services
 			await context.SaveChangesAsync();
 		}
 
-		public async Task RemovePodcastAsync(int podcastId)
+		public async Task RemoveAsync(int podcastId)
 		{
 			using var context = _dbContextFactory.CreateDbContext();
 			await context.Podcasts.Where(p => p.Id == podcastId).ExecuteDeleteAsync();

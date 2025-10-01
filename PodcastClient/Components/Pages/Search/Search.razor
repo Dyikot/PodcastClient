@@ -1,0 +1,38 @@
+@page "/search"
+@inject IDbContextFactory<ApplicationDbContext> DbContextFactory
+
+<div class="p-3 d-flex flex-column gap-5">
+	<input type="text"
+		   class="bg-1 fg-main seacrhBar rounded-5 fontSize-3"
+		   placeholder="@Resource.Search"
+		   @ref="_inputText"
+		   @oninput="OnValueChanged" />	
+	@if(Results != null)
+	{
+		if(Results.Count > 0)
+		{
+			<div class="d-flex flex-wrap gap-3">
+				@foreach(var podcast in Results)
+				{
+					<PodcastView Podcast="podcast" />
+				}
+			</div>
+		}
+		else
+		{
+			<span class="fontSize-4">@Resource.NoResults</span>
+		}
+	}	
+	@if (_searching)
+	{
+		<div class="spinner-border m-auto" role="status">
+			<span class="visually-hidden">Searching...</span>
+		</div>
+	}
+	else if(HasMoreResults)
+	{
+		<button class="btn bg-1 hoverable" @onclick="LoadMoreAsync">
+			@Resource.ShowMore
+		</button>
+	}
+</div>

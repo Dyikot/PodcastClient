@@ -6,7 +6,9 @@ namespace PodcastClient.Services
 {
 	public class PodcastRssFetcher
 	{
-		private static readonly string[] _dateFormats = {
+		private static readonly CultureInfo _culture = CultureInfo.InvariantCulture;
+		private static readonly string[] _dateFormats =
+		[
 			"ddd, dd MMM yyyy HH:mm:ss 'GMT'",
 			"ddd, dd MMM yyyy HH:mm:ss GMT",
 			"ddd, dd MMM yyyy HH:mm:ss 'UTC'",
@@ -19,7 +21,7 @@ namespace PodcastClient.Services
 			"ddd, dd MMM yyyy HH:mm:ss EDT",
 			"ddd, dd MMM yyyy HH:mm:ss 'CST'",
 			"ddd, dd MMM yyyy HH:mm:ss CST",
-		};
+		];
 
 		private readonly IHttpClientFactory _httpClientFactory;
 
@@ -87,7 +89,13 @@ namespace PodcastClient.Services
 
 					case "item":
 					{
-						episodes.Add(ParseEpisode(element, iconSource));
+						try
+						{
+							var episode = ParseEpisode(element, iconSource);
+							episodes.Add(episode);
+						}
+						catch { }
+
 						break;
 					}
 				}
@@ -161,16 +169,23 @@ namespace PodcastClient.Services
 				Description = description,
 				ReleaseDate = ParseDate(releaseDate),
 				Duration = ParseDuration(duration),
-				Source = new Uri(source),
-				ContentSource = new Uri(contentSource),
-				IconSource = iconSource == "" ? podcastIconSource : new Uri(iconSource),
-				Type = episodeType.Split('/').First() switch
-				{
-					"audio" => EpisodeType.Audio,
-					"video" => EpisodeType.Video,
-					_ => throw new NotSupportedException()
-				}
+				Source = ParseUri(source),
+				ContentSource = ParseUri(contentSource),
+				IconSource = iconSource == "" ? podcastIconSource : ParseUri(iconSource),
+				Type = ParseType(episodeType.Split('/').First())
 			};
+		}
+
+		private static Uri ParseUri(string uri)
+		{
+			try
+			{
+				return new Uri(uri);
+			}
+			catch
+			{
+				throw new NotSupportedException($"Unable to parse episode uri: {uri}");
+			}
 		}
 
 		private static TimeSpan ParseDuration(string duration)
@@ -185,25 +200,38 @@ namespace PodcastClient.Services
 				return timeSpan;
 			}
 
+			if(TimeSpan.TryParseExact(duration, "mm':'ss", _culture, out timeSpan))
+			{
+				return timeSpan;
+			}
+
 			throw new NotSupportedException($"Unable to parse episode duration: {duration}");
 		}
 
 		private static DateTime ParseDate(string releaseDate)
 		{
-			if (DateTime.TryParse(releaseDate, CultureInfo.InvariantCulture,
-								  DateTimeStyles.None, out DateTime date))
+			if (DateTime.TryParse(releaseDate, _culture, DateTimeStyles.None, out DateTime date))
 			{
 				return date.ToLocalTime();
 			}
 
-			if (DateTime.TryParseExact(releaseDate, _dateFormats,
-									   CultureInfo.InvariantCulture,
+			if (DateTime.TryParseExact(releaseDate, _dateFormats, _culture,
 									   DateTimeStyles.None, out date))
 			{
 				return date.ToLocalTime();
 			}
 
 			throw new NotSupportedException($"Unable to parse date: {releaseDate}");
+		}
+
+		private static EpisodeType ParseType(string type)
+		{
+			return type switch
+			{
+				"audio" => EpisodeType.Audio,
+				"video" => EpisodeType.Video,
+				_ => throw new NotSupportedException($"Unable to parse episode type: {type}")
+			};
 		}
 	}
 }

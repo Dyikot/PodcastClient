@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using PodcastClient.Components;
 using PodcastClient.Data;
+using PodcastClient.Extensions;
 using PodcastClient.Services;
+using System.Threading.Tasks;
 
 internal class Program
 {
@@ -46,6 +48,7 @@ internal class Program
 		});
 		app.MapControllers();
 		app.MapRazorComponents<App>().AddInteractiveServerRenderMode();
+		app.AddDefaultPodcasts();
 
 		app.Run();
 	}

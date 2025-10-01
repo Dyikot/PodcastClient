@@ -1,11 +1,8 @@
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using PodcastClient.Data;
 using PodcastClient.Resources;
 using System.ComponentModel.DataAnnotations;
-using System.Security.Claims;
 
 namespace PodcastClient.Components.Pages
 {

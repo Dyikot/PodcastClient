@@ -63,7 +63,9 @@ namespace PodcastClient.Components.Pages
 			context.Users.Add(user);
 			await context.SaveChangesAsync();
 
-			NavigationManager.NavigateTo($"/Auth/SignIn?userId={user.Id}");
+			NavigationManager.NavigateTo(
+				uri: $"/Auth/SignIn?userId={user.Id}", 
+				forceLoad: true);
 		}
 	}
 }

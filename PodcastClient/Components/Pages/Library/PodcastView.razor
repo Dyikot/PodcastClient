@@ -3,26 +3,23 @@
 @inject UserContext UserContext
 
 <NavLink class="btn bg-1 hoverable rounded-2 d-flex justify-content-center align-items-center"
-		 style="width: 200px; height: 240px;" 
+		 style="width: 220px; height: 240px;" 
 		 href="@Href" role="button">
 	<div class="position-relative d-flex flex-column text-start"
-		 style="width: 130px; height: 90%;">
+		 style="width: 150px; height: 90%;">
 		<!--New articles view-->
 		@if (NewEpisodes > 0)
 		{
-			<div id="new-episodes"
-				 class="position-absolute top-0 start-100 translate-middle text-black
-						text-center rounded-circle d-flex align-items-center justify-content-center"
+			<div class="position-absolute top-0 start-100 translate-middle text-black
+						rounded-circle d-flex align-items-center justify-content-center"
 				  style="width: 24px; height: 24px; background-color: orange">
 				@int.Min(NewEpisodes, 99)
 			</div>
 		}
 		<!--Icon-->
-		<img src="@Podcast.IconSource" 
-			 class="rounded-2 mb-1"
-			 style="height: 130px" />
+		<img src="@Podcast.IconSource" class="rounded-2 mb-1" style="height: 150px" />
 		<!--Title and author-->
-		<h5 id="title">@Podcast.Title</h5>
-		<div class="text-grey text-truncate mw-100">@Podcast.Author</div>
+		<span class="fontSize-1 text-truncate">@Podcast.Title</span>
+		<span class="fontSize-r-1 fg-secondary overflowOn2">@Podcast.Author</span>
 	</div>
 </NavLink>

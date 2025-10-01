@@ -50,7 +50,7 @@ namespace PodcastClient.Components.Pages.Library
 					podcast = await PodcastRssFetcher.GetPodcastAsync(rss);
 					if (podcast != null)
 					{
-						await PodcastsService.AddPodcastAsync(podcast);
+						await PodcastsService.AddAsync(podcast);
 					}
 				}
 

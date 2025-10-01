@@ -312,4 +312,10 @@
   <data name="MoreEpisodes" xml:space="preserve">
     <value />
   </data>
+  <data name="NoResults" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ShowMore" xml:space="preserve">
+    <value />
+  </data>
 </root>

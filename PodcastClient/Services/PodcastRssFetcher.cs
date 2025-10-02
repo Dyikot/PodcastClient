@@ -46,6 +46,7 @@ namespace PodcastClient.Services
 
 			var channel = XDocument.Parse(rssPage).Root!.Element("channel");
 			List<Episode> episodes = [];
+			HashSet<string> categories = [];
 			Uri iconSource = Podcast.DefaultIconSource;
 			string title = "",
 				   author = "",
@@ -87,6 +88,17 @@ namespace PodcastClient.Services
 						break;
 					}
 
+					case "category":
+					{
+						var category = element.Attribute("text")?.Value;
+						if(category != null)
+						{
+							categories.Add(category);
+						}
+
+						break;
+					}
+
 					case "item":
 					{
 						try
@@ -113,6 +125,7 @@ namespace PodcastClient.Services
 				Rss = rss,
 				Author = author,
 				IconSource = iconSource,
+				Categories = categories.Select(c => new Category { Name = c }).ToList(),
 				Episodes = episodes
 			};
 		}

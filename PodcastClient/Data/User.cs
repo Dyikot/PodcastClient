@@ -8,7 +8,7 @@ namespace PodcastClient.Data
 		public string UserName { get; set; } = string.Empty;
 		public string HashPassword { get; set; } = string.Empty;
 
-		public List<Podcast> Podcasts { get; set; } = [];
-		public List<UserEpisode> Episodes { get; set; } = [];
+		public List<Podcast> Podcasts { get; set; }
+		public List<UserEpisode> Episodes { get; set; }
 	}
 }

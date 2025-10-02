@@ -36,6 +36,7 @@ namespace PodcastClient.Services
 
 			user.Podcasts.Add(podcast);
 			context.UserEpisodes.AddRange(userEpisodes);
+			podcast.Subscribers++;
 
 			await context.SaveChangesAsync();
 		}
@@ -50,6 +51,10 @@ namespace PodcastClient.Services
 			await context.UserEpisodes
 				.Where(ep => ep.UserId == UserId && ep.PodcastId == podcastId)
 				.ExecuteDeleteAsync();
+
+			await context.Podcasts
+				.Where(p => p.Id == podcastId)
+				.ExecuteUpdateAsync(s => s.SetProperty(p => p.Subscribers, p => p.Subscribers - 1));
 		}
 
 		public async Task InitializeAsync()

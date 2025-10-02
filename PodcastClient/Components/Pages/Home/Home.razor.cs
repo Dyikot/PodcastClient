@@ -1,5 +1,5 @@
+using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
-using PodcastClient.Components.Pages.NewEpisodes;
 using PodcastClient.Data;
 
 namespace PodcastClient.Components.Pages.Home
@@ -26,6 +26,21 @@ namespace PodcastClient.Components.Pages.Home
 					.Take(4)
 					.ToListAsync();
 			}
+		}
+
+		private RenderFragment CategoryView(string name, string href, string src)
+		{
+			return builder =>
+			{
+				builder.OpenElement(0, "a");
+				builder.AddAttribute(1, "href", href);
+				builder.AddAttribute(2, "class", "bg-1 hoverable rounded-2 categoryButton");
+				builder.OpenElement(3, "img");
+				builder.AddAttribute(4, "src", src);
+				builder.CloseElement();
+				builder.AddContent(5, name);
+				builder.CloseElement();
+			};
 		}
     }
 }

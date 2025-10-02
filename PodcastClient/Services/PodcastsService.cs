@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using PodcastClient.Base;
 using PodcastClient.Data;
 using System.Linq.Expressions;
 
@@ -41,6 +42,7 @@ namespace PodcastClient.Services
 		{
 			using var context = _dbContextFactory.CreateDbContext();
 
+			await podcast.AttachCategoriesAsync(context);
 			await context.AddAsync(podcast);
 			await context.SaveChangesAsync();
 		}

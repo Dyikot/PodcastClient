@@ -240,9 +240,6 @@
   <data name="Subscribe" xml:space="preserve">
     <value>Подписаться</value>
   </data>
-  <data name="Theme" xml:space="preserve">
-    <value>Тема</value>
-  </data>
   <data name="UnMarkPlayedAll" xml:space="preserve">
     <value>Снять отметку со всех</value>
   </data>
@@ -317,5 +314,68 @@
   </data>
   <data name="ShowMore" xml:space="preserve">
     <value>Больше</value>
+  </data>
+  <data name="Arts" xml:space="preserve">
+    <value>Искусство</value>
+  </data>
+  <data name="Business" xml:space="preserve">
+    <value>Бизнес</value>
+  </data>
+  <data name="Comedy" xml:space="preserve">
+    <value>Комедия</value>
+  </data>
+  <data name="Education" xml:space="preserve">
+    <value>Образование</value>
+  </data>
+  <data name="Fiction" xml:space="preserve">
+    <value>Художественная литература</value>
+  </data>
+  <data name="Government" xml:space="preserve">
+    <value>Правительство</value>
+  </data>
+  <data name="History" xml:space="preserve">
+    <value>История</value>
+  </data>
+  <data name="HealthAndFitness" xml:space="preserve">
+    <value>Здоровье и фитнес</value>
+  </data>
+  <data name="KidsAndFamily" xml:space="preserve">
+    <value>Для детей и семьи</value>
+  </data>
+  <data name="Leisure" xml:space="preserve">
+    <value>Досуг</value>
+  </data>
+  <data name="Music" xml:space="preserve">
+    <value>Музыка</value>
+  </data>
+  <data name="News" xml:space="preserve">
+    <value>Новости</value>
+  </data>
+  <data name="ReligionAndSpirituality" xml:space="preserve">
+    <value>Религия и духовность</value>
+  </data>
+  <data name="Science" xml:space="preserve">
+    <value>Наука</value>
+  </data>
+  <data name="SocietyAndCulture" xml:space="preserve">
+    <value>Общество и культура</value>
+  </data>
+  <data name="Sports" xml:space="preserve">
+    <value>Спорт</value>
+  </data>
+  <data name="Technology" xml:space="preserve">
+    <value>Технологии</value>
+  </data>
+  <data name="TrueCrime" xml:space="preserve">
+    <value>Расследования</value>
+  </data>
+  <data name="TvAndFilm" xml:space="preserve">
+    <value>ТВ и фильмы</value>
+  </data>
+  <data name="Theme" xml:space="preserve">
+    <value>Тема</value>
+  </data>
+  <data name="ExploreByCategory" xml:space="preserve">
+    <value>Исследуй по категориям</value>
   </data>
 </root>

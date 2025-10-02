@@ -48,7 +48,7 @@ internal class Program
 		});
 		app.MapControllers();
 		app.MapRazorComponents<App>().AddInteractiveServerRenderMode();
-		app.AddDefaultPodcasts();
+		app.SeedDatabase();
 
 		app.Run();
 	}

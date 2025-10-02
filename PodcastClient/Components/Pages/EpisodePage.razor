@@ -1,5 +1,4 @@
 @page "/podcast/{podcastId:int}/episode/{episodeNumber:int}"
-@using PodcastClient.Data
 @inject UserContext UserContext
 @inject MediaService MediaService
 @inject IStringLocalizer<Resources.Resource> Localizer
@@ -30,17 +29,19 @@
 						<img src="Episode/Clock.svg"
 							 width="16"
 							 title="@Resource.Duration"/>
-						<span>@Episode.Duration.ToString("hh':'mm':'ss")</span>
+						<span>@Episode.Duration.ToLocalizedString(Localizer)</span>
 					</div>
 				</div>
-				<div class="mt-auto d-flex gap-1 flex-wrap">
-					<a class="btn bg-0 hoverable" href="@PodcastHref">
+				<div class="mt-auto d-flex gap-1">
+					<a class="btn bg-0 hoverable"
+					   href="@PodcastHref"
+					   title="@Resource.PodcastPage">
 						<img src="Episode/Podcast.svg" />
-						<span>@Resource.PodcastPage</span>
 					</a>
-					<a class="btn bg-0 hoverable" href="@Episode.Source" target="_blank">
+					<a class="btn bg-0 hoverable"
+					   href="@Episode.Source" target="_blank"
+					   title="@Resource.Source">
 						<img src="Episode/Link.svg" />
-						<span>@Resource.Source</span>
 					</a>
 				</div>
 			</div>

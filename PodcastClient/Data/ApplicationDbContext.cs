@@ -9,6 +9,7 @@ namespace PodcastClient.Data
 		public DbSet<Podcast> Podcasts { get; set; }
 		public DbSet<Episode> Episodes { get; set; }
 		public DbSet<UserEpisode> UserEpisodes { get; set; }
+		public DbSet<Category> Categories { get; set; }
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
@@ -21,6 +22,7 @@ namespace PodcastClient.Data
 			modelBuilder.Entity<Podcast>(ConfigurePodcast);
 			modelBuilder.Entity<Episode>(ConfigureEpisode);
 			modelBuilder.Entity<UserEpisode>(ConfigureUserEpisode);
+			modelBuilder.Entity<Category>(ConfigureCategory);
 		}
 
 		private void ConfigureUser(EntityTypeBuilder<User> builder)
@@ -32,6 +34,9 @@ namespace PodcastClient.Data
 		{
 			builder.HasIndex(p => p.Rss).IsUnique();
 			builder.HasIndex(p => p.Title);
+			builder.Property(p => p.Inserted)
+				.HasDefaultValueSql("date('now')")
+				.ValueGeneratedOnAdd();
 		}
 
 		private void ConfigureEpisode(EntityTypeBuilder<Episode> builder)
@@ -46,6 +51,11 @@ namespace PodcastClient.Data
 				   .WithMany()
 				   .HasForeignKey(ep => new { ep.EpisodeNumber, ep.PodcastId })
 				   .OnDelete(DeleteBehavior.Cascade);
+		}
+
+		private void ConfigureCategory(EntityTypeBuilder<Category> builder)
+		{
+			builder.HasKey(c => c.Name);
 		}
 	}
 }

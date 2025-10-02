@@ -240,9 +240,6 @@
   <data name="Subscribe" xml:space="preserve">
     <value>Subscribe</value>
   </data>
-  <data name="Theme" xml:space="preserve">
-    <value>Theme</value>
-  </data>
   <data name="UnMarkPlayedAll" xml:space="preserve">
     <value>Unmark all</value>
   </data>
@@ -317,5 +314,68 @@
   </data>
   <data name="ShowMore" xml:space="preserve">
     <value>More</value>
+  </data>
+  <data name="Arts" xml:space="preserve">
+    <value>Arts</value>
+  </data>
+  <data name="Business" xml:space="preserve">
+    <value>Business</value>
+  </data>
+  <data name="Comedy" xml:space="preserve">
+    <value>Comedy</value>
+  </data>
+  <data name="Education" xml:space="preserve">
+    <value>Education</value>
+  </data>
+  <data name="Fiction" xml:space="preserve">
+    <value>Fiction</value>
+  </data>
+  <data name="Government" xml:space="preserve">
+    <value>Government</value>
+  </data>
+  <data name="History" xml:space="preserve">
+    <value>History</value>
+  </data>
+  <data name="HealthAndFitness" xml:space="preserve">
+    <value>Health &amp; Fitness</value>
+  </data>
+  <data name="KidsAndFamily" xml:space="preserve">
+    <value>Kids &amp; Family</value>
+  </data>
+  <data name="Leisure" xml:space="preserve">
+    <value>Leisure</value>
+  </data>
+  <data name="Music" xml:space="preserve">
+    <value>Music</value>
+  </data>
+  <data name="News" xml:space="preserve">
+    <value>News</value>
+  </data>
+  <data name="ReligionAndSpirituality" xml:space="preserve">
+    <value>Religion &amp; Spirituality</value>
+  </data>
+  <data name="Science" xml:space="preserve">
+    <value>Science</value>
+  </data>
+  <data name="SocietyAndCulture" xml:space="preserve">
+    <value>Society &amp; Culture</value>
+  </data>
+  <data name="Sports" xml:space="preserve">
+    <value>Sports</value>
+  </data>
+  <data name="Technology" xml:space="preserve">
+    <value>Technology</value>
+  </data>
+  <data name="TrueCrime" xml:space="preserve">
+    <value>True Crime</value>
+  </data>
+  <data name="TvAndFilm" xml:space="preserve">
+    <value>TV &amp; Film</value>
+  </data>
+  <data name="Theme" xml:space="preserve">
+    <value>Theme</value>
+  </data>
+  <data name="ExploreByCategory" xml:space="preserve">
+    <value>Explore by category</value>
   </data>
 </root>

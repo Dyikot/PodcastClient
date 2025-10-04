@@ -1,22 +1,10 @@
 @page "/"
+@inject IJSRuntime JS
 @inject UserContext UserContext
 @inject IDbContextFactory<ApplicationDbContext> DbContextFactory
 @using PodcastClient.Components.Pages.Search
 
 <PageTitle>@Resource.Home</PageTitle>
-
-<style>
-	.categoryButton {
-		width: 250px;
-		padding: .5rem;
-		display: flex;
-		align-items: center;
-		flex-wrap: wrap;
-		gap: .75rem;
-		text-decoration: none;
-		color: var(--fg-main);
-	}
-</style>
 
 <div class="p-3 d-flex flex-column gap-5">
 	<!--Search-->
@@ -56,7 +44,29 @@
 		</div>
 	</AuthorizeView>
 	<!--Popular-->
+	<div class="d-flex flex-column gap-2">
+		<span class="fontSize-4 fw-semibold">@Resource.PopularPodcasts</span>
+		<Carousel Class="podcastsContainer" @ref="_popularPodcasts">
+			<ContentTemplate>
+				@foreach (var podcast in PopularPodcasts)
+				{
+					<PodcastView Podcast="podcast" />
+				}
+			</ContentTemplate>
+		</Carousel>
+	</div>
 	<!--New-->
+	<div class="d-flex flex-column gap-2">
+		<span class="fontSize-4 fw-semibold">@Resource.NewPodcasts</span>
+		<Carousel Class="podcastsContainer" @ref="_newPodcasts">
+			<ContentTemplate>
+				@foreach (var podcast in NewPodcasts)
+				{
+					<PodcastView Podcast="podcast" />
+				}
+			</ContentTemplate>
+		</Carousel>
+	</div>
 	<!--Categories-->
 	<div class="d-flex flex-column gap-2">
 		<span class="fontSize-4 fw-semibold">@Resource.ExploreByCategory</span>

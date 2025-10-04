@@ -1,11 +1,19 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.JSInterop;
+using PodcastClient.Components.Controls;
 using PodcastClient.Data;
 
 namespace PodcastClient.Components.Pages.Home
 {
 	public partial class Home
     {
+		private readonly DateOnly _lastMonth = DateOnly.FromDateTime(DateTime.Today.AddMonths(-1));
+		private Carousel _popularPodcasts = default!;
+		private Carousel _newPodcasts = default!;
+
+		public List<Podcast> PopularPodcasts { get; set; } = default!;
+		public List<Podcast> NewPodcasts { get; set; } = default!;
 		public List<EpisodeViewModel>? NewEpisodes { get; set; }
 
 		protected override async Task OnInitializedAsync()
@@ -25,6 +33,29 @@ namespace PodcastClient.Components.Pages.Home
 					})
 					.Take(4)
 					.ToListAsync();
+
+				PopularPodcasts = await content.Podcasts
+					.AsNoTracking()
+					.OrderByDescending(p => p.Subscribers)
+					.Take(20)
+					.ToListAsync();
+
+				NewPodcasts = await content.Podcasts
+					.AsNoTracking()
+					.Where(p => p.Inserted > _lastMonth)
+					.OrderByDescending(p => p.Subscribers)
+					.Take(20)
+					.ToListAsync();
+			}
+		}
+
+		protected override async Task OnAfterRenderAsync(bool firstRender)
+		{
+			if(firstRender)
+			{
+				await JS.InvokeVoidAsync("InitializeHomePage", 
+										 _popularPodcasts.Element, 
+										 _newPodcasts.Element);
 			}
 		}
 
@@ -42,5 +73,5 @@ namespace PodcastClient.Components.Pages.Home
 				builder.CloseElement();
 			};
 		}
-    }
+	}
 }

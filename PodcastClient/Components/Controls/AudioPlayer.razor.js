@@ -1,31 +1,31 @@
 let audio = null;
 
-window.InitializeAudio = (control) => {
+function InitializeAudio(control) {
     audio = control;
-};
+}
 
-window.Play = () => {
+function Play() {
     audio.play();
-};
+}
 
-window.Pause = () => {
+function Pause() {
     audio.pause();
-};
+}
 
-window.GetCurrentTime = () => {
+function GetCurrentTime() {
     return audio.currentTime;
-};
+}
 
-window.SetCurrentTime = (value) => {
+function SetCurrentTime(value) {
     audio.currentTime = value;
-};
+}
 
-window.SetVolume = (value) => {
+function SetVolume(value) {
     audio.volume = value;
     localStorage.setItem("audio-volume", value);
-};
+}
 
-window.SetPlaySpeed = (value) => {
+function SetPlaySpeed(value) {
     audio.playbackRate = value;
     localStorage.setItem("audio-speed", value);
-};
+}

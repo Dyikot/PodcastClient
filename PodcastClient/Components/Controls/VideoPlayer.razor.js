@@ -1,7 +1,7 @@
 let video = null;
 let videoPlayer = null;
 
-window.InitializeVideo = (control) => {
+function InitializeVideo(control) {
     video = control;
     videoPlayer = document.getElementById("video-player");
 
@@ -16,39 +16,39 @@ window.InitializeVideo = (control) => {
             video.focus();
         }
     });
-};
+}
 
-window.PlayVideo = () => {
+function PlayVideo() {
     video.play();
-};
+}
 
-window.PauseVideo = () => {
+function PauseVideo() {
     video.pause();
-};
+}
 
-window.GetVideoCurrentTime = () => {
+function GetVideoCurrentTime() {
     return video.currentTime;
-};
+}
 
-window.SetVideoCurrentTime = (value) => {
+function SetVideoCurrentTime(value) {
     video.currentTime = value;
-};
+}
 
-window.SetVideoVolume = (value) => {
+function SetVideoVolume(value) {
     video.volume = value;
     localStorage.setItem("video-volume", value);
-};
+}
 
-window.SetVideoPlaySpeed = (value) => {
+function SetVideoPlaySpeed(value) {
     video.playbackRate = value;
     localStorage.setItem("video-speed", value);
-};
+}
 
-window.SwitchFullscreen = () => {
+function SwitchFullscreen() {
     if (document.fullscreenElement) {
         document.exitFullscreen();
     }
     else {
         videoPlayer.requestFullscreen();
     }
-};
+}

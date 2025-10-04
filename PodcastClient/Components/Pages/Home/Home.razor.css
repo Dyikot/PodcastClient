@@ -11,8 +11,155 @@
     border-color: darkorange;
 }
 
+::deep .categoryButton {
+	width: 250px;
+	padding: .5rem;
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: .75rem;
+	text-decoration: none;
+	color: var(--fg-main);
+}
+
+
+::deep .podcastsContainer {
+    --maxItems: 7;
+    width: calc((175px + 0.5rem) * var(--maxItems) - 0.5rem);
+}
+
+::deep .carouselButton {
+    visibility: hidden;
+}
+
+::deep .podcastsContainer[data-at-start="true"]:has(a:nth-child(8)) .leftButton {
+    visibility: hidden;
+}
+
+::deep .podcastsContainer[data-at-start="false"]:has(a:nth-child(8)) .leftButton {
+    visibility: visible;
+}
+
+::deep .podcastsContainer[data-at-end="true"]:has(a:nth-child(8)) .rightButton {
+    visibility: hidden;
+}
+
+::deep .podcastsContainer[data-at-end="false"]:has(a:nth-child(8)) .rightButton {
+    visibility: visible;
+}
+
 @media (min-width: 641px) {
     .card {
         width: 500px;
+    }
+}
+
+@media (max-width: 1517px) {
+    ::deep .podcastsContainer {
+        --maxItems: 6;
+    }
+
+    ::deep .podcastsContainer[data-at-start="true"]:has(a:nth-child(7)) .leftButton {
+        visibility: hidden;
+    }
+
+    ::deep .podcastsContainer[data-at-start="false"]:has(a:nth-child(7)) .leftButton {
+        visibility: visible;
+    }
+
+    ::deep .podcastsContainer[data-at-end="true"]:has(a:nth-child(7)) .rightButton {
+        visibility: hidden;
+    }
+
+    ::deep .podcastsContainer[data-at-end="false"]:has(a:nth-child(7)) .rightButton {
+        visibility: visible;
+    }
+}
+
+@media (max-width: 1335px) {
+    ::deep .podcastsContainer {
+        --maxItems: 5;
+    }
+
+    ::deep .podcastsContainer[data-at-start="true"]:has(a:nth-child(6)) .leftButton {
+        visibility: hidden;
+    }
+
+    ::deep .podcastsContainer[data-at-start="false"]:has(a:nth-child(6)) .leftButton {
+        visibility: visible;
+    }
+
+    ::deep .podcastsContainer[data-at-end="true"]:has(a:nth-child(6)) .rightButton {
+        visibility: hidden;
+    }
+
+    ::deep .podcastsContainer[data-at-end="false"]:has(a:nth-child(6)) .rightButton {
+        visibility: visible;
+    }
+}
+
+@media (max-width: 1153px) {
+    ::deep .podcastsContainer {
+       --maxItems: 4;
+    }
+
+    ::deep .podcastsContainer[data-at-start="true"]:has(a:nth-child(5)) .leftButton {
+        visibility: hidden;
+    }
+
+    ::deep .podcastsContainer[data-at-start="false"]:has(a:nth-child(5)) .leftButton {
+        visibility: visible;
+    }
+
+    ::deep .podcastsContainer[data-at-end="true"]:has(a:nth-child(5)) .rightButton {
+        visibility: hidden;
+    }
+
+    ::deep .podcastsContainer[data-at-end="false"]:has(a:nth-child(5)) .rightButton {
+        visibility: visible;
+    }
+}
+
+@media (max-width: 971px) {
+    ::deep .podcastsContainer {
+       --maxItems: 3;
+    }
+
+    ::deep .podcastsContainer[data-at-start="true"]:has(a:nth-child(4)) .leftButton {
+        visibility: hidden;
+    }
+
+    ::deep .podcastsContainer[data-at-start="false"]:has(a:nth-child(4)) .leftButton {
+        visibility: visible;
+    }
+
+    ::deep .podcastsContainer[data-at-end="true"]:has(a:nth-child(4)) .rightButton {
+        visibility: hidden;
+    }
+
+    ::deep .podcastsContainer[data-at-end="false"]:has(a:nth-child(4)) .rightButton {
+        visibility: visible;
+    }
+}
+
+@media (max-width: 539px) {
+    ::deep .podcastsContainer {
+       --maxItems: 2;
+    }
+
+    ::deep .podcastsContainer[data-at-start="true"]:has(a:nth-child(3)) .leftButton {
+        visibility: hidden;
+    }
+
+    ::deep .podcastsContainer[data-at-start="false"]:has(a:nth-child(3)) .leftButton {
+        visibility: visible;
+    }
+
+    ::deep .podcastsContainer[data-at-end="true"]:has(a:nth-child(3)) .rightButton {
+        visibility: hidden;
+    }
+
+    ::deep .podcastsContainer[data-at-end="false"]:has(a:nth-child(3)) .rightButton {
+        visibility: visible;
     }
 }

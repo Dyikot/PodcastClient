@@ -1,5 +1,5 @@
-using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 using Microsoft.JSInterop;
 using PodcastClient.Components.Controls;
 using PodcastClient.Data;
@@ -16,11 +16,13 @@ namespace PodcastClient.Components.Pages.Home
 		public List<Podcast> PopularPodcasts { get; set; } = default!;
 		public List<Podcast> NewPodcasts { get; set; } = default!;
 		public List<EpisodeViewModel>? NewEpisodes { get; set; }
-		public IEnumerable<CategoryViewModel> Categories { get; set; } = default!;
+		public List<CategoryViewModel> Categories { get; set; } = default!;
 
 		protected override async Task OnInitializedAsync()
 		{
-			Categories = CategoriesService.GetAllCategories();
+			Categories = CategoriesService.Categories
+				.Select(c => new CategoryViewModel(Localizer, c))
+				.ToList();
 
 			if (UserContext.IsAuthenticated)
 			{
@@ -62,5 +64,23 @@ namespace PodcastClient.Components.Pages.Home
 										 _newPodcasts.Element);
 			}
 		}
+	}
+
+	public class CategoryViewModel
+	{
+		private readonly IStringLocalizer _localizer;
+		private readonly string _resourceKey;
+
+		public CategoryViewModel(IStringLocalizer localizer, CategoryInfo categoryInfo)
+		{
+			_localizer = localizer;
+			_resourceKey = categoryInfo.ResourceKey;
+			Uri = categoryInfo.Uri;
+			ImageSource = categoryInfo.ImageSource;
+		}
+
+		public string LocalizedName => _localizer[_resourceKey];
+		public string Uri { get; set; }
+		public string ImageSource { get; set; }
 	}
 }

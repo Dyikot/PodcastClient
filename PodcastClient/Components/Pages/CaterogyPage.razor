@@ -1,0 +1,32 @@
+@page "/category/{category}"
+@using PodcastClient.Components.Pages.Search
+@inject CategoriesService CategoriesService
+@inject IStringLocalizer<Resource> Localizer
+@inject IDbContextFactory<ApplicationDbContext> DbContextFactory
+
+<PageTitle>@LocalizedName</PageTitle>
+
+<div class="p-3 d-flex flex-column gap-3">
+	@if(CategoryInfo == null)
+	{
+		@Resource.CategoryNotFound
+	}
+	else
+	{
+		<span class="fontSize-4 fw-bold">@LocalizedName</span>
+		<LoadableItemsSource ItemsClass="d-flex flex-wrap gap-3"
+							 HasMoreItems="HasMoreItems"
+							 LoadItemsAsync="LoadItemsAsync"
+							 LoadOnInitialization="true"
+							 Context="podcast">
+			<ItemTemplate>
+				<PodcastView Podcast="podcast" />
+			</ItemTemplate>
+			<LoadingTemplate>
+				<div class="spinner-border m-auto" role="status">
+					<span class="visually-hidden">Loading...</span>
+				</div>
+			</LoadingTemplate>
+		</LoadableItemsSource>
+	}
+</div>

@@ -1,0 +1,30 @@
+@typeparam T
+
+<div class="@Class">
+	@if (_items != null)
+	{
+		if (_items.Count > 0)
+		{
+			<div class="@ItemsClass">
+				@foreach (var item in _items)
+				{
+					@ItemTemplate(item)
+				}
+			</div>
+		}
+		else
+		{
+			@NoItemsTemplate
+		}
+	}
+	@if (IsLoading)
+	{
+		@LoadingTemplate
+	}
+	else if (HasMoreItems())
+	{
+		<button class="@ButonClass" @onclick="LoadMoreItemsAsync">
+			@ButtonContentTemplate
+		</button>
+	}
+</div>

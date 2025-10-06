@@ -313,7 +313,7 @@
     <value>Ничего не найдено</value>
   </data>
   <data name="ShowMore" xml:space="preserve">
-    <value>Больше</value>
+    <value>Показать больше</value>
   </data>
   <data name="Arts" xml:space="preserve">
     <value>Искусство</value>
@@ -383,5 +383,8 @@
   </data>
   <data name="NewPodcasts" xml:space="preserve">
     <value>Новинки</value>
+  </data>
+  <data name="CategoryNotFound" xml:space="preserve">
+    <value>Категория не найдена</value>
   </data>
 </root>

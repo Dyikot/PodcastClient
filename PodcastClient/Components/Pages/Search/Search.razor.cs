@@ -1,21 +1,19 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
+using PodcastClient.Components.Controls;
 using PodcastClient.Data;
 
 namespace PodcastClient.Components.Pages.Search
 {
 	public partial class Search : IAsyncDisposable
 	{
-		private const int ResultsPerPage = 50;
+		private const int ItemsPerPage = 50;
 
-		private ElementReference _inputText = default!;
-		private ApplicationDbContext _context = default!;
-		private bool _searching = false;
 		private string? _searchValue;
-		private int _page = 1;
-
-		public List<Podcast>? Results { get; private set; }
-		public bool HasMoreResults { get; private set; } = false;
+		private bool _hasMoreItems = false;
+		private ApplicationDbContext _context = default!;
+		private ElementReference _inputText = default!;
+		private LoadableItemsSource<Podcast> _loadableItemsSource = default!;
 
 		public ValueTask DisposeAsync() => _context.DisposeAsync();
 
@@ -38,40 +36,31 @@ namespace PodcastClient.Components.Pages.Search
 
 			if (string.IsNullOrEmpty(_searchValue))
 			{
-				_page = 1;
-				_searching = false;
-				Results = null;
-				HasMoreResults = false;
+				_hasMoreItems = false;
+				_loadableItemsSource.Reset();
 				return;
 			}
 
-			_page = 1;
-			Results = await PerformSearchAsync();			
+			await _loadableItemsSource.ReloadItemsAsync();
 		}
 
-		private async Task<List<Podcast>> PerformSearchAsync(int skip = 0)
-		{
-			_searching = true;
-			var results = await _context.Podcasts
-				.Where(p => p.Title.StartsWith(_searchValue!))
-				.Skip(skip)
-				.Take(ResultsPerPage + 1)
-				.ToListAsync();
-			_searching = false;
+		private bool HasMoreItems() => _hasMoreItems;
 
-			HasMoreResults = results.Count > ResultsPerPage;
-			if (HasMoreResults)
+		private async Task<List<Podcast>> LoadItemsAsync(int page)
+		{
+			var items = await _context.Podcasts
+				.Where(p => p.Title.StartsWith(_searchValue!))
+				.Skip(page * ItemsPerPage)
+				.Take(ItemsPerPage + 1)
+				.ToListAsync();
+
+			_hasMoreItems = items.Count > ItemsPerPage;
+			if (_hasMoreItems)
 			{
-				results.RemoveAt(results.Count - 1);
+				items.RemoveAt(items.Count - 1);
 			}
 
-			return results;
-		}
-
-		private async Task LoadMoreAsync()
-		{
-			var results = await PerformSearchAsync(skip: _page++ * ResultsPerPage);
-			Results!.AddRange(results);
+			return items;
 		}
 	}
 }

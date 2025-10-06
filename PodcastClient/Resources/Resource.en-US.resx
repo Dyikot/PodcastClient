@@ -313,7 +313,7 @@
     <value>No results</value>
   </data>
   <data name="ShowMore" xml:space="preserve">
-    <value>More</value>
+    <value>Show more</value>
   </data>
   <data name="Arts" xml:space="preserve">
     <value>Arts</value>
@@ -383,5 +383,8 @@
   </data>
   <data name="NewPodcasts" xml:space="preserve">
     <value>New</value>
+  </data>
+  <data name="CategoryNotFound" xml:space="preserve">
+    <value>Сategory not found</value>
   </data>
 </root>

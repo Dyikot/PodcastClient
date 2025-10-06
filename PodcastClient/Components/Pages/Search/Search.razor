@@ -1,38 +1,29 @@
 @page "/search"
 @inject IDbContextFactory<ApplicationDbContext> DbContextFactory
 
+<PageTitle>@Resource.Search</PageTitle>
+
 <div class="p-3 d-flex flex-column gap-5">
 	<input type="text"
 		   class="bg-1 fg-main seacrhBar rounded-5 fontSize-3"
 		   placeholder="@Resource.Search"
 		   @ref="_inputText"
 		   @oninput="OnValueChanged" />	
-	@if(Results != null)
-	{
-		if(Results.Count > 0)
-		{
-			<div class="d-flex flex-wrap gap-3">
-				@foreach(var podcast in Results)
-				{
-					<PodcastView Podcast="podcast" />
-				}
+	<LoadableItemsSource ItemsClass="d-flex flex-wrap gap-3"
+						 HasMoreItems="HasMoreItems"
+						 LoadItemsAsync="LoadItemsAsync"
+						 Context="podcast"
+						 @ref="_loadableItemsSource">
+		<ItemTemplate>
+			<PodcastView Podcast="podcast" />
+		</ItemTemplate>
+		<LoadingTemplate>
+			<div class="spinner-border m-auto" role="status">
+				<span class="visually-hidden">Loading...</span>
 			</div>
-		}
-		else
-		{
+		</LoadingTemplate>
+		<NoItemsTemplate>
 			<span class="fontSize-4">@Resource.NoResults</span>
-		}
-	}	
-	@if (_searching)
-	{
-		<div class="spinner-border m-auto" role="status">
-			<span class="visually-hidden">Searching...</span>
-		</div>
-	}
-	else if(HasMoreResults)
-	{
-		<button class="btn bg-1 hoverable" @onclick="LoadMoreAsync">
-			@Resource.ShowMore
-		</button>
-	}
+		</NoItemsTemplate>
+	</LoadableItemsSource>
 </div>

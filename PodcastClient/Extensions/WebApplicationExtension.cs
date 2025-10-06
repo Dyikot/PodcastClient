@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using PodcastClient.Data;
 using PodcastClient.Services;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace PodcastClient.Extensions
 {
@@ -9,42 +10,44 @@ namespace PodcastClient.Extensions
 		public static void SeedDatabase(this WebApplication app)
 		{
 			using var scope = app.Services.CreateScope();
+			var services = scope.ServiceProvider;
+			var configuration = app.Configuration;
 			var dbContextFactory = scope.ServiceProvider.GetRequiredService<IDbContextFactory<ApplicationDbContext>>();
-			var podcastRssFetcher = scope.ServiceProvider.GetRequiredService<PodcastRssFetcher>();
+			
 
 			using var context = dbContextFactory.CreateDbContext();
 			context.Database.EnsureCreated();
 
-			AddPodcastCategories(context, app.Configuration);
-			AddDefaultPodcasts(context, app.Configuration, podcastRssFetcher);
+			AddPodcastCategories(context, services);
+			AddDefaultPodcasts(context, services, configuration);
 		}
 
 		private static void AddPodcastCategories(ApplicationDbContext context,
-												 IConfiguration configuration)
+												 IServiceProvider services)
 		{
 			if (context.Categories.Any())
 			{
 				return;
 			}
 
-			var podcastCategories = configuration
-				.GetSection("PodcastCategories")
-				.Get<string[]>()!
-				.Select(categoryName => new Category { Name = categoryName })
-				.ToArray();
+			var categoriesService = services.GetRequiredService<CategoriesService>();
+			var categoryNames = categoriesService.Categories
+				.Select(c => new Category { Name = c.Name });
 
-			context.Categories.AddRange(podcastCategories);
+			context.Categories.AddRange(categoryNames);
 			context.SaveChanges();
 		}
 
-		private static void AddDefaultPodcasts(ApplicationDbContext context, 
-											   IConfiguration configuration,
-											   PodcastRssFetcher podcastRssFetcher)
+		private static void AddDefaultPodcasts(ApplicationDbContext context,
+											   IServiceProvider serivces,
+											   IConfiguration configuration)
 		{
 			if (context.Podcasts.Any())
 			{
 				return;
 			}
+
+			var podcastRssFetcher = serivces.GetRequiredService<PodcastRssFetcher>();
 
 			var defaultPodcastUrls = configuration
 				.GetSection("DefaultPodcasts")

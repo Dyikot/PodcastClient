@@ -5,5 +5,5 @@ namespace PodcastClient.Data
 		public required string Name { get; set; }
 
 		public List<Podcast> Podcasts { get; set; }
-	}
+	}	
 }

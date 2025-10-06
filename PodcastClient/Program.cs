@@ -30,6 +30,7 @@ internal class Program
 		builder.Services.AddScoped<CultureService>();
 		builder.Services.AddScoped<ThemeService>();
 		builder.Services.AddScoped<MediaService>();
+		builder.Services.AddScoped<CategoriesService>();
 		builder.Services.AddSingleton<PodcastRssFetcher>();
 
 		var app = builder.Build();

@@ -1,6 +1,7 @@
 @page "/"
 @inject IJSRuntime JS
 @inject UserContext UserContext
+@inject CategoriesService CategoriesService
 @inject IDbContextFactory<ApplicationDbContext> DbContextFactory
 @using PodcastClient.Components.Pages.Search
 
@@ -71,25 +72,13 @@
 	<div class="d-flex flex-column gap-2">
 		<span class="fontSize-4 fw-semibold">@Resource.ExploreByCategory</span>
 		<div class="d-flex flex-wrap gap-3">
-			@CategoryView(Resource.Arts, "category/arts", "Home/Palette.svg")
-			@CategoryView(Resource.Business, "category/business", "Home/Business.svg")
-			@CategoryView(Resource.Comedy, "category/comedy", "Home/Comedy.svg")
-			@CategoryView(Resource.Education, "category/education", "Home/School.svg")
-			@CategoryView(Resource.Fiction, "category/fiction", "Home/Book.svg")
-			@CategoryView(Resource.Government, "category/government", "Home/Government.svg")
-			@CategoryView(Resource.History, "category/history", "Home/Book2.svg")
-			@CategoryView(Resource.HealthAndFitness, "category/health-fitness", "Home/Health.svg")
-			@CategoryView(Resource.KidsAndFamily, "category/kids-family", "Home/Family.svg")
-			@CategoryView(Resource.Leisure, "category/leisure", "Home/Leisure.svg")
-			@CategoryView(Resource.Music, "category/music", "Home/Music.svg")
-			@CategoryView(Resource.News, "category/news", "Home/News.svg")
-			@CategoryView(Resource.ReligionAndSpirituality, "category/religion-spirituality", "Home/Religion.svg")
-			@CategoryView(Resource.Science, "category/science", "Home/Science.svg")
-			@CategoryView(Resource.SocietyAndCulture, "category/society-culture", "Home/Building.svg")
-			@CategoryView(Resource.Sports, "category/sports", "Home/Sports.svg")
-			@CategoryView(Resource.Technology, "category/technology", "Home/Technology.svg")
-			@CategoryView(Resource.TrueCrime, "category/true-crime", "Home/Police.svg")
-			@CategoryView(Resource.TvAndFilm, "category/tv-film", "Home/TV.svg")
+			@foreach(var category in Categories)
+			{
+				<a href="@category.Uri" class="bg-1 hoverable rounded-2 categoryButton">
+					<img src="@category.ImageSource" />
+					<span>@category.LocalizedName</span>
+				</a>
+			}
 		</div>
 	</div>
 </div>

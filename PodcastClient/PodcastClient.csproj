@@ -28,7 +28,7 @@
       <Generator></Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\Resource.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\Resource.ru-RU.resx">

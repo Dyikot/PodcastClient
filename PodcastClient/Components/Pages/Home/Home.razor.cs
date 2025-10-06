@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.JSInterop;
 using PodcastClient.Components.Controls;
 using PodcastClient.Data;
+using PodcastClient.Services;
 
 namespace PodcastClient.Components.Pages.Home
 {
@@ -15,9 +16,12 @@ namespace PodcastClient.Components.Pages.Home
 		public List<Podcast> PopularPodcasts { get; set; } = default!;
 		public List<Podcast> NewPodcasts { get; set; } = default!;
 		public List<EpisodeViewModel>? NewEpisodes { get; set; }
+		public IEnumerable<CategoryViewModel> Categories { get; set; } = default!;
 
 		protected override async Task OnInitializedAsync()
 		{
+			Categories = CategoriesService.GetAllCategories();
+
 			if (UserContext.IsAuthenticated)
 			{
 				using var content = DbContextFactory.CreateDbContext();
@@ -57,21 +61,6 @@ namespace PodcastClient.Components.Pages.Home
 										 _popularPodcasts.Element, 
 										 _newPodcasts.Element);
 			}
-		}
-
-		private RenderFragment CategoryView(string name, string href, string src)
-		{
-			return builder =>
-			{
-				builder.OpenElement(0, "a");
-				builder.AddAttribute(1, "href", href);
-				builder.AddAttribute(2, "class", "bg-1 hoverable rounded-2 categoryButton");
-				builder.OpenElement(3, "img");
-				builder.AddAttribute(4, "src", src);
-				builder.CloseElement();
-				builder.AddContent(5, name);
-				builder.CloseElement();
-			};
 		}
 	}
 }

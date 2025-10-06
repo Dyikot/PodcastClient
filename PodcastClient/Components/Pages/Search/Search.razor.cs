@@ -13,7 +13,7 @@ namespace PodcastClient.Components.Pages.Search
 		private bool _hasMoreItems = false;
 		private ApplicationDbContext _context = default!;
 		private ElementReference _inputText = default!;
-		private LoadableItemsSource<Podcast> _loadableItemsSource = default!;
+		private LoadableItemsControl<Podcast> _loadableItemsSource = default!;
 
 		public ValueTask DisposeAsync() => _context.DisposeAsync();
 

@@ -6,7 +6,7 @@ using PodcastClient.Resources;
 
 namespace PodcastClient.Components.Controls
 {
-	public partial class LoadableItemsSource<T>
+	public partial class LoadableItemsControl<T>
 	{
 		private List<T>? _items;		
 

@@ -9,7 +9,7 @@
 		   placeholder="@Resource.Search"
 		   @ref="_inputText"
 		   @oninput="OnValueChanged" />	
-	<LoadableItemsSource ItemsClass="d-flex flex-wrap gap-3"
+	<LoadableItemsControl ItemsClass="d-flex flex-wrap gap-3"
 						 HasMoreItems="HasMoreItems"
 						 LoadItemsAsync="LoadItemsAsync"
 						 Context="podcast"
@@ -25,5 +25,5 @@
 		<NoItemsTemplate>
 			<span class="fontSize-4">@Resource.NoResults</span>
 		</NoItemsTemplate>
-	</LoadableItemsSource>
+	</LoadableItemsControl>
 </div>

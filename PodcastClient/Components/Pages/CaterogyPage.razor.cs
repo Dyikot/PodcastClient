@@ -11,7 +11,7 @@ namespace PodcastClient.Components.Pages
 		private const int ItemsPerPage = 50;
 		private bool _hasMoreItems = false;
 		private ApplicationDbContext _context = default!;
-		private LoadableItemsSource<int> _loadableItemsSource = default!;
+		private LoadableItemsControl<int> _loadableItemsSource = default!;
 
 		[Parameter]
 		public string Category { get; set; } = default!;

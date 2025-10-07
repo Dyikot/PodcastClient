@@ -13,42 +13,39 @@
 	}
 	else
 	{
-		<div class="d-flex gap-3 mt-4 mainLayout">
-			<img src="@Episode!.IconSource" class="rounded-2" width="175" height="175" />
-			<div class="d-flex flex-column align-items-start gap-1">
-				<h5 class="m-0">@Episode.Title</h5>
+		<!--Header-->
+		<div class="layout mainLayout">
+			<!--Icon-->
+			<img src="@Episode!.IconSource" class="icon rounded-2" />
+			<!--About-->
+			<div class="d-flex flex-column">
+				<span class="fontSize-2 fw-medium">@Episode.Title</span>
 				<span>@PodcastTitle</span>
-				<div class="d-flex align-items-stretch gap-3">
-					<div class="d-flex align-items-md-center gap-2">
-						<img src="Episode/Calendar.svg" 
-							 width="16"
-							 title="@Resource.ReleaseDate"/>
+				<div class="mt-2 d-flex gap-2 fontSize-r-1">
+					<div class="d-flex align-items-center gap-2">
+						<img src="Episode/Calendar.svg" width="16" />
 						<span>@Episode.ReleaseDate.ToLocalizedString(Localizer)</span>
 					</div>
 					<div class="d-flex align-items-center gap-2">
-						<img src="Episode/Clock.svg"
-							 width="16"
-							 title="@Resource.Duration"/>
+						<img src="Episode/Clock.svg" width="16" />
 						<span>@Episode.Duration.ToLocalizedString(Localizer)</span>
 					</div>
 				</div>
-				<div class="mt-auto d-flex gap-1">
-					<a class="btn bg-0 hoverable"
-					   href="@PodcastHref"
-					   title="@Resource.PodcastPage">
+				<div class="linkContainer">
+					<a class="btn bg-0 hoverable border-main" href="@PodcastHref">
 						<img src="Episode/Podcast.svg" />
+						<span>@Resource.PodcastPage</span>
 					</a>
-					<a class="btn bg-0 hoverable"
-					   href="@Episode.Source" target="_blank"
-					   title="@Resource.Source">
+					<a class="btn bg-0 hoverable border-main" href="@Episode.Source" target="_blank">
 						<img src="Episode/Link.svg" />
+						<span>@Resource.Source</span>
 					</a>
 				</div>
 			</div>
 		</div>
-		<div class="mainLayout order-2">
-			@Description
-		</div>
+		<!--Description-->
+		<div class="mainLayout order-2">@Description</div>
+		<!--Player-->
 		switch (Episode.Type)
 		{
 			case EpisodeType.Audio:

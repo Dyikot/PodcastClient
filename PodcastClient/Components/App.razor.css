@@ -1,5 +1,6 @@
 html {
-    font-size: 14px;
+    font-size: var(--fs-base);
+    scroll-behavior: auto;
 }
 
 body {

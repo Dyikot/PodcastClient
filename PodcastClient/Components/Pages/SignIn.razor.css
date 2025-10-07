@@ -1,5 +1,5 @@
 ::deep .signin-form {
     width: 250px;
     min-height: 300px;
-    border: 1px solid var(--bg-3);
+    border: 1px solid var(--color-3);
 }

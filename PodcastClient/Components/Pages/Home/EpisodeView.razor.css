@@ -1,0 +1,19 @@
+.layout {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    color: var(--color-fg-main);
+    text-decoration: none;
+}
+
+.description {
+    display: grid;
+    grid-template-rows: auto 1fr 1fr;
+    margin-right: 0.5rem;
+}
+
+.descriptionHeader {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    font-size: var(--fs-r1);
+}

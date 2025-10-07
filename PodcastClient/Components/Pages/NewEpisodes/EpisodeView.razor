@@ -1,16 +1,14 @@
 @inject IStringLocalizer<Resource> Localizer
 
-<NavLink class="btn bg-1 hoverable d-flex align-items-center gap-3 ps-0" 
-		 style="height: 80px"
-		 href="@Href" target="_blank" role="button">
+<a class="layout bg-1 hoverable rounded-2" href="@Href" role="button">
 	<!--Icon-->
-	<img src="@Episode.IconSource" class="rounded-start-2" width="80" height="80" />
+	<img src="@Episode.IconSource" class="rounded-start-2" height="80" />
 	<!--Description-->
-	<div class="d-flex flex-column align-items-start" style="width: 70%">
+	<div class="description">
 		<span class="fontSize-r-1">@Episode.ReleaseDate.ToLocalizedString(Localizer)</span>
-		<span class="fontSize-1 mw-100 text-truncate fw-bold">@Episode.Title</span>
+		<span class="fontSize-1 text-truncate fw-semibold">@Episode.Title</span>
 		<span>@PodcastTitle</span>
 	</div>
 	<!--Duration-->
-	<div class="flex-grow-1">@Episode.Duration.ToLocalizedString(Localizer)</div>
-</NavLink>
+	<span>@Episode.Duration.ToLocalizedString(Localizer)</span>
+</a>

@@ -1,28 +1,28 @@
 #page {
-    display: flex;
-    flex-direction: column;    
-    min-height: 100vh;
+    display: flex;    
 }
 
 #sidebar {
-    background-color: var(--nav-menu);
+    background-color: var(--color-nav-menu);
     position: sticky;
-    height: 10vh;
-    bottom: 0px;
-    order: 1;
-    z-index: 1;
+    top: 0px;
+    order: 0;
+    width: 200px;
+    min-width: 200px;
+    height: 100vh;
 }
 
-@media (min-width: 641px) {
+@media (max-width: 640px) {
     #page {
-        flex-direction: row;
+        min-height: 100vh;
+        flex-direction: column;
     }
 
-    #sidebar {
-        top: 0px;
-        order: 0;
-        width: 200px;
-        min-width: 200px;
-        height: 100vh;
+    #sidebar {       
+        height: 48px;
+        width: 100%;
+        bottom: 0;
+        order: 1;
+        z-index: 10;
     }
 }

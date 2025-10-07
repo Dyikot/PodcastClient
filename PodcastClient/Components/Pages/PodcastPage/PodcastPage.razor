@@ -18,41 +18,40 @@
 	}
 </style>
 
-<div>
+<div class="d-flex flex-column">
 	@if(Podcast == null)
 	{
 		<h1>@Resource.PodcastNotFound</h1>
 	}
 	else
 	{	
-		<div class="bg-1 d-flex justify-content-center align-items-center mb-3"
-			 style="height: 300px">
-			<!--Header-->
-			<div class="d-flex gap-3" style="width: 75%; height: 80%">
-				<img src="@Podcast.IconSource" class="rounded-2" width="150" height="150"  />
-				<div class="h-100 d-flex flex-column align-items-stretch gap-1">
-					<h4 class="m-0">@Podcast.Title</h4>
-					<div class="d-flex gap-2">
+		<!--Header-->
+		<div class="headerBgLayout">
+			<div class="mainLayout headerLayout">
+				<!--Icon-->
+				<img src="@Podcast.IconSource" class="icon rounded-2"  />
+				<!--About-->
+				<div class="h-100 d-flex flex-column align-items-stretch">
+					<span class="fontSize-2 fw-medium">@Podcast.Title</span>
+					<div class="d-inline-flex gap-2">
 						<span>@Podcast.Author</span>
 						<span>•</span>
 						<span>@($"{Resource.Episodes}: {Podcast.Episodes.Count}")</span>
 					</div>
-					<div class="h-100 overflowOn5">@Description</div>
-					<div class="d-flex align-items-end gap-2">
-						<ToggleButton Class="btn bg-2 hoverable rounded-2"
-									  CheckedClass="btn bg-2 hoverable  rounded-2"
-									  IsChecked="UserHasSubscription"
-									  IsEnabled="UserContext.IsAuthenticated"
-									  OnClick="OnSubscribeButtonClick">
-							<ContentTemplate>@Resource.Subscribe</ContentTemplate>
-							<CheckedContentTemplate>@Resource.Unsubscribe</CheckedContentTemplate>
-						</ToggleButton>
-					</div>
+					<div class="mt-2 h-100 overflowOn5">@Description</div>
+					<ToggleButton Class="btn bg-2 hoverable rounded-2 align-self-start"
+								  CheckedClass="btn bg-2 hoverable rounded-2 align-self-start"
+								  IsChecked="UserHasSubscription"
+								  IsEnabled="UserContext.IsAuthenticated"
+								  OnClick="OnSubscribeButtonClick">
+						<ContentTemplate>@Resource.Subscribe</ContentTemplate>
+						<CheckedContentTemplate>@Resource.Unsubscribe</CheckedContentTemplate>
+					</ToggleButton>
 				</div>
 			</div>
 		</div>
 		<!--Main-->
-		<div class="d-flex flex-column gap-4 mainLayout m-auto">
+		<div class="mainLayout p-3 m-auto d-flex flex-column gap-3">
 			<!--Sort and filter buttons-->
 			<div class="d-flex gap-2">
 				<ComboBox TItem="PodcastClient.Base.SortOrder"

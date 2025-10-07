@@ -1,36 +1,36 @@
 @inject NavigationManager NavigationManager
 
 <nav class="navMenu">
-    <NavLink class="navItem navItemBg" href="" Match="NavLinkMatch.All">
+    <NavLink class="navItem" href="" Match="NavLinkMatch.All">
         <img src="Navigation/Home.svg" />
-        <span class="navText">@Resource.Home</span>
+        <span>@Resource.Home</span>
     </NavLink>
     <AuthorizeView>
-        <NavLink class="navItem navItemBg" href="library">
+        <NavLink class="navItem" href="library">
             <img src="Navigation/Library.svg" />
-            <span class="navText">@Resource.Library</span>
+            <span>@Resource.Library</span>
         </NavLink>
-        <NavLink class="navItem navItemBg" href="new-episodes">
+        <NavLink class="navItem" href="new-episodes">
             <img src="Navigation/MusicQueue.svg" />
-            <span class="navText">@Resource.NewEpisodes</span>
+            <span>@Resource.NewEpisodes</span>
         </NavLink>
     </AuthorizeView>
     <AuthorizeView>
         <Authorized>
-            <button class="navItem navItemBg account" @onclick="SignOut">
+            <button class="navItem account" @onclick="SignOut">
                 <img src="Navigation/LogOut.svg" />
-                <span class="navText">@Resource.SignOut</span>
+                <span>@Resource.SignOut</span>
             </button>
         </Authorized>
         <NotAuthorized>
-            <button class="navItem navItemBg account" @onclick="SignIn">
+            <button class="navItem account" @onclick="SignIn">
                 <img src="Navigation/LogIn.svg" />
-                <span class="navText">@Resource.SignIn</span>
+                <span>@Resource.SignIn</span>
             </button>
         </NotAuthorized>
     </AuthorizeView>
-    <NavLink class="navItem navItemBg" href="settings">
+    <NavLink class="navItem" href="settings">
         <img src="Navigation/Settings.svg" />
-        <span class="navText">@Resource.Settings</span>
+        <span>@Resource.Settings</span>
     </NavLink>
 </nav>

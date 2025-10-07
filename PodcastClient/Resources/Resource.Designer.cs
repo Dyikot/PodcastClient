@@ -792,9 +792,9 @@ namespace PodcastClient.Resources {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
-        public static string ToBeginning {
+        public static string ToFirst {
             get {
-                return ResourceManager.GetString("ToBeginning", resourceCulture);
+                return ResourceManager.GetString("ToFirst", resourceCulture);
             }
         }
         

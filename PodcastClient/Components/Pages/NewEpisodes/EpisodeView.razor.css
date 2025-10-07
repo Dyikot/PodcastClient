@@ -1,0 +1,15 @@
+.layout {
+    height: 80px;
+    padding-right: 1rem;
+    text-decoration: none;
+    color: var(--color-fg-main);
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.description {
+    display: grid;
+    grid-template-rows: repeat(3, 1rf);
+}

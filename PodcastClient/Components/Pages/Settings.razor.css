@@ -1,2 +1,8 @@
-.settings-title { width: 100px; }
-::deep .settings-combobox { width: 100px; }
+.settingsTitle { 
+    width: 100px; 
+}
+
+::deep .settingsButton { 
+    width: 100px;
+    justify-content: space-between;
+}

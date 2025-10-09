@@ -1,7 +1,7 @@
 @typeparam TItem
 
 <div class="position-relative" @onfocusout="OnLostFocus">
-	<button class="comboBox-button @ButtonClass" @onclick="OnButtonClick">
+	<button class="@ButtonClass" @onclick="OnButtonClick">
 		@ButtonContentTemplate!(SelectedItem)
 	</button>
 	@if(IsDropDownOpen)

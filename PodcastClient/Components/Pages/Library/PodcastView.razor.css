@@ -28,7 +28,7 @@
     position: absolute;
     top: 0;
     left: 100%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -40%);
     display: flex;
     align-items: center;
     justify-content: center;

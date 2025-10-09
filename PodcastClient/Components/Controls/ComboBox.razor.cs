@@ -80,12 +80,10 @@ namespace PodcastClient.Components.Controls
 		{
 			return builder =>
 			{
-				builder.OpenElement(0, "div");
-				builder.AddAttribute(1, "class", "d-flex align-items-center justify-content-between px-1");
-				builder.AddContent(2, ItemTemplate(item));
-				builder.OpenElement(3, "img");
-				builder.AddAttribute(4, "src", "Controls/ComboBox/ArrowDown.svg");
-				builder.CloseElement();
+				builder.AddContent(1, ItemTemplate(item));
+				builder.OpenElement(2, "img");
+				builder.AddAttribute(3, "src", "Controls/ComboBox/ArrowDown.svg");
+				builder.AddAttribute(4, "style", "width: 1.5rem;");
 				builder.CloseElement();
 			};
 		};

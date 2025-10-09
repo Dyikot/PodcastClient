@@ -102,8 +102,6 @@ namespace PodcastClient.Components.Controls
 			{
 				await InitializeControlAsync();
 			}
-
-			await base.OnAfterRenderAsync(firstRender);
 		}		
 
 		protected async Task OnTimeUpdate()

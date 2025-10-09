@@ -1,5 +1,6 @@
 #page {
-    display: flex;    
+    display: flex; 
+    min-height: 100vh;
 }
 
 #sidebar {
@@ -13,8 +14,7 @@
 }
 
 @media (max-width: 640px) {
-    #page {
-        min-height: 100vh;
+    #page {       
         flex-direction: column;
     }
 

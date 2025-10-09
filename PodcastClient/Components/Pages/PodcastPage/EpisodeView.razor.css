@@ -1,3 +1,9 @@
+.layout {
+    height: 150px;
+    border-radius: 1rem;
+    padding: 1rem;
+}
+
 .linkLayout {
     text-decoration: none;
     color: var(--color-fg-1);
@@ -8,4 +14,10 @@
 ::deep .expanderPosition {
     right: 0;
     left: auto;
+}
+
+@media (max-width: 640px) {
+    .layout {
+        height: 130px;
+    }
 }

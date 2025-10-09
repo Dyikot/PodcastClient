@@ -1,7 +1,7 @@
 @inject IJSRuntime JS
 @inherits PlayerBase
 
-<div class="playerLayout d-flex flex-column justify-content-center align-items-stretch">
+<div class="layout">
 	<audio src="@Source" 
 		   @ref="_control"
 		   @onloadedmetadata="OnMetadataLoaded"
@@ -10,44 +10,44 @@
 		   @onpause="OnPause"
 		   @ontimeupdate="OnTimeUpdate" />
 	<!--Duration slider-->
-	<input class="slider sliderThumb"
+	<input class="slider sliderThumb" id="durationSlider"
 		   type="range"
 		   style="background-size: @(DurationPersentage)% 100%;"
 		   max="@Duration.TotalSeconds"
 		   value="@CurrentTime.TotalSeconds"
 		   @oninput="OnCurrentTimeSliderChanged" />
-	<div class="bg-1 flex-grow-1 px-4 d-flex align-items-center gap-1" data-CanPlay="@CanPlay.ToString()">
+	<div class="controls bg-1" data-canplay="@CanPlay.ToString()">
 		<!--Rewind button-->
-		<button class="btn bg-1 hoverable"
+		<button class="defaultButton rewindButton rounded-2 bg-1 hoverable"
 				@onclick="OnRewindButtonClick">
 			<img src="Controls/AudioPlayer/Replay.svg" />
 		</button>
 		<!--Play/Pause button-->
-		<ToggleButton Class="btn bg-1 hoverable px-2"
-					  CheckedClass="btn bg-1 hoverable px-2"
+		<ToggleButton Class="defaultButton rounded-2 bg-1 hoverable p-0 px-1"
+					  CheckedClass="defaultButton rounded-2 bg-1 hoverable p-0 px-1 "
 					  IsChecked="IsPlaying"
 					  OnClick="OnPlayButtonClick">
 			<ContentTemplate>
-				<img src="Controls/AudioPlayer/Play.svg" width="36" />
+				<img src="Controls/AudioPlayer/Play.svg" width="38" />
 			</ContentTemplate>
 			<CheckedContentTemplate>
-				<img src="Controls/AudioPlayer/Pause.svg" width="36" />
+				<img src="Controls/AudioPlayer/Pause.svg" width="38" />
 			</CheckedContentTemplate>
 		</ToggleButton>
 		<!--Forward button-->
-		<button class="btn bg-1 hoverable" @onclick="OnForwardButtonClick">
+		<button class="defaultButton rewindButton rounded-2 bg-1 hoverable"
+				@onclick="OnForwardButtonClick">
 			<img src="Controls/AudioPlayer/Forward.svg"  />
 		</button>
 		<!--Duration panel-->
-		<div class="d-flex justify-content-center align-items-center gap-1"
-			 style="width: 160px">
-			<span id="duration-played">@CurrentTime.ToString(TimeFormat)</span>
+		<div class="durationPanel">
+			<span>@CurrentTime.ToString(TimeFormat)</span>
 			<span>/</span>
-			<span id="duration-total">@Duration.ToString(TimeFormat)</span>
+			<span>@Duration.ToString(TimeFormat)</span>
 		</div>
 		<!--Mute button-->
-		<ToggleButton Class="btn bg-1 hoverable ms-auto"
-					  CheckedClass="btn bg-1 hoverable  ms-auto"
+		<ToggleButton Class="defaultButton rounded-2 bg-1 hoverable ms-auto"
+					  CheckedClass="defaultButton rounded-2 bg-1 hoverable  ms-auto"
 					  IsChecked="IsMute"
 					  OnClick="OnMuteButtonClick">
 			<ContentTemplate>
@@ -58,7 +58,7 @@
 			</CheckedContentTemplate>
 		</ToggleButton>
 		<!--Volume slider-->
-		<input class="slider rounded-2"
+		<input class="slider rounded-2" id="volumeSlider"
 			   type="range"
 			   style="background-size: @(VolumePersentage)% 100%;"
 			   max="1"
@@ -72,7 +72,7 @@
 				  Items="PlaySpeedOptions"
 				  SelectionChanged="OnSpeedOptionSelect"
 				  DropDownPosition="DropDownPosition.Top"
-				  ButtonClass="btn bg-1 hoverable"
+				  ButtonClass="defaultButton rounded-2 bg-1 hoverable"
 				  DropDownClass="playSpeed-dropDown"
 				  Context="context">
 			<ButtonContentTemplate>

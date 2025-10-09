@@ -20,11 +20,8 @@
 
 .buttonsLayout {
     display: flex;
+    align-items: center;
     gap: 1rem;
-}
-
-::deep .buttonsPadding {
-    padding: 0.5rem 0.75rem;
 }
 
 @media (max-width: 640px) {

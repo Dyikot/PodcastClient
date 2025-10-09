@@ -53,7 +53,7 @@
 			<div class="buttonsLayout">
 				<ComboBox Items="SortOrderOptions"
 						  @bind-SelectedItem="SortOrder"
-						  ButtonClass="p-2"
+						  ButtonClass="defaultButton bg-1 rounded-2"
 						  Context="context">
 					<ItemTemplate>
 						@Localizer[context.ToString()]
@@ -62,22 +62,22 @@
 				@if(UserHasSubscription)
 				{
 					<div class="d-flex gap-2">
-						<ToggleButton Class="buttonsPadding bg-1 hoverable rounded-2"
-									  CheckedClass="buttonsPadding bg-2 hoverable rounded-2"
+						<ToggleButton Class="defaultButton bg-1 hoverable rounded-2"
+									  CheckedClass="defaultButton bg-2 hoverable rounded-2"
 									  IsChecked="IsInProgressFilter"
 									  OnClick="OnInProgressButtonClick">
 							<ContentTemplate>@Resource.InProgress</ContentTemplate>
 							<CheckedContentTemplate>@Resource.InProgress</CheckedContentTemplate>
 						</ToggleButton>
-						<ToggleButton Class="buttonsPadding bg-1 hoverable rounded-2"
-									  CheckedClass="buttonsPadding bg-2 hoverable rounded-2"
+						<ToggleButton Class="defaultButton bg-1 hoverable rounded-2"
+									  CheckedClass="defaultButton bg-2 hoverable rounded-2"
 									  IsChecked="IsPlayedFilter"
 									  OnClick="OnPlayedButtonClick">
 							<ContentTemplate>@Resource.Played</ContentTemplate>
 							<CheckedContentTemplate>@Resource.Played</CheckedContentTemplate>
 						</ToggleButton>
-						<ToggleButton Class="buttonsPadding bg-1 hoverable  rounded-2"
-									  CheckedClass="buttonsPadding bg-2 hoverable  rounded-2"
+						<ToggleButton Class="defaultButton bg-1 hoverable  rounded-2"
+									  CheckedClass="defaultButton bg-2 hoverable  rounded-2"
 									  IsChecked="IsUnplayedFilter"
 									  OnClick="OnUnplayedButtonClick">
 							<ContentTemplate>@Resource.Unplayed</ContentTemplate>

@@ -1,6 +1,5 @@
 @page "/settings"
 @inject LocalStorage LocalStorage
-@inject NavigationManager Navigator
 @inject ThemeService ThemeService
 @inject CultureService CultureService
 @inject IStringLocalizer<Resource> Localizer
@@ -9,11 +8,11 @@
 
 <div class="d-flex flex-column gap-3 m-3">
 	<div class="d-flex align-items-center">
-		<div class="settings-title">@Resource.Language</div>
+		<span class="settingsTitle">@Resource.Language</span>
 		<ComboBox TItem="CultureInfo"
 				  Items="LanguageOptions"
 				  @bind-SelectedItem="CultureService.Culture"
-				  ButtonClass="settings-combobox"
+				  ButtonClass="defaultButton settingsButton bg-1 rounded-2"
 				  Context="context">
 			<ItemTemplate>
 				@GetLanguageLabel(context)
@@ -21,12 +20,12 @@
 		</ComboBox>
 	</div>
 	<div class="d-flex align-items-center">
-		<div class="settings-title">@Resource.Theme</div>
+		<span class="settingsTitle">@Resource.Theme</span>
 		<ComboBox TItem="string"
 				  Items="ThemeOptions"
 				  @bind-SelectedItem="ThemeService.Theme"
 				  SelectionChanged="OnThemeChanged"
-				  ButtonClass="settings-combobox"
+				  ButtonClass="defaultButton settingsButton bg-1 rounded-2 "
 				  Context="context">
 			<ItemTemplate>
 				@Localizer[context]

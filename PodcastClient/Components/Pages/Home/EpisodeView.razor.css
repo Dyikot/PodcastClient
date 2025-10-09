@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     gap: 0.375rem;
-    color: var(--color-fg-main);
+    color: var(--color-fg-1);
     text-decoration: none;
 }
 

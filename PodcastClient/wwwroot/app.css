@@ -2,19 +2,20 @@
     --sliderColor: #f59630;
 
     --fs-base: 14px;
-    --fs-1: 16px;
-    --fs-2: 18px;
-    --fs-3: 20px;
-    --fs-4: 22px;
-    --fs-5: 24px;
-    --fs-r1: 12px;
-    --fs-r2: 10px;
-    --fs-r3: 8px;
+    --fs-1: calc(var(--fs-base) + 2px);
+    --fs-2: calc(var(--fs-base) + 4px);
+    --fs-3: calc(var(--fs-base) + 6px);
+    --fs-4: calc(var(--fs-base) + 8px);
+    --fs-5: calc(var(--fs-base) + 10px);
+    --fs-r1: calc(var(--fs-base) - 2px);
+    --fs-r2: calc(var(--fs-base) - 4px);
+    --fs-r3: calc(var(--fs-base) - 6px);
 }
 
 :root[data-theme="light"] {
-    --color-fg-main: black;
-    --color-fg-secondary: #797979;
+    --color-fg-1: black;
+    --color-fg-2: #3D3D3D;
+    --color-fg-3: #6E6E6E;
     --color-0: #e3e3e3;
     --color-1: #d4d4d4;
     --color-2: #c5c5c5;
@@ -25,8 +26,9 @@
 }
 
 :root[data-theme="dark"] {
-    --color-fg-main: #e6e6e6;
-    --color-fg-secondary: #a5a4a4;
+    --color-fg-1: #e6e6e6;
+    --color-fg-2: #CFCFCF;
+    --color-fg-3: #B6B6B6;
     --color-0: #2e2e2e;
     --color-1: #3d3d3d;
     --color-2: #4c4c4c;
@@ -36,8 +38,9 @@
     --color-nav-menu-currentItem: #252525;
 }
 
-.fg-main { color : var(--color-fg-main); }
-.fg-secondary { color : var(--color-fg-secondary); }
+.fg-main { color : var(--color-fg-1); }
+.fg-main-2 { color : var(--color-fg-2); }
+.fg-main-3 { color : var(--color-fg-3); }
 
 .border-main { border: 1px solid var(--color-4); }
 
@@ -51,57 +54,73 @@
 .bg-2.hoverable:hover { background-color: var(--color-3); }
 .bg-3.hoverable:hover { background-color: var(--color-4); }
 
+.bg-0:focus-visible,
+.bg-1:focus-visible,
+.bg-2:focus-visible,
+.bg-3:focus-visible { outline: 2px solid var(--color-fg-1); }
+
 .fontSize-1 { font-size: var(--fs-1); }
 .fontSize-2 { font-size: var(--fs-2); }
 .fontSize-3 { font-size: var(--fs-3); }
 .fontSize-4 { font-size: var(--fs-4); }
 .fontSize-5 { font-size: var(--fs-5); }
 
-.fontSize-r-1 { font-size: var(--fs-r1); }
-.fontSize-r-2 { font-size: var(--fs-r2); }
-.fontSize-r-3 { font-size: var(--fs-r3); }
+.fontSize-r1 { font-size: var(--fs-r1); }
+.fontSize-r2 { font-size: var(--fs-r2); }
+.fontSize-r3 { font-size: var(--fs-r3); }
 
 .mainLayout {
     width: clamp(75%, 70vw, 95%);
 }
 
-@media (max-width: 640px) {    
-    .mainLayout {
-        width: 100%;
-        padding: 0 .75rem;
-    }
-}
-
 .card {
     --bs-card-bg: var(--color-0);
-    --bs-card-color: var(--color-fg-main);
+    --bs-card-color: var(--color-fg-1);
     --bs-card-cap-bg: var(--color-1);
-    --bs-card-cap-color: var(--color-fg-main);
-    --bs-card-title-color: var(--color-fg-main);
+    --bs-card-cap-color: var(--color-fg-1);
+    --bs-card-title-color: var(--color-fg-1);
     --bs-card-border-color: var(--color-4);
 }
 
 button {
     border: none;
-    color: inherit;
+    color: var(--color-fg-1);
 }
 
-.btn {
-    --bs-btn-active-border-color: transparent;
-    --bs-btn-color: --var(--color-fg-main);
+dialog {
+    border: none;
+}
+
+.linkButton {
+    color: var(--color-fg-1);
+    text-decoration: none;
+    padding: 0.5rem 0.75rem;
+    text-align: center;
+}
+
+.defaultButton {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
 }
 
 .pagination {
     --bs-pagination-bg: var(--color-1);
-    --bs-pagination-color: var(--color-fg-main);
+    --bs-pagination-color: var(--color-fg-1);
     --bs-pagination-border-color: var(--color-0);
 
     --bs-pagination-hover-bg: var(--color-2);
-    --bs-pagination-hover-color: var(--color-fg-main);
+    --bs-pagination-hover-color: var(--color-fg-1);
     --bs-pagination-hover-border-color: var(--color-1);
 
     --bs-pagination-focus-bg: var(--color-2);
-    --bs-pagination-focus-color: var(--color-fg-main);
+    --bs-pagination-focus-color: var(--color-fg-1);
+}
+
+.validation-message {
+	color: orangered;
+	margin-top: .25rem;
 }
 
 .overflowOn5 {
@@ -121,7 +140,7 @@ button {
 }
 
 input::placeholder {
-    color: var(--color-fg-secondary);
+    color: var(--color-fg-3);
 }
 
 input[type="range"].slider {
@@ -145,3 +164,14 @@ input[type="range"].slider::-webkit-slider-thumb {
 
 .sliderThumb::-webkit-slider-thumb { opacity: 0; }
 .sliderThumb:hover::-webkit-slider-thumb { opacity: 1; }
+
+@media (max-width: 640px) {    
+    .mainLayout {
+        width: 100%;
+        padding: 0 .75rem;
+    }
+
+    :root {
+        --fs-base: 12px;
+    }
+}

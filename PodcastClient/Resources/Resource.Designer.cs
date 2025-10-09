@@ -99,6 +99,15 @@ namespace PodcastClient.Resources {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        public static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         public static string CategoryNotFound {
             get {
                 return ResourceManager.GetString("CategoryNotFound", resourceCulture);
@@ -201,6 +210,15 @@ namespace PodcastClient.Resources {
         public static string EmailValidation {
             get {
                 return ResourceManager.GetString("EmailValidation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string EnterRss {
+            get {
+                return ResourceManager.GetString("EnterRss", resourceCulture);
             }
         }
         
@@ -327,6 +345,15 @@ namespace PodcastClient.Resources {
         public static string InProgress {
             get {
                 return ResourceManager.GetString("InProgress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string InvalidUrl {
+            get {
+                return ResourceManager.GetString("InvalidUrl", resourceCulture);
             }
         }
         

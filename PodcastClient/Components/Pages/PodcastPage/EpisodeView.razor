@@ -1,17 +1,16 @@
 @inject IStringLocalizer<Resource> Localizer
 
-<div class="bg-1 hoverable  rounded-3 p-3" role="button"
-	 style="height: 160px">
+<div class="bg-1 hoverable rounded-3 p-3" role="button" style="height: 150px">
 	<!--Date, mark and additional features-->
 	<div class="d-flex gap-2" style="height: 25px">
-		<span>@Episode.ReleaseDate.ToLocalizedString(Localizer)</span>
+		<div>@Episode.ReleaseDate.ToLocalizedString(Localizer)</div>
 		@if(HasPlayed)
 		{
 			<span class="text-success">@Resource.Played</span>
 		}
 		<Expander Class="ms-auto"
 				  HeaderClass="bg-transparent rounded-2"
-				  ContentClass="dropDown-more py-2 bg-1 rounded-2 d-flex flex-column"
+				  ContentClass="border-main text-nowrap expanderPosition py-2 bg-1 rounded-2 d-flex flex-column"
 				  DropDownPosition="DropDownPosition.Top"
 				  @ref="_expander">
 			<HeaderTemplate>
@@ -33,16 +32,15 @@
 		</Expander>
 	</div>
 	<!--Desription-->
-	<NavLink class="btn p-0 fg-main text-decoration-none d-flex flex-column align-items-start gap-1"
-			 href="@Href" role="button">
+	<a class="linkLayout" href="@Href" role="button">
 		<!--Title and description-->
 		<div class="mw-100 fw-bold fontSize-1 m-0 text-start text-truncate">
 			@Episode.Title
 		</div>
-		<div class="overflowOn2 text-start no-link-text no-header-text">
+		<div class="fg-main-2 overflowOn2 text-start no-link-text no-header-text">
 			@Description
 		</div>
 		<!--Durtion-->
-		<span class="mt-2">@Episode.Duration.ToLocalizedString(Localizer)</span>
-	</NavLink>
+		<div class="mt-1">@Episode.Duration.ToLocalizedString(Localizer)</div>
+	</a>
 </div>

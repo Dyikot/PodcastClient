@@ -1,4 +1,11 @@
-::deep .dropDown-more {
-    text-wrap: nowrap;
-    border: 1px solid var(--color-3);
+.linkLayout {
+    text-decoration: none;
+    color: var(--color-fg-1);
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+}
+
+::deep .expanderPosition {
+    right: 0;
+    left: auto;
 }

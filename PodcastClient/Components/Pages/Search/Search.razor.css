@@ -3,3 +3,8 @@
     padding: .5rem calc(2rem + 24px);
     border: 2px solid var(--color-4);
 }
+
+.seacrhBar:focus-visible {
+    border-color: darkorange;
+    outline: none;
+}

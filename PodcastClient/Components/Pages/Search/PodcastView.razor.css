@@ -1,3 +1,25 @@
-a { text-decoration: none; }
-a:hover { text-decoration: underline; }
-a:hover > img { filter: brightness(85%); }
+.layout {
+    --base-width: 175px;
+    --base-height: 250px;
+
+    text-decoration: none;
+    width: var(--base-width);
+    height: var(--base-height);
+    display: flex;
+    flex-direction: column;
+}
+
+.layout:hover {
+    text-decoration: underline; 
+}
+
+.layout:hover > img {
+    filter: brightness(85%);
+}
+
+@media (max-width: 640px) {
+    .layout {
+        width: calc(var(--base-width) * 0.9);
+        height: calc(var(--base-height) * 0.9);
+    }
+}

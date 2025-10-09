@@ -31,16 +31,13 @@
 				<!--Icon-->
 				<img src="@Podcast.IconSource" class="icon rounded-2"  />
 				<!--About-->
-				<div class="h-100 d-flex flex-column align-items-stretch">
-					<span class="fontSize-2 fw-medium">@Podcast.Title</span>
-					<div class="d-inline-flex gap-2">
-						<span>@Podcast.Author</span>
-						<span>•</span>
-						<span>@($"{Resource.Episodes}: {Podcast.Episodes.Count}")</span>
-					</div>
-					<div class="mt-2 h-100 overflowOn5">@Description</div>
-					<ToggleButton Class="btn bg-2 hoverable rounded-2 align-self-start"
-								  CheckedClass="btn bg-2 hoverable rounded-2 align-self-start"
+				<div class="d-flex align-items-start flex-column">
+					<div class="fontSize-3 fw-semibold">@Podcast.Title</div>
+					<div>@Podcast.Author</div>
+					<div>@($"{Resource.Episodes}: {Podcast.Episodes.Count}")</div>
+					<div class="mt-2 mb-4">@Description</div>
+					<ToggleButton Class="mt-auto btn bg-2 hoverable rounded-2"
+								  CheckedClass="mt-auto btn bg-2 hoverable rounded-2"
 								  IsChecked="UserHasSubscription"
 								  IsEnabled="UserContext.IsAuthenticated"
 								  OnClick="OnSubscribeButtonClick">
@@ -53,9 +50,8 @@
 		<!--Main-->
 		<div class="mainLayout p-3 m-auto d-flex flex-column gap-3">
 			<!--Sort and filter buttons-->
-			<div class="d-flex gap-2">
-				<ComboBox TItem="PodcastClient.Base.SortOrder"
-						  Items="SortOrderOptions"
+			<div class="buttonsLayout">
+				<ComboBox Items="SortOrderOptions"
 						  @bind-SelectedItem="SortOrder"
 						  ButtonClass="p-2"
 						  Context="context">
@@ -65,27 +61,29 @@
 				</ComboBox>
 				@if(UserHasSubscription)
 				{
-					<ToggleButton Class="btn bg-1 hoverable  rounded-2"
-								  CheckedClass="btn bg-2 hoverable  rounded-2"
-								  IsChecked="IsInProgressFilter"
-								  OnClick="OnInProgressButtonClick">
-						<ContentTemplate>@Resource.InProgress</ContentTemplate>
-						<CheckedContentTemplate>@Resource.InProgress</CheckedContentTemplate>
-					</ToggleButton>
-					<ToggleButton Class="btn bg-1 hoverable  rounded-2"
-								  CheckedClass="btn bg-2 hoverable  rounded-2"
-								  IsChecked="IsPlayedFilter"
-								  OnClick="OnPlayedButtonClick">
-						<ContentTemplate>@Resource.Played</ContentTemplate>
-						<CheckedContentTemplate>@Resource.Played</CheckedContentTemplate>
-					</ToggleButton>
-					<ToggleButton Class="btn bg-1 hoverable  rounded-2"
-								  CheckedClass="btn bg-2 hoverable  rounded-2"
-								  IsChecked="IsUnplayedFilter"
-								  OnClick="OnUnplayedButtonClick">
-						<ContentTemplate>@Resource.Unplayed</ContentTemplate>
-						<CheckedContentTemplate>@Resource.Unplayed</CheckedContentTemplate>
-					</ToggleButton>					
+					<div class="d-flex gap-2">
+						<ToggleButton Class="buttonsPadding bg-1 hoverable rounded-2"
+									  CheckedClass="buttonsPadding bg-2 hoverable rounded-2"
+									  IsChecked="IsInProgressFilter"
+									  OnClick="OnInProgressButtonClick">
+							<ContentTemplate>@Resource.InProgress</ContentTemplate>
+							<CheckedContentTemplate>@Resource.InProgress</CheckedContentTemplate>
+						</ToggleButton>
+						<ToggleButton Class="buttonsPadding bg-1 hoverable rounded-2"
+									  CheckedClass="buttonsPadding bg-2 hoverable rounded-2"
+									  IsChecked="IsPlayedFilter"
+									  OnClick="OnPlayedButtonClick">
+							<ContentTemplate>@Resource.Played</ContentTemplate>
+							<CheckedContentTemplate>@Resource.Played</CheckedContentTemplate>
+						</ToggleButton>
+						<ToggleButton Class="buttonsPadding bg-1 hoverable  rounded-2"
+									  CheckedClass="buttonsPadding bg-2 hoverable  rounded-2"
+									  IsChecked="IsUnplayedFilter"
+									  OnClick="OnUnplayedButtonClick">
+							<ContentTemplate>@Resource.Unplayed</ContentTemplate>
+							<CheckedContentTemplate>@Resource.Unplayed</CheckedContentTemplate>
+						</ToggleButton>
+					</div>
 				}
 			</div>
 			<!--Podcasts-->

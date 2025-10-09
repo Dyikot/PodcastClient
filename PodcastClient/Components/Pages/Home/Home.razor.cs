@@ -9,7 +9,7 @@ namespace PodcastClient.Components.Pages.Home
 {
 	public partial class Home
     {
-		private readonly DateOnly _lastMonth = DateOnly.FromDateTime(DateTime.Today.AddMonths(-1));
+		private readonly DateOnly _newDate = DateOnly.FromDateTime(DateTime.Today.AddMonths(-3));
 		private Carousel _popularPodcasts = default!;
 		private Carousel _newPodcasts = default!;
 
@@ -48,7 +48,7 @@ namespace PodcastClient.Components.Pages.Home
 
 				NewPodcasts = await content.Podcasts
 					.AsNoTracking()
-					.Where(p => p.Inserted > _lastMonth)
+					.Where(p => p.Inserted > _newDate)
 					.OrderByDescending(p => p.Subscribers)
 					.Take(20)
 					.ToListAsync();

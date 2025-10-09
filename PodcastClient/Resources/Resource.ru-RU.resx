@@ -387,4 +387,13 @@
   <data name="CategoryNotFound" xml:space="preserve">
     <value>Категория не найдена</value>
   </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="EnterRss" xml:space="preserve">
+    <value>Введите URL RSS-ленты</value>
+  </data>
+  <data name="InvalidUrl" xml:space="preserve">
+    <value>URL-адрес не является допустимым полным URL-адресом http, https или ftp</value>
+  </data>
 </root>

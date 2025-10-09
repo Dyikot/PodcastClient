@@ -3,34 +3,42 @@
 @inject PodcastRssFetcher PodcastRssFetcher
 @inject UserContext UserContext
 @inject PodcastsService PodcastsService
+@inject IJSRuntime JS
 @inject ILogger<Library> Logger
 @inject IDbContextFactory<ApplicationDbContext> DbContextFactory
 
 <PageTitle>@Resource.Library</PageTitle>
 
 <div class="m-3 d-flex flex-column gap-2">
-	<div class="d-flex align-items-center gap-2" style="height: 50px;">
-	<!--Subscribe expander-->
-	<Expander HeaderClass="btn bg-1 hoverable d-flex align-items-center gap-1"
-			  ContentClass="bg-1 rounded-2 p-2 top-50 translate-middle-y d-flex justify-content-around align-items-center gap-2"
-			  DropDownPosition="DropDownPosition.Right">
-		<HeaderTemplate>
-			<img src="Library/Add.svg" width="24" height="24" />
-			<span>@Resource.Subscribe</span>
-		</HeaderTemplate>
-		<ContentTemplate>
-			<img src="Library/RssFeed.svg" />
-			<InputText @bind-Value="RssFeed"
-					   placeholder="https://rss-feed.com"
-					   class="fg-main bg-0 border border-0"
-					   style="outline: none" />
-			<button class="btn bg-2 hoverable"
-					@onclick="OnSubmitButtonClick">
-				@Resource.Submit
-			</button>
-		</ContentTemplate>
-	</Expander>
-	</div>
+	<button class="defaultButton bg-1 hoverable rounded-2 align-self-start"
+			@onclick="OpenRssDialog">
+		<img src="Library/Add.svg" width="24" height="24" />
+		<span>@Resource.Subscribe</span>
+	</button>
+	<dialog id="rssDialog" class="bg-1 rounded-2 border-main">
+		<EditForm method="dialog" class="dialogLayout fg-main"
+				  EditContext="_editContext"
+				  OnValidSubmit="OnRssFeedSubmit">
+			<DataAnnotationsValidator />
+			<div class="d-flex flex-column gap-1">
+				<div class="fontSize-1">@Resource.EnterRss</div>
+				<InputText @bind-Value="RssFeed.Url"
+						   placeholder="https://rss-feed.com"
+						   class="fg-main p-2 bg-0 border-main rounded-2"
+						   style="outline: none" />
+				<ValidationMessage For="() => RssFeed.Url" />
+			</div>
+			<div class="d-flex gap-1 justify-content-end">
+				<button class="defaultButton bg-2 hoverable rounded-2" type="button"
+						@onclick="CloseRssDialog">
+					@Resource.Cancel
+				</button>
+				<button class="defaultButton bg-2 hoverable rounded-2" type="submit">
+					@Resource.Submit
+				</button>
+			</div>
+		</EditForm>
+	</dialog>
 	<!--Podcasts-->
 	<div class="d-flex flex-wrap justify-content-start my-2 gap-2">
 		@foreach (var podcast in Podcasts)

@@ -10,7 +10,7 @@
 
 <div class="p-3 d-flex flex-column gap-5">
 	<!--Search-->
-	<a href="/search" class="bg-0 seacrhBar rounded-5 fg-secondary fontSize-3">
+	<a href="search" class="bg-0 seacrhBar rounded-5 fg-main-3 fontSize-3">
 		<img src="Home/Search.svg" />
 		<span>@Resource.Search</span>
 	</a>
@@ -30,7 +30,7 @@
 						}
 						@if(NewEpisodes.Count > 3)
 						{
-							<NavLink href="new-episodes" class="btn bg-1 hoverable">
+							<NavLink href="new-episodes" class="linkButton bg-1 hoverable rounded-2">
 								@Resource.MoreEpisodes
 							</NavLink>							
 						}
@@ -38,7 +38,7 @@
 				}
 				else
 				{
-					<div class="card-text fg-secondary text-center">
+					<div class="card-text fg-main-3 text-center">
 						@Resource.NoNewEpisodes
 					</div>
 				}
@@ -48,7 +48,9 @@
 	<!--Popular-->
 	<div class="d-flex flex-column gap-2">
 		<span class="fontSize-4 fw-semibold">@Resource.PopularPodcasts</span>
-		<Carousel Class="podcastsContainer" @ref="_popularPodcasts">
+		<Carousel Class="podcastsContainer" 
+				  ContentClass="podcastContainerContent" 
+				  @ref="_popularPodcasts">
 			<ContentTemplate>
 				@foreach (var podcast in PopularPodcasts)
 				{
@@ -60,7 +62,9 @@
 	<!--New-->
 	<div class="d-flex flex-column gap-2">
 		<span class="fontSize-4 fw-semibold">@Resource.NewPodcasts</span>
-		<Carousel Class="podcastsContainer" @ref="_newPodcasts">
+		<Carousel Class="podcastsContainer" 
+				  ContentClass="podcastContainerContent" 
+				  @ref="_newPodcasts">
 			<ContentTemplate>
 				@foreach (var podcast in NewPodcasts)
 				{
@@ -72,7 +76,7 @@
 	<!--Categories-->
 	<div class="d-flex flex-column gap-2">
 		<span class="fontSize-4 fw-semibold">@Resource.ExploreByCategory</span>
-		<div class="d-flex flex-wrap gap-3">
+		<div class="categoryLayout">
 			@foreach(var category in Categories)
 			{
 				<a href="@category.Uri" class="bg-1 hoverable rounded-2 categoryButton">

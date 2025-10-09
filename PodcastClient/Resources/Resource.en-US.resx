@@ -387,4 +387,13 @@
   <data name="CategoryNotFound" xml:space="preserve">
     <value>Сategory not found</value>
   </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="EnterRss" xml:space="preserve">
+    <value>Enter RSS Feed URL</value>
+  </data>
+  <data name="InvalidUrl" xml:space="preserve">
+    <value>The URL is not a valid fully-qualified http, https, or ftp URL</value>
+  </data>
 </root>

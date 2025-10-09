@@ -16,7 +16,7 @@
 
 ::deep .carouselContent {
     display: flex;
-    gap: .5rem;
+    gap: 0.5rem;
     overflow-x: hidden;
     scroll-behavior: smooth;
 }

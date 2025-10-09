@@ -5,11 +5,7 @@
 }
 
 .comboBox-button:focus-visible {
-    outline: none;
-    box-shadow: 
-        0 2px 4px rgb(0 0 0 / 0.12),
-        0 0 2px rgb(0 0 0 / 0.15), 
-        0 0 0 4px rgb(from var(--color-1) r g b / 0.75);
+    outline: 2px solid var(--color-fg-1);
 }
 
 .comboBox-item {
@@ -33,7 +29,7 @@
 
 .comboBox-dropDown {
     z-index: 10;
-    display: inline-flex;
+    display: flex;
     flex-direction: column;
     position: absolute;
     width: 100%;

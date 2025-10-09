@@ -1,16 +1,31 @@
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.JSInterop;
 using PodcastClient.Data;
+using PodcastClient.Resources;
+using System.ComponentModel.DataAnnotations;
 
 namespace PodcastClient.Components.Pages.Library
 {
+	public class RssFeedModel
+	{
+		[Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "FieldRequiredValidation")]
+		[Url(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "InvalidUrl")]
+		public string Url { get; set; } = string.Empty;
+	}
+
     public partial class Library
     {
+		private EditContext? _editContext;
+
 		public List<Podcast> Podcasts { get; set; } = [];
-		public string RssFeed { get; set; } = string.Empty;
+		public RssFeedModel RssFeed { get; set; } = new();
 		public bool IsAddingPodcast { get; private set; } = false;
 
 		protected override async Task OnInitializedAsync()
 		{
+			_editContext = new(RssFeed);
+
 			using var context = DbContextFactory.CreateDbContext();
 
 			var user = await context.Users
@@ -21,23 +36,32 @@ namespace PodcastClient.Components.Pages.Library
 			Podcasts = user.Podcasts;
 		}
 
-		private async Task OnSubmitButtonClick()
+		private async Task OpenRssDialog()
 		{
-			if (!string.IsNullOrEmpty(RssFeed))
-			{
-				IsAddingPodcast = true;
-				await TryAddPodcast();
-				IsAddingPodcast = false;
-				RssFeed = string.Empty;
-            }
+			await JS.InvokeVoidAsync("OpenDialog", "rssDialog");
 		}
 
-		private async Task TryAddPodcast()
+		private async Task CloseRssDialog()
+		{
+			RssFeed.Url = string.Empty;
+			_editContext = new(RssFeed);
+			await JS.InvokeVoidAsync("CloseDialog", "rssDialog");
+		}
+
+		private async Task OnRssFeedSubmit()
+		{
+			var rss = new Uri(RssFeed.Url);
+
+			IsAddingPodcast = true;
+			await CloseRssDialog();
+			await TryAddPodcast(rss);
+			IsAddingPodcast = false;
+		}
+
+		private async Task TryAddPodcast(Uri rss)
 		{
 			try
 			{				
-				var rss = new Uri(RssFeed);
-
 				if (Podcasts.Any(p => p.Rss == rss))
 				{
 					return;

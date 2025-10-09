@@ -387,4 +387,13 @@
   <data name="CategoryNotFound" xml:space="preserve">
     <value />
   </data>
+  <data name="Cancel" xml:space="preserve">
+    <value />
+  </data>
+  <data name="EnterRss" xml:space="preserve">
+    <value />
+  </data>
+  <data name="InvalidUrl" xml:space="preserve">
+    <value />
+  </data>
 </root>

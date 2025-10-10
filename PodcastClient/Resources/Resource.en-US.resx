@@ -250,10 +250,10 @@
     <value>Unsubscribe</value>
   </data>
   <data name="SignIn" xml:space="preserve">
-    <value>Sign In</value>
+    <value>Sign in</value>
   </data>
   <data name="SignUp" xml:space="preserve">
-    <value>Sign Up</value>
+    <value>Sign up</value>
   </data>
   <data name="UserName" xml:space="preserve">
     <value>Username</value>
@@ -286,7 +286,7 @@
     <value>Incorrect username or password</value>
   </data>
   <data name="SignOut" xml:space="preserve">
-    <value>Sign Out</value>
+    <value>Sign out</value>
   </data>
   <data name="EmailExist" xml:space="preserve">
     <value>This email is already registered</value>
@@ -395,5 +395,11 @@
   </data>
   <data name="InvalidUrl" xml:space="preserve">
     <value>The URL is not a valid fully-qualified http, https, or ftp URL</value>
+  </data>
+  <data name="NoAccount" xml:space="preserve">
+    <value>No account?</value>
+  </data>
+  <data name="DoSignUp" xml:space="preserve">
+    <value>Sign up!</value>
   </data>
 </root>

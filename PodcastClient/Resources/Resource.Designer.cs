@@ -180,6 +180,15 @@ namespace PodcastClient.Resources {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        public static string DoSignUp {
+            get {
+                return ResourceManager.GetString("DoSignUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         public static string Duration {
             get {
                 return ResourceManager.GetString("Duration", resourceCulture);
@@ -516,6 +525,15 @@ namespace PodcastClient.Resources {
         public static string NextPage {
             get {
                 return ResourceManager.GetString("NextPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string NoAccount {
+            get {
+                return ResourceManager.GetString("NoAccount", resourceCulture);
             }
         }
         

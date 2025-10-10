@@ -4,20 +4,20 @@
 
 <PageTitle>@Resource.SignIn</PageTitle>
 
-<div class="h-100 p-2 d-flex align-items-center justify-content-center">
-	<EditForm class="signin-form bg-1 rounded-2 p-3 d-flex flex-column align-items-center justify-content-around"
+<div class="layout p-2 d-flex align-items-center justify-content-center">
+	<EditForm class="formLayout bg-1 border-main rounded-2 p-3"
 			  Model="User"
 			  OnValidSubmit="OnValidSubmit">
 		<DataAnnotationsValidator />
 		<h4>@Resource.SignIn</h4>
-		<div>
+		<div class="w-100">
 			<label for="username" class="form-label fontSize-1">
 				@Resource.UserName
 			</label>
 			<InputText id="username" class="form-control" @bind-Value="User.UserName" />
 			<ValidationMessage For="@(() => User.UserName)" />
 		</div>
-		<div>
+		<div class="w-100">
 			<label for="password" class="form-label fontSize-1">
 				@Resource.Password
 			</label>
@@ -29,13 +29,12 @@
 		{
 			<span class="validation-message">@_errorMessage</span>			
 		}
-		<div class="w-100 mt-1 d-flex flex-column gap-2">
-			<button class="w-100 btn btn-warning text-black" type="submit">
-				@Resource.Submit
-			</button>
-			<a class="w-100 btn bg-3 hoverable" href="signup">
-				@Resource.SignUp
-			</a>
-		</div>
+		<button class="mt-1 w-100 btn btn-warning text-black" type="submit">
+			@Resource.Submit
+		</button>
+		<p class="mt-1">
+			<span>@Resource.NoAccount</span>
+			<a href="signup">@Resource.DoSignUp</a>
+		</p>
 	</EditForm>
 </div>

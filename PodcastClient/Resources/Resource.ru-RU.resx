@@ -396,4 +396,10 @@
   <data name="InvalidUrl" xml:space="preserve">
     <value>URL-адрес не является допустимым полным URL-адресом http, https или ftp</value>
   </data>
+  <data name="NoAccount" xml:space="preserve">
+    <value>Нет аккаунта?</value>
+  </data>
+  <data name="DoSignUp" xml:space="preserve">
+    <value>Зарегистрируйтесь!</value>
+  </data>
 </root>

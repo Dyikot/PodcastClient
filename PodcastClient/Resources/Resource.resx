@@ -396,4 +396,10 @@
   <data name="InvalidUrl" xml:space="preserve">
     <value />
   </data>
+  <data name="NoAccount" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DoSignUp" xml:space="preserve">
+    <value />
+  </data>
 </root>

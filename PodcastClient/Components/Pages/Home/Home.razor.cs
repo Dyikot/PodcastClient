@@ -24,9 +24,23 @@ namespace PodcastClient.Components.Pages.Home
 				.Select(c => new CategoryViewModel(Localizer, c))
 				.ToList();
 
+			using var content = DbContextFactory.CreateDbContext();
+
+			PopularPodcasts = await content.Podcasts
+					.AsNoTracking()
+					.OrderByDescending(p => p.Subscribers)
+					.Take(20)
+					.ToListAsync();
+
+			NewPodcasts = await content.Podcasts
+				.AsNoTracking()
+				.Where(p => p.Inserted > _newDate)
+				.OrderByDescending(p => p.Subscribers)
+				.Take(20)
+				.ToListAsync();
+
 			if (UserContext.IsAuthenticated)
 			{
-				using var content = DbContextFactory.CreateDbContext();
 				NewEpisodes = await content.UserEpisodes
 					.AsNoTracking()
 					.Where(ue => ue.UserId == UserContext.UserId &&
@@ -38,20 +52,7 @@ namespace PodcastClient.Components.Pages.Home
 						PodcastTitle = ue.Episode.Podcast.Title
 					})
 					.Take(4)
-					.ToListAsync();
-
-				PopularPodcasts = await content.Podcasts
-					.AsNoTracking()
-					.OrderByDescending(p => p.Subscribers)
-					.Take(20)
-					.ToListAsync();
-
-				NewPodcasts = await content.Podcasts
-					.AsNoTracking()
-					.Where(p => p.Inserted > _newDate)
-					.OrderByDescending(p => p.Subscribers)
-					.Take(20)
-					.ToListAsync();
+					.ToListAsync();				
 			}
 		}
 

@@ -1,12 +1,19 @@
-#video-player {
-    width: 100%;
+#video-player {    
     max-width: 1280px;
-    aspect-ratio: 16/9;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    background-color: black;
 }
 
 #video-player:hover #controls {
     opacity: 1;
+}
+
+video {
+    width: 100%;
+    aspect-ratio: 16/9;
 }
 
 video:focus {
@@ -21,22 +28,40 @@ video:focus {
     bottom: 0;
     width: 100%;
     height: 50px;    
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-around;
 }
 
 #controls-buttons {
     background-color: rgba(0, 0, 0, 80%);
     flex-grow: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0 0.5rem;
 }
 
-::deep .controlButton { background-color: transparent; }
-::deep .controlButton:hover { background-color: var(--sliderColor); }
-::deep .controlButton:focus-visible {
-    outline: none;
-    box-shadow: 0 0 0 4px var(--sliderColor);
+::deep .controlButton { 
+    background-color: transparent; 
+}
+
+::deep .controlButton:hover { 
+    background-color: var(--sliderColor); 
 }
 
 ::deep .speedDropDown {
     width: auto !important;
+}
+
+#durationSlider {
+    height: 5px;
+}
+
+#volumeSlider {
+    width: 100px;
+    height: 5px;
 }
 
 .fullscreenButton { 
@@ -50,4 +75,18 @@ video:focus {
 
 #video-player:fullscreen .fullscreenButton {
     background-image: url("/Controls/VideoPlayer/Collapse.svg");
+}
+
+@media (max-width: 640px) {
+    #controls {
+        opacity: 1;
+    }
+
+    #volumeSlider {
+        width: 75px;
+    }
+
+    ::deep .playButton, .rewindButton {
+        display: none;
+    }
 }

@@ -1,8 +1,7 @@
 @inject IJSRuntime JS
 @inherits PlayerBase
 
-<figure id="video-player" 
-		class="d-flex flex-column align-items-stretch">
+<figure id="video-player">
 	<video src="@Source"
 		   tabindex="0"
 		   @ref="_control"
@@ -14,25 +13,32 @@
 		   @onclick="OnPlayButtonClick"
 		   @onkeydown="OnKeyDown"
 		   @ondblclick="OnFullscreenButtonClick" />
-	<div id="controls"
-		 class="d-flex flex-column align-items-stretch justify-content-around">
+	@if (!CanPlay)
+	{
+		<div class="position-absolute top-50 start-50 translate-middle">
+			<div class="spinner-border text-warning" role="status">
+				<span class="visually-hidden">Loading...</span>
+			</div>
+		</div>
+	}
+	<div id="controls">
 		<!--Duration slider-->
-		<input class="slider sliderThumb"
+		<input class="slider sliderThumb" id="durationSlider"
 			   type="range"
-			   style="background-size: @(DurationPersentage)% 100%;"
+			   style="background-size: @(CurrentTimePersentage)% 100%;"
 			   max="@Duration.TotalSeconds"
 			   value="@CurrentTime.TotalSeconds"
 			   @oninput="OnCurrentTimeSliderChanged" />
 		<!--Buttons-->
-		<div id="controls-buttons" class="d-flex align-items-center gap-2 px-2">
+		<div id="controls-buttons">
 			<!--Rewind button-->
-			<button class="controlButton rounded-2"
+			<button class="controlButton rounded-2 rewindButton"
 					@onclick="OnRewindButtonClick">
 				<img src="Controls/VideoPlayer/Replay.svg" />
 			</button>
 			<!--Play/Pause button-->
-			<ToggleButton Class="controlButton rounded-2"
-						  CheckedClass="controlButton rounded-2"
+			<ToggleButton Class="controlButton rounded-2 playButton"
+						  CheckedClass="controlButton rounded-2 playButton"
 						  IsChecked="IsPlaying"
 						  OnClick="OnPlayButtonClick">
 				<ContentTemplate>
@@ -43,13 +49,12 @@
 				</CheckedContentTemplate>
 			</ToggleButton>
 			<!--Forward button-->
-			<button class="controlButton rounded-2"
+			<button class="controlButton rounded-2 rewindButton"
 				    @onclick="OnForwardButtonClick">
 				<img src="Controls/VideoPlayer/Forward.svg"  />
 			</button>
 			<!--Duration panel-->
-			<div class="d-flex justify-content-center align-items-center gap-1 text-white"
-				 style="width: 160px">
+			<div class="px-1 d-flex justify-content-center align-items-center gap-1 text-white">
 				<span>@CurrentTime.ToString(TimeFormat)</span>
 				<span>/</span>
 				<span>@Duration.ToString(TimeFormat)</span>
@@ -67,7 +72,7 @@
 				</CheckedContentTemplate>
 			</ToggleButton>
 			<!--Volume slider-->
-			<input class="slider rounded-2"
+			<input class="slider rounded-2" id="volumeSlider"
 				   type="range"
 				   style="background-size: @(VolumePersentage)% 100%"
 				   max="1"

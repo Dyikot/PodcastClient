@@ -1,5 +1,7 @@
 PodcastClient/bin
 PodcastClient/obj
+PodcastClient/.config
+PodcastClient/Properties/PublishProfiles
 .vs
 *.db
 *.db-shm

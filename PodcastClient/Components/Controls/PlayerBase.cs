@@ -5,6 +5,7 @@ namespace PodcastClient.Components.Controls
 	public abstract class PlayerBase : ComponentBase
 	{
 		public const string TimeFormat = "hh':'mm':'ss";
+		private const int MaxTimeUpdated = 4;
 		public readonly List<double> PlaySpeedOptions = [0.5, 1.0, 1.25, 1.5, 2.0];
 
 		protected TimeSpan _currentTime;
@@ -13,6 +14,7 @@ namespace PodcastClient.Components.Controls
 		protected double _playSpeed;
 		protected ElementReference _control;
 		private bool _hasMuteButtonPressed = false;
+		private int _timeUpdated = 0;
 
 		[Parameter]
 		public Uri? Source { get; set; }
@@ -29,7 +31,9 @@ namespace PodcastClient.Components.Controls
 				if (_currentTime != value)
 				{
 					if (CurrentTimeChanged.HasDelegate)
+					{
 						CurrentTimeChanged.InvokeAsync(value);
+					}
 
 					_currentTime = value;
 				}
@@ -45,7 +49,9 @@ namespace PodcastClient.Components.Controls
 				if (_volume != value)
 				{
 					if (VolumeChanged.HasDelegate)
+					{
 						VolumeChanged.InvokeAsync(value);
+					}
 
 					_volume = value;
 				}
@@ -61,7 +67,9 @@ namespace PodcastClient.Components.Controls
 				if (_playSpeed != value)
 				{
 					if (PlaySpeedChanged.HasDelegate)
+					{
 						PlaySpeedChanged.InvokeAsync(value);
+					}
 
 					_playSpeed = value;
 				}
@@ -86,7 +94,7 @@ namespace PodcastClient.Components.Controls
 		public bool IsMute => _volume == 0;
 
 		public double VolumePersentage => Volume / 1 * 100;
-		public double DurationPersentage => CurrentTime / Duration * 100;
+		public double CurrentTimePersentage => CurrentTime / Duration * 100;
 
 		protected abstract Task InitializeControlAsync();
 		protected abstract Task<double> GetCurrentTimeAsync();
@@ -106,8 +114,16 @@ namespace PodcastClient.Components.Controls
 
 		protected async Task OnTimeUpdate()
 		{
-			var seconds = await GetCurrentTimeAsync();
-			CurrentTime = TimeSpan.FromSeconds(seconds);
+			if(_timeUpdated < MaxTimeUpdated)
+			{
+				_timeUpdated++;
+			}
+			else
+			{
+				_timeUpdated = 0;
+				var seconds = await GetCurrentTimeAsync();
+				CurrentTime = TimeSpan.FromSeconds(seconds);
+			}
 		}
 
 		protected async Task OnMetadataLoaded()

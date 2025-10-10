@@ -12,7 +12,7 @@
 	<!--Duration slider-->
 	<input class="slider sliderThumb" id="durationSlider"
 		   type="range"
-		   style="background-size: @(DurationPersentage)% 100%;"
+		   style="background-size: @(CurrentTimePersentage)% 100%;"
 		   max="@Duration.TotalSeconds"
 		   value="@CurrentTime.TotalSeconds"
 		   @oninput="OnCurrentTimeSliderChanged" />

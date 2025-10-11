@@ -33,7 +33,11 @@ div[data-canplay="False"] {
     padding: 0 1.5rem;
     display: flex;
     align-items: center;
-    gap: 0.25rem;
+    gap: 0.5rem;
+}   
+
+::deep .controlButton {
+    padding: 4px;
 }
 
 .durationPanel {

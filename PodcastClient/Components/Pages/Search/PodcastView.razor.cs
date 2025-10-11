@@ -8,6 +8,9 @@ namespace PodcastClient.Components.Pages.Search
 		[Parameter, EditorRequired]
 		public Podcast Podcast { get; set; }
 
+		[Parameter]
+		public string HrefTarget { get; set; } = "_self";
+
 		public string Href => $"podcast/{Podcast.Id}";
 	}
 }

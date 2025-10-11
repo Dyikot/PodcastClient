@@ -1,7 +1,7 @@
+using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 using Microsoft.JSInterop;
-using PodcastClient.Components.Controls;
 using PodcastClient.Data;
 using PodcastClient.Services;
 
@@ -10,8 +10,6 @@ namespace PodcastClient.Components.Pages.Home
 	public partial class Home
     {
 		private readonly DateOnly _newDate = DateOnly.FromDateTime(DateTime.Today.AddMonths(-3));
-		private Carousel _popularPodcasts = default!;
-		private Carousel _newPodcasts = default!;
 
 		public List<Podcast> PopularPodcasts { get; set; } = default!;
 		public List<Podcast> NewPodcasts { get; set; } = default!;
@@ -53,16 +51,6 @@ namespace PodcastClient.Components.Pages.Home
 					})
 					.Take(4)
 					.ToListAsync();				
-			}
-		}
-
-		protected override async Task OnAfterRenderAsync(bool firstRender)
-		{
-			if(firstRender)
-			{
-				await JS.InvokeVoidAsync("InitializeHomePage", 
-										 _popularPodcasts.Element, 
-										 _newPodcasts.Element);
 			}
 		}
 	}

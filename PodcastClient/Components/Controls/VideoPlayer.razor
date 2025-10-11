@@ -32,13 +32,13 @@
 		<!--Buttons-->
 		<div id="controls-buttons">
 			<!--Rewind button-->
-			<button class="controlButton rounded-2 rewindButton"
+			<button class="controlButton rounded-circle rewindButton"
 					@onclick="OnRewindButtonClick">
 				<img src="Controls/VideoPlayer/Replay.svg" />
 			</button>
 			<!--Play/Pause button-->
-			<ToggleButton Class="controlButton rounded-2"
-						  CheckedClass="controlButton rounded-2"
+			<ToggleButton Class="controlButton rounded-circle p-0"
+						  CheckedClass="controlButton rounded-circle p-0"
 						  IsChecked="IsPlaying"
 						  OnClick="OnPlayButtonClick">
 				<ContentTemplate>
@@ -49,7 +49,7 @@
 				</CheckedContentTemplate>
 			</ToggleButton>
 			<!--Forward button-->
-			<button class="controlButton rounded-2"
+			<button class="controlButton rounded-circle"
 				    @onclick="OnForwardButtonClick">
 				<img src="Controls/VideoPlayer/Forward.svg"  />
 			</button>
@@ -60,8 +60,8 @@
 				<span>@Duration.ToString(TimeFormat)</span>
 			</div>
 			<!--Mute button-->
-			<ToggleButton Class="controlButton rounded-2 ms-auto"
-						  CheckedClass="controlButton rounded-2 ms-auto"
+			<ToggleButton Class="controlButton rounded-circle ms-auto"
+						  CheckedClass="controlButton rounded-circle ms-auto"
 						  IsChecked="IsMute"
 						  OnClick="OnMuteButtonClick">
 				<ContentTemplate>
@@ -85,7 +85,7 @@
 					  SelectedItem="PlaySpeed"
 					  SelectionChanged="OnSpeedOptionSelect"
 					  DropDownPosition="DropDownPosition.Top"
-					  ButtonClass="controlButton rounded-2"
+					  ButtonClass="controlButton rounded-circle"
 					  DropDownClass="speedDropDown mb-3"
 					  Items="PlaySpeedOptions"
 					  Context="context">
@@ -97,7 +97,7 @@
 				</ItemTemplate>
 			</ComboBox>
 			<!--Fullscreen button-->
-			<button class="controlButton rounded-2 fullscreenButton"
+			<button class="controlButton rounded-circle fullscreenButton"
 					@onclick="OnFullscreenButtonClick" />
 		</div>
 	</div>

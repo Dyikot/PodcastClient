@@ -4,7 +4,7 @@
 }
 
 #sidebar {
-    background-color: var(--color-nav-menu);
+    background-color: var(--navMenu-color);
     position: sticky;
     top: 0px;
     order: 0;

@@ -1,6 +1,4 @@
 :root {
-    --sliderColor: #f59630;
-
     --fs-base: 14px;
     --fs-1: calc(var(--fs-base) + 2px);
     --fs-2: calc(var(--fs-base) + 4px);
@@ -10,37 +8,43 @@
     --fs-r1: calc(var(--fs-base) - 2px);
     --fs-r2: calc(var(--fs-base) - 4px);
     --fs-r3: calc(var(--fs-base) - 6px);
+
+    --slider-fill-color: #f59630;
 }
 
 :root[data-theme="light"] {
-    --color-fg-1: black;
-    --color-fg-2: #3D3D3D;
-    --color-fg-3: #6E6E6E;
+    --fg-color-1: black;
+    --fg-color-2: #3D3D3D;
+    --fg-color-3: #6E6E6E;
     --color-0: #e3e3e3;
     --color-1: #d4d4d4;
     --color-2: #c5c5c5;
     --color-3: #b6b6b6;
     --color-4: #a7a7a7;
-    --color-nav-menu: #c5c5c5;
-    --color-nav-menu-currentItem: #b6b6b6;
+    --navMenu-color: #c5c5c5;
+    --navMenu-active-color: #b6b6b6;
+    --slider-blank-color: white;
+    --brightness-1: 0.9;
 }
 
 :root[data-theme="dark"] {
-    --color-fg-1: #e6e6e6;
-    --color-fg-2: #CFCFCF;
-    --color-fg-3: #B6B6B6;
+    --fg-color-1: #e6e6e6;
+    --fg-color-2: #CFCFCF;
+    --fg-color-3: #B6B6B6;
     --color-0: #2e2e2e;
     --color-1: #3d3d3d;
     --color-2: #4c4c4c;
     --color-3: #5b5b5b;
     --color-4: #6a6a6a;
-    --color-nav-menu: #151515;
-    --color-nav-menu-currentItem: #252525;
+    --navMenu-color: #151515;
+    --navMenu-active-color: #252525;
+    --slider-blank-color: #CFCFCF;
+    --brightness-1: 1.25;
 }
 
-.fg-main { color : var(--color-fg-1); }
-.fg-main-2 { color : var(--color-fg-2); }
-.fg-main-3 { color : var(--color-fg-3); }
+.fg-main { color : var(--fg-color-1); }
+.fg-main-2 { color : var(--fg-color-2); }
+.fg-main-3 { color : var(--fg-color-3); }
 
 .border-main { border: 1px solid var(--color-4); }
 
@@ -57,7 +61,7 @@
 .bg-0:focus-visible,
 .bg-1:focus-visible,
 .bg-2:focus-visible,
-.bg-3:focus-visible { outline: 2px solid var(--color-fg-1); }
+.bg-3:focus-visible { outline: 2px solid var(--fg-color-1); }
 
 .fontSize-1 { font-size: var(--fs-1); }
 .fontSize-2 { font-size: var(--fs-2); }
@@ -75,16 +79,16 @@
 
 .card {
     --bs-card-bg: var(--color-0);
-    --bs-card-color: var(--color-fg-1);
+    --bs-card-color: var(--fg-color-1);
     --bs-card-cap-bg: var(--color-1);
-    --bs-card-cap-color: var(--color-fg-1);
-    --bs-card-title-color: var(--color-fg-1);
+    --bs-card-cap-color: var(--fg-color-1);
+    --bs-card-title-color: var(--fg-color-1);
     --bs-card-border-color: var(--color-4);
 }
 
 button {
     border: none;
-    color: var(--color-fg-1);
+    color: var(--fg-color-1);
 }
 
 dialog {
@@ -92,7 +96,7 @@ dialog {
 }
 
 .linkButton {
-    color: var(--color-fg-1);
+    color: var(--fg-color-1);
     text-decoration: none;
     padding: 0.5rem 0.75rem;
     text-align: center;
@@ -107,15 +111,15 @@ dialog {
 
 .pagination {
     --bs-pagination-bg: var(--color-1);
-    --bs-pagination-color: var(--color-fg-1);
+    --bs-pagination-color: var(--fg-color-1);
     --bs-pagination-border-color: var(--color-0);
 
     --bs-pagination-hover-bg: var(--color-2);
-    --bs-pagination-hover-color: var(--color-fg-1);
+    --bs-pagination-hover-color: var(--fg-color-1);
     --bs-pagination-hover-border-color: var(--color-1);
 
     --bs-pagination-focus-bg: var(--color-2);
-    --bs-pagination-focus-color: var(--color-fg-1);
+    --bs-pagination-focus-color: var(--fg-color-1);
 }
 
 .validation-message {
@@ -140,14 +144,15 @@ dialog {
 }
 
 input::placeholder {
-    color: var(--color-fg-3);
+    color: var(--fg-color-3);
 }
 
 input[type="range"].slider {
     -webkit-appearance: none;
     height: 5px;
     z-index: 1;
-    background-image: linear-gradient(var(--sliderColor), var(--sliderColor));
+    background: var(--slider-blank-color);
+    background-image: linear-gradient(var(--slider-fill-color), var(--slider-fill-color));
     background-size: 0% 100%;
     background-repeat: no-repeat;
     cursor: pointer;
@@ -155,7 +160,7 @@ input[type="range"].slider {
 
 input[type="range"].slider::-webkit-slider-thumb {
     -webkit-appearance: none;
-    background-color: var(--sliderColor);
+    background-color: var(--slider-fill-color);
     height: 15px;
     width: 15px;
     z-index: 1;

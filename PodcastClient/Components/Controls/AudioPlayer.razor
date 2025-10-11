@@ -18,24 +18,24 @@
 		   @oninput="OnCurrentTimeSliderChanged" />
 	<div class="controls bg-1" data-canplay="@CanPlay.ToString()">
 		<!--Rewind button-->
-		<button class="defaultButton rewindButton rounded-2 bg-1 hoverable"
+		<button class="controlButton rewindButton rounded-circle bg-1 hoverable"
 				@onclick="OnRewindButtonClick">
 			<img src="Controls/AudioPlayer/Replay.svg" />
 		</button>
 		<!--Play/Pause button-->
-		<ToggleButton Class="defaultButton rounded-2 bg-1 hoverable p-0 px-1"
-					  CheckedClass="defaultButton rounded-2 bg-1 hoverable p-0 px-1 "
+		<ToggleButton Class="rounded-circle bg-1 hoverable p-0"
+					  CheckedClass="rounded-circle bg-1 hoverable p-0"
 					  IsChecked="IsPlaying"
 					  OnClick="OnPlayButtonClick">
 			<ContentTemplate>
-				<img src="Controls/AudioPlayer/Play.svg" width="38" />
+				<img src="Controls/AudioPlayer/Play.svg" width="32" />
 			</ContentTemplate>
 			<CheckedContentTemplate>
-				<img src="Controls/AudioPlayer/Pause.svg" width="38" />
+				<img src="Controls/AudioPlayer/Pause.svg" width="32" />
 			</CheckedContentTemplate>
 		</ToggleButton>
 		<!--Forward button-->
-		<button class="defaultButton rewindButton rounded-2 bg-1 hoverable"
+		<button class="controlButton rewindButton rounded-circle bg-1 hoverable"
 				@onclick="OnForwardButtonClick">
 			<img src="Controls/AudioPlayer/Forward.svg"  />
 		</button>
@@ -46,8 +46,8 @@
 			<span>@Duration.ToString(TimeFormat)</span>
 		</div>
 		<!--Mute button-->
-		<ToggleButton Class="defaultButton rounded-2 bg-1 hoverable ms-auto"
-					  CheckedClass="defaultButton rounded-2 bg-1 hoverable  ms-auto"
+		<ToggleButton Class="controlButton rounded-circle bg-1 hoverable ms-auto"
+					  CheckedClass="controlButton rounded-circle bg-1 hoverable ms-auto"
 					  IsChecked="IsMute"
 					  OnClick="OnMuteButtonClick">
 			<ContentTemplate>
@@ -72,7 +72,7 @@
 				  Items="PlaySpeedOptions"
 				  SelectionChanged="OnSpeedOptionSelect"
 				  DropDownPosition="DropDownPosition.Top"
-				  ButtonClass="defaultButton rounded-2 bg-1 hoverable"
+				  ButtonClass="controlButton rounded-circle bg-1 hoverable"
 				  DropDownClass="playSpeed-dropDown"
 				  Context="context">
 			<ButtonContentTemplate>

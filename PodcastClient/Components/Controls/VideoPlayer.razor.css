@@ -44,11 +44,12 @@ video:focus {
 }
 
 ::deep .controlButton { 
+    padding: 4px;
     background-color: transparent; 
 }
 
 ::deep .controlButton:hover { 
-    background-color: var(--sliderColor); 
+    background-color: var(--slider-fill-color); 
 }
 
 ::deep .speedDropDown {
@@ -70,7 +71,7 @@ video:focus {
     justify-content: center;
     align-items: center;
     gap: 0.25rem;
-    color: white;
+    color: #d4d4d4;
 }
 
 .fullscreenButton { 
@@ -87,10 +88,6 @@ video:focus {
 }
 
 @media (max-width: 640px) {
-    /*#controls {
-        opacity: 1;
-    }*/
-
     #volumeSlider {
         width: 75px;
     }

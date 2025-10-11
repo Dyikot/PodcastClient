@@ -6,7 +6,7 @@
 
 .linkLayout {
     text-decoration: none;
-    color: var(--color-fg-1);
+    color: var(--fg-color-1);
     display: grid;
     grid-template-rows: auto 1fr auto;
 }

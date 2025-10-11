@@ -36,14 +36,23 @@
 					<div>@Podcast.Author</div>
 					<div>@($"{Resource.Episodes}: {Podcast.Episodes.Count}")</div>
 					<div class="mt-2 mb-4">@Description</div>
-					<ToggleButton Class="mt-auto btn bg-2 hoverable rounded-2"
-								  CheckedClass="mt-auto btn bg-2 hoverable rounded-2"
-								  IsChecked="UserHasSubscription"
-								  IsEnabled="UserContext.IsAuthenticated"
-								  OnClick="OnSubscribeButtonClick">
-						<ContentTemplate>@Resource.Subscribe</ContentTemplate>
-						<CheckedContentTemplate>@Resource.Unsubscribe</CheckedContentTemplate>
-					</ToggleButton>
+					<AuthorizeView>
+						<Authorized>
+							<ToggleButton Class="mt-auto defaultButton bg-2 hoverable rounded-2"
+										  CheckedClass="mt-auto defaultButton bg-2 hoverable rounded-2"
+										  IsChecked="UserHasSubscription"
+										  IsEnabled="UserContext.IsAuthenticated"
+										  OnClick="OnSubscribeButtonClick">
+								<ContentTemplate>@Resource.Subscribe</ContentTemplate>
+								<CheckedContentTemplate>@Resource.Unsubscribe</CheckedContentTemplate>
+							</ToggleButton>
+						</Authorized>
+						<NotAuthorized>
+							<a href="signin" class="mt-auto linkButton bg-2 hoverable rounded-2">
+								@Resource.Subscribe
+							</a>
+						</NotAuthorized>
+					</AuthorizeView>
 				</div>
 			</div>
 		</div>

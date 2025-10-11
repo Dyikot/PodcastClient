@@ -24,7 +24,7 @@
 	flex-wrap: wrap;
 	gap: .75rem;
 	text-decoration: none;
-	color: var(--color-fg-1);
+	color: var(--fg-color-1);
 }
 
 .categoryLayout {
@@ -38,31 +38,32 @@
     width: 500px;
 }
 
+.podcastsHeader {
+    max-width: calc((175px + 0.5rem) * 7 + 0.5rem);
+    display: flex;
+    justify-content: space-between;
+}
+
+.podcastsNavigation {
+    display: flex;
+    gap: 0.5rem;
+}
+
 ::deep .podcastsContainer {
    max-width: calc((175px + 0.5rem) * 7 + 0.5rem);
    width: calc(100vw - 250px);
 }
 
-::deep .carouselButton {
-    visibility: hidden;
+.carouselButton {
+    border: 2px solid var(--color-4);
 }
 
-@media (min-width: 641px) {
-    ::deep .podcastsContainer[data-at-start="true"] .leftButton {
-        visibility: hidden;
-    }
+.carouselButton:enabled {
+    filter: brightness(var(--brightness-1));
+}
 
-    ::deep .podcastsContainer[data-at-start="false"] .leftButton {
-        visibility: visible;
-    }
-
-    ::deep .podcastsContainer[data-at-end="true"] .rightButton {
-        visibility: hidden;
-    }
-
-    ::deep .podcastsContainer[data-at-end="false"] .rightButton {
-        visibility: visible;
-    }
+.carouselButton:enabled:hover {
+    background-color: var(--color-1);
 }
 
 @media (max-width: 640px) {
@@ -72,9 +73,10 @@
 
     ::deep .podcastsContainer {
         width: 100%;
+        overflow-x: scroll;
     }
 
-    ::deep .podcastContainerContent {
-        overflow-x: scroll;
+    .podcastsNavigation {
+        display: none;
     }
 }

@@ -1,13 +1,9 @@
+@typeparam T
 @inject IJSRuntime JS
 
-<div class="position-relative @Class" @ref="Element">
-	<button class="leftButton carouselButton start-0 @ButtonClass" @onclick="OnLeftButtonClick">
-		@LeftButtonTemplate
-	</button>
-	<button class="rightButton carouselButton end-0 @ButtonClass" @onclick="OnRightButtonClick">
-		@RightButtonTemplate
-	</button>
-	<div class="carouselContent @ContentClass" @ref="_container">
-		@ContentTemplate
-	</div>
+<div class="carouselContainer @Class" @ref="_element">
+	@foreach(var item in Items)
+	{
+		@ItemTemplate(item)		
+	}
 </div>

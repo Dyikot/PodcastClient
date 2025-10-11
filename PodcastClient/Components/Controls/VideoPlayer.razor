@@ -37,8 +37,8 @@
 				<img src="Controls/VideoPlayer/Replay.svg" />
 			</button>
 			<!--Play/Pause button-->
-			<ToggleButton Class="controlButton rounded-2 playButton"
-						  CheckedClass="controlButton rounded-2 playButton"
+			<ToggleButton Class="controlButton rounded-2"
+						  CheckedClass="controlButton rounded-2"
 						  IsChecked="IsPlaying"
 						  OnClick="OnPlayButtonClick">
 				<ContentTemplate>
@@ -49,12 +49,12 @@
 				</CheckedContentTemplate>
 			</ToggleButton>
 			<!--Forward button-->
-			<button class="controlButton rounded-2 rewindButton"
+			<button class="controlButton rounded-2"
 				    @onclick="OnForwardButtonClick">
 				<img src="Controls/VideoPlayer/Forward.svg"  />
 			</button>
 			<!--Duration panel-->
-			<div class="px-1 d-flex justify-content-center align-items-center gap-1 text-white">
+			<div id="duraionPanel">
 				<span>@CurrentTime.ToString(TimeFormat)</span>
 				<span>/</span>
 				<span>@Duration.ToString(TimeFormat)</span>

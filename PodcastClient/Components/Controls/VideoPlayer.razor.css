@@ -64,6 +64,15 @@ video:focus {
     height: 5px;
 }
 
+#duraionPanel {
+    padding: 0 0.25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.25rem;
+    color: white;
+}
+
 .fullscreenButton { 
     width: 32px;
     height: 32px;
@@ -78,15 +87,15 @@ video:focus {
 }
 
 @media (max-width: 640px) {
-    #controls {
+    /*#controls {
         opacity: 1;
-    }
+    }*/
 
     #volumeSlider {
         width: 75px;
     }
 
-    ::deep .playButton, .rewindButton {
+    .rewindButton, #duraionPanel {
         display: none;
     }
 }

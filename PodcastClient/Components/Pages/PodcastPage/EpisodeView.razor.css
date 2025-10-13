@@ -1,5 +1,5 @@
 .layout {
-    height: 150px;
+    height: 10.75em;
     border-radius: 1rem;
     padding: 1rem;
 }
@@ -14,10 +14,4 @@
 ::deep .expanderPosition {
     right: 0;
     left: auto;
-}
-
-@media (max-width: 640px) {
-    .layout {
-        height: 130px;
-    }
 }

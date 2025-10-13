@@ -7,10 +7,10 @@
 }
 
 ::deep .navItem {
-    display: flex;
     flex: 0 50px;
     margin: 0 10px;
     padding: 0 10px;
+    display: flex;
     gap: 10px;    
     align-items: center;
     border-radius: var(--bs-border-radius);
@@ -24,12 +24,46 @@
     background-color: var(--navMenu-active-color);
 }
 
-::deep .navItem:focus-visible {
+::deep .navItem:focus-visible, .authButton:focus-visible {
     outline: 2px solid var(--fg-color-1);
 }
 
-::deep .account {
+.authItem {
+    position: relative;
+    flex: 0 50px;
+    margin: 0 10px;
     margin-top: auto;
+}
+
+.authButton {
+    width: 100%;
+    height: 100%;
+    padding: 0 10px;
+    color: var(--fg-color-1);
+    background-color: var(--navMenu);
+    border-radius: var(--bs-border-radius);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.authButton:hover {
+    background-color: var(--navMenu-active-color);
+}
+
+.authMenu {
+    z-index: 10;
+
+    width: 180px;
+    padding: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    position: absolute;
+    left: 0;
+    bottom: 100%;
+    margin-bottom: 0.5rem;
 }
 
 @media (max-width: 640px) {
@@ -44,14 +78,29 @@
         justify-content: center;
         gap: 0;
         margin: 0;
+        padding: 0;
         border-radius: initial;
     }
 
-    ::deep .navItem > span {
+    ::deep .navItem > span, .authButton > span {
         display: none;
     }
 
-    ::deep .account {
-        margin-top: 0;
+    .authItem {
+        position: static;
+        flex: 1;
+        margin: 0;
+    }    
+
+    .authButton {
+        justify-content: center;
+        border-radius: 0;
+        gap: 0;
+    }
+
+    .authMenu {
+        width: 100%;
+        position: fixed;
+        bottom: 48px;
     }
 }

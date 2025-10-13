@@ -1,3 +1,20 @@
+.layout {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem auto;
+    gap: 1.5rem;
+}
+
+.sectionLayout {
+    margin-bottom: 2rem;
+}
+
+.sectionContent {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
 .settingsTitle { 
     width: 100px; 
 }

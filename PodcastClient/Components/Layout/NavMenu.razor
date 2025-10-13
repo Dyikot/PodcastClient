@@ -1,4 +1,5 @@
 @inject NavigationManager NavigationManager
+@inject IJSRuntime JS
 
 <nav class="navMenu">
     <NavLink class="navItem" href="" Match="NavLinkMatch.All">
@@ -15,22 +16,36 @@
             <span>@Resource.NewEpisodes</span>
         </NavLink>
     </AuthorizeView>
-    <AuthorizeView>
-        <Authorized>
-            <button class="navItem account" @onclick="SignOut">
-                <img src="Navigation/LogOut.svg" />
-                <span>@Resource.SignOut</span>
-            </button>
-        </Authorized>
-        <NotAuthorized>
-            <button class="navItem account" @onclick="SignIn">
-                <img src="Navigation/LogIn.svg" />
-                <span>@Resource.SignIn</span>
-            </button>
-        </NotAuthorized>
-    </AuthorizeView>
-    <NavLink class="navItem" href="settings">
-        <img src="Navigation/Settings.svg" />
-        <span>@Resource.Settings</span>
-    </NavLink>
+    <div class="authItem" @onfocusout="OnAuthMenuFocusLost">
+        <button class="authButton" @onclick="OnAuthButtonClick">
+            <img src="Navigation/Account.svg" />
+            <span>@Resource.Account</span>
+        </button>
+        @if (_isAuthMenuOpen)
+        {
+            <div class="authMenu bg-1 rounded-2 border-main"
+                 @onmouseenter="OnAuthMenuMouseEnter"
+                 @onmouseleave="OnAuthMenuMouseLeave">
+                <button class="defaultButton linkButton bg-1 hoverable rounded-2"
+                        @onclick="OnSettingsClick">
+                    <img src="Navigation/Settings.svg" />
+                    <span>@Resource.Settings</span>
+                </button>
+                <AuthorizeView>
+                    <Authorized>
+                        <button class="defaultButton bg-1 hoverable rounded-2" @onclick="LogOut">
+                            <img src="Navigation/Logout.svg" />
+                            <span>@Resource.SignOut</span>
+                        </button>
+                    </Authorized>
+                    <NotAuthorized>
+                        <button class="defaultButton bg-1 hoverable rounded-2" @onclick="LogIn">
+                            <img src="Navigation/Login.svg" />
+                            <span>@Resource.NavMenuSignIn</span>
+                        </button>
+                    </NotAuthorized>
+                </AuthorizeView>
+            </div>
+        }
+    </div>
 </nav>

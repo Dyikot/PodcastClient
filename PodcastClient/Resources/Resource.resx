@@ -402,4 +402,13 @@
   <data name="DoSignUp" xml:space="preserve">
     <value />
   </data>
+  <data name="Appearance" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Account" xml:space="preserve">
+    <value />
+  </data>
+  <data name="NavMenuSignIn" xml:space="preserve">
+    <value />
+  </data>
 </root>

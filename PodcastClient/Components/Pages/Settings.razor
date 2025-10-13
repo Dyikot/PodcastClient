@@ -6,30 +6,55 @@
 
 <PageTitle>@Resource.Settings</PageTitle>
 
-<div class="d-flex flex-column gap-3 m-3">
-	<div class="d-flex align-items-center">
-		<span class="settingsTitle">@Resource.Language</span>
-		<ComboBox TItem="CultureInfo"
-				  Items="LanguageOptions"
-				  @bind-SelectedItem="CultureService.Culture"
-				  ButtonClass="defaultButton settingsButton bg-1 rounded-2"
-				  Context="context">
-			<ItemTemplate>
-				@GetLanguageLabel(context)
-			</ItemTemplate>
-		</ComboBox>
+<div class="layout mainLayout">
+	@* <AuthorizeView>
+		<div class="d-flex justify-content-end">
+			<button class="defaultButton bg-1 rounded-2" @onclick="LogOut">
+				<img src="Navigation/LogOut.svg" class="buttonImg" />
+				<span>@Resource.SignOut</span>
+			</button>
+		</div>
+	</AuthorizeView> *@
+	<!--Appearance-->
+	<div class="sectionLayout">
+		<span class="header-3">@Resource.Appearance</span>
+		<hr />
+		<div class="sectionContent">
+			<div class="d-flex align-items-center">
+				<span class="settingsTitle">@Resource.Language</span>
+				<ComboBox TItem="CultureInfo"
+						  Items="LanguageOptions"
+						  @bind-SelectedItem="CultureService.Culture"
+						  ButtonClass="defaultButton settingsButton bg-1 rounded-2"
+						  Context="culture">
+					<ItemTemplate>
+						@GetLanguageLabel(culture)
+					</ItemTemplate>
+				</ComboBox>
+			</div>
+			<div class="d-flex align-items-center">
+				<span class="settingsTitle">@Resource.Theme</span>
+				<ComboBox TItem="string"
+						  Items="ThemeOptions"
+						  @bind-SelectedItem="ThemeService.Theme"
+						  SelectionChanged="OnThemeChanged"
+						  ButtonClass="defaultButton settingsButton bg-1 rounded-2"
+						  Context="theme">
+					<ItemTemplate>
+						@Localizer[theme]
+					</ItemTemplate>
+				</ComboBox>
+			</div>
+		</div>
 	</div>
-	<div class="d-flex align-items-center">
-		<span class="settingsTitle">@Resource.Theme</span>
-		<ComboBox TItem="string"
-				  Items="ThemeOptions"
-				  @bind-SelectedItem="ThemeService.Theme"
-				  SelectionChanged="OnThemeChanged"
-				  ButtonClass="defaultButton settingsButton bg-1 rounded-2 "
-				  Context="context">
-			<ItemTemplate>
-				@Localizer[context]
-			</ItemTemplate>
-		</ComboBox>
-	</div>
+	<AuthorizeView>
+		<!--Account-->
+		<div class="sectionLayout">
+			<span class="header-3">@Resource.Account</span>
+			<hr />
+			<div class="sectionContent">
+			
+			</div>
+		</div>
+	</AuthorizeView>
 </div>

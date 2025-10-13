@@ -73,6 +73,11 @@
 .fontSize-r2 { font-size: var(--fs-r2); }
 .fontSize-r3 { font-size: var(--fs-r3); }
 
+.header-1 { font-size: 2em; font-weight: 700; }
+.header-2 { font-size: 1.75em; font-weight: 650; }
+.header-3 { font-size: 1.5em; font-weight: 600; }
+.header-4 { font-size: 1.25em; font-weight: 550; }
+
 .mainLayout {
     width: clamp(75%, 70vw, 95%);
 }
@@ -107,6 +112,11 @@ dialog {
     align-items: center;
     gap: 0.5rem;
     padding: 0.5rem 0.75rem;
+}
+
+.buttonImg{
+    width: 1.5em;
+    height: 1.5em;
 }
 
 .pagination {

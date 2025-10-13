@@ -1,7 +1,5 @@
-using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
-using Microsoft.JSInterop;
 using PodcastClient.Data;
 using PodcastClient.Services;
 

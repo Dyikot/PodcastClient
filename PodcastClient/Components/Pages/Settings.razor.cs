@@ -23,11 +23,13 @@ namespace PodcastClient.Components.Pages
 			await LocalStorage.SetItem(LocalStorageKeys.Theme, theme);
 		}
 
-		private string GetLanguageLabel(CultureInfo option) => option.Name switch
+		private string GetLanguageLabel(CultureInfo culture) => culture.Name switch
 		{
 			"ru-RU" => "Русский",
 			"en-US" => "English",
 			_ => throw new NotSupportedException()
 		};
+
+		//
 	}
 }

@@ -1,12 +1,17 @@
 .layout {
-    height: 80px;
+    height: 5.75em;
     padding-right: 1rem;
     text-decoration: none;
     color: var(--fg-color-1);
     display: grid;
-    grid-template-columns: 80px 1fr auto;
+    grid-template-columns: 5.75em 1fr auto;
     gap: 0.75rem;
     align-items: center;
+}
+
+.icon {
+    width: 5.75em;
+    height: 5.75em;
 }
 
 .description {

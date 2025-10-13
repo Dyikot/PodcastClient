@@ -402,4 +402,13 @@
   <data name="DoSignUp" xml:space="preserve">
     <value>Зарегистрируйтесь!</value>
   </data>
+  <data name="Appearance" xml:space="preserve">
+    <value>Внешний вид</value>
+  </data>
+  <data name="Account" xml:space="preserve">
+    <value>Аккаунт</value>
+  </data>
+  <data name="NavMenuSignIn" xml:space="preserve">
+    <value>Войти</value>
+  </data>
 </root>

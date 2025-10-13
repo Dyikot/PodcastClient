@@ -48,7 +48,7 @@
 	<!--Popular-->
 	<div class="d-flex flex-column gap-2">
 		<div class="podcastsHeader">
-			<span class="fontSize-4 fw-semibold">@Resource.PopularPodcasts</span>
+			<span class="header-3">@Resource.PopularPodcasts</span>
 			<div class="podcastsNavigation">
 				<button class="p-1 bg-0 rounded-circle carouselButton"
 						id="popularLeftButton">
@@ -73,7 +73,7 @@
 	<!--New-->
 	<div class="d-flex flex-column gap-2">
 		<div class="podcastsHeader">
-			<span class="fontSize-4 fw-semibold">@Resource.NewPodcasts</span>
+			<span class="header-3">@Resource.NewPodcasts</span>
 			<div class="podcastsNavigation">
 				<button class="p-1 bg-0 rounded-circle carouselButton"
 						id="newLeftButton">
@@ -97,12 +97,12 @@
 	</div>
 	<!--Categories-->
 	<div class="d-flex flex-column gap-2">
-		<span class="fontSize-4 fw-semibold">@Resource.ExploreByCategory</span>
+		<span class="header-3">@Resource.ExploreByCategory</span>
 		<div class="categoryLayout">
 			@foreach(var category in Categories)
 			{
 				<a href="@category.Uri" class="bg-1 hoverable rounded-2 categoryButton">
-					<img src="@category.ImageSource" />
+					<img src="@category.ImageSource" class="buttonImg" />
 					<span>@category.LocalizedName</span>
 				</a>
 			}

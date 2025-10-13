@@ -1,6 +1,6 @@
 @inject IStringLocalizer<Resource> Localizer
 
-<div class="layout bg-1 hoverable" role="button">
+<div class="layout bg-1 hoverable">
 	<!--Date, mark and additional features-->
 	<div class="d-flex gap-2" style="height: 25px">
 		<div>@Episode.ReleaseDate.ToLocalizedString(Localizer)</div>
@@ -14,7 +14,7 @@
 				  DropDownPosition="DropDownPosition.Top"
 				  @ref="_expander">
 			<HeaderTemplate>
-				<img class="ms-auto" src="Podcast/MoreHorizontal.svg" width="24" />
+				<img src="Podcast/MoreHorizontal.svg" class="ms-auto buttonImg" />
 			</HeaderTemplate>
 			<ContentTemplate>
 				<button class="btn border-0 p-1 bg-1 hoverable  @Disabled" 

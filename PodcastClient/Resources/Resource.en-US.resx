@@ -411,4 +411,10 @@
   <data name="NavMenuSignIn" xml:space="preserve">
     <value>Sign in</value>
   </data>
+  <data name="SettingsChangePassword" xml:space="preserve">
+    <value>Change password</value>
+  </data>
+  <data name="SettingDeleteAccount" xml:space="preserve">
+    <value>Delete account</value>
+  </data>
 </root>

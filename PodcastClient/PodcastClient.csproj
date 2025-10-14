@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <None Include="wwwroot\app.css" />
+    <None Include="wwwroot\Scripts\Dialog.js" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,6 +1,6 @@
 ::deep .dialogLayout {
-    width: 200px;
+    width: 14.5rem;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 1rem;
 }

@@ -738,9 +738,27 @@ namespace PodcastClient.Resources {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        public static string SettingDeleteAccount {
+            get {
+                return ResourceManager.GetString("SettingDeleteAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         public static string Settings {
             get {
                 return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string SettingsChangePassword {
+            get {
+                return ResourceManager.GetString("SettingsChangePassword", resourceCulture);
             }
         }
         

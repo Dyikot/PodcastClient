@@ -10,6 +10,7 @@
     --fs-r3: calc(var(--fs-base) - 6px);
 
     --slider-fill-color: #f59630;
+    --bs-body-color: var(--fg-color-1);
 }
 
 :root[data-theme="light"] {
@@ -25,6 +26,8 @@
     --navMenu-active-color: #b6b6b6;
     --slider-blank-color: white;
     --brightness-1: 0.9;
+
+    --bs-body-bg: #f5f5f5;
 }
 
 :root[data-theme="dark"] {
@@ -40,6 +43,8 @@
     --navMenu-active-color: #252525;
     --slider-blank-color: #CFCFCF;
     --brightness-1: 1.25;
+
+    --bs-body-bg: #262626;
 }
 
 .fg-main { color : var(--fg-color-1); }

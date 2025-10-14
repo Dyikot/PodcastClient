@@ -36,16 +36,13 @@ namespace PodcastClient.Components.Pages.Library
 			Podcasts = user.Podcasts;
 		}
 
-		private async Task OpenRssDialog()
-		{
-			await JS.InvokeVoidAsync("OpenDialog", "rssDialog");
-		}
+		private async Task OpenRssDialog() => await Dialog.Open("rssDialog");
 
 		private async Task CloseRssDialog()
 		{
 			RssFeed.Url = string.Empty;
 			_editContext = new(RssFeed);
-			await JS.InvokeVoidAsync("CloseDialog", "rssDialog");
+			await Dialog.Close("rssDialog");
 		}
 
 		private async Task OnRssFeedSubmit()

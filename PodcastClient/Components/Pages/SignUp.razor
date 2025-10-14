@@ -4,27 +4,27 @@
 
 <PageTitle>@Resource.SignUp</PageTitle>
 
-<div class="h-100 p-2 d-flex align-items-center justify-content-center">
-	<EditForm class="signin-form bg-1 rounded-2 p-3 d-flex flex-column align-items-center justify-content-around"
+<div class="layout">
+	<EditForm class="formLayout bg-1 border-main rounded-2 p-3"
 			  Model="User"
 			  OnValidSubmit="OnValidSubmit">
 		<DataAnnotationsValidator />
-		<h4>@Resource.SignUp</h4>
-		<div>
+		<div class="header-3">@Resource.SignUp</div>
+		<div class="w-100">
 			<label for="email" class="form-label fontSize-1">
 				Email
 			</label>
 			<InputText id="email" class="form-control" @bind-Value="User.Email" />
 			<ValidationMessage For="@(() => User.Email)" />
 		</div>
-		<div>
+		<div class="w-100">
 			<label for="username" class="form-label fontSize-1">
 				@Resource.UserName
 			</label>
 			<InputText id="username" class="form-control" @bind-Value="User.UserName" />
 			<ValidationMessage For="@(() => User.UserName)" />
 		</div>
-		<div>
+		<div class="w-100">
 			<label for="password" class="form-label fontSize-1">
 				@Resource.Password
 			</label>
@@ -32,7 +32,7 @@
 					   @bind-Value="User.Password" />
 			<ValidationMessage For="@(() => User.Password)" />
 		</div>
-		<div>
+		<div class="w-100">
 			<label for="confirm-password" class="form-label fontSize-1">
 				@Resource.ConfirmPassword
 			</label>
@@ -44,7 +44,7 @@
 		{
 			<span class="validation-message">@_errorMessage</span>
 		}
-		<button class="w-100 btn btn-warning text-black" type="submit">
+		<button class="w-100 mt-2 btn btn-primary" type="submit">
 			@Resource.Submit
 		</button>
 	</EditForm>

@@ -4,6 +4,13 @@ using System.Globalization;
 
 namespace PodcastClient.Components.Pages
 {
+	public class ChangePasswordModel
+	{
+		public string CurrentPassword { get; set; } = string.Empty;
+		public string Password { get; set; } = string.Empty;
+		public string ConfirmPassword { get; set; } = string.Empty;
+	}
+
     public partial class Settings
     {
 		public CultureInfo[] LanguageOptions { get; } = 
@@ -18,6 +25,8 @@ namespace PodcastClient.Components.Pages
 			ThemeService.Dark
 		];
 
+		public ChangePasswordModel ChangePasswordModel { get; set; } = new();
+
 		private async Task OnThemeChanged(string theme)
 		{
 			await LocalStorage.SetItem(LocalStorageKeys.Theme, theme);
@@ -30,6 +39,9 @@ namespace PodcastClient.Components.Pages
 			_ => throw new NotSupportedException()
 		};
 
-		//
+		private async Task ChangePasswordAsync()
+		{
+
+		}
 	}
 }

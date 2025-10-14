@@ -4,12 +4,12 @@
 
 <PageTitle>@Resource.SignIn</PageTitle>
 
-<div class="layout p-2 d-flex align-items-center justify-content-center">
+<div class="layout">
 	<EditForm class="formLayout bg-1 border-main rounded-2 p-3"
 			  Model="User"
 			  OnValidSubmit="OnValidSubmit">
 		<DataAnnotationsValidator />
-		<h4>@Resource.SignIn</h4>
+		<div class="header-3">@Resource.SignIn</div>
 		<div class="w-100">
 			<label for="username" class="form-label fontSize-1">
 				@Resource.UserName

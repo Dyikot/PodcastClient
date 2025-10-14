@@ -15,11 +15,23 @@
     gap: 0.75rem;
 }
 
-.settingsTitle { 
-    width: 100px; 
+.settingLayout {
+    display: flex;
+    align-items: center;
 }
 
-::deep .settingsButton { 
-    width: 100px;
+.settingTitle { 
+    width: 7.25rem; 
+}
+
+::deep .settingComboBox { 
+    width: 7.25rem;
     justify-content: space-between;
+}
+
+::deep .dialogLayout {
+    width: 14.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }

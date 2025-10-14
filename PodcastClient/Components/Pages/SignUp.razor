@@ -10,34 +10,28 @@
 			  OnValidSubmit="OnValidSubmit">
 		<DataAnnotationsValidator />
 		<div class="header-3">@Resource.SignUp</div>
+		<!--Email-->
 		<div class="w-100">
-			<label for="email" class="form-label fontSize-1">
-				Email
-			</label>
-			<InputText id="email" class="form-control" @bind-Value="User.Email" />
+			<div class="form-label fontSize-1">Email</div>
+			<InputText class="form-control" @bind-Value="User.Email" />
 			<ValidationMessage For="@(() => User.Email)" />
 		</div>
+		<!--Username-->
 		<div class="w-100">
-			<label for="username" class="form-label fontSize-1">
-				@Resource.UserName
-			</label>
-			<InputText id="username" class="form-control" @bind-Value="User.UserName" />
+			<div class="form-label fontSize-1">@Resource.UserName</div>
+			<InputText class="form-control" @bind-Value="User.UserName" />
 			<ValidationMessage For="@(() => User.UserName)" />
 		</div>
+		<!--Password-->
 		<div class="w-100">
-			<label for="password" class="form-label fontSize-1">
-				@Resource.Password
-			</label>
-			<InputText type="password" id="password" class="form-control"
-					   @bind-Value="User.Password" />
+			<div class="form-label fontSize-1">@Resource.Password</div>
+			<InputText type="password" class="form-control" @bind-Value="User.Password" />
 			<ValidationMessage For="@(() => User.Password)" />
 		</div>
+		<!--Confirm password-->
 		<div class="w-100">
-			<label for="confirm-password" class="form-label fontSize-1">
-				@Resource.ConfirmPassword
-			</label>
-			<InputText type="password" id="confirm-password" class="form-control"
-					   @bind-Value="User.ConfirmPassword" />
+			<div class="form-label fontSize-1">@Resource.ConfirmPassword</div>
+			<InputText type="password" class="form-control" @bind-Value="User.ConfirmPassword" />
 			<ValidationMessage For="@(() => User.ConfirmPassword)" />
 		</div>
 		@if (_errorMessage != null)

@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Identity;
+
 namespace PodcastClient.Data
 {
 	public class User
@@ -10,5 +12,18 @@ namespace PodcastClient.Data
 
 		public List<Podcast> Podcasts { get; set; }
 		public List<UserEpisode> Episodes { get; set; }
+
+		public bool IsPasswordCorrect(string password)
+		{
+			var passwordHasher = new PasswordHasher<IdentityUser>();
+			var result = passwordHasher.VerifyHashedPassword(null!, HashPassword, password);
+			return result != PasswordVerificationResult.Failed;
+		}
+
+		public void ChangePassword(string newPassword)
+		{
+			var passwordHasher = new PasswordHasher<IdentityUser>();
+			HashPassword = passwordHasher.HashPassword(null!, newPassword);
+		}
 	}
 }

@@ -34,9 +34,7 @@ namespace PodcastClient.Components.Pages
 				return;
 			}
 
-			var passwordHasher = new PasswordHasher<IdentityUser>();
-			var result = passwordHasher.VerifyHashedPassword(null!, user.HashPassword, User.Password);
-			if (result == PasswordVerificationResult.Failed)
+			if (!user.IsPasswordCorrect(User.Password))
 			{
 				_errorMessage = Resource.InvalidUsernameOrPassword;
 				return;

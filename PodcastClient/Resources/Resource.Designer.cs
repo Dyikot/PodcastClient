@@ -162,6 +162,15 @@ namespace PodcastClient.Resources {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        public static string CurrentPassword {
+            get {
+                return ResourceManager.GetString("CurrentPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         public static string dark {
             get {
                 return ResourceManager.GetString("dark", resourceCulture);
@@ -378,6 +387,15 @@ namespace PodcastClient.Resources {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        public static string InvalidCurrentPassword {
+            get {
+                return ResourceManager.GetString("InvalidCurrentPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         public static string InvalidUrl {
             get {
                 return ResourceManager.GetString("InvalidUrl", resourceCulture);
@@ -531,6 +549,15 @@ namespace PodcastClient.Resources {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        public static string NewPassword {
+            get {
+                return ResourceManager.GetString("NewPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         public static string NewPodcasts {
             get {
                 return ResourceManager.GetString("NewPodcasts", resourceCulture);
@@ -624,6 +651,24 @@ namespace PodcastClient.Resources {
         public static string Password {
             get {
                 return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string PasswordChange {
+            get {
+                return ResourceManager.GetString("PasswordChange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string PasswordChanged {
+            get {
+                return ResourceManager.GetString("PasswordChanged", resourceCulture);
             }
         }
         

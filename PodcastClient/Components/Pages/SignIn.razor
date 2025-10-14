@@ -10,24 +10,21 @@
 			  OnValidSubmit="OnValidSubmit">
 		<DataAnnotationsValidator />
 		<div class="header-3">@Resource.SignIn</div>
+		<!--Username-->
 		<div class="w-100">
-			<label for="username" class="form-label fontSize-1">
-				@Resource.UserName
-			</label>
-			<InputText id="username" class="form-control" @bind-Value="User.UserName" />
+			<div class="form-label fontSize-1">@Resource.UserName</div>
+			<InputText class="form-control" @bind-Value="User.UserName" />
 			<ValidationMessage For="@(() => User.UserName)" />
 		</div>
+		<!--Password-->
 		<div class="w-100">
-			<label for="password" class="form-label fontSize-1">
-				@Resource.Password
-			</label>
-			<InputText type="password" id="password" class="form-control"
-					   @bind-Value="User.Password" />
+			<div class="form-label fontSize-1">@Resource.Password</div>
+			<InputText type="password" class="form-control" @bind-Value="User.Password" />
 			<ValidationMessage For="@(() => User.Password)" />
 		</div>
 		@if(_errorMessage != null)
 		{
-			<span class="validation-message">@_errorMessage</span>			
+			<div class="validation-message">@_errorMessage</div>			
 		}
 		<button class="mt-1 w-100 btn btn-primary" type="submit">
 			@Resource.Submit

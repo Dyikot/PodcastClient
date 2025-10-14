@@ -417,4 +417,19 @@
   <data name="SettingDeleteAccount" xml:space="preserve">
     <value>Delete account</value>
   </data>
+  <data name="PasswordChange" xml:space="preserve">
+    <value>Change password</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Current password</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>New password</value>
+  </data>
+  <data name="InvalidCurrentPassword" xml:space="preserve">
+    <value>Incorrect current password</value>
+  </data>
+  <data name="PasswordChanged" xml:space="preserve">
+    <value>Password changed successfully</value>
+  </data>
 </root>

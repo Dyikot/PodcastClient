@@ -3,7 +3,9 @@
 @inject LocalStorage LocalStorage
 @inject ThemeService ThemeService
 @inject CultureService CultureService
+@inject UserContext User
 @inject IStringLocalizer<Resource> Localizer
+@inject IDbContextFactory<ApplicationDbContext> DbContextFactory
 
 <PageTitle>@Resource.Settings</PageTitle>
 
@@ -42,25 +44,63 @@
 			</div>
 		</div>
 	</div>
-	<AuthorizeView>
+	<AuthorizeView Context="user">
 		<!--Account-->
 		<div class="sectionLayout">
 			<span class="header-3">@Resource.Account</span>
 			<hr />
 			<div class="sectionContent">
 				<!--Change password-->
-				<div class="settingLayout">
-					<button class="defaultButton bg-1 hoverable rounded-2">
+				<div class="settingLayout gap-2">
+					<button class="defaultButton bg-1 hoverable rounded-2"
+							@onclick="OpenChangePasswordDialog">
 						<img src="Settings/KeyVertical.svg" class="buttonImg" />
 						<span>@Resource.SettingsChangePassword</span>
 					</button>
+					@if (_passwordChanged)
+					{
+						<div class="text-success">@Resource.PasswordChanged</div>
+					}
 				</div>
-				<dialog id="changePasswordDialog">
-					<EditForm method="dialog" class="dialogLayout fg-main"
+				<!--Change password dialog-->
+				<dialog id="changePasswordDialog" class="fg-main bg-1 border-main rounded-2">
+					<EditForm method="dialog" class="dialogLayout"
 							  Model="ChangePasswordModel"
 							  OnValidSubmit="ChangePasswordAsync">
 						<DataAnnotationsValidator />
-						
+						<div class="header-4 m-auto">@Resource.PasswordChange</div>
+						<!--Current password-->
+						<div>
+							<div class="form-label">@Resource.CurrentPassword</div>
+							<InputText class="form-control" type="password"
+									   @bind-Value="ChangePasswordModel.CurrentPassword" />
+						</div>
+						<!--New password-->
+						<div>
+							<div class="form-label">@Resource.NewPassword</div>
+							<InputText class="form-control" type="password"
+									   @bind-Value="ChangePasswordModel.Password" />
+						</div>
+						<!--Confirm password-->
+						<div>
+							<div class="form-label">@Resource.ConfirmPassword</div>
+							<InputText class="form-control" type="password"
+									   @bind-Value="ChangePasswordModel.ConfirmPassword" />
+						</div>
+						@if (_errorMessage != null)
+						{
+							<div class="validation-message">@_errorMessage</div>
+						}
+						<!--Cancel/Submit buttons-->
+						<div class="d-flex gap-1 justify-content-end">
+							<button class="defaultButton bg-2 hoverable rounded-2" type="button"
+									@onclick="CloseChangePasswordDialog">
+								@Resource.Cancel
+							</button>
+							<button class="defaultButton bg-2 hoverable rounded-2" type="submit">
+								@Resource.Submit
+							</button>
+						</div>
 					</EditForm>
 				</dialog>
 				<!--Delete account-->

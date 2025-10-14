@@ -20,8 +20,8 @@
 				  EditContext="_editContext"
 				  OnValidSubmit="OnRssFeedSubmit">
 			<DataAnnotationsValidator />
-			<div class="d-flex flex-column gap-2">
-				<div class="fontSize-1">@Resource.EnterRss</div>
+			<div>
+				<div class="fontSize-1 form-label">@Resource.EnterRss</div>
 				<InputText @bind-Value="RssFeed.Url"
 						   placeholder="https://rss-feed.com"
 						   class="form-control"/>

@@ -1,9 +1,10 @@
 @page "/settings"
+@inject UserContext User
 @inject DialogService Dialog
 @inject LocalStorage LocalStorage
 @inject ThemeService ThemeService
 @inject CultureService CultureService
-@inject UserContext User
+@inject NavigationManager NavigationManager
 @inject IStringLocalizer<Resource> Localizer
 @inject IDbContextFactory<ApplicationDbContext> DbContextFactory
 
@@ -63,7 +64,7 @@
 					}
 				</div>
 				<!--Change password dialog-->
-				<dialog id="changePasswordDialog" class="fg-main bg-1 border-main rounded-2">
+				<dialog id="changePasswordDialog" class="fg-main bg-0 border-main rounded-2">
 					<EditForm method="dialog" class="dialogLayout"
 							  Model="ChangePasswordModel"
 							  OnValidSubmit="ChangePasswordAsync">
@@ -74,18 +75,21 @@
 							<div class="form-label">@Resource.CurrentPassword</div>
 							<InputText class="form-control" type="password"
 									   @bind-Value="ChangePasswordModel.CurrentPassword" />
+							<ValidationMessage For="() => ChangePasswordModel.CurrentPassword" />
 						</div>
 						<!--New password-->
 						<div>
 							<div class="form-label">@Resource.NewPassword</div>
 							<InputText class="form-control" type="password"
 									   @bind-Value="ChangePasswordModel.Password" />
+							<ValidationMessage For="() => ChangePasswordModel.Password" />
 						</div>
 						<!--Confirm password-->
 						<div>
 							<div class="form-label">@Resource.ConfirmPassword</div>
 							<InputText class="form-control" type="password"
 									   @bind-Value="ChangePasswordModel.ConfirmPassword" />
+							<ValidationMessage For="() => ChangePasswordModel.ConfirmPassword" />
 						</div>
 						@if (_errorMessage != null)
 						{
@@ -93,11 +97,11 @@
 						}
 						<!--Cancel/Submit buttons-->
 						<div class="d-flex gap-1 justify-content-end">
-							<button class="defaultButton bg-2 hoverable rounded-2" type="button"
+							<button class="defaultButton bg-1 hoverable rounded-2" type="button"
 									@onclick="CloseChangePasswordDialog">
 								@Resource.Cancel
 							</button>
-							<button class="defaultButton bg-2 hoverable rounded-2" type="submit">
+							<button class="defaultButton bg-1 hoverable rounded-2" type="submit">
 								@Resource.Submit
 							</button>
 						</div>
@@ -105,13 +109,27 @@
 				</dialog>
 				<!--Delete account-->
 				<div class="settingLayout">
-					<button class="defaultButton bg-1 hoverable rounded-2">
+					<button class="defaultButton bg-1 hoverable rounded-2"
+							@onclick="OpenConfirmDeleteDialog">
 						<img src="Settings/AccountDelete.svg" class="buttonImg" />
 						<span>@Resource.SettingDeleteAccount</span>
 					</button>
 				</div>
-				<dialog id="deleteAccountDialog">
-
+				<dialog id="confirmDeleteDialog" class="bg-0 border-main rounded-2 fg-main">
+					<div class="dialogLayout">
+						<div class="d-flex gap-3 align-items-center">
+							<img src="Settings/Warning.svg" style="width: 2.5rem; height: 2.5rem" />
+							<div class="flex-fill">@Resource.DeleteAccountWarning</div>
+						</div>
+						<div class="dialogButtonLayout">
+							<button class="btn btn-primary" @onclick="CloseConfirmDeleteDialog">
+								@Resource.Cancel
+							</button>
+							<button class="btn btn-danger" @onclick="DeleteAccount">
+								@Resource.Confirm
+							</button>
+						</div>
+					</div>
 				</dialog>
 			</div>
 		</div>

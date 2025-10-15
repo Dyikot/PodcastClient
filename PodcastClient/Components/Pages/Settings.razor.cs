@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using PodcastClient.Data;
 using PodcastClient.Resources;
 using PodcastClient.Services;
@@ -69,7 +70,20 @@ namespace PodcastClient.Components.Pages
 			_passwordChanged = true;
 		}
 
+		private async Task DeleteAccount()
+		{
+			using var context = DbContextFactory.CreateDbContext();
+			await context.Users
+				.Where(u => u.Id == User.UserId)
+				.ExecuteDeleteAsync();
+
+			NavigationManager.NavigateTo("auth/signout", forceLoad: true);
+		}
+
 		private async Task OpenChangePasswordDialog() => await Dialog.Open("changePasswordDialog");
 		private async Task CloseChangePasswordDialog() => await Dialog.Close("changePasswordDialog");
+
+		private async Task OpenConfirmDeleteDialog() => await Dialog.Open("confirmDeleteDialog");
+		private async Task CloseConfirmDeleteDialog() => await Dialog.Close("confirmDeleteDialog");
 	}
 }

@@ -432,4 +432,10 @@
   <data name="PasswordChanged" xml:space="preserve">
     <value />
   </data>
+  <data name="Confirm" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DeleteAccountWarning" xml:space="preserve">
+    <value />
+  </data>
 </root>

@@ -18,7 +18,7 @@ namespace PodcastClient.Controlles
 			await HttpContext.SignInAsync("Cookies", principal, new AuthenticationProperties
 			{
 				IsPersistent = true,
-				ExpiresUtc = DateTime.UtcNow.AddDays(30)
+				ExpiresUtc = DateTime.UtcNow.AddYears(1)
 			});
 			return LocalRedirect("/");
 		}

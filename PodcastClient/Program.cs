@@ -3,7 +3,6 @@ using PodcastClient.Components;
 using PodcastClient.Data;
 using PodcastClient.Extensions;
 using PodcastClient.Services;
-using System.Threading.Tasks;
 
 internal class Program
 {

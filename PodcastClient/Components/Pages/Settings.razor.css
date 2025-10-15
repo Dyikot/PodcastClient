@@ -35,3 +35,9 @@
     flex-direction: column;
     gap: 0.75rem;
 }
+
+.dialogButtonLayout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}

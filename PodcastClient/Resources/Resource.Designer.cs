@@ -144,6 +144,15 @@ namespace PodcastClient.Resources {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        public static string Confirm {
+            get {
+                return ResourceManager.GetString("Confirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         public static string ConfirmPassword {
             get {
                 return ResourceManager.GetString("ConfirmPassword", resourceCulture);
@@ -192,6 +201,15 @@ namespace PodcastClient.Resources {
         public static string DaysShort {
             get {
                 return ResourceManager.GetString("DaysShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string DeleteAccountWarning {
+            get {
+                return ResourceManager.GetString("DeleteAccountWarning", resourceCulture);
             }
         }
         

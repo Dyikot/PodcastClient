@@ -432,4 +432,10 @@
   <data name="PasswordChanged" xml:space="preserve">
     <value>Password changed successfully</value>
   </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="DeleteAccountWarning" xml:space="preserve">
+    <value>Deleting your account will permanently remove all of your data. Are you sure you want to proceed?</value>
+  </data>
 </root>

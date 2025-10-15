@@ -432,4 +432,10 @@
   <data name="PasswordChanged" xml:space="preserve">
     <value>Пароль успешно изменен</value>
   </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Потвердить</value>
+  </data>
+  <data name="DeleteAccountWarning" xml:space="preserve">
+    <value>Удаление аккаунта приведёт к безвозвратной потере всех ваших данных. Вы уверены, что хотите продолжить?</value>
+  </data>
 </root>

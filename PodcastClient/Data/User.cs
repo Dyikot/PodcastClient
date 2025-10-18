@@ -9,6 +9,7 @@ namespace PodcastClient.Data
 		public string Email { get; set; } = string.Empty;
 		public string UserName { get; set; } = string.Empty;
 		public string HashPassword { get; set; } = string.Empty;
+		public DateTime LastUpdateChecked { get; set; }
 
 		public List<Podcast> Podcasts { get; set; }
 		public List<UserEpisode> Episodes { get; set; }

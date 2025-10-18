@@ -8,10 +8,13 @@ namespace PodcastClient.Services
 	public class PodcastsService
 	{
 		private readonly IDbContextFactory<ApplicationDbContext> _dbContextFactory;
+		private readonly PodcastRssFetcher _podcastRssFetcher;
 
-		public PodcastsService(IDbContextFactory<ApplicationDbContext> dbContextFactory)
+		public PodcastsService(IDbContextFactory<ApplicationDbContext> dbContextFactory, 
+							   PodcastRssFetcher podcastRssFetcher)
 		{
 			_dbContextFactory = dbContextFactory;
+			_podcastRssFetcher = podcastRssFetcher;
 		}
 
 		public async Task<Podcast?> FindAsync(Expression<Func<Podcast, bool>> predicate)
@@ -32,6 +35,7 @@ namespace PodcastClient.Services
 			using var context = _dbContextFactory.CreateDbContext();
 
 			return await context.Podcasts
+				.AsNoTracking()
 				.Where(p => p.Title.Contains(title, StringComparison.OrdinalIgnoreCase))
 				.Skip(skip)
 				.Take(take)
@@ -42,9 +46,25 @@ namespace PodcastClient.Services
 		{
 			using var context = _dbContextFactory.CreateDbContext();
 
-			await podcast.AttachCategoriesAsync(context);
 			await context.AddAsync(podcast);
 			await context.SaveChangesAsync();
+		}
+
+		public async Task<Podcast?> TryAddAsync(Uri rss)
+		{
+			Podcast? podcast = null;
+
+			var podcastUpdate = await _podcastRssFetcher.GetUpdateAsync(rss);
+			if (podcastUpdate != null)
+			{
+				using var context = _dbContextFactory.CreateDbContext();
+
+				podcast = podcastUpdate.ToPodcast(context.Categories);
+				await context.AddAsync(podcast);
+				await context.SaveChangesAsync();
+			}
+
+			return podcast;
 		}
 
 		public async Task RemoveAsync(int podcastId)

@@ -32,6 +32,7 @@ internal class Program
 		builder.Services.AddScoped<DialogService>();
 		builder.Services.AddSingleton<CategoriesService>();
 		builder.Services.AddSingleton<PodcastRssFetcher>();
+		builder.Services.AddHostedService<PodcastUpdateService>();
 
 		var app = builder.Build();
 

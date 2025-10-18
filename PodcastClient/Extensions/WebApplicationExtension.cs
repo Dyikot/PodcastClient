@@ -1,7 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using PodcastClient.Data;
 using PodcastClient.Services;
-using static System.Formats.Asn1.AsnWriter;
+using System;
+using System.Threading.Tasks;
 
 namespace PodcastClient.Extensions
 {
@@ -31,10 +32,10 @@ namespace PodcastClient.Extensions
 			}
 
 			var categoriesService = services.GetRequiredService<CategoriesService>();
-			var categoryNames = categoriesService.Categories
-				.Select(c => new Category { Name = c.Name });
+			var categories = categoriesService.Categories
+				.Select(c => new Category(c.Name));
 
-			context.Categories.AddRange(categoryNames);
+			context.Categories.AddRange(categories);
 			context.SaveChanges();
 		}
 
@@ -58,23 +59,19 @@ namespace PodcastClient.Extensions
 				.Select(url => new Uri(url))
 				.ToArray();
 
-			var podcastsTasks = validPodcastUrls
-				.Select(podcastRssFetcher.GetPodcastAsync)
-				.ToArray();
+			var podcastUpdates = podcastRssFetcher
+				.GetMultipleUpdatesAsync(validPodcastUrls)
+				.GetAwaiter()
+				.GetResult();
 
-			if(podcastsTasks.Length == 0)
+			if (podcastUpdates.Count == 0)
 			{
 				return;
 			}
 
-			var podcasts = Task.WhenAll(podcastsTasks).Result
-				.Where(p => p != null)
-				.Cast<Podcast>();
-
-			foreach(var podcast in podcasts)
-			{
-				podcast.AttachCategories(context);
-			}
+			var podcasts = podcastUpdates
+				.Select(podcastUpdate => podcastUpdate.ToPodcast(context.Categories))
+				.ToArray();			
 
 			context.Podcasts.AddRange(podcasts);
 			context.SaveChanges();

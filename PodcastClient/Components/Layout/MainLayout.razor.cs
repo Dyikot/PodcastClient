@@ -9,7 +9,7 @@ namespace PodcastClient.Components.Layout
 
 		protected override async Task OnInitializedAsync()
 		{
-			await UserContext.InitializeAsync();			
+			await UserContext.InitializeAsync();
 		}
 
 		protected override async Task OnAfterRenderAsync(bool firstRender)

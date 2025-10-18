@@ -65,7 +65,44 @@ namespace PodcastClient.Services
 			if (claim != null)
 			{
 				UserId = int.Parse(claim.Value);
+				await UpdatePodcastsAsync();
 			}
+		}
+
+		private async Task UpdatePodcastsAsync()
+		{
+			using var context = _dbContextFactory.CreateDbContext();
+
+			var user = await context.Users.FindAsync(UserId);
+			var lastUpdateChecked = user!.LastUpdateChecked;
+
+			if (DateTime.Now - lastUpdateChecked < TimeSpan.FromDays(1))
+			{
+				return;
+			}
+
+			var newEpisodes = await context.Users
+				.AsNoTracking()
+				.Where(u => u.Id == UserId)
+				.SelectMany(u => u.Podcasts)
+				.Where(p => p.LastUpdated > lastUpdateChecked)
+				.SelectMany(p => p.Episodes)
+				.Where(e => e.ReleaseDate > lastUpdateChecked)
+				.ToListAsync();
+				
+			var newUserEpisodes = newEpisodes
+				.Select(e => new UserEpisode
+				{
+					UserId = UserId,
+					PodcastId = e.PodcastId,
+					EpisodeNumber = e.EpisodeNumber
+				})
+				.ToList();
+
+			user.LastUpdateChecked = DateTime.Now;
+
+			await context.UserEpisodes.AddRangeAsync(newUserEpisodes);
+			await context.SaveChangesAsync();
 		}
 	}
 }

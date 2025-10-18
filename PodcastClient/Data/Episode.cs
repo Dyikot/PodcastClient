@@ -13,7 +13,6 @@ namespace PodcastClient.Data
 		public required string Description { get; set; }
 		public required DateTime ReleaseDate { get; set; }
 		public required TimeSpan Duration { get; set; }
-		public required Uri Source { get; set; }
 		public required Uri IconSource { get; set; }
 		public required Uri ContentSource { get; set; }
 		public EpisodeType Type { get; set; } = EpisodeType.Audio;

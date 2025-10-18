@@ -24,55 +24,114 @@ namespace PodcastClient.Services
 		];
 
 		private readonly IHttpClientFactory _httpClientFactory;
+		private readonly ILogger<PodcastRssFetcher> _logger;
 
-		public PodcastRssFetcher(IHttpClientFactory httpClientFactory)
+		public PodcastRssFetcher(IHttpClientFactory httpClientFactory,
+								 ILogger<PodcastRssFetcher> logger)
 		{
 			_httpClientFactory = httpClientFactory;
+			_logger = logger;
 		}
 
-		public async Task<Podcast?> GetPodcastAsync(Uri rss)
+		public async Task<PodcastUpdate?> GetUpdateAsync(Uri rss)
 		{
-			var httpClient = _httpClientFactory.CreateClient();
-			var rssPage = await httpClient.GetStringAsync(rss);
-			return ParsePodcast(rss, rssPage);
-		}
-
-		private static Podcast? ParsePodcast(Uri rss, string? rssPage)
-		{
-			if (string.IsNullOrEmpty(rssPage))
+			try
 			{
+				var httpClient = _httpClientFactory.CreateClient();
+				var rssPage = await httpClient.GetStringAsync(rss);
+				if (string.IsNullOrEmpty(rssPage))
+				{
+					return null;
+				}
+
+				return ParsePodcastUpdate(rss, rssPage);
+			}
+			catch(Exception)
+			{
+				_logger.LogError("Enable to get rss page: '{}'", rss);
 				return null;
 			}
+		}
 
+		public async Task<PodcastUpdate?> GetUpdateAsync(Uri rss, DateTime updateTime)
+		{
+			try
+			{
+				var httpClient = _httpClientFactory.CreateClient();
+				var rssPage = await httpClient.GetStringAsync(rss);
+
+				if (string.IsNullOrEmpty(rssPage))
+				{
+					return null;
+				}
+
+				return ParsePodcastUpdate(rss, rssPage, updateTime);
+			}
+			catch(Exception)
+			{
+				_logger.LogError("Enable to get rss page: '{}'", rss);
+				return null;
+			}
+		}
+
+		public async Task<List<PodcastUpdate>> GetMultipleUpdatesAsync(IEnumerable<Uri> rssUris)
+		{
+			if (!rssUris.Any())
+			{
+				return [];
+			}
+
+			var tasks = rssUris.Select(GetUpdateAsync);
+			var results = await Task.WhenAll(tasks);
+
+			return results.Where(result => result != null).ToList()!;
+		}
+
+		public async Task<List<PodcastUpdate>> GetMultipleUpdatesAsync(IEnumerable<Uri> rssUris, 
+																	   DateTime updateTime)
+		{
+			if (!rssUris.Any())
+			{
+				return [];
+			}
+
+			var tasks = rssUris.Select(uri => GetUpdateAsync(uri, updateTime));
+			var results = await Task.WhenAll(tasks);
+
+			return results.Where(result => result != null).ToList()!;
+		}
+
+		private PodcastUpdate ParsePodcastUpdate(Uri rss, string rssPage)
+		{
 			var channel = XDocument.Parse(rssPage).Root!.Element("channel");
-			List<Episode> episodes = [];
-			HashSet<string> categories = [];
-			Uri iconSource = Podcast.DefaultIconSource;
-			string title = "",
-				   author = "",
-				   description = "";
 
-			foreach (XElement element in channel!.Elements())
+			string title = "";
+			string author = "";
+			string description = "";
+			DateTime lastUpdated = DateTime.Now;
+			Uri iconSource = Podcast.DefaultIconSource;
+			List<Episode> episodes = [];
+			HashSet<string> categories = [];			
+
+			foreach (var element in channel!.Elements())
 			{
 				switch (element.Name.LocalName)
 				{
 					case "title":
-					{
 						title = element.Value;
 						break;
-					}
 
 					case "author":
-					{
 						author = element.Value;
 						break;
-					}
 
 					case "description":
-					{
-						description = new(element.Value);
+						description = element.Value;
 						break;
-					}
+
+					case "lastBuildDate":
+						lastUpdated = ParseDate(element.Value);
+						break;
 
 					case "image":
 					{
@@ -84,14 +143,12 @@ namespace PodcastClient.Services
 						{
 							iconSource = new(href.Value);
 						}
-
 						break;
 					}
 
 					case "category":
 					{
-						var category = element.Attribute("text")?.Value;
-						if(category != null)
+						if (element.Attribute("text")?.Value is string category)
 						{
 							categories.Add(category);
 						}
@@ -106,42 +163,50 @@ namespace PodcastClient.Services
 							var episode = ParseEpisode(element, iconSource);
 							episodes.Add(episode);
 						}
-						catch { }
+						catch (Exception ex)
+						{
+							_logger.LogError("Error occur while parsing '{}' podcast episode: {}", title, ex.Message);
+						}
 
 						break;
 					}
 				}
 			}
 
-			for (int i = 0; i < episodes.Count; i++)
+			int episodeNumber = episodes.Count - 1;
+			foreach(var episode in episodes)
 			{
-				episodes[i].EpisodeNumber = episodes.Count - i;
+				episode.EpisodeNumber = episodeNumber--;
 			}
 
-			return new Podcast
+			return new PodcastUpdate
 			{
 				Title = title,
 				Description = description,
 				Rss = rss,
 				Author = author,
+				LastUpdated = lastUpdated,
 				IconSource = iconSource,
-				Categories = categories.Select(c => new Category { Name = c }).ToList(),
-				Episodes = episodes
+				Categories = categories.ToList(),
+				NewEpisodes = episodes
 			};
 		}
 
-		private static Episode ParseEpisode(XElement item, Uri podcastIconSource)
+		private PodcastUpdate ParsePodcastUpdate(Uri rss, string rssPage, DateTime updateTime)
 		{
-			string title = "",
-				   description = "",
-				   releaseDate = "",
-				   duration = "",
-				   source = "",
-				   contentSource = "",
-				   iconSource = "",
-				   episodeType = "";
+			var channel = XDocument.Parse(rssPage).Root!.Element("channel");
 
-			foreach (var element in item.Elements())
+			string title = "";
+			string author = "";
+			string description = "";
+			DateTime lastPodcastUpdated = DateTime.Now;
+			Uri iconSource = Podcast.DefaultIconSource;
+			List<Episode> episodes = [];
+			HashSet<string> categories = [];
+
+			bool shouldBreak = false;
+
+			foreach (var element in channel!.Elements())
 			{
 				switch (element.Name.LocalName)
 				{
@@ -149,8 +214,92 @@ namespace PodcastClient.Services
 						title = element.Value;
 						break;
 
-					case "link":
-						source = element.Value;
+					case "author":
+						author = element.Value;
+						break;
+
+					case "description":
+						description = element.Value;
+						break;
+
+					case "lastBuildDate":
+						lastPodcastUpdated = ParseDate(element.Value);
+						shouldBreak = lastPodcastUpdated < updateTime;
+						break;
+
+					case "image":
+						if (element.Element("url") is XElement url)
+						{
+							iconSource = new(url.Value);
+						}
+						else if (element.Attribute("href") is XAttribute href)
+						{
+							iconSource = new(href.Value);
+						}
+						break;
+
+					case "category":
+						if (element.Attribute("text")?.Value is string category)
+						{
+							categories.Add(category);
+						}
+
+						break;
+
+					case "item":
+						try
+						{
+							var episode = ParseEpisode(element, iconSource);
+							shouldBreak = episode.ReleaseDate < updateTime;
+
+							if (!shouldBreak)
+							{
+								episodes.Add(episode);
+							}
+						}
+						catch(Exception ex) 
+						{
+							_logger.LogError("Error occur while parsing '{}' podcast episode: {}", title, ex.Message);
+						}
+
+						break;
+				}
+
+				if (shouldBreak)
+				{
+					break;
+				}
+			}
+
+			return new PodcastUpdate
+			{
+				Title = title,
+				Author = author,
+				Description = description,
+				Rss = rss,
+				LastUpdated = lastPodcastUpdated,
+				IconSource = iconSource,
+				Categories = categories.ToList(),
+				NewEpisodes = episodes,
+			};
+		}
+
+		private static Episode ParseEpisode(XElement item, Uri podcastIconSource)
+		{
+			string title = "";
+			string description = "";
+			string releaseDate = "";
+			string duration = "";
+			string contentSource = "";
+			string iconSource = "";
+			string episodeType = "";
+
+			foreach (var element in item.Elements())
+			{
+				switch (element.Name.LocalName)
+				{
+					case "title":
+						title = element.Value;
 						break;
 
 					case "description":
@@ -182,7 +331,6 @@ namespace PodcastClient.Services
 				Description = description,
 				ReleaseDate = ParseDate(releaseDate),
 				Duration = ParseDuration(duration),
-				Source = ParseUri(source),
 				ContentSource = ParseUri(contentSource),
 				IconSource = iconSource == "" ? podcastIconSource : ParseUri(iconSource),
 				Type = ParseType(episodeType.Split('/').First())
@@ -191,14 +339,12 @@ namespace PodcastClient.Services
 
 		private static Uri ParseUri(string uri)
 		{
-			try
+			if(Uri.TryCreate(uri, UriKind.Absolute, out var result))
 			{
-				return new Uri(uri);
+				return result;
 			}
-			catch
-			{
-				throw new NotSupportedException($"Unable to parse episode uri: {uri}");
-			}
+
+			throw new NotSupportedException($"Unable to parse episode uri: '{uri}'");
 		}
 
 		private static TimeSpan ParseDuration(string duration)
@@ -218,7 +364,7 @@ namespace PodcastClient.Services
 				return timeSpan;
 			}
 
-			throw new NotSupportedException($"Unable to parse episode duration: {duration}");
+			throw new NotSupportedException($"Unable to parse episode duration: '{duration}'");
 		}
 
 		private static DateTime ParseDate(string releaseDate)
@@ -234,7 +380,7 @@ namespace PodcastClient.Services
 				return date.ToLocalTime();
 			}
 
-			throw new NotSupportedException($"Unable to parse date: {releaseDate}");
+			throw new NotSupportedException($"Unable to parse date: '{releaseDate}'");
 		}
 
 		private static EpisodeType ParseType(string type)
@@ -243,7 +389,7 @@ namespace PodcastClient.Services
 			{
 				"audio" => EpisodeType.Audio,
 				"video" => EpisodeType.Video,
-				_ => throw new NotSupportedException($"Unable to parse episode type: {type}")
+				_ => throw new NotSupportedException($"Unable to parse episode type: '{type}'")
 			};
 		}
 	}

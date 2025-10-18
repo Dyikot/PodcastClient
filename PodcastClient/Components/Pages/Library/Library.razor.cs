@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.JSInterop;
 using PodcastClient.Data;
 using PodcastClient.Resources;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace PodcastClient.Components.Pages.Library
@@ -31,7 +33,7 @@ namespace PodcastClient.Components.Pages.Library
 			var user = await context.Users
 				.AsNoTracking()
 				.Include(u => u.Podcasts)
-				.SingleAsync(u => u.Id == UserContext.UserId);
+				.FirstAsync(u => u.Id == UserContext.UserId);
 
 			Podcasts = user.Podcasts;
 		}
@@ -65,15 +67,7 @@ namespace PodcastClient.Components.Pages.Library
 				}
 
 				var podcast = await PodcastsService.FindAsync(p => p.Rss == rss);
-
-				if (podcast == null)
-				{
-					podcast = await PodcastRssFetcher.GetPodcastAsync(rss);
-					if (podcast != null)
-					{
-						await PodcastsService.AddAsync(podcast);
-					}
-				}
+				podcast ??= await PodcastsService.TryAddAsync(rss);
 
 				if (podcast != null)
 				{

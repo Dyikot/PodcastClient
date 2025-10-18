@@ -13,7 +13,7 @@ namespace PodcastClient.Data
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
-			optionsBuilder.UseSqlite("Data Source=test.db");
+			optionsBuilder.UseSqlite("Data Source=AppDb.db");
 		}
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)

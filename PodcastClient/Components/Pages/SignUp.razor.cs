@@ -57,7 +57,8 @@ namespace PodcastClient.Components.Pages
 			{
 				Email = User.Email,
 				UserName = User.UserName,
-				HashPassword = passwordHasher.HashPassword(null!, User.Password)
+				HashPassword = passwordHasher.HashPassword(null!, User.Password),
+				LastUpdateChecked = DateTime.Now
 			};
 
 			context.Users.Add(user);
